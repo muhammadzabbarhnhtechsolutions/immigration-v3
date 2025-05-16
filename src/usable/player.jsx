@@ -9,7 +9,7 @@ import Comming from "@/assets/soon.png"
 
 // Convert TypeScript interface to PropTypes for JavaScript
 const VideoPlayer = forwardRef(({ video }, ref) => {
-  console.log('video player', video);
+  // console.log('video player', video);
   
   return (
     <div className='flex justify-center items-center m-auto'>

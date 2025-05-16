@@ -22,6 +22,6 @@ export const cityValidation = yup.string().required('City is required')
 export const phoneValidation = yup.string().required('Phone No is required')
 export const provinceValidation = yup.string().required('Province No is required')
 export const usernameValidation = yup.string().required('Username No is required')
-export const validatar = (msg: string)=>{
+export const validatar = (msg)=>{
   return yup.string().required(msg)
 }

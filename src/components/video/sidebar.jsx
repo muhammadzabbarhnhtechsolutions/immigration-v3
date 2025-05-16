@@ -103,7 +103,7 @@ export function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const handleClose = () => setIsOpen(false);
   const coursedata = useSelector((state) => state.course.courses);
-  console.log('coursedata', coursedata);
+  // console.log('coursedata', coursedata);
 
   return (
     <>
