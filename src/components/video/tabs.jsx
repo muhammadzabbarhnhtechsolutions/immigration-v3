@@ -9,7 +9,7 @@ import { setVideoUrl } from '@/app/Redux/features/CourseSlice';
 // import "swiper/css";
 // import "swiper/css/pagination";
 import { FaInfoCircle } from "react-icons/fa";
-import DescriptionBox from "../ui/DescriptionBox";
+import DescriptionBox from "../ui/DescriptionBox2";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import { AllVideos } from "@/services/courseService";

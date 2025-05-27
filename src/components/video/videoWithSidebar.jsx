@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Sidebar } from './sidebar';
 import VideoPlayer from '@/usable/player';
-import DescriptionBox from '../ui/DescriptionBox';
+import DescriptionBox from '../ui/DescriptionBox2';
 import { toast } from 'react-toastify';
 import { GetModuleOfCourses } from '@/services/courseService';
 import { useDispatch, useSelector } from 'react-redux';

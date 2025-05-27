@@ -130,3 +130,23 @@ body {
 .slide-in {
   animation: slide-in 0.5s forwards;
 }
+
+
+
+  .hero_animation_forum {
+    position: relative;
+    overflow: hidden;
+    /* Ensure the parent container is positioned relative */
+  }
+  
+  .hero_animation_forum::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(147.92deg, rgba(65, 212, 156, 0.5) 10.41%, hsla(0, 0%, 100%, 0) 89.25%);
+    animation: changeBackgroundColor 8s infinite alternate;
+    z-index: -1; /* Place behind the content */
+  }

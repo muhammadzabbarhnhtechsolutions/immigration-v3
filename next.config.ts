@@ -1,8 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+    reactStrictMode: false,
+    output:"export",
 images: {
-  domains: ["immigrationnavigator.co.uk"],
+   unoptimized:true
+  // domains: ["immigrationnavigator.co.uk"],
 },
 };
 

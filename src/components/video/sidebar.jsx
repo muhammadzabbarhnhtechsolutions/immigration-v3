@@ -113,7 +113,7 @@ export function Sidebar() {
           onClick={() => setIsOpen(true)}
           className="text-white bg-primary hover:dark focus:outline-none focus:ring-1 focus:ring-secondary font-medium rounded-lg border-none text-sm px-5 py-2.5 me-2 mb-2"
         >
-          <FaBars color="#ac2ca8" size={25} />
+          <FaBars color="#5aaa7c" size={25} />
         </button>
         <Drawer open={isOpen} onClose={handleClose}>
           <Drawer.Header title="Course" />

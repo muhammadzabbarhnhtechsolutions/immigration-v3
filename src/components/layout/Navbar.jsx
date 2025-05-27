@@ -110,6 +110,10 @@ export default function Navbar() {
              {isLoggedIn && (
               <Link className='text-[#88AE98]' href="/videos">Courses</Link>
             )}
+
+              {isLoggedIn && (
+              <Link className='text-[#88AE98]' href="/forum">Fight Club</Link>
+            )}
             <Link href="/about-us" className="text-[#88AE98]">About Us</Link>
             <Link href="/our-products" className="text-[#88AE98]">Our Products</Link>
             <Link href="/pricing" className="text-[#88AE98]">Pricing</Link>

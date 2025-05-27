@@ -121,7 +121,7 @@ export default function DescriptionBox({ videoid }) {
                               href={answer.answer_file}
                               target='_blank'
                               rel='noopener noreferrer'
-                              className=" text-white bg-[#AC2CA8] hover:bg-[#AC2CA8] focus:ring-1 focus:ring-[#AC2CA8] rounded-3xl font-[700] px-4 py-2 mt-2 inline-block"
+                              className=" text-white bg-[#5aaa7c] hover:bg-[#5aaa7c] focus:ring-1 focus:ring-[#5aaa7c] rounded-3xl font-[700] px-4 py-2 mt-2 inline-block"
                               download
                             >
                               Download Answer File
@@ -139,14 +139,14 @@ export default function DescriptionBox({ videoid }) {
                           <input
                             type="file"
                             accept=".pdf,.doc,.docx,.txt"
-                            className='mt-2 p-2 border border-[#AC2CA8] rounded'
+                            className='mt-2 p-2 border border-[#5aaa7c] rounded'
                             onChange={(e) => handleFileChange(e.target.files ? e.target.files[0] : null)}
                           />
                         </>
                       )}
                       <div className='flex items-center justify-end mt-4'>
                         <button
-                          className="text-white bg-[#AC2CA8] hover:bg-[#AC2CA8] focus:ring-1 focus:ring-[#AC2CA8] rounded-full font-[700] p-1 mx-2 absolute top-[-10px] right-[-18px]"
+                          className="text-white bg-[#5aaa7c] hover:bg-[#5aaa7c] focus:ring-1 focus:ring-[#5aaa7c] rounded-full font-[700] p-1 mx-2 absolute top-[-10px] right-[-18px]"
                           onClick={() => { setAnswers({ [task.id]: answer.answer }); setIsEdit(true); }}>
                           <MdEdit />
                         </button>
@@ -155,7 +155,7 @@ export default function DescriptionBox({ videoid }) {
                           <a
                             href={task.task_file}
                             target='_blank'
-                            className="text-white bg-[#AC2CA8] hover:bg-[#AC2CA8] focus:ring-1 focus:ring-[#AC2CA8] rounded-3xl font-[700] px-10 mx-2 py-3"
+                            className="text-white bg-[#5aaa7c] hover:bg-[#5aaa7c] focus:ring-1 focus:ring-[#5aaa7c] rounded-3xl font-[700] px-10 mx-2 py-3"
                             download
                           >
                             Download Task File
@@ -164,7 +164,7 @@ export default function DescriptionBox({ videoid }) {
 
                         <button
                           type="button"
-                          className="text-white bg-[#AC2CA8] hover:bg-[#AC2CA8] focus:ring-1 focus:ring-[#AC2CA8] rounded-3xl font-[700] px-10 py-3"
+                          className="text-white bg-[#5aaa7c] hover:bg-[#5aaa7c] focus:ring-1 focus:ring-[#5aaa7c] rounded-3xl font-[700] px-10 py-3"
                           onClick={() => AddUpdateTask(task.id)}
                         >
                           Submit
@@ -184,7 +184,7 @@ export default function DescriptionBox({ videoid }) {
                     <input
                       type="file"
                       accept=".pdf,.doc,.docx,.txt"
-                      className='mt-2 p-2 border border-[#AC2CA8] rounded'
+                      className='mt-2 p-2 border border-[#5aaa7c] rounded'
                       onChange={(e) => handleFileChange(e.target.files ? e.target.files[0] : null)}
                     />
                     <div className='flex items-center justify-end mt-4'>
@@ -192,7 +192,7 @@ export default function DescriptionBox({ videoid }) {
                         <a
                           href={task.task_file}
                           target='_blank'
-                          className="text-white bg-[#AC2CA8] hover:bg-[#AC2CA8] focus:ring-1 focus:ring-[#AC2CA8] rounded-3xl font-[700] px-10 mx-2 py-3"
+                          className="text-white bg-[#5aaa7c] hover:bg-[#5aaa7c] focus:ring-1 focus:ring-[#5aaa7c] rounded-3xl font-[700] px-10 mx-2 py-3"
                           download
                         >
                           Download Task File
@@ -200,7 +200,7 @@ export default function DescriptionBox({ videoid }) {
                       )}
                       <button
                         type="button"
-                        className="text-white bg-[#AC2CA8] hover:bg-[#AC2CA8] focus:ring-1 focus:ring-[#AC2CA8] rounded-3xl font-[700] px-10 py-3"
+                        className="text-white bg-[#5aaa7c] hover:bg-[#5aaa7c] focus:ring-1 focus:ring-[#5aaa7c] rounded-3xl font-[700] px-10 py-3"
                         onClick={() => AddUpdateTask(task.id)}
                       >
                         Submit
