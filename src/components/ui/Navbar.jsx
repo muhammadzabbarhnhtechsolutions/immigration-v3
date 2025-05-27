@@ -17,14 +17,14 @@ import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import { RootState } from '../../app/Redux/store';
 
-type Props = {};
 
-const Navbar = (props: Props) => {
+
+const Navbar = (props) => {
   const [isLogin, setIsLogin] = useState(true);
   const router = useRouter();
-  const [token, setToken] = useState<string | null>(null);
+  const [token, setToken] = useState(null);
 
-  const profiledata = useSelector((state: RootState) => state.example.profile);
+  const profiledata = useSelector((state) => state.example.profile);
 
   console.log('profiledata', profiledata)
   useEffect(() => {
