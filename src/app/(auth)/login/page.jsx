@@ -10,47 +10,46 @@ import { setAccessToken } from "@/utils/localStorage";
 
 export default function MainComponent() {
   const [loader, setLoader] = useState(false);
-  const [email, setEmail] = useState  ('');
-  const [password, setPassword] = useState ('');
-  const [showPassword, setShowPassword] = useState  (false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   const router = useRouter();
+
   const handleSignIn = async () => {
     setLoader(true);
-    const values = { email, password }; // Gather form data into values
     try {
-      const result = await LoginAuthService(values); // Make async API call
+      const result = await LoginAuthService({ email, password });
       setLoader(false);
-      if ("data" in result) {
-        const Data = result.data
-        if (Data?.status) {
-          console.log('data', Data)
-          setAccessToken(Data?.token)
-          localStorage.setItem('user', JSON.stringify(Data?.payload));
-          localStorage.setItem('course_id', Data?.course.id);
-          toast.success(Data.message)
-          router.push('/'); // Navigate to the sign-in page on success
-        }
+
+      console.log("API Result:", result.data.data);
+
+      if (result?.data?.data?.status === true) {
+        const Data = result.data.data;
+        setAccessToken(Data?.token);
+        localStorage.setItem("user", JSON.stringify(Data?.payload));
+        localStorage.setItem("course_id", Data?.course?.id || "");
+        toast.success(Data?.message || "Login successful");
+        router.push("/");
+      } else {
+    
       }
-
-
     } catch (error) {
-      toast.error('something went wrong')
-      console.error("Sigin error", error);
       setLoader(false);
+      toast.error("Something went wrong");
+      console.error("Login error:", error);
     }
   };
 
-
-  const handleInputChange = (e, func) => {
-    func(e.target.value);
+  const handleInputChange = (e, setter) => {
+    setter(e.target.value);
   };
 
   return (
     <div className="min-h-screen flex items-center flex-col justify-center bg-gray-50">
-      <h1 className="text-3xl  text-center font-semibold text-[#87AA9C] mb-8">Login</h1>
+      <h1 className="text-3xl text-center font-semibold text-[#87AA9C] mb-8">Login</h1>
       <div className="bg-[#f2f6f4] p-8 rounded-lg shadow-sm w-full max-w-md">
-        <form className="space-y-6">
+        <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); handleSignIn(); }}>
           <div>
             <label className="block text-sm mb-1">
               Username or email address <span className="text-red-500">*</span>
@@ -58,15 +57,14 @@ export default function MainComponent() {
             <input
               type="email"
               name="email"
-              onChange={(e) => handleInputChange(e, setEmail)}
               value={email}
+              onChange={(e) => handleInputChange(e, setEmail)}
               className="w-full bg-white px-3 py-2 border border-gray-200 rounded"
               required
             />
           </div>
 
-          <div className="relative item-center">
-
+          <div className="relative">
             <label className="block text-sm mb-1">
               Password <span className="text-red-500">*</span>
             </label>
@@ -80,7 +78,7 @@ export default function MainComponent() {
                 required
               />
               <div
-                className="absolute right-0 cursor-pointer text-white  bg-blue-600 px-3 py-[11px] hover:text-gray-700"
+                className="absolute right-0 cursor-pointer text-white bg-blue-600 px-3 py-[11px] hover:text-gray-700"
                 onClick={() => setShowPassword((prev) => !prev)}
               >
                 {showPassword ? <EyeOff className="text-white" size={20} /> : <Eye size={20} />}
@@ -89,29 +87,20 @@ export default function MainComponent() {
           </div>
 
           <div className="flex items-center">
-            <input
-              type="checkbox"
-              name="rememberMe"
-
-              className="h-4 w-4 bg-white text-blue-600 rounded border-gray-300"
-            />
+            <input type="checkbox" name="rememberMe" className="h-4 w-4 bg-white text-blue-600 rounded border-gray-300" />
             <label className="ml-2 text-sm">Remember me</label>
           </div>
 
-         
-      
-            <button
-              onClick={handleSignIn}
-              type="button"
-              // disabled={loading}
-              className="py-2 px-4 w-full cursor-pointer bg-[#87AA9C] text-white rounded hover:bg-[#769589]"
-            >
-              {loader ? "Loading..." : "Login"}
-            </button>
-     
+          <button
+            type="submit"
+            disabled={loader}
+            className="py-2 px-4 w-full bg-[#87AA9C] text-white rounded hover:bg-[#769589]"
+          >
+            {loader ? "Loading..." : "Login"}
+          </button>
 
           <div className="text-sm text-blue-600 hover:underline">
-            <a href="#">Forgotten your password?</a>
+            <Link href="#">Forgotten your password?</Link>
           </div>
         </form>
       </div>

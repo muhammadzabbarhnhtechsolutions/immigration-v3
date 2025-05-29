@@ -1,14 +1,14 @@
-import { Bell, Images, Map, Pencil, Video } from "lucide-react";
-import Image from "next/image";
-import React, { useRef, useState } from "react";
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import Notification from "./Notification";
+import { setUpdatePost } from "@/app/Redux/features/ForumSlice";
 import { AddPosts } from "@/services/postServices";
-import { toast } from "react-toastify";
 import { Button, Label, Modal, Textarea } from "flowbite-react";
+import { Images, Map, Pencil, Video } from "lucide-react";
+import Image from "next/image";
+import { useRef, useState } from "react";
 import { FaImages } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { setUpdatePost } from "@/app/Redux/features/ForumSlice";
+import { toast } from "react-toastify";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import Notification from "./Notification";
 
 
 
@@ -138,7 +138,7 @@ const ProfileImg = Profile?.profile
 
 
       {/* ADD POST  */}
-      <Modal className=" z-[70]" show={openModal} size="lg" onClose={onCloseModal} popup>
+      <Modal className=" z-[999999999990]" show={openModal} size="lg" onClose={onCloseModal} popup>
         <Modal.Header className="bg-[#2c353d] flex justify-center items-center" > 
             <h3 className=" text-xl font-medium text-white">Create Post</h3>
             </Modal.Header>

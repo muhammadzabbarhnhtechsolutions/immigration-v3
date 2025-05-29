@@ -77,7 +77,7 @@ const Forum = (props) => {
             </div>
 
             <div className="flex   gap-4 mt-4">
-              <div className="w-full lg:w-[70%] overflow-y-auto  h-[calc(100vh-12rem)]">
+              <div className="w-full lg:w-[70%] overflow-y-auto  h-[100vh]">
                 <ForumList />
               </div>
 
