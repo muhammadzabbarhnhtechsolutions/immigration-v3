@@ -13,6 +13,7 @@ interface SignupPayload {
   last_name:  string;
   email:      string;
   password:   string;
+  profile:   any;
 }
 
 
@@ -22,11 +23,12 @@ export const SignupAuthService = async (data:SignupPayload) => {
   formData.append("last_name",  data.last_name);
   formData.append("email",      data.email);
   formData.append("password",   data.password);
+  formData.append("password",   data.profile);
 
   try {
     const response = await axiosInstance.post(
       "user/user_auth/signup/",
-      formData,
+      data,
       {
         headers: {
           "Content-Type": "multipart/form-data",

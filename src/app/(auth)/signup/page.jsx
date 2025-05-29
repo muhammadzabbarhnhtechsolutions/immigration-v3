@@ -11,15 +11,29 @@ export default function MainComponent() {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
-    username: "",       // still captured but not sent
+    // username: "",
     email: "",
     password: "",
     agreeToTerms: false,
+    profile: null, // Image file
   });
 
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const handleInputChange = (e) => {
+    const { name, value, type, checked, files } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]:
+        type === "checkbox"
+          ? checked
+          : type === "file"
+          ? files[0]
+          : value,
+    }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,32 +47,25 @@ export default function MainComponent() {
     }
 
     try {
-      // Build payload with only the snake_case keys your API expects
-      const payload = {
-        first_name: formData.firstName,
-        last_name:  formData.lastName,
-        email:      formData.email,
-        password:   formData.password,
-      };
+      const payload = new FormData();
+      payload.append("first_name", formData.firstName);
+      payload.append("last_name", formData.lastName);
+      payload.append("email", formData.email);
+      payload.append("password", formData.password);
+      if (formData.profile) {
+        payload.append("profile", formData.profile);
+      }
 
-      await SignupAuthService(payload);
-
-      // On success, navigate to login
-      router.push("/login");
+      const res = await SignupAuthService(payload);
+      if (res.data.status) {
+        router.push("/login");
+      }
     } catch (err) {
       console.error(err);
       setError("Registration failed. Please try again.");
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: type === "checkbox" ? checked : value,
-    }));
   };
 
   return (
@@ -92,7 +99,7 @@ export default function MainComponent() {
             </div>
           </div>
 
-          <div>
+          {/* <div>
             <label className="block text-sm mb-1">
               Username <span className="text-red-500">*</span>
             </label>
@@ -104,7 +111,7 @@ export default function MainComponent() {
               className="w-full px-3 py-2 bg-white border border-gray-200 rounded"
               required
             />
-          </div>
+          </div> */}
 
           <div>
             <label className="block text-sm mb-1">
@@ -144,6 +151,17 @@ export default function MainComponent() {
                 )}
               </div>
             </div>
+          </div>
+
+          <div>
+            <label className="block text-sm mb-1">Profile Image</label>
+            <input
+              type="file"
+              name="profile"
+              accept="image/*"
+              onChange={handleInputChange}
+              className="w-full px-3 bg-white py-2 border border-gray-200 rounded"
+            />
           </div>
 
           <div className="flex items-start mt-4">
