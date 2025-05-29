@@ -4,7 +4,7 @@ import { refreshToken } from '@/api/auth'; // Your token refresh API logic
 // import { BASE_URL } from '@/utils/constants';
 
 const axiosInstance = axios.create({
-  baseURL: "https://mistresswife.devssh.xyz",
+  baseURL: "https://e-learning.devssh.xyz",
 });
 
 // Request interceptor to add the access token to every request

@@ -9,7 +9,7 @@ interface ErrorResponse {
   }
   
   // POSTS 
-  export const GeAllPostsUser = async (url: string = `fightclub/user-posts/get_user_posts/?page=1`) => {
+  export const GeAllPostsUser = async (url: string = `chatform/user-posts/get_all_posts/`) => {
     try {
   
       const response = await axiosInstance.get(url);
@@ -36,7 +36,7 @@ export const DeletePost = async (id: string) => {
 
 
     try {
-      const response = await axiosInstance.delete(`fightclub/user-posts/delete_my_post/?post_id=${id}`, {
+      const response = await axiosInstance.delete(`chatform/user-posts/delete_my_post/?post_id=${id}`, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -65,7 +65,7 @@ export const LikeComment = async (id: string) => {
     formData.append('comment', id);
   
     try {
-      const response = await axiosInstance.post('fightclub/comment-like/add_like/', formData, {
+      const response = await axiosInstance.post('chatform/comment-like/add_like/', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

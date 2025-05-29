@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Sidebar } from './sidebar';
 import VideoPlayer from '@/usable/player';
-import DescriptionBox from '../ui/DescriptionBox2';
 import { toast } from 'react-toastify';
 import { GetModuleOfCourses } from '@/services/courseService';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,6 +8,7 @@ import { setCoursesdata } from '@/app/Redux/features/CourseSlice';
 import { useRouter } from 'next/navigation';
 import { Drawer } from 'flowbite-react';
 import { FaInfoCircle } from "react-icons/fa";
+import DescriptionBox from '../ui/DescriptionBox';
 
 export default function VideoWithSidebar() {
   const dispatch = useDispatch();

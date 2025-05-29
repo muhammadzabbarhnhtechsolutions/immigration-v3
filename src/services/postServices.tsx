@@ -11,7 +11,7 @@ interface ErrorResponse {
 }
 
 // POSTS 
-export const GeAllPosts = async (url: string = `fightclub/user-posts/get_all_posts/?page=1`) => {
+export const GeAllPosts = async (url: string = `chatform/user-posts/get_all_posts/`) => {
   try {
 
     const response = await axiosInstance.get(url);
@@ -40,7 +40,7 @@ export const AddPosts = async (data: { caption: string; thumbnail: null }) => {
     formData.append('image', data?.thumbnail);
   }
   try {
-    const response = await axiosInstance.post('fightclub/user-posts/create_post/', formData, {
+    const response = await axiosInstance.post('chatform/user-posts/create_post/', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -66,7 +66,7 @@ export const AddPosts = async (data: { caption: string; thumbnail: null }) => {
 // All Comments  
 export const GeAllComments = async (id?: string, url?: string) => {
   // If no URL is provided, construct the URL with the id
-  const requestUrl = url || `fightclub/post-comment/get_comments/?page=1&post=${id}`;
+  const requestUrl = url || `chatform/post-comment/get_comments/?page=1&post=${id}`;
   try {
 
     const response = await axiosInstance.get(requestUrl);
@@ -92,7 +92,7 @@ export const SpecificReply = async (id: string) => {
   console.log('id', id)
   try {
 
-    const response = await axiosInstance.get(`fightclub/post-comment/get_replies/?comment=${id}`);
+    const response = await axiosInstance.get(`chatform/post-comment/get_replies/?comment=${id}`);
     return response;
   } catch (error) {
     const axiosError = error as AxiosError<ErrorResponse>;
@@ -117,7 +117,7 @@ export const AddComments = async (data: { comnt: string; postid: string }) => {
   formData.append('post', data?.postid);
 
   try {
-    const response = await axiosInstance.post('fightclub/post-comment/create_comment/', formData, {
+    const response = await axiosInstance.post('chatform/post-comment/create_comment/', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -145,7 +145,7 @@ export const LikePost = async (id: string) => {
   formData.append('post', id);
 
   try {
-    const response = await axiosInstance.post('fightclub/post-like/add_like/', formData, {
+    const response = await axiosInstance.post('chatform/post-like/add_like/', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -171,7 +171,7 @@ export const DeleteMyComment = async (id: string) => {
 
 
   try {
-    const response = await axiosInstance.delete(`fightclub/post-comment/delete_comment/?comment_id=${id}`, {
+    const response = await axiosInstance.delete(`chatform/post-comment/delete_comment/?comment_id=${id}`, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -197,7 +197,7 @@ export const ReplySpecificComment = async (data: { comnt: string; replyid: strin
   formData.append('reply', data?.comnt);
   formData.append('comment', data?.replyid);
   try {
-    const response = await axiosInstance.post('fightclub/post-comment/add_reply/', formData, {
+    const response = await axiosInstance.post('chatform/post-comment/add_reply/', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -219,7 +219,7 @@ export const ReplySpecificComment = async (data: { comnt: string; replyid: strin
 
 
 // POSTS 
-export const GeAllPost = async (url: string = `fightclub/user-posts/get_user_posts/?page=1`) => {
+export const GeAllPost = async (url: string = `chatform/user-posts/get_all_posts/`) => {
   try {
 
     const response = await axiosInstance.get(url);

@@ -26,7 +26,7 @@ export default function Navbar() {
   }
 
   return (
-    <div className="w-full">
+    <div className="w-full relative z-[100]">
       {/* Fixed Navigation Container */}
       <div className="fixed top-0 left-0 right-0 z-50">
         {/* Top Contact Bar */}
@@ -74,9 +74,11 @@ export default function Navbar() {
           <nav className="hidden md:flex space-x-6 text-[#90B29F] font-sans text-[16px]">
             <Link className='focus:text-black hover:text-black' href="/">Home</Link>
             {isLoggedIn && (
-              <Link className='focus:text-black hover:text-black' href="/videos">Courses</Link>
+              <>
+            <Link className='text-[#88AE98]' href="/forum">Fight Club</Link>
+            <Link className='focus:text-black hover:text-black' href="/videos">Courses</Link>
+              </>
             )}
-
             <Link className='hover:text-black focus:text-black' href="/about-us">About Us</Link>
             <Link className='hover:text-black focus:text-black' href="/our-products">Our Products</Link>
             <Link className='hover:text-black focus:text-black' href="/pricing">Pricing</Link>
@@ -107,11 +109,11 @@ export default function Navbar() {
         {isMobileMenuOpen && (
           <div className="bg-white px-6 py-4 h-screen flex flex-col space-y-4 md:hidden border-t-2 border-gray-100 shadow-md">
             <Link href="/" className="text-[#88AE98]">Home</Link>
-             {isLoggedIn && (
+            {isLoggedIn && (
               <Link className='text-[#88AE98]' href="/videos">Courses</Link>
             )}
 
-              {isLoggedIn && (
+            {isLoggedIn && (
               <Link className='text-[#88AE98]' href="/forum">Fight Club</Link>
             )}
             <Link href="/about-us" className="text-[#88AE98]">About Us</Link>

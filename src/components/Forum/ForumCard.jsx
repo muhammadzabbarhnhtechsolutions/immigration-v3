@@ -519,6 +519,8 @@ console.log('repliesData',repliesData)
             setLoader(false);
         }
     };
+    console.log(posts,'posts');
+    
     return (
         <div ref={scrollableRef} style={{ overflowY: 'auto', maxHeight: '500px' }}>
             <div className="rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 py-4">
@@ -619,7 +621,7 @@ console.log('repliesData',repliesData)
 
                 {/* View Comments  */}
                 {/* // Inside your modal */}
-                <Modal className="z-[70]" show={openModal} size="lg" onClose={() => setOpenModal(false)} popup>
+                <Modal className="z-[999999999990]" show={openModal} size="lg" onClose={() => setOpenModal(false)} popup>
                     <Modal.Header className="bg-[#2c353d] flex justify-center items-center">
                         <h3 className="text-xl font-medium text-white"> {postby} Comments</h3>
                     </Modal.Header>
