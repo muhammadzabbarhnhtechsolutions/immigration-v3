@@ -37,6 +37,10 @@ interface ErrorResponse {
   };
 
 
+
+
+  
+
 export const SubscribePackage = async (id: number) => {
     const formData = new FormData();
     formData.append('package_id', id.toString());

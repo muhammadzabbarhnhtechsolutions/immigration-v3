@@ -21,16 +21,17 @@ export default function MainComponent() {
     try {
       const result = await LoginAuthService({ email, password });
       setLoader(false);
-
-      console.log("API Result:", result.data.data);
-
-      if (result?.data?.data?.status === true) {
+      if (result?.data?.status === true) {
         const Data = result.data.data;
         setAccessToken(Data?.token);
         localStorage.setItem("user", JSON.stringify(Data?.payload));
         localStorage.setItem("course_id", Data?.course?.id || "");
         toast.success(Data?.message || "Login successful");
-        router.push("/");
+        if(Data.is_active){
+          router.push("/pricing");
+        }else{
+          router.push("/");
+        }
       } else {
     
       }

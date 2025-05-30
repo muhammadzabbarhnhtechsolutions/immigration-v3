@@ -49,6 +49,10 @@ export const SignupAuthService = async (data:SignupPayload) => {
     return axiosError.response ?? { status: "error", message: errorMessage };
   }
 };
+
+
+
+
 export const LoginAuthService = async (data: { email: string; password: string }) => {
   const formData = new FormData();
   formData.append('email', data?.email);
