@@ -18,11 +18,6 @@ export const GeAllPosts = async (url: string = `chatform/user-posts/get_all_post
     return response;
   } catch (error) {
     const axiosError = error as AxiosError<ErrorResponse>;
-    const statusCode = axiosError?.response?.status;
-    const errorMessage = axiosError?.response?.data?.error || axiosError?.response?.data?.message;
-    // toast.error(errorMessage || "Something went wrong");
-
-
     if (axiosError?.response) {
       return axiosError.response;
     } else {
@@ -30,6 +25,23 @@ export const GeAllPosts = async (url: string = `chatform/user-posts/get_all_post
     }
   }
 };
+
+// POSTS 
+export const GetProfile = async (url: string = `user/user_profile/profile/`) => {
+  try {
+
+    const response = await axiosInstance.get(url);
+    return response;
+  } catch (error) {
+    const axiosError = error as AxiosError<ErrorResponse>;
+    if (axiosError?.response) {
+      return axiosError.response;
+    } else {
+      return { status: "error", message: "Something went wrong. Please try again later." };
+    }
+  }
+};
+
 
 
 export const AddPosts = async (data: { caption: string; thumbnail: null }) => {
@@ -60,7 +72,6 @@ export const AddPosts = async (data: { caption: string; thumbnail: null }) => {
   }
 };
 
-// COMMENTS 
 
 
 // All Comments  

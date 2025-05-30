@@ -1,22 +1,22 @@
+import { setNextPage, setPostData, setPreviousPage, UserPost } from "@/app/Redux/features/ForumSlice";
+import { GeAllPosts } from "@/services/postServices";
+import { GeAllPostsUser } from "@/services/userPost";
 import {
-  
+  Images,
+  MessageSquare,
   Newspaper,
+  User2,
   UserPlus,
-  Video,
+  Video
 } from "lucide-react";
 import Image from "next/image";
-import React, { useState } from "react";
-import SearchBar from "./SearchBar";
-import { useDispatch, useSelector } from "react-redux";
-import { GeAllPostsUser } from "@/services/userPost";
-import { GeAllPosts } from "@/services/postServices";
-import { toast } from "react-toastify";
-import Comment from "./Comment";
-import {  setNextPage, setPostData, setPreviousPage, UserPost } from "@/app/Redux/features/ForumSlice";
 import Link from "next/link";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 
-const ForumLeftSide = (props) => {
+const ForumLeftSide = ({profileData}) => {
   const dispatch = useDispatch();
 
   const Profile = useSelector((state) => state.example.profile);
@@ -79,47 +79,59 @@ const ForumLeftSide = (props) => {
     }
   };
 
+  console.log(profileData,'profileData');
+  
 
 
 
   return (
     <div className="flex flex-col ">
       {/* <SearchBar /> */}
-      <div className="mb-2">
-        <video width={400} controls>
-          <source src="/assets/fightclub.mp4" type="video/mp4" />
-          {/* <source src="mov_bbb.ogg" type="video/ogg" /> */}
-          Your browser does not support HTML video.
-        </video>
-      </div>
-      <div className="bg-form bg-cover rounded-lg p-4 px-6 flex items-center gap-4 cursor-pointer">
-        <div className="w-[30%] bg-white rounded-full p-2  ">
+        <div className="relative rounded-lg overflow-hidden cursor-pointer ">
+      {/* Background with purple overlay */}
+      <div className="absolute inset-0 bg-[url('/your-background.jpg')] bg-cover bg-center" />
+      <div className="absolute inset-0 bg-[#88AE98]" />
+
+      {/* Content */}
+      <div className="relative z-10 flex items-center gap-4 p-4">
+        <div className="w-[64px] h-[64px] bg-white rounded-full p-1 shrink-0">
           <Image
-            src={ProfileImg ? ProfileImg : "/assets/user.png"}
+            src={profileData ? profileData.profile : "/assets/user.png"}
             alt="user"
-            width={100}
-            height={100}
-            className=""
+            width={64}
+            height={64}
+            className="rounded-full object-cover"
           />
         </div>
-        <div className="flex flex-col gap-2 ">
-          <h1 className="text-lg"> {Name ? Name :"User Name"}</h1>
+        <div className="flex flex-col text-white">
+          <h1 className="text-lg font-semibold">{profileData ? `${profileData.first_name} ${profileData.last_name}`  : "User Name"}</h1>
+          {/* <div className="flex items-center gap-1 text-sm">
+            <User2 className="w-4 h-4" />
+            <span>{ "0"} followers</span>
+          </div> */}
         </div>
       </div>
+    </div>
+
+
       <div className="px-4">
         <ul>
 
           <li className="flex gap-4 items-center cursor-pointer" onClick={() => fetchAllUserPost()}>
-            <Newspaper stroke="none" fill="#8DC63F" />
-            <span className="border-b py-4 w-full">My Posts</span>
+            <Newspaper strokeWidth={0.75}  />
+            <span className="border-b py-4 w-full">My Newsfeed</span>
           </li>
           <li className="flex gap-4 items-center cursor-pointer" onClick={() => fetchAllPosts()}>
-            <Newspaper stroke="none" fill="#8DC63F" />
-            <span className="border-b py-4 w-full">All Newsfeed</span>
+            <MessageSquare strokeWidth={0.75} />
+            <span className="border-b py-4 w-full">Previous Forum</span>
           </li>
-         <Link href={'/profile'}> <li className="flex gap-4 items-center cursor-pointer" >
-            <UserPlus stroke="none" fill="#8DC63F" />
-            <span className="border-b py-4 w-full">Profile</span>
+          <Link href={'/profile'}> <li className="flex gap-4 items-center cursor-pointer" >
+            <Images strokeWidth={0.75} />
+            <span className="border-b py-4 w-full">Images</span>
+          </li></Link>
+          <Link href={'/profile'}> <li className="flex gap-4 items-center cursor-pointer" >
+            <Video strokeWidth={0.75} />
+            <span className="border-b py-4 w-full">Videos</span>
           </li></Link>
           {/* <li className="flex gap-4 items-center cursor-pointer">
             <MessageSquare stroke="none" fill="#F7941E" />
@@ -135,7 +147,6 @@ const ForumLeftSide = (props) => {
           </li> */}
         </ul>
       </div>
-      
     </div>
   );
 };
