@@ -26,7 +26,7 @@ const Comment = ({
         <div className="">
           <Image className="rounded-full" src={user_profile_url} alt={comment_by} width={60} height={60} />
         </div>
-        <div className="bg-[#5aaa7c] basis-96 p-3 rounded-md">
+        <div className="basis-96 p-3 rounded-md">
           <span className="text-[#27AAE1]">{comment_by} </span>: {comment}
           <div className="opacity-70 text-[13px]">
             <span>{comment_at_date} at {comment_at_time}</span>

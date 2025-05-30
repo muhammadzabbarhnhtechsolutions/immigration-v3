@@ -9,7 +9,7 @@ interface ErrorResponse {
   }
   
   // POSTS 
-  export const GeAllPostsUser = async (url: string = `chatform/user-posts/get_all_posts/`) => {
+  export const GeAllPostsUser = async (url: string = `chatform/user-posts/get_user_posts/`) => {
     try {
   
       const response = await axiosInstance.get(url);
