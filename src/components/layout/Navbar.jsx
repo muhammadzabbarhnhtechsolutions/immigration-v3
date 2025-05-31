@@ -5,13 +5,18 @@ import Image from 'next/image';
 import Link from 'next/link';
 import logo from "../../assets/logo1.png";
 import { useRouter } from "next/navigation";
+import Cookies from 'js-cookie';
+import { removeAccessToken, removeRefreshToken } from '../../utils/localStorage';
+import {  GetProfile } from "../../services/postServices";
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [scrollDirection, setScrollDirection] = useState("up");
   const router = useRouter();
-
+  const [userData, setUserData] = useState()
+  const [profile, setProfile] = useState()
+ 
   useEffect(() => {
     const token = localStorage.getItem("access_token");
     if (token) {
@@ -19,11 +24,25 @@ export default function Navbar() {
     }
   }, []);
 
+
   const Logout = () => {
-    localStorage.clear();
-    setIsLoggedIn(false);
+
+    // Clear tokens
+    removeAccessToken();
+    removeRefreshToken(); // Optional if using refresh tokens
+    Cookies.remove('access_token'); // Remove cookie
+
+    // Remove additional data
+    localStorage.removeItem('user');
+    localStorage.removeItem('course_id');
+
+    // Optionally, clear all
+    // localStorage.clear();
+
+    // Redirect to login
     router.push('/login');
   };
+
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
@@ -45,21 +64,39 @@ export default function Navbar() {
 
 
   const getProfileData = async () => {
-    try {
-      const result = await GetProfile()
-      if (result.data) {
-        setProfile(result.data.data);
-      }
-    } catch (_) {
-      toast.error('something went wrong')
+  try {
+    const result = await GetProfile();
+    if (result.data) {
+      const newProfileData = result.data.data;
+      setProfile(newProfileData);
+
+      // Update localStorage "user" key with latest profile data
+      localStorage.setItem("user", JSON.stringify(newProfileData));
     }
+  } catch (error) {
+    toast.error('Something went wrong');
+    console.error(error);
   }
+}
 
   useEffect(() => {
     getProfileData()
   }, [])
 
 
+  
+
+  useEffect(() => {
+    const userObject = localStorage.getItem("user");
+    if (userObject) {
+      const parsedata = JSON.parse(userObject)
+      if (parsedata) {
+
+        setUserData(parsedata);
+      }
+    }
+
+  }, []);
 
 
   return (
@@ -107,7 +144,7 @@ export default function Navbar() {
 
           <nav className="hidden md:flex space-x-6 text-[#90B29F] font-sans text-[16px]">
             <Link className='focus:text-black hover:text-black' href="/">Home</Link>
-            {isLoggedIn && (
+            {isLoggedIn && userData?.is_active && (
               <>
                 <Link className='text-[#88AE98] focus:text-black hover:text-black' href="/forum">Discussion Forum</Link>
                 <Link className='focus:text-black hover:text-black' href="/videos">Courses</Link>
@@ -115,7 +152,9 @@ export default function Navbar() {
             )}
             <Link className='hover:text-black focus:text-black' href="/about-us">About Us</Link>
             <Link className='hover:text-black focus:text-black' href="/our-products">Our Products</Link>
-            <Link className='hover:text-black focus:text-black' href="/pricing">Pricing</Link>
+            {isLoggedIn && !userData?.is_active && (
+              <Link className='hover:text-black focus:text-black' href="/pricing">Pricing</Link>
+            )}
             <Link className='hover:text-black focus:text-black' href="/latest-news">Latest News</Link>
             <Link className='hover:text-black focus:text-black' href="/contact-us">Contact Us</Link>
           </nav>
@@ -140,7 +179,7 @@ export default function Navbar() {
         {isMobileMenuOpen && (
           <div className="bg-white px-6 py-4 h-screen flex flex-col space-y-4 md:hidden border-t-2 border-gray-100 shadow-md">
             <Link href="/" className="text-[#88AE98]">Home</Link>
-            {isLoggedIn && (
+            {isLoggedIn && userData?.is_active && (
               <>
                 <Link className='text-[#88AE98]' href="/videos">Courses</Link>
                 <Link className='text-[#88AE98]' href="/forum">Discussion Forum</Link>
@@ -148,7 +187,9 @@ export default function Navbar() {
             )}
             <Link href="/about-us" className="text-[#88AE98]">About Us</Link>
             <Link href="/our-products" className="text-[#88AE98]">Our Products</Link>
-            <Link href="/pricing" className="text-[#88AE98]">Pricing</Link>
+            {isLoggedIn && !userData?.is_active && (
+              <Link href="/pricing" className="text-[#88AE98]">Pricing</Link>
+            )}
             <Link href="/latest-news" className="text-[#88AE98]">Latest News</Link>
             <Link href="/contact-us" className="text-[#88AE98]">Contact Us</Link>
             <div className="flex flex-col space-y-2 pt-4 border-t-2 border-gray-100">

@@ -24,10 +24,12 @@ export default function MainComponent() {
       if (result?.data?.status === true) {
         const Data = result.data.data;
         setAccessToken(Data?.token);
-        localStorage.setItem("user", JSON.stringify(Data?.payload));
+        console.log(Data,'DataDataData');
+        
+        localStorage.setItem("user", JSON.stringify(Data));
         localStorage.setItem("course_id", Data?.course?.id || "");
         toast.success(Data?.message || "Login successful");
-        if(Data.is_active){
+        if(!Data.is_active){
           router.push("/pricing");
         }else{
           router.push("/");
