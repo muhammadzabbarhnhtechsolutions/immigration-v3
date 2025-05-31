@@ -577,7 +577,7 @@ const ForumCard = () => {
                                                             onClick={() => AddSpecificReply(comment.id, reply)}
                                                             className="bg-white  text-[#27b866] px-3 py-2 rounded-xl"
                                                         >
-                                                            {loader ? 'Posting...' : <IoIosSend size={16} />}
+                                                            {loader ? '...' : <IoIosSend size={16} />}
                                                         </button>
                                                     </div>
                                                 )}
@@ -616,7 +616,7 @@ const ForumCard = () => {
                                             className="bg-[#71A587] p-2 border- placeholder:text-white outline-none  border rounded-md w-full text-white"
                                         />
                                         <button onClick={() => AddComment()} className="bg-white  text-[#27b866] px-3 py-2 rounded-xl">
-                                            {loader ? 'Posting...' : <IoIosSend size={20} />}
+                                            {loader ? '...' : <IoIosSend size={20} />}
                                         </button>
                                     </div>
                                 </div>
@@ -692,7 +692,7 @@ const ForumCard = () => {
                                 </div>
 
                                 {/* Right Side - Comments */}
-                                <div className="w-1/2 pt-4 px-4 overflow-y-auto" ref={scrollableModalRef}>
+                                <div className="w-1/2 pt-4 px-4 relative overflow-y-auto" ref={scrollableModalRef}>
                                     {isLoading && (
                                         <div className="flex flex-col space-y-4">
                                             <PostPlaceholder />
@@ -788,7 +788,7 @@ const ForumCard = () => {
                                                             onClick={() => AddSpecificReply(comment.id, reply)}
                                                             className="bg-blue-500 text-white px-3 py-2 rounded-md"
                                                         >
-                                                            {loader ? 'Posting...' : <IoIosSend size={16} />}
+                                                            {loader ? '...' : <IoIosSend size={16} />}
                                                         </button>
                                                     </div>
                                                 )}
@@ -867,8 +867,8 @@ const ForumCard = () => {
                                         </div>
                                     ))}
 
-                                    <div className="sticky bottom-0 bg-white pt-4 pb-2 border-t">
-                                        <div className="flex items-center gap-2">
+                                    <div className="absolute w-[95%] bottom-0 bg-white pt-4 pb-2 border-t">
+                                        <div className="flex items-center gap-2 ">
                                             <input
                                                 value={comnt}
                                                 onChange={(e) => setComnt(e.target.value)}
@@ -877,9 +877,9 @@ const ForumCard = () => {
                                             />
                                             <button
                                                 onClick={AddComment}
-                                                className="bg-blue-500 text-white px-4 py-2 rounded-md"
+                                                className="bg-blue-500 text-white p-4 py-2 rounded-md"
                                             >
-                                                {loader ? 'Posting...' : <IoIosSend size={20} />}
+                                                {loader ? '...' : <IoIosSend size={20} />}
                                             </button>
                                         </div>
                                     </div>
