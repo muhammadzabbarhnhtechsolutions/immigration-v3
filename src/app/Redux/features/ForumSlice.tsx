@@ -138,6 +138,8 @@ const exampleSlice = createSlice({
     initialState,
     reducers: {
         // Action to set posts data
+
+        
         setPostData: (state, action: PayloadAction<Post[]>) => {
             // state.posts = []
             const posts = [...state.posts, ...action.payload]

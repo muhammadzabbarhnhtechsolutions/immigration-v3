@@ -1,55 +1,41 @@
+'use client'
 import { setUpdatePost } from "@/app/Redux/features/ForumSlice";
 import { AddPosts } from "@/services/postServices";
-import { Button, Label, Modal, Textarea } from "flowbite-react";
-import { Images, Map, Pencil, Video } from "lucide-react";
+import { Button, Modal } from "flowbite-react";
+import { Images, Smile } from "lucide-react";
 import Image from "next/image";
 import { useRef, useState } from "react";
 import { FaImages } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import Notification from "./Notification";
-
-
-
 
 const ForumTopBar = ({ profileData }) => {
   const [openModal, setOpenModal] = useState(false);
   const [loader, setLoader] = useState(false);
-  // const [file, setFile] = useState(null);
   const [caption, setCaption] = useState('');
   const [thumbnail, setThumbnail] = useState(null);
-  const fileInputRef = useRef(null); // Ref for input element
+  const fileInputRef = useRef(null);
   const dispatch = useDispatch();
-
   const Profile = useSelector((state) => state.example.profile);
-  const ProfileImg = Profile?.profile
-  // const handleFileUpload = (e: any) => {
-  //   const file = e.target.files[0];
-  //   setFile(file)
-  // };
-  const AddPost = async () => {
-    // Trim the caption to avoid empty spaces
-    const trimmedCaption = caption.trim();
 
-    // Check if caption or thumbnail is empty
+  const AddPost = async () => {
+    const trimmedCaption = caption.trim();
     if (!trimmedCaption && !thumbnail) {
       toast.error('Please provide either a caption or a thumbnail before submitting.');
-      return; // Exit the function early
+      return;
     }
     setLoader(true);
-    const values = { caption: trimmedCaption, thumbnail }; // Gather form data into values
+    const values = { caption: trimmedCaption, thumbnail };
     try {
-      const result = await AddPosts(values); // Make async API call
+      const result = await AddPosts(values);
       setLoader(false);
       if ("data" in result) {
         const Data = result.data;
         if (Data?.status) {
-          // await refreshPosts();
-          dispatch(setUpdatePost(Data?.data)); // Reset the video URL or any other cleanup action
+          dispatch(setUpdatePost(Data?.data));
           setOpenModal(false);
           setThumbnail(null);
-          setCaption(''); // Clear the input field
+          setCaption('');
           toast.success("Post Added Successfully");
         }
       }
@@ -60,7 +46,6 @@ const ForumTopBar = ({ profileData }) => {
     }
   };
 
-
   function onCloseModal() {
     setOpenModal(false);
   }
@@ -70,150 +55,131 @@ const ForumTopBar = ({ profileData }) => {
   };
 
   const handleThumbnailClick = () => {
-    // Trigger file input when clicking the div
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
   };
 
-
   return (
-    <div className="flex items-center gap-4 ">
-      <div className="bg-[#262D34] w-[90%] rounded-xl p-3 flex md:flex-row flex-col gap-2 items-center">
-        <div className="flex items-center gap-2 w-full">
-          <div className="relative z-10 flex items-center gap-4 p-1">
-            <div className="w-[40px] h-[40px] bg-white rounded-full p-1 ">
-              <Image
-                src={profileData ? profileData.profile : "/assets/user.png"}
-                alt="user"
-                width={64}
-                height={64}
-                className="rounded-full object-cover"
-              />
-            </div>
+    <div className="bg-[#88AE98] rounded-lg shadow p-4 mb-4">
+      <Modal
+        show={openModal}
+        size="md"
+        onClose={onCloseModal}
+        popup
+        position="center"
+        className="z-[999999999990] bg-black"
+        theme={{
+          header: {
+            close: {
+              base: "ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-white !bg-gray-200 !text-gray-900  z-[9999]",
+              icon: "h-5 w-5"
+            }
+          }
+        }}
+      >
+        <div className="fixed inset-0 rounded-xl flex items-center justify-center p-4">
+          <div className="relative  w-full max-w-xl max-h-full">
+            <div className="relative  bg-[#88AE98] rounded-lg shadow">
+              <Modal.Header className="relative border-b p-4 rounded-t-xl bg-[#88AE98] text-white">
+                <h3 className="text-xl text-white font-medium text-center w-full absolute left-0">
+                  Create post
+                </h3>
+              </Modal.Header>
+              <Modal.Body className="p-4 rounded-xl bg-[#88AE98]">
 
+                <div className="space-y-4">
+
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="w-10 h-10 rounded-full bg-white p-1 overflow-hidden">
+                      <Image
+                        src={profileData?.profile || "/assets/user.png"}
+                        alt="User"
+                        width={40}
+                        height={40}
+                        className="object-cover rounded-full"
+                      />
+                    </div>
+                    <span className="font-medium text-white">{profileData?.first_name}{" "}{profileData?.last_name}</span>
+                  </div>
+
+                  <div className="flex justify-between text-white">
+                    <p>What's on your mind, {profileData?.first_name} {" "}{profileData?.last_name}?</p>
+                    <p><Smile strokeWidth={1} /></p>
+                  </div>
+
+
+                  <div className="border border-white  rounded-lg p-2 text-center">
+                    <div
+                      className={`cursor-pointer ${!thumbnail ? "p-[3.5rem]" : "p-6"} bg-white h-full`}
+                      onClick={handleThumbnailClick}
+                    >
+                      {thumbnail ? (
+                        <img
+                          src={typeof thumbnail === "string" ? thumbnail : URL.createObjectURL(thumbnail)}
+                          alt="Preview"
+                          className="max-h-60 mx-auto mb-2 rounded-md"
+                        />
+                      ) : (
+                        <>
+                          <FaImages className="mx-auto text-[#88AE98] text-4xl mb-2" />
+                          <p className="text-[#88AE98] font-medium">Add photos/videos</p>
+                          <p className="text-[#88AE98] text-sm">or drag and drop</p>
+                        </>
+                      )}
+                      <input
+                        ref={fileInputRef}
+                        type="file"
+                        accept="image/*,video/*"
+                        style={{ display: "none" }}
+                        onChange={handleFileChange}
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <input
+                      id="mind"
+                      value={caption}
+                      onChange={(e) => setCaption(e.target.value)}
+                      placeholder={`Add to your post`}
+                      className="border-0 p-2 w-full rounded-lg outline-none focus:ring-0"
+                    />
+                  </div>
+
+                  <div className="flex justify-between items-center pt-2 border-t">
+                    <Button
+                      disabled={loader || (!caption.trim() && !thumbnail)}
+                      onClick={AddPost}
+                      className="bg-white w-full text-[#88AE98] px-6"
+                    >
+                      {loader ? 'Posting...' : 'Post'}
+                    </Button>
+                  </div>
+                </div>
+              </Modal.Body>
+            </div>
           </div>
-          <input
-            className="rounded-md bg-[#2C353D] p-2 w-[100%] outline-none"
-            title="up to 1000 words"
-            placeholder="Lets share whats going on your mind..."
-            rows={2}
-            maxLength={1000}
-            onClick={() => setOpenModal(true)}
+        </div>
+      </Modal>
+      <div
+        className="bg-gray-100 rounded-full p-3 flex items-center gap-3 cursor-pointer hover:bg-gray-200"
+        onClick={() => setOpenModal(true)}
+      >
+        <div className="w-10 h-10 rounded-full overflow-hidden">
+          <Image
+            src={profileData?.profile || "/assets/user.png"}
+            alt="User"
+            width={40}
+            height={40}
+            className="object-cover"
           />
         </div>
-        <div className="flex gap-2">
-          <div className="flex items-center gap-2 cursor-pointer" onClick={() => setOpenModal(true)}>
-            <Pencil color="#6D6E71" />
-            <Images color="#6D6E71" />
-            {/* <input type="file" hidden ref={Inputref} onChange={handleFileUpload} /> */}
-            <Video color="#6D6E71" />
-            <Map color="#6D6E71" />
-          </div>
-          <button
-            onClick={() => setOpenModal(true)}
-            className={`bg-[#5aaa7c] text-white p-2 rounded-lg ${loader ? 'opacity-50 cursor-not-allowed' : ''}`}
-            // onClick={() => AddPost()}
-            disabled={loader}
-          >
-            {loader ? 'Loading...' : 'Publish'}
-          </button>
-        </div>
+        <span className="text-gray-500 flex-grow">What's on your mind?</span>
+        <button className="p-2 rounded-md hover:bg-gray-300 text-gray-500">
+          <Images size={20} />
+        </button>
       </div>
-      
-      <Popover>
-        <PopoverTrigger>
-          {/* <Bell stroke="none" fill="white" /> */}
-        </PopoverTrigger>
-        <PopoverContent className="relative ont-inter text-white border border-[#5aaa7c27] bg-gradient-to-b from-transparent to-[#5aaa7c1c]  bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-10">
-          {" "}
-
-          <h1 className="text-2xl font-bold mb-8">Notifications</h1>
-          <Notification />
-        </PopoverContent>
-      </Popover>
-
-
-      {/* ADD POST  */}
-      <Modal className=" z-[999999999990]" show={openModal} size="lg" onClose={onCloseModal} popup>
-        <Modal.Header className="bg-[#2c353d] flex justify-center items-center" >
-          <h3 className=" text-xl font-medium text-white">Create Post</h3>
-        </Modal.Header>
-        <Modal.Body className="text-white bg-[#2c353d]">
-          <div className="space-y-6">
-            <div>
-              <div className="mb-2 block">
-                <Label htmlFor="mind" value="Whats on your mind" className="text-white" />
-              </div>
-              <Textarea
-                id="mind"
-                value={caption}
-                onChange={(e) => setCaption(e.target.value)}
-                placeholder="Whats on your mind ?"
-                rows={4}
-              />
-            </div>
-            <div>
-              <div className="mb-2 block">
-                <Label htmlFor="password" value="Add Photo" className="text-white" />
-              </div>
-              <div className="row">
-                <div className="col-md-12">
-                  <div
-                    style={{
-                      border: "2px dotted  #5aaa7c",
-                      width: "100%",
-                      padding: "30px",
-                      backgroundColor: "#efb3ed",
-                      display: "flex",
-                      justifyContent: "center",
-                      cursor: "pointer",
-                    }}
-                    onClick={handleThumbnailClick} // Trigger the file input on div click
-                  >
-                    {thumbnail ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
-                        src={
-                          typeof thumbnail === "string"
-                            ? thumbnail
-                            : URL.createObjectURL(thumbnail)
-                        }
-                        width={"200"}
-                        height={"200"}
-                        alt="Thumbnail Preview"
-                      />
-                    ) : (
-                      <div className="text-center">
-                        <FaImages size={100} color="#e907e1" />
-                        <p>Click to Add Photo</p>
-                      </div>
-
-                    )}
-                  </div>
-                  <input
-                    ref={fileInputRef} // Attach the ref to the input
-                    type="file"
-                    accept="image/*"
-                    style={{ display: "none" }} // Hide the file input
-                    onChange={handleFileChange}
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className="w-full flex justify-center">
-              <Button
-                disabled={loader} // Enable button only when caption and file are filled up
-                onClick={() => AddPost()}
-                className="bg-gradient-to-r from-[#B72EB2D6] to-[#DF6ABADB] rounded-lg w-full"
-              >  {loader ? 'Loading...' : 'Publish'}
-              </Button> {/* Full-width button */}
-            </div>
-
-          </div>
-        </Modal.Body>
-      </Modal>
     </div>
   );
 };

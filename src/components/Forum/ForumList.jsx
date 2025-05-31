@@ -1,12 +1,11 @@
 import React from "react";
 import ForumCard from "./ForumCard";
-import { Root } from "@/utils/posttypes";
 
-const ForumList = (props) => {
+const ForumList = ({ refreshPosts }) => {
   
   return (
     <div>
-      <ForumCard  />
+      <ForumCard refreshPosts={refreshPosts} />
     </div>
   );
 };
