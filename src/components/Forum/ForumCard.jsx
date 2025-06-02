@@ -479,152 +479,7 @@ const ForumCard = () => {
                 }
             </div>
 
-            {/* <Modal
-                show={openModal}
-                size="md"
-                onClose={() => setOpenModal(false)}
-                popup
-                position="center"
-                className="z-[99999] bg-black"
-                theme={{
-                    header: {
-                        close: {
-                            base: "ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-white !bg-gray-200 !text-gray-900  z-[9999]",
-                            icon: "h-5 w-5"
-                        }
-                    }
-                }}
-            >
-                <div className="fixed inset-0 rounded-xl flex items-center justify-center p-4">
-                    <div className="relative  w-full max-w-xl max-h-full">
-                        <div className="relative  bg-[#88AE98] rounded-lg shadow">
-                            <Modal.Header className="bg-[#71A587] rounded-t-lg flex justify-center items-center">
-                            </Modal.Header>
-                            <Modal.Body className="text-white bg-[#71A587] rounded-b-lg">
-                                <div ref={scrollableModalRef} className="space-y-6 overflow-y-auto max-h-[500px]">
-                                    {isLoading && (
-                                        <div className="flex flex-col space-y-4">
-                                            <PostPlaceholder />
-                                        </div>
-                                    )}
 
-                                    {CurrentComments?.map((comment) => (
-                                        <div key={comment.id} className="flex items-start gap-3">
-                                            <Image
-                                                src={comment.user_profile_url || '/assets/user.png'}
-                                                alt={comment?.comment_by}
-                                                width={35}
-                                                height={35}
-                                                className="rounded-full"
-                                            />
-                                            <div className="">
-                                                <div className=" p-2 rounded-xl relative">
-                                                    {(selectedPost?.is_my_post || comment.is_my_comment) && (
-                                                        <button
-                                                            onClick={() => handleDeleteComment(comment.id)}
-                                                            className="absolute top-0 right-0 text-white hover:text-red-500"
-                                                            aria-label="Delete comment"
-                                                        >
-                                                            <MdDelete size={16} />
-                                                        </button>
-                                                    )}
-
-                                                    <div className="text-white text-sm mt-1">
-                                                        <span className="text-white font-semibold text-sm"> {comment?.comment_by} : </span>{comment?.comment}</div>
-                                                </div>
-
-                                                <div className="flex items-center gap-4 text-xs text-white mt-1 ml-1">
-                                                    <span className="cursor-pointer" onClick={() => ShowReplay(comment.id)}>
-                                                        Reply
-                                                    </span>
-                                                    <span
-                                                        className={`flex items-center gap-1 cursor-pointer ${comment.is_my_like ? 'opacity-50 cursor-not-allowed' : ''}`}
-                                                        onClick={() => {
-                                                            if (!comment.is_my_like) AddLikestoComment(comment.id);
-                                                        }}
-                                                    >
-                                                        {comment.is_my_like ? (
-                                                            <Heart stroke="none" fill="#c82726" />
-                                                        ) : (
-                                                            <Heart />
-                                                        )}
-                                                        {comment?.likes_count}
-                                                    </span>
-                                                    <span className="opacity-70">{comment?.comment_at_time}</span>
-                                                </div>
-
-                                                {comment.is_any_reply && (
-                                                    <p
-                                                        className="text-white cursor-pointer text-xs ml-1 mt-1"
-                                                        onClick={() => {
-                                                            if (!showReplies[comment.id]) ReplySpecificCmt(comment.id);
-                                                            toggleReplies(comment.id);
-                                                        }}
-                                                    >
-                                                        {showReplies[comment.id] ? 'Show less' : `View all ${comment.reply_count} replies`}
-                                                    </p>
-                                                )}
-
-                                                {replyid === comment.id && (
-                                                    <div className="flex items-center gap-2 mt-2">
-                                                        <input
-                                                            value={reply}
-                                                            onChange={(e) => setReply(e.target.value)}
-                                                            placeholder="Write a reply..."
-                                                            className="bg-[#71A587] p-2 border- placeholder:text-white outline-none  border rounded-md w-full text-white"
-                                                        />
-                                                        <button
-                                                            onClick={() => AddSpecificReply(comment.id, reply)}
-                                                            className="bg-white  text-[#27b866] px-3 py-2 rounded-xl"
-                                                        >
-                                                            {loader ? '...' : <IoIosSend size={16} />}
-                                                        </button>
-                                                    </div>
-                                                )}
-
-                                                {showReplies[comment.id] && repliesData[comment.id]?.length > 0 && (
-                                                    <div className="mt-2 ml-4 space-y-2">
-                                                        {repliesData[comment.id]?.map((reply) => (
-                                                            <div key={reply.id} className="flex items-start gap-2">
-                                                                <Image
-                                                                    src={reply.user_profile_url || '/assets/user.png'}
-                                                                    alt={reply.comment_by}
-                                                                    width={28}
-                                                                    height={28}
-                                                                    className="rounded-full"
-                                                                />
-                                                                <div className="flex-1 p-2 rounded-xl">
-
-                                                                    <div className="text-white text-sm mt-1">
-                                                                        <span className="text-white font-semibold text-sm">{reply?.comment_by}    </span>
-                                                                        : {reply?.comment}</div>
-
-                                                                </div>
-                                                            </div>
-                                                        ))}
-                                                    </div>
-                                                )}
-                                            </div>
-                                        </div>
-                                    ))}
-
-                                    <div className="flex items-center gap-2 pt-4">
-                                        <input
-                                            value={comnt}
-                                            onChange={(e) => setComnt(e.target.value)}
-                                            placeholder="Add a comment..."
-                                            className="bg-[#71A587] p-2 border- placeholder:text-white outline-none  border rounded-md w-full text-white"
-                                        />
-                                        <button onClick={() => AddComment()} className="bg-white  text-[#27b866] px-3 py-2 rounded-xl">
-                                            {loader ? '...' : <IoIosSend size={20} />}
-                                        </button>
-                                    </div>
-                                </div>
-                            </Modal.Body>
-                        </div>
-                    </div>
-                </div>
-            </Modal> */}
 
             <Modal
                 show={openModal}
@@ -692,7 +547,9 @@ const ForumCard = () => {
                                 </div>
 
                                 {/* Right Side - Comments */}
-                                <div className="w-1/2 pt-4 px-4 relative overflow-y-auto" ref={scrollableModalRef}>
+                                <div className="w-1/2 pt-4 px-4 relative " ref={scrollableModalRef}>
+                                   <div className="h-[80%] overflow-y-auto">
+                                   
                                     {isLoading && (
                                         <div className="flex flex-col space-y-4">
                                             <PostPlaceholder />
@@ -866,8 +723,9 @@ const ForumCard = () => {
                                             </div>
                                         </div>
                                     ))}
+                                   </div>
 
-                                    <div className="absolute w-[95%] bottom-0 bg-white pt-4 pb-2 border-t">
+                                    <div className="absolute bottom-0 w-full bg-white pt-4 pb-2 border-t">
                                         <div className="flex items-center gap-2 ">
                                             <input
                                                 value={comnt}
