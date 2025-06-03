@@ -1,7 +1,7 @@
 'use client'
 import { RemoveComment, setCmtNextPage, setCmtPrevPage, setCurrentPostComments, setNextPage, setNoMorePosts, setPostData, setPreviousPage, updateCommentLikes, UpdatePost, updatePostLikes } from "@/app/Redux/features/ForumSlice";
 import { AddComments, DeleteMyComment, GeAllComments, GeAllPosts, LikePost, ReplySpecificComment, SpecificReply } from "@/services/postServices";
-import { LikeComment } from "@/services/userPost";
+import { DeletePost, LikeComment } from "@/services/userPost";
 import { Modal } from "flowbite-react";
 import { Heart, MessageSquare, MoreVertical } from "lucide-react";
 import Image from "next/image";
@@ -384,8 +384,29 @@ const ForumCard = () => {
 
     };
     const toggleDropdown = (id) => {
-  setOpenDropdownId(openDropdownId === id ? null : id);
-};
+        setOpenDropdownId(openDropdownId === id ? null : id);
+    };
+
+    const DeleteMyPost = async (id) => {
+        setLoader(true);
+        try {
+            const result = await DeletePost(id);
+            setLoader(false);
+            if ("data" in result) {
+                const Data = result.data;
+                if (Data?.status) {
+                    console.log('delete post===', Data)
+                    dispatch(RemovePost({ curentpostid: id }));
+                    toast.success('Deleted Successfully')
+
+                }
+            }
+        } catch (error) {
+            toast.error('Something went wrong');
+            console.error("Error adding comment", error);
+            setLoader(false);
+        }
+    };
 
 
     return (
@@ -442,6 +463,12 @@ const ForumCard = () => {
                                     <MessageSquare fill="#EC8949" />
                                     {post.comments_count} Comments
                                 </button>
+
+                                {post.is_my_post == true ?
+                                    <div className="text-red-7 flex gap-2 cursor-pointer items-center" onClick={() => DeleteMyPost(post.id)}>
+                                        <MdDelete size={25} fill="black" />
+                                    </div> : ""}
+
                             </div>
 
                             {/* {expandedComments[post.id] && ( */}
@@ -548,158 +575,158 @@ const ForumCard = () => {
 
                                 {/* Right Side - Comments */}
                                 <div className="w-1/2 pt-4 px-4 relative " ref={scrollableModalRef}>
-                                   <div className="h-[80%] overflow-y-auto">
-                                   
-                                    {isLoading && (
-                                        <div className="flex flex-col space-y-4">
-                                            <PostPlaceholder />
-                                        </div>
-                                    )}
+                                    <div className="h-[80%] overflow-y-auto">
 
-                                    {CurrentComments?.map((comment) => (
-                                        <div key={comment.id} className="flex items-start gap-3 mb-4 group relative">
-                                            <Image
-                                                src={comment.user_profile_url || '/assets/user.png'}
-                                                alt={comment?.comment_by}
-                                                width={40}
-                                                height={40}
-                                                className="rounded-full flex-shrink-0"
-                                            />
-                                            <div className="flex-1">
-                                                <div className="bg-gray-100 p-3 rounded-xl relative">
-                                                    {(selectedPost?.is_my_post || comment.is_my_comment) && (
-                                                        <div className="absolute top-2 right-2">
-                                                            <button
-                                                                onClick={() => toggleDropdown(comment.id)}
-                                                                className="text-gray-500 hover:text-gray-700 p-1"
-                                                            >
-                                                                <MoreVertical size={16} />
-                                                            </button>
-                                                            {openDropdownId === comment.id && (
-                                                                <div className="absolute right-0 mt-1 w-32 bg-white rounded-md shadow-lg z-10 border border-gray-200">
-                                                                    <button
-                                                                        onClick={() => {
-                                                                            handleDeleteComment(comment.id);
-                                                                            setOpenDropdownId(null);
-                                                                        }}
-                                                                        className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
-                                                                    >
-                                                                        Delete
-                                                                    </button>
-                                                                </div>
+                                        {isLoading && (
+                                            <div className="flex flex-col space-y-4">
+                                                <PostPlaceholder />
+                                            </div>
+                                        )}
+
+                                        {CurrentComments?.map((comment) => (
+                                            <div key={comment.id} className="flex items-start gap-3 mb-4 group relative">
+                                                <Image
+                                                    src={comment.user_profile_url || '/assets/user.png'}
+                                                    alt={comment?.comment_by}
+                                                    width={40}
+                                                    height={40}
+                                                    className="rounded-full flex-shrink-0"
+                                                />
+                                                <div className="flex-1">
+                                                    <div className="bg-gray-100 p-3 rounded-xl relative">
+                                                        {(selectedPost?.is_my_post || comment.is_my_comment) && (
+                                                            <div className="absolute top-2 right-2">
+                                                                <button
+                                                                    onClick={() => toggleDropdown(comment.id)}
+                                                                    className="text-gray-500 hover:text-gray-700 p-1"
+                                                                >
+                                                                    <MoreVertical size={16} />
+                                                                </button>
+                                                                {openDropdownId === comment.id && (
+                                                                    <div className="absolute right-0 mt-1 w-32 bg-white rounded-md shadow-lg z-10 border border-gray-200">
+                                                                        <button
+                                                                            onClick={() => {
+                                                                                handleDeleteComment(comment.id);
+                                                                                setOpenDropdownId(null);
+                                                                            }}
+                                                                            className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
+                                                                        >
+                                                                            Delete
+                                                                        </button>
+                                                                    </div>
+                                                                )}
+                                                            </div>
+                                                        )}
+
+                                                        <div className="text-sm">
+                                                            <span className="font-semibold">{comment?.comment_by}</span>
+                                                            <p className="mt-1">{comment?.comment}</p>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="flex items-center gap-4 text-xs text-gray-500 mt-1 ml-1">
+                                                        <button
+                                                            onClick={() => ShowReplay(comment.id)}
+                                                            className="hover:text-gray-700"
+                                                        >
+                                                            Reply
+                                                        </button>
+                                                        <button
+                                                            className={`flex items-center gap-1 ${comment.is_my_like ? 'text-red-500' : 'hover:text-gray-700'}`}
+                                                            onClick={() => {
+                                                                if (!comment.is_my_like) AddLikestoComment(comment.id);
+                                                            }}
+                                                            disabled={comment.is_my_like}
+                                                        >
+                                                            {comment.is_my_like ? (
+                                                                <Heart stroke="none" fill="#c82726" size={14} />
+                                                            ) : (
+                                                                <Heart size={14} />
                                                             )}
+                                                            {comment?.likes_count}
+                                                        </button>
+                                                        <span>{comment?.comment_at_time}</span>
+                                                    </div>
+
+                                                    {comment.is_any_reply && (
+                                                        <button
+                                                            className="text-xs text-blue-500 mt-1 ml-1 hover:underline"
+                                                            onClick={() => {
+                                                                if (!showReplies[comment.id]) ReplySpecificCmt(comment.id);
+                                                                toggleReplies(comment.id);
+                                                            }}
+                                                        >
+                                                            {showReplies[comment.id] ? 'Show less' : `View all ${comment.reply_count} replies`}
+                                                        </button>
+                                                    )}
+
+                                                    {replyid === comment.id && (
+                                                        <div className="flex items-center gap-2 mt-2">
+                                                            <input
+                                                                value={reply}
+                                                                onChange={(e) => setReply(e.target.value)}
+                                                                placeholder="Write a reply..."
+                                                                className="flex-1 p-2 border border-gray-300 rounded-md text-sm"
+                                                            />
+                                                            <button
+                                                                onClick={() => AddSpecificReply(comment.id, reply)}
+                                                                className="bg-blue-500 text-white px-3 py-2 rounded-md"
+                                                            >
+                                                                {loader ? '...' : <IoIosSend size={16} />}
+                                                            </button>
                                                         </div>
                                                     )}
 
-                                                    <div className="text-sm">
-                                                        <span className="font-semibold">{comment?.comment_by}</span>
-                                                        <p className="mt-1">{comment?.comment}</p>
-                                                    </div>
-                                                </div>
-
-                                                <div className="flex items-center gap-4 text-xs text-gray-500 mt-1 ml-1">
-                                                    <button
-                                                        onClick={() => ShowReplay(comment.id)}
-                                                        className="hover:text-gray-700"
-                                                    >
-                                                        Reply
-                                                    </button>
-                                                    <button
-                                                        className={`flex items-center gap-1 ${comment.is_my_like ? 'text-red-500' : 'hover:text-gray-700'}`}
-                                                        onClick={() => {
-                                                            if (!comment.is_my_like) AddLikestoComment(comment.id);
-                                                        }}
-                                                        disabled={comment.is_my_like}
-                                                    >
-                                                        {comment.is_my_like ? (
-                                                            <Heart stroke="none" fill="#c82726" size={14} />
-                                                        ) : (
-                                                            <Heart size={14} />
-                                                        )}
-                                                        {comment?.likes_count}
-                                                    </button>
-                                                    <span>{comment?.comment_at_time}</span>
-                                                </div>
-
-                                                {comment.is_any_reply && (
-                                                    <button
-                                                        className="text-xs text-blue-500 mt-1 ml-1 hover:underline"
-                                                        onClick={() => {
-                                                            if (!showReplies[comment.id]) ReplySpecificCmt(comment.id);
-                                                            toggleReplies(comment.id);
-                                                        }}
-                                                    >
-                                                        {showReplies[comment.id] ? 'Show less' : `View all ${comment.reply_count} replies`}
-                                                    </button>
-                                                )}
-
-                                                {replyid === comment.id && (
-                                                    <div className="flex items-center gap-2 mt-2">
-                                                        <input
-                                                            value={reply}
-                                                            onChange={(e) => setReply(e.target.value)}
-                                                            placeholder="Write a reply..."
-                                                            className="flex-1 p-2 border border-gray-300 rounded-md text-sm"
-                                                        />
-                                                        <button
-                                                            onClick={() => AddSpecificReply(comment.id, reply)}
-                                                            className="bg-blue-500 text-white px-3 py-2 rounded-md"
-                                                        >
-                                                            {loader ? '...' : <IoIosSend size={16} />}
-                                                        </button>
-                                                    </div>
-                                                )}
-
-                                                {showReplies[comment.id] && repliesData[comment.id]?.length > 0 && (
-                                                    <div className="mt-2 ml-4 space-y-2">
-                                                        {repliesData[comment.id]?.map((reply) => (
-                                                            <div key={reply.id} className="flex items-start gap-2">
-                                                                <Image
-                                                                    src={reply.user_profile_url || '/assets/user.png'}
-                                                                    alt={reply.comment_by}
-                                                                    width={32}
-                                                                    height={32}
-                                                                    className="rounded-full flex-shrink-0"
-                                                                />
-                                                                <div className="flex-1">
-                                                                    <div className="bg-gray-100 p-2 rounded-xl relative">
-                                                                        {reply.is_my_reply && (
-                                                                            <div className="absolute top-1 right-1">
-                                                                                <button
-                                                                                    onClick={(e) => {
-                                                                                        e.stopPropagation(); // Prevent event bubbling
-                                                                                        toggleDropdown(`reply-${reply.id}`);
-                                                                                    }}
-                                                                                    className="text-gray-500 hover:text-gray-700 p-1"
-                                                                                >
-                                                                                    <MoreVertical size={14} />
-                                                                                </button>
-                                                                                {openDropdownId === `reply-${reply.id}` && (
-                                                                                    <div
-                                                                                        className="absolute right-0 mt-1 w-32 bg-white rounded-md shadow-lg z-50 border border-gray-200"
-                                                                                        onClick={(e) => e.stopPropagation()} // Prevent clicks inside dropdown from closing it
+                                                    {showReplies[comment.id] && repliesData[comment.id]?.length > 0 && (
+                                                        <div className="mt-2 ml-4 space-y-2">
+                                                            {repliesData[comment.id]?.map((reply) => (
+                                                                <div key={reply.id} className="flex items-start gap-2">
+                                                                    <Image
+                                                                        src={reply.user_profile_url || '/assets/user.png'}
+                                                                        alt={reply.comment_by}
+                                                                        width={32}
+                                                                        height={32}
+                                                                        className="rounded-full flex-shrink-0"
+                                                                    />
+                                                                    <div className="flex-1">
+                                                                        <div className="bg-gray-100 p-2 rounded-xl relative">
+                                                                            {reply.is_my_reply && (
+                                                                                <div className="absolute top-1 right-1">
+                                                                                    <button
+                                                                                        onClick={(e) => {
+                                                                                            e.stopPropagation(); // Prevent event bubbling
+                                                                                            toggleDropdown(`reply-${reply.id}`);
+                                                                                        }}
+                                                                                        className="text-gray-500 hover:text-gray-700 p-1"
                                                                                     >
-                                                                                        <button
-                                                                                            onClick={() => {
-                                                                                                handleDeleteComment(reply.id);
-                                                                                                setOpenDropdownId(null);
-                                                                                            }}
-                                                                                            className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
+                                                                                        <MoreVertical size={14} />
+                                                                                    </button>
+                                                                                    {openDropdownId === `reply-${reply.id}` && (
+                                                                                        <div
+                                                                                            className="absolute right-0 mt-1 w-32 bg-white rounded-md shadow-lg z-50 border border-gray-200"
+                                                                                            onClick={(e) => e.stopPropagation()} // Prevent clicks inside dropdown from closing it
                                                                                         >
-                                                                                            Delete
-                                                                                        </button>
-                                                                                    </div>
-                                                                                )}
-                                                                            </div>
-                                                                        )}
+                                                                                            <button
+                                                                                                onClick={() => {
+                                                                                                    handleDeleteComment(reply.id);
+                                                                                                    setOpenDropdownId(null);
+                                                                                                }}
+                                                                                                className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
+                                                                                            >
+                                                                                                Delete
+                                                                                            </button>
+                                                                                        </div>
+                                                                                    )}
+                                                                                </div>
+                                                                            )}
 
-                                                                        <div className="text-sm">
-                                                                            <span className="font-semibold">{reply?.comment_by}</span>
-                                                                            <p className="mt-1">{reply?.comment}</p>
+                                                                            <div className="text-sm">
+                                                                                <span className="font-semibold">{reply?.comment_by}</span>
+                                                                                <p className="mt-1">{reply?.comment}</p>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <div className="flex items-center gap-3 text-xs text-gray-500 mt-1 ml-1">
-                                                                        {/* <button
+                                                                        <div className="flex items-center gap-3 text-xs text-gray-500 mt-1 ml-1">
+                                                                            {/* <button
                                                                             className={`flex items-center gap-1 ${reply.is_my_like ? 'text-red-500' : 'hover:text-gray-700'}`}
                                                                             onClick={() => {
                                                                                 if (!reply.is_my_like) AddLikestoReply(reply.id);
@@ -713,17 +740,17 @@ const ForumCard = () => {
                                                                             )}
                                                                             {reply?.likes_count}
                                                                         </button> */}
-                                                                        <span>{reply?.comment_at_time}</span>
+                                                                            <span>{reply?.comment_at_time}</span>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        ))}
-                                                    </div>
-                                                )}
+                                                            ))}
+                                                        </div>
+                                                    )}
+                                                </div>
                                             </div>
-                                        </div>
-                                    ))}
-                                   </div>
+                                        ))}
+                                    </div>
 
                                     <div className="absolute bottom-0 w-full bg-white pt-4 pb-2 border-t">
                                         <div className="flex items-center gap-2 ">
