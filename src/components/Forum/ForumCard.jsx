@@ -398,7 +398,7 @@ const ForumCard = () => {
                     console.log('delete post===', Data)
                     dispatch(RemovePost({ curentpostid: id }));
                     toast.success('Deleted Successfully')
-
+// ..
                 }
             }
         } catch (error) {
