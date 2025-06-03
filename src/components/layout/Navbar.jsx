@@ -27,6 +27,17 @@ export default function Navbar() {
   const [userData, setUserData] = useState();
   const [profile, setProfile] = useState();
   const [resources, setResources] = useState([]);
+  //   const [token, setToken] = useState(null);
+  // const router = useRouter();
+  // useEffect(() => {
+  //   const userToken = localStorage.getItem("user");
+  //   console.log(userToken);
+  //   if (!userToken || userToken === "undefined") {
+  //     router.push("/login"); // Redirect to login if token is not found
+  //   } else {
+  //     setToken(userToken); // Set token if exists
+  //   }
+  // }, []);
   useEffect(() => {
     const token = localStorage.getItem("access_token");
     if (token) {
@@ -199,14 +210,14 @@ export default function Navbar() {
               Our Products
             </Link>
             {/* {isLoggedIn && !userData?.is_active && ( */}
-            {!token && (
+            {/* {!token && ( */}
               <Link
                 className="hover:text-black focus:text-black"
                 href="/pricing"
               >
                 Pricing
               </Link>
-            )}
+            {/* )} */}
             {/* )} */}
             <Link
               className="hover:text-black focus:text-black"
