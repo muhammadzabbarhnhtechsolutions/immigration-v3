@@ -157,6 +157,8 @@ export default function Navbar() {
             )}
             <Link className='hover:text-black focus:text-black' href="/latest-news">Latest News</Link>
             <Link className='hover:text-black focus:text-black' href="/contact-us">Contact Us</Link>
+                    <Link className='hover:text-black focus:text-black' href="/article"> Articles</Link>
+
           </nav>
 
           <Link href="/request-a-demo">
