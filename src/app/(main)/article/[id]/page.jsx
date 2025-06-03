@@ -3,19 +3,19 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import axiosInstance from "../../../../api/axiosInstance" // Adjust path as needed
+import axiosInstance from "../../../../api/axiosInstance";
 
 const Page = () => {
   const [article, setArticle] = useState(null);
   const params = useParams();
-console.log(article, "article");
+
   useEffect(() => {
     const getArticle = async () => {
       try {
         const res = await axiosInstance.get(
           `/user/blog/article/blog_detail/?blog_id=${params.id}`
         );
-        setArticle(res?.data?.data);
+        setArticle(res?.data?.data?.[0]); // Correctly extracting the article
       } catch (error) {
         console.error("Error fetching article:", error);
       }
@@ -44,6 +44,9 @@ console.log(article, "article");
           {/* Dynamic Title & Heading */}
           <h3 className="text-2xl font-bold text-[#333] mb-2">{article.title}</h3>
           <p className="text-gray-700 text-lg leading-relaxed mb-6">{article.heading}</p>
+
+          {/* Optional Description */}
+          <p className="text-gray-600 text-base mb-6">{article.description}</p>
 
           {/* Static Quote */}
           <blockquote className="border-l-4 border-purple-500 pl-4 italic text-gray-600 text-base mb-6">
