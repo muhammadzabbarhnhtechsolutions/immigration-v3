@@ -41,28 +41,38 @@ interface ErrorResponse {
 
   
 
-export const SubscribePackage = async (id: number) => {
-    const formData = new FormData();
-    formData.append('package_id', id.toString());
-    try {
-        const response = await axiosInstance.post('/user/user_subscription/subscribe/', formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-        });
-        return response;
-    } catch (error) {
-        const axiosError = error as AxiosError<ErrorResponse>;
-        const errorMessage = axiosError?.response?.data?.message || "Something went wrong";
-        toast.error(errorMessage);
-        console.error("Error during signup:", axiosError);
-        if (axiosError?.response) {
-          return axiosError.response;
-        } else {
-          return { status: "error", message: "Something went wrong. Please try again later." };
-        }
-      }
+export const SubscribePackage = async (id: number, router: AppRouterInstance) => {
+  const formData = new FormData();
+  formData.append("package_id", id.toString());
+
+  try {
+    const response = await axiosInstance.post("/user/user_subscription/subscribe/", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response;
+  } catch (error) {
+    const axiosError = error as AxiosError<ErrorResponse>;
+    const statusCode = axiosError?.response?.status;
+    const errorMessage = axiosError?.response?.data?.message || "Something went wrong";
+
+    if (statusCode === 403) {
+      router.push("/auth/login"); // Redirect to login page
+    } else {
+      toast.error(errorMessage);
+    }
+
+    console.error("Error during subscribe:", axiosError);
+
+    if (axiosError?.response) {
+      return axiosError.response;
+    } else {
+      return { status: "error", message: "Something went wrong. Please try again later." };
+    }
+  }
 };
+
 
 
 

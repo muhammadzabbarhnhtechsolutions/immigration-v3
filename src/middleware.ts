@@ -9,7 +9,8 @@ export function middleware(request: NextRequest) {
   const isAuthPage = authPages.some(path => pathname.startsWith(path));
 
   // Routes protected for non-logged-in users
-  const protectedPages = ['/forum', '/pricing', '/videos'];
+  const protectedPages = ['/forum', '/videos'];
+  // const protectedPages = ['/forum', '/pricing', '/videos'];
   const isProtectedPage = protectedPages.some(path => pathname.startsWith(path));
 
   if (token && isAuthPage) {

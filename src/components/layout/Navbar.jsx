@@ -1,48 +1,59 @@
 "use client";
-import { useEffect, useState } from 'react';
-import { FaPhone, FaEnvelope, FaArrowRight, FaBars, FaTimes } from 'react-icons/fa';
-import Image from 'next/image';
-import Link from 'next/link';
+import { useEffect, useState } from "react";
+import {
+  FaPhone,
+  FaEnvelope,
+  FaArrowRight,
+  FaBars,
+  FaTimes,
+} from "react-icons/fa";
+import Image from "next/image";
+import Link from "next/link";
 import logo from "../../assets/logo1.png";
 import { useRouter } from "next/navigation";
-import Cookies from 'js-cookie';
-import { removeAccessToken, removeRefreshToken } from '../../utils/localStorage';
-import {  GetProfile } from "../../services/postServices";
+import Cookies from "js-cookie";
+import {
+  removeAccessToken,
+  removeRefreshToken,
+} from "../../utils/localStorage";
+import { GetProfile } from "../../services/postServices";
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [scrollDirection, setScrollDirection] = useState("up");
   const router = useRouter();
-  const [userData, setUserData] = useState()
-  const [profile, setProfile] = useState()
- 
+  const [token, setToken] = useState(null);
+  const [userData, setUserData] = useState();
+  const [profile, setProfile] = useState();
+  const [resources, setResources] = useState([]);
   useEffect(() => {
     const token = localStorage.getItem("access_token");
     if (token) {
       setIsLoggedIn(true);
     }
   }, []);
-
-
+  useEffect(() => {
+    const userToken = localStorage.getItem("user");
+    setToken(userToken);
+  }, []);
+  console.log(resources, "resources");
   const Logout = () => {
-
     // Clear tokens
     removeAccessToken();
     removeRefreshToken(); // Optional if using refresh tokens
-    Cookies.remove('access_token'); // Remove cookie
+    Cookies.remove("access_token"); // Remove cookie
 
     // Remove additional data
-    localStorage.removeItem('user');
-    localStorage.removeItem('course_id');
+    localStorage.removeItem("user");
+    localStorage.removeItem("course_id");
 
     // Optionally, clear all
     // localStorage.clear();
 
     // Redirect to login
-    router.push('/login');
+    router.push("/login");
   };
-
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
@@ -50,7 +61,10 @@ export default function Navbar() {
     const updateScrollDirection = () => {
       const currentScrollY = window.scrollY;
       const direction = currentScrollY > lastScrollY ? "down" : "up";
-      if (direction !== scrollDirection && Math.abs(currentScrollY - lastScrollY) > 10) {
+      if (
+        direction !== scrollDirection &&
+        Math.abs(currentScrollY - lastScrollY) > 10
+      ) {
         setScrollDirection(direction);
       }
       lastScrollY = currentScrollY > 0 ? currentScrollY : 0;
@@ -62,47 +76,53 @@ export default function Navbar() {
     };
   }, [scrollDirection]);
 
-
   const getProfileData = async () => {
-  try {
-    const result = await GetProfile();
-    if (result.data) {
-      const newProfileData = result.data.data;
-      setProfile(newProfileData);
+    try {
+      const result = await GetProfile();
+      if (result.data) {
+        const newProfileData = result?.data?.data;
+        setProfile(newProfileData);
 
-      // Update localStorage "user" key with latest profile data
-      localStorage.setItem("user", JSON.stringify(newProfileData));
-    }
-  } catch (error) {
-    toast.error('Something went wrong');
-    console.error(error);
-  }
-}
-
-  useEffect(() => {
-    getProfileData()
-  }, [])
-
-
-  
-
-  useEffect(() => {
-    const userObject = localStorage.getItem("user");
-    if (userObject) {
-      const parsedata = JSON.parse(userObject)
-      if (parsedata) {
-
-        setUserData(parsedata);
+        // Update localStorage "user" key with latest profile data
+        localStorage.setItem("user", JSON?.stringify(newProfileData));
       }
+    } catch (error) {
+      toast.error("Something went wrong");
+      console.error(error);
     }
+  };
 
+  useEffect(() => {
+    getProfileData();
   }, []);
 
+  useEffect(() => {
+    const userObject = localStorage?.getItem("user");
+
+    if (userObject && userObject !== "undefined") {
+      try {
+        const parsedata = JSON.parse(userObject);
+        if (parsedata) {
+          setUserData(parsedata);
+        }
+      } catch (error) {
+        console.error("Failed to parse user data:", error);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    setResources(userData?.package?.resources);
+  }, [userData?.package?.resources]);
 
   return (
     <div className="w-full relative z-[100]">
       {/* Fixed Navigation Container */}
-      <div className={`fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ${scrollDirection === "down" ? "-translate-y-full" : "translate-y-0"}`}>
+      <div
+        className={`fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ${
+          scrollDirection === "down" ? "-translate-y-full" : "translate-y-0"
+        }`}
+      >
         {/* Top Contact Bar */}
         <div className="bg-[#88AE98] text-white px-14 py-2 hidden md:flex justify-between items-center text-sm">
           <div className="flex items-center gap-6">
@@ -116,8 +136,12 @@ export default function Navbar() {
           <div className="space-x-4">
             {!isLoggedIn ? (
               <>
-                <Link href="/login" className="hover:underline font-semibold">Login</Link>
-                <Link href="/signup" className="hover:underline font-semibold">Sign Up</Link>
+                <Link href="/login" className="hover:underline font-semibold">
+                  Login
+                </Link>
+                <Link href="/signup" className="hover:underline font-semibold">
+                  Sign Up
+                </Link>
               </>
             ) : (
               <button
@@ -143,20 +167,68 @@ export default function Navbar() {
           </Link>
 
           <nav className="hidden md:flex space-x-6 text-[#90B29F] font-sans text-[16px]">
-            <Link className='focus:text-black hover:text-black' href="/">Home</Link>
+            <Link className="focus:text-black hover:text-black" href="/">
+              Home
+            </Link>
             {isLoggedIn && userData?.is_active && (
               <>
-                <Link className='text-[#88AE98] focus:text-black hover:text-black' href="/forum">Discussion Forum</Link>
-                <Link className='focus:text-black hover:text-black' href="/videos">Courses</Link>
+                <Link
+                  className="text-[#88AE98] focus:text-black hover:text-black"
+                  href="/forum"
+                >
+                  Discussion Forum
+                </Link>
+                <Link
+                  className="focus:text-black hover:text-black"
+                  href="/videos"
+                >
+                  Courses
+                </Link>
               </>
             )}
-            <Link className='hover:text-black focus:text-black' href="/about-us">About Us</Link>
-            <Link className='hover:text-black focus:text-black' href="/our-products">Our Products</Link>
-            {isLoggedIn && !userData?.is_active && (
-              <Link className='hover:text-black focus:text-black' href="/pricing">Pricing</Link>
+            <Link
+              className="hover:text-black focus:text-black"
+              href="/about-us"
+            >
+              About Us
+            </Link>
+            <Link
+              className="hover:text-black focus:text-black"
+              href="/our-products"
+            >
+              Our Products
+            </Link>
+            {/* {isLoggedIn && !userData?.is_active && ( */}
+            {!token && (
+              <Link
+                className="hover:text-black focus:text-black"
+                href="/pricing"
+              >
+                Pricing
+              </Link>
             )}
-            <Link className='hover:text-black focus:text-black' href="/latest-news">Latest News</Link>
-            <Link className='hover:text-black focus:text-black' href="/contact-us">Contact Us</Link>
+            {/* )} */}
+            <Link
+              className="hover:text-black focus:text-black"
+              href="/latest-news"
+            >
+              Latest News
+            </Link>
+            <Link
+              className="hover:text-black focus:text-black"
+              href="/contact-us"
+            >
+              Contact Us
+            </Link>
+
+            {userData?.package?.resources?.includes("Blogs") && (
+              <Link
+                className="hover:text-black focus:text-black"
+                href="/article"
+              >
+                Articles
+              </Link>
+            )}
           </nav>
 
           <Link href="/request-a-demo">
@@ -178,20 +250,36 @@ export default function Navbar() {
         {/* Mobile Dropdown Menu */}
         {isMobileMenuOpen && (
           <div className="bg-white px-6 py-4 h-screen flex flex-col space-y-4 md:hidden border-t-2 border-gray-100 shadow-md">
-            <Link href="/" className="text-[#88AE98]">Home</Link>
+            <Link href="/" className="text-[#88AE98]">
+              Home
+            </Link>
             {isLoggedIn && userData?.is_active && (
               <>
-                <Link className='text-[#88AE98]' href="/videos">Courses</Link>
-                <Link className='text-[#88AE98]' href="/forum">Discussion Forum</Link>
+                <Link className="text-[#88AE98]" href="/videos">
+                  Courses
+                </Link>
+                <Link className="text-[#88AE98]" href="/forum">
+                  Discussion Forum
+                </Link>
               </>
             )}
-            <Link href="/about-us" className="text-[#88AE98]">About Us</Link>
-            <Link href="/our-products" className="text-[#88AE98]">Our Products</Link>
+            <Link href="/about-us" className="text-[#88AE98]">
+              About Us
+            </Link>
+            <Link href="/our-products" className="text-[#88AE98]">
+              Our Products
+            </Link>
             {isLoggedIn && !userData?.is_active && (
-              <Link href="/pricing" className="text-[#88AE98]">Pricing</Link>
+              <Link href="/pricing" className="text-[#88AE98]">
+                Pricing
+              </Link>
             )}
-            <Link href="/latest-news" className="text-[#88AE98]">Latest News</Link>
-            <Link href="/contact-us" className="text-[#88AE98]">Contact Us</Link>
+            <Link href="/latest-news" className="text-[#88AE98]">
+              Latest News
+            </Link>
+            <Link href="/contact-us" className="text-[#88AE98]">
+              Contact Us
+            </Link>
             <div className="flex flex-col space-y-2 pt-4 border-t-2 border-gray-100">
               <span className="flex items-center gap-2 text-[#88AE98]">
                 <FaPhone /> 07578979789

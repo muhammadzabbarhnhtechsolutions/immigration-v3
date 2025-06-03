@@ -34,13 +34,13 @@ export default function ContactSection() {
     <section className="py-16 px-14 bg-[#E6EDE9] relative overflow-hidden">
       {/* Background pattern */}
       <div className="absolute inset-0 z-0">
-        <Image
+        {/* <Image
           // src={bg3}
           alt="Background pattern"
           fill
           className="object-cover opacity-30"
           priority
-        />
+        /> */}
       </div>
 
       <div className="container mx-auto px-4 relative z-10">

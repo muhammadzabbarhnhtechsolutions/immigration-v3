@@ -94,17 +94,21 @@ export default function MainComponent() {
             <label className="ml-2 text-sm">Remember me</label>
           </div>
 
-          <button
-            type="submit"
-            disabled={loader}
-            className="py-2 px-4 w-full bg-[#87AA9C] text-white rounded hover:bg-[#769589]"
-          >
-            {loader ? "Loading..." : "Login"}
-          </button>
+<div className="mt-4 text-right text-sm text-blue-600 hover:underline">
+  <Link href="#">Forgotten your password?</Link>
+</div>
+        
+<button
+  type="submit"
+  disabled={loader}
+  className="py-2 px-4 w-full bg-[#87AA9C] text-white rounded hover:bg-[#769589]"
+>
+  {loader ? "Loading..." : "Login"}
+</button>
 
-          <div className="text-sm text-blue-600 hover:underline">
-            <Link href="#">Forgotten your password?</Link>
-          </div>
+
+
+
         </form>
       </div>
     </div>
