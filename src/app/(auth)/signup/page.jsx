@@ -4,6 +4,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { SignupAuthService } from "../../../services/authServices";
+import Link from "next/link";
 
 export default function MainComponent() {
   const router = useRouter();
@@ -192,6 +193,13 @@ export default function MainComponent() {
           >
             {loading ? "..." : "Register"}
           </button>
+          <div className="mt-2 text-sm text-gray-700">
+            Already have an account?{" "}
+            <Link
+           href="/login" className="text-blue-600 hover:underline">
+              login
+            </Link>
+          </div>
         </form>
       </div>
     </div>
