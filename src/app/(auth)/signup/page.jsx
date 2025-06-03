@@ -153,7 +153,7 @@ export default function MainComponent() {
             </div>
           </div>
 
-          <div>
+          {/* <div>
             <label className="block text-sm mb-1">Profile Image</label>
             <input
               type="file"
@@ -162,7 +162,7 @@ export default function MainComponent() {
               onChange={handleInputChange}
               className="w-full px-3 bg-white py-2 border border-gray-200 rounded"
             />
-          </div>
+          </div> */}
 
           <div className="flex items-start mt-4">
             <input

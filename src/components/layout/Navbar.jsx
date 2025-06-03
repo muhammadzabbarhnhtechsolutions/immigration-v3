@@ -67,11 +67,11 @@ export default function Navbar() {
   try {
     const result = await GetProfile();
     if (result.data) {
-      const newProfileData = result.data.data;
+      const newProfileData = result?.data?.data;
       setProfile(newProfileData);
 
       // Update localStorage "user" key with latest profile data
-      localStorage.setItem("user", JSON.stringify(newProfileData));
+      localStorage.setItem("user", JSON?.stringify(newProfileData));
     }
   } catch (error) {
     toast.error('Something went wrong');
@@ -86,17 +86,22 @@ export default function Navbar() {
 
   
 
-  useEffect(() => {
-    const userObject = localStorage.getItem("user");
-    if (userObject) {
-      const parsedata = JSON.parse(userObject)
-      if (parsedata) {
+useEffect(() => {
+  const userObject = localStorage?.getItem("user");
 
+  if (userObject && userObject !== "undefined") {
+    try {
+      const parsedata = JSON.parse(userObject);
+      if (parsedata) {
         setUserData(parsedata);
       }
+    } catch (error) {
+      console.error("Failed to parse user data:", error);
     }
+  }
+}, []);
 
-  }, []);
+
 
 
   return (
