@@ -29,6 +29,12 @@ export default function Navbar() {
   const [profile, setProfile] = useState();
   const [resources, setResources] = useState([]);
   const [packageData, setPackageData] = useState([]);
+  const [checklogin, setcheckLogin] = useState("");
+
+useEffect(() => {
+ const userToken = localStorage.getItem("user");
+    setcheckLogin(userToken);
+  }, [])
   useEffect(() => {
     const token = localStorage.getItem("user");
     setUserData(token)
@@ -38,8 +44,9 @@ export default function Navbar() {
     }
   }, []);
   useEffect(() => {
-    const userToken = localStorage.getItem("user");
-    setToken(userToken);
+   const userToken = localStorage.getItem("user");
+setcheckLogin(userToken);
+
   }, []);
   console.log(resources, "resources");
   const Logout = () => {
@@ -173,25 +180,24 @@ export default function Navbar() {
               <FaEnvelope /> immigration@training.com
             </span>
           </div>
-          <div className="space-x-4">
-            {!isLoggedIn ? (
-              <>
-                <Link href="/login" className="hover:underline font-semibold">
-                  Login
-                </Link>
-                <Link href="/signup" className="hover:underline font-semibold">
-                  Sign Up
-                </Link>
-              </>
-            ) : (
-              <button
-                onClick={Logout}
-                className="hover:underline font-semibold"
-              >
-                Logout
-              </button>
-            )}
-          </div>
+        <div className="space-x-4">
+  {!checklogin || checklogin === "undefined" ? (
+  <>
+    <Link href="/login" className="hover:underline font-semibold">
+      Login
+    </Link>
+    <Link href="/signup" className="hover:underline font-semibold">
+      Sign Up
+    </Link>
+  </>
+) : (
+  <button onClick={Logout} className="hover:underline font-semibold">
+    Logout
+  </button>
+)}
+
+</div>
+
         </div>
 
         {/* Main Navbar */}

@@ -46,17 +46,19 @@ export default function IndividualUsers() {
   const [packageData, setPackageData] = useState([]);
   const [billing, setBilling] = useState("monthly");
   const [loading, setLoading] = useState(true);
+  const [checklogin, setcheckLogin] = useState("");
   const [token, setToken] = useState(null);
   const router = useRouter();
-// useEffect(() => {
-//   const userToken = localStorage.getItem("access_token");
-// console.log(userToken)
-//   // if (!userToken || userToken === "undefined") {
-//   //   router.push("/login"); // Redirect to login if token is not found
-//   // } else {
-//   //   setToken(userToken); // Set token if exists
-//   // }
-// }, []);
+useEffect(() => {
+  const userToken = localStorage.getItem("access_token");
+    setToken(userToken); // Set token if exists
+
+}, []);
+
+useEffect(() => {
+ const userToken = localStorage.getItem("user");
+    setcheckLogin(userToken);
+  }, [])
 
 // useEffect(() => {
 //   const userToken = localStorage.getItem("access_token");
@@ -83,6 +85,7 @@ export default function IndividualUsers() {
       setLoading(false);
     }
   };
+  // .
 
   useEffect(() => {
     getPricing();
