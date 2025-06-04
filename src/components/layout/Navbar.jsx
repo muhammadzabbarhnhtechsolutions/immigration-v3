@@ -239,14 +239,15 @@ export default function Navbar() {
               Our Products
             </Link>
             {/* {isLoggedIn && !userData?.is_active && ( */}
-            {!packageData && (
-              <Link
-                className="hover:text-black focus:text-black"
-                href="/pricing"
-              >
-                Pricing
-              </Link>
-            )}
+           {(!isLoggedIn || !userData?.package) && (
+  <Link
+    className="hover:text-black focus:text-black"
+    href="/pricing"
+  >
+    Pricing
+  </Link>
+)}
+
             {/* )} */}
             <Link
               className="hover:text-black focus:text-black"

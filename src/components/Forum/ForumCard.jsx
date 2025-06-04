@@ -425,57 +425,55 @@ const ForumCard = () => {
     setOpenDropdownId(openDropdownId === id ? null : id);
   };
   const fetchAllPosts = async () => {
-  setIsLoading(true);
-  try {
-    const result = await GeAllPosts();
+    setIsLoading(true);
+    try {
+      const result = await GeAllPosts();
 
-    if (result && "data" in result) {
-      const Data = result.data;
+      if (result && "data" in result) {
+        const Data = result.data;
 
-      if (Data?.status) {
-        dispatch(setPostData(Data.results));
-        dispatch(setNextPage(Data.next));
-        dispatch(setPreviousPage(Data.previous));
+        if (Data?.status) {
+          dispatch(setPostData(Data.results));
+          dispatch(setNextPage(Data.next));
+          dispatch(setPreviousPage(Data.previous));
+        } else {
+          toast.error(Data.message || "Failed to fetch posts");
+        }
       } else {
-        toast.error(Data.message || "Failed to fetch posts");
+        toast.error(result?.message || "Invalid response from server");
       }
-    } else {
-      toast.error(result?.message || "Invalid response from server");
+    } catch (error) {
+      console.error("Error fetching posts:", error);
+      toast.error("Something went wrong while fetching posts");
+    } finally {
+      setIsLoading(false);
     }
-  } catch (error) {
-    console.error("Error fetching posts:", error);
-    toast.error("Something went wrong while fetching posts");
-  } finally {
-    setIsLoading(false);
-  }
-};
-const DeleteMyPost = async (id) => {
-  setLoader(true);
+  };
+  const DeleteMyPost = async (id) => {
+    setLoader(true);
 
-  try {
-    const result = await DeletePost(id); // axios.delete internally
-    const Data = result?.data;
-console.log(Data)
-    if (Data?.status === true) {
-      console.log("Post deleted:", Data.message);
-      dispatch(RemovePost({ curentpostid: id }));
-      toast.success("Deleted Successfully");
+    try {
+      const result = await DeletePost(id); // axios.delete internally
+      const Data = result?.data;
+      console.log(Data);
+      if (Data?.status === true) {
+        console.log("Post deleted:", Data.message);
+        dispatch(RemovePost({ curentpostid: id }));
+        toast.success("Deleted Successfully");
         // window.location.reload();
 
-      // ✅ Refresh posts
-      fetchAllPosts();
-    } else {
-      toast.error(Data?.message || "Failed to delete post");
+        // ✅ Refresh posts
+        fetchAllPosts();
+      } else {
+        toast.error(Data?.message || "Failed to delete post");
+      }
+    } catch (error) {
+      console.error("Error deleting post:", error);
+      toast.error("Something went wrong while deleting post");
+    } finally {
+      setLoader(false);
     }
-  } catch (error) {
-    console.error("Error deleting post:", error);
-    toast.error("Something went wrong while deleting post");
-  } finally {
-    setLoader(false);
-  }
-};
-
-
+  };
 
   useEffect(() => {
     if (selectedPost?.id) {
@@ -557,29 +555,27 @@ console.log(Data)
                                     ) : null}
                                 </button> */}
                 {/* {post?.likes_count} Likes */}
-{/* ... */}
-               <button
-  onClick={() => {
-    toggleComments(post.id);
-    handleCommentsClick(post);
-  }}
-  className="m-auto mt-8 flex items-center gap-2 px-4 ml-4 py-2 rounded-full bg-orange-100 text-orange-600 hover:bg-orange-200 hover:text-orange-700 transition-all duration-200 shadow-sm font-medium"
->
-  <MessageSquare fill="#EC8949" />
-  <span>{post.comments_count} Comments</span>
-</button>
-
+                {/* ... */}
+                <button
+                  onClick={() => {
+                    toggleComments(post.id);
+                    handleCommentsClick(post);
+                  }}
+                  className="m-auto mt-8 flex items-center gap-2 px-4 ml-4 py-2 rounded-full bg-orange-100 text-orange-600 hover:bg-orange-200 hover:text-orange-700 transition-all duration-200 shadow-sm font-medium"
+                >
+                  <MessageSquare fill="#EC8949" />
+                  <span>{post.comments_count} Comments</span>
+                </button>
 
                 {post.is_my_post == true ? (
-                 <div
-  className="flex items-center gap-2 text-red-600 cursor-pointer hover:bg-red-100 hover:text-red-700 transition-all duration-200 px-8 py-2 rounded-2xl shadow-sm mt-6"
-  onClick={() => DeleteMyPost(post.id)}
-  title="Delete Post"
->
-  <MdDelete size={22} />
-  <span className="font-medium hidden sm:inline">Delete</span>
-</div>
-
+                  <div
+                    className="flex items-center gap-2 text-red-600 cursor-pointer hover:bg-red-100 hover:text-red-700 transition-all duration-200 px-8 py-2 rounded-2xl shadow-sm mt-6"
+                    onClick={() => DeleteMyPost(post.id)}
+                    title="Delete Post"
+                  >
+                    <MdDelete size={22} />
+                    <span className="font-medium hidden sm:inline">Delete</span>
+                  </div>
                 ) : (
                   ""
                 )}

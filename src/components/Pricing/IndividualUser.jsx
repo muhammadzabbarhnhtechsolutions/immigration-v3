@@ -58,16 +58,16 @@ export default function IndividualUsers() {
 //   // }
 // }, []);
 
-useEffect(() => {
-  const userToken = localStorage.getItem("access_token");
-  console.log(userToken);
+// useEffect(() => {
+//   const userToken = localStorage.getItem("access_token");
+//   console.log(userToken);
 
-  if (!userToken || userToken === "undefined") {
-    router.push("/login");
-  } else {
-    setToken(userToken); // ✅ Set it here
-  }
-}, []);
+//   if (!userToken || userToken === "undefined") {
+//     router.push("/login");
+//   } else {
+//     setToken(userToken); // ✅ Set it here
+//   }
+// }, []);
 
 
   const getPricing = async () => {
