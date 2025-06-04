@@ -1,6 +1,6 @@
 'use client'
-import { setUpdatePost } from "@/app/Redux/features/ForumSlice";
-import { AddPosts } from "@/services/postServices";
+import { setNextPage, setPostData, setPreviousPage, setUpdatePost } from "@/app/Redux/features/ForumSlice";
+import { AddPosts, GeAllPosts } from "@/services/postServices";
 import { Button, Modal } from "flowbite-react";
 import { Images, Smile } from "lucide-react";
 import Image from "next/image";
@@ -18,33 +18,75 @@ const ForumTopBar = ({ profileData }) => {
   const dispatch = useDispatch();
   const Profile = useSelector((state) => state.example.profile);
 
-  const AddPost = async () => {
-    const trimmedCaption = caption.trim();
-    if (!trimmedCaption && !thumbnail) {
-      toast.error('Please provide either a caption or a thumbnail before submitting.');
-      return;
-    }
-    setLoader(true);
-    const values = { caption: trimmedCaption, thumbnail };
-    try {
-      const result = await AddPosts(values);
-      setLoader(false);
-      if ("data" in result) {
-        const Data = result.data;
-        if (Data?.status) {
-          dispatch(setUpdatePost(Data?.data));
-          setOpenModal(false);
-          setThumbnail(null);
-          setCaption('');
-          toast.success("Post Added Successfully");
-        }
+  const fetchAllPosts = async () => {
+  setIsLoading(true);
+  try {
+    const result = await GeAllPosts();
+
+    if (result && "data" in result) {
+      const Data = result.data;
+
+      if (Data?.status) {
+        dispatch(setPostData(Data.results));
+        dispatch(setNextPage(Data.next));
+        dispatch(setPreviousPage(Data.previous));
+      } else {
+        toast.error(Data.message || "Failed to fetch posts");
       }
-    } catch (error) {
-      toast.error('Something went wrong');
-      console.error("Error adding post", error);
-      setLoader(false);
+    } else {
+      toast.error(result?.message || "Invalid response from server");
     }
-  };
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+  } finally {
+    setIsLoading(false);
+  }
+};
+
+const AddPost = async () => {
+  const trimmedCaption = caption.trim();
+
+  if (!trimmedCaption && !thumbnail) {
+    toast.error('Please provide either a caption or a thumbnail before submitting.');
+    return;
+  }
+
+  setLoader(true);
+  const values = { caption: trimmedCaption, thumbnail };
+
+  try {
+    const result = await AddPosts(values);
+              fetchAllPosts();
+
+    if (result && "data" in result) {
+      const Data = result.data;
+
+      if (Data?.status === true) {
+        dispatch(setUpdatePost(Data.data));
+        toast.success("Post Added Successfully");
+        setThumbnail(null);
+        setCaption('');
+        setOpenModal(false);
+        
+        // Page reload after post is successfully added
+        window.location.reload();
+              // fetchAllPosts();
+
+      } else {
+        toast.error(Data.message || "Failed to add post");
+      }
+    } else {
+      toast.error(result?.message || "Invalid response from server");
+    }
+  } catch (error) {
+    console.error("Error adding post:", error);
+    toast.error("Something went wrong while adding post");
+  } finally {
+    setLoader(false);
+  }
+};
+
+
 
   function onCloseModal() {
     setOpenModal(false);

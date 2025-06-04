@@ -48,15 +48,27 @@ export default function IndividualUsers() {
   const [loading, setLoading] = useState(true);
   const [token, setToken] = useState(null);
   const router = useRouter();
+// useEffect(() => {
+//   const userToken = localStorage.getItem("access_token");
+// console.log(userToken)
+//   // if (!userToken || userToken === "undefined") {
+//   //   router.push("/login"); // Redirect to login if token is not found
+//   // } else {
+//   //   setToken(userToken); // Set token if exists
+//   // }
+// }, []);
+
 useEffect(() => {
-  const userToken = localStorage.getItem("user");
-console.log(userToken)
+  const userToken = localStorage.getItem("access_token");
+  console.log(userToken);
+
   if (!userToken || userToken === "undefined") {
-    router.push("/login"); // Redirect to login if token is not found
+    router.push("/login");
   } else {
-    setToken(userToken); // Set token if exists
+    setToken(userToken); // ✅ Set it here
   }
 }, []);
+
 
   const getPricing = async () => {
     try {
@@ -82,13 +94,35 @@ console.log(userToken)
       : pkg.package_duration === 2
   );
 
+// const handlebuyPakages = async (id) => {
+//   if (!token) {
+//     return router.push("/signup");
+//   }
+
+//   try {
+//     const res = await buyPakages(id);
+
+//     const checkoutUrl = res?.data?.checkout_url;
+
+//     if (checkoutUrl && typeof checkoutUrl === "string") {
+//       window.open(checkoutUrl, "_blank");
+//     } else {
+//       console.error("Invalid checkout URL:", checkoutUrl);
+//       toast.error("Something went wrong. Please try again later.");
+//     }
+//   } catch (error) {
+//     console.error("Error in handlebuyPakages:", error);
+//     toast.error("Failed to process payment. Try again.");
+//   }
+// };
+
 const handlebuyPakages = async (id) => {
   if (!token) {
     return router.push("/signup");
   }
 
   try {
-    const res = await buyPakages(id);
+    const res = await buyPakages(id, token); // ✅ Pass token here
 
     const checkoutUrl = res?.data?.checkout_url;
 
@@ -103,7 +137,6 @@ const handlebuyPakages = async (id) => {
     toast.error("Failed to process payment. Try again.");
   }
 };
-
 
   if (loading) {
     return (

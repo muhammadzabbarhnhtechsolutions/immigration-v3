@@ -35,7 +35,42 @@ export const getPackageResources = async (router: AppRouterInstance) => {
   }
 };
 
-export const buyPakages = async (id: any) => {
+// export const buyPakages = async (id: any) => {
+//   try {
+//     const formData = new FormData();
+//     formData.append("package_id", id);
+
+//     const response = await axiosInstance.post(
+//       `/user/buy/subscription/create_checkout_session/`,
+//       formData,
+//       {
+//         headers: {
+//           "Content-Type": "multipart/form-data",
+//         },
+//       }
+//     );
+
+//     return response;
+//   } catch (error) {
+//     const axiosError = error as AxiosError<ErrorResponse>;
+//     const statusCode = axiosError?.response?.status;
+//     const errorMessage =
+//       axiosError?.response?.data?.error || axiosError?.response?.data?.message;
+
+//     if (axiosError?.response) {
+//       return axiosError.response;
+//     } else {
+//       return {
+//         status: "error",
+//         message: "Something went wrong. Please try again later.",
+//       };
+//     }
+//   }
+// };
+
+
+
+export const buyPakages = async (id: any, token: string) => {
   try {
     const formData = new FormData();
     formData.append("package_id", id);
@@ -46,6 +81,7 @@ export const buyPakages = async (id: any) => {
       {
         headers: {
           "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`, // ✅ Add this
         },
       }
     );
