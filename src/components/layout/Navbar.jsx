@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   FaPhone,
   FaEnvelope,
@@ -17,6 +17,7 @@ import {
   removeRefreshToken,
 } from "../../utils/localStorage";
 import { GetProfile } from "../../services/postServices";
+import { Dropdown } from "flowbite-react";
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -27,19 +28,11 @@ export default function Navbar() {
   const [userData, setUserData] = useState();
   const [profile, setProfile] = useState();
   const [resources, setResources] = useState([]);
-  //   const [token, setToken] = useState(null);
-  // const router = useRouter();
-  // useEffect(() => {
-  //   const userToken = localStorage.getItem("user");
-  //   console.log(userToken);
-  //   if (!userToken || userToken === "undefined") {
-  //     router.push("/login"); // Redirect to login if token is not found
-  //   } else {
-  //     setToken(userToken); // Set token if exists
-  //   }
-  // }, []);
+  const [packageData, setPackageData] = useState([]);
   useEffect(() => {
-    const token = localStorage.getItem("access_token");
+    const token = localStorage.getItem("user");
+    setUserData(token)
+    console.log("dddddddddd", packageData)
     if (token) {
       setIsLoggedIn(true);
     }
@@ -65,6 +58,28 @@ export default function Navbar() {
     // Redirect to login
     router.push("/login");
   };
+
+  const [open, setOpen] = useState(false);
+  const dropdownRef = useRef();
+
+  const resourceLinks = {
+    Forums: "/forum",
+    Blogs: "/article",
+    "Create Blog": "/article/create",
+    Videos: "/videos",
+    Courses: "/courses",
+  };
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
@@ -106,7 +121,11 @@ export default function Navbar() {
   useEffect(() => {
     getProfileData();
   }, []);
-
+  useEffect(() => {
+    const userToken = localStorage.getItem("user");
+    setToken(userToken);
+  }, []);
+  console.log(resources, "resources");
   useEffect(() => {
     const userObject = localStorage?.getItem("user");
 
@@ -126,6 +145,16 @@ export default function Navbar() {
     setResources(userData?.package?.resources);
   }, [userData?.package?.resources]);
 
+
+  useEffect(() => {
+      const userObject = localStorage?.getItem("user");
+
+    if (userObject?.package === null ) {
+      setPackageData(false);
+    }else{
+      setPackageData(true);
+    }
+  }, [])
   return (
     <div className="w-full relative z-[100]">
       {/* Fixed Navigation Container */}
@@ -183,12 +212,12 @@ export default function Navbar() {
             </Link>
             {isLoggedIn && userData?.is_active && (
               <>
-                <Link
+                {/* <Link
                   className="text-[#88AE98] focus:text-black hover:text-black"
                   href="/forum"
                 >
                   Discussion Forum
-                </Link>
+                </Link> */}
                 <Link
                   className="focus:text-black hover:text-black"
                   href="/videos"
@@ -210,14 +239,14 @@ export default function Navbar() {
               Our Products
             </Link>
             {/* {isLoggedIn && !userData?.is_active && ( */}
-            {/* {!token && ( */}
+            {!packageData && (
               <Link
                 className="hover:text-black focus:text-black"
                 href="/pricing"
               >
                 Pricing
               </Link>
-            {/* )} */}
+            )}
             {/* )} */}
             <Link
               className="hover:text-black focus:text-black"
@@ -232,16 +261,45 @@ export default function Navbar() {
               Contact Us
             </Link>
 
-            {userData?.package?.resources?.includes("Blogs") && (
-              <Link
-                className="hover:text-black focus:text-black"
-                href="/article"
-              >
-                Articles
-              </Link>
-            )}
-          </nav>
+ {userData?.package?.resources?.length > 0 && (
+      <div ref={dropdownRef} className="relative -mt-2 inline-block text-left">
+        <button
+          onClick={() => setOpen(!open)}
+          className="inline-flex items-center gap-2 px-2 py-2 text-base text-[#90B29F] bg-white rounded-full hover:text-black transition duration-300 ease-in-out "
+        >
+          Resources
+          <svg
+            className={`w-5 h-5 transform transition-transform duration-300 ${open ? "rotate-180" : ""}`}
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
 
+        {open && (
+          <div className="absolute right-0 left-6 z-20 mt-1 w-48 rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 animate-fade-in">
+            <div className="py-2">
+              {userData.package.resources.map((resource, index) => (
+                <Link
+                  key={index}
+                  href={resourceLinks[resource] || "#"}
+                  onClick={() => setOpen(false)}
+                  className="block px-5 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#6fbe91] transition duration-200 rounded-md"
+                >
+                  {resource === "Create Blog" ? "Create Blog" : `${resource}`}
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    )}
+
+
+          </nav>
           <Link href="/request-a-demo">
             <div className="hidden md:block">
               <button className="bg-[#90B29F] cursor-pointer hover:bg-[#7fa98b] transition duration-200 flex items-center gap-2 text-white text-sm font-medium px-4 py-3 rounded-md">
@@ -269,9 +327,9 @@ export default function Navbar() {
                 <Link className="text-[#88AE98]" href="/videos">
                   Courses
                 </Link>
-                <Link className="text-[#88AE98]" href="/forum">
+                {/* <Link className="text-[#88AE98]" href="/forum">
                   Discussion Forum
-                </Link>
+                </Link> */}
               </>
             )}
             <Link href="/about-us" className="text-[#88AE98]">
