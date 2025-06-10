@@ -44,7 +44,7 @@ const CrossIcon = () => (
 
 export default function IndividualUsers() {
   const [packageData, setPackageData] = useState([]);
-  const [billing, setBilling] = useState("monthly");
+  const [billing, setBilling] = useState("Service");
   const [loading, setLoading] = useState(true);
   const [checklogin, setcheckLogin] = useState("");
   const [token, setToken] = useState(null);
@@ -91,11 +91,13 @@ useEffect(() => {
     getPricing();
   }, []);
 
-  const filteredPackages = packageData.filter((pkg) =>
-    billing === "monthly"
-      ? pkg.package_duration === 1
-      : pkg.package_duration === 2
-  );
+const filteredPackages = packageData.filter((pkg) => {
+  if (billing === "Service") return pkg.package_type === 1;
+  if (billing === "Consultation") return pkg.package_type === 2;
+  if (billing === "buisness Plan") return pkg.package_type === 3;
+  return false;
+});
+
 
 // const handlebuyPakages = async (id) => {
 //   if (!token) {
@@ -140,7 +142,6 @@ const handlebuyPakages = async (id) => {
     toast.error("Failed to process payment. Try again.");
   }
 };
-
   if (loading) {
     return (
       <div className="mx-auto bg-[#ebf0ed] px-4 mt-8 py-20 text-center">
@@ -151,7 +152,31 @@ const handlebuyPakages = async (id) => {
 
   if (filteredPackages.length === 0) {
     return (
-      <div className="mx-auto bg-[#ebf0ed] px-4 mt-8 py-20 text-center">
+      <div className="mx-auto px-4 mt-8 py-20 text-center">
+         <div className="text-center mb-8">
+        <h1 className="text-2xl md:text-[40px] font-bold mb-6">
+          <span className="text-black">Individual </span>
+          <span className="text-[#7bab8e]">Users</span>
+        </h1>
+
+        <div className="flex justify-center">
+          <div className="inline-flex rounded-md gap-4 mb-6 mt-6 p-1">
+            {["Service", "Consultation","buisness Plan"].map((type) => (
+              <button
+                key={type}
+                onClick={() => setBilling(type)}
+                className={`px-5 py-3 mb-8 font-semibold cursor-pointer text-base md:text-[18px] rounded-md transition-colors ${
+                  billing === type
+                    ? "bg-[#7bab8e] text-white"
+                    : "text-gray-600 hover:bg-gray-100"
+                }`}
+              >
+                {type.charAt(0).toUpperCase() + type.slice(1)}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
         <p>No {billing} packages available at the moment.</p>
       </div>
     );
@@ -166,8 +191,8 @@ const handlebuyPakages = async (id) => {
         </h1>
 
         <div className="flex justify-center">
-          <div className="inline-flex rounded-md mb-6 p-1">
-            {["monthly", "annually"].map((type) => (
+          <div className="inline-flex rounded-md gap-4 mb-6 mt-6 p-1">
+            {["Service", "Consultation","buisness Plan"].map((type) => (
               <button
                 key={type}
                 onClick={() => setBilling(type)}

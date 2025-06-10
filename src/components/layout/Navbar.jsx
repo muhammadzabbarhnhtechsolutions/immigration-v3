@@ -75,9 +75,9 @@ setcheckLogin(userToken);
     "Create Blog": "/article/create",
     Videos: "/videos",
     Courses: "/courses",
+    Podcast: "/podcast",
   };
-  // ..
-
+// ...
   // Close dropdown on outside click
   useEffect(() => {
     function handleClickOutside(event) {
@@ -293,7 +293,7 @@ setcheckLogin(userToken);
               {userData.package.resources.map((resource, index) => (
                 <Link
                   key={index}
-                  href={resourceLinks[resource] || "#"}
+                  href={resource == "E-book" ? "/e-book" : resourceLinks[resource] || "#"}
                   onClick={() => setOpen(false)}
                   className="block px-5 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#6fbe91] transition duration-200 rounded-md"
                 >
