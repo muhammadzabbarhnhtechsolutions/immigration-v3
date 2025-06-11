@@ -20,13 +20,13 @@ const Page = () => {
         console.error("Error fetching article:", error);
       }
     };
-// ..
+
     if (params?.id) getArticle();
   }, [params?.id]);
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <h2 className="text-3xl mt-6 font-bold text-[#71a587] mb-10">Article Details</h2>
+      <h2 className="text-3xl mt-6 font-bold text-[#71a587] mb-10">Blog Details</h2>
 
       {article ? (
         <div className="mb-16">

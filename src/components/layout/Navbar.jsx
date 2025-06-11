@@ -31,22 +31,21 @@ export default function Navbar() {
   const [packageData, setPackageData] = useState([]);
   const [checklogin, setcheckLogin] = useState("");
 
-useEffect(() => {
- const userToken = localStorage.getItem("user");
+  useEffect(() => {
+    const userToken = localStorage.getItem("user");
     setcheckLogin(userToken);
-  }, [])
+  }, []);
   useEffect(() => {
     const token = localStorage.getItem("user");
-    setUserData(token)
-    console.log("dddddddddd", packageData)
+    setUserData(token);
+    console.log("dddddddddd", packageData);
     if (token) {
       setIsLoggedIn(true);
     }
   }, []);
   useEffect(() => {
-   const userToken = localStorage.getItem("user");
-setcheckLogin(userToken);
-
+    const userToken = localStorage.getItem("user");
+    setcheckLogin(userToken);
   }, []);
   console.log(resources, "resources");
   const Logout = () => {
@@ -71,13 +70,14 @@ setcheckLogin(userToken);
 
   const resourceLinks = {
     Forums: "/forum",
-    Blogs: "/article",
+    Blogs: "/blogs",
+    Articles: "/article",
     "Create Blog": "/article/create",
     Videos: "/videos",
     Courses: "/courses",
     Podcast: "/podcast",
   };
-// ...
+  // ...
   // Close dropdown on outside click
   useEffect(() => {
     function handleClickOutside(event) {
@@ -153,16 +153,15 @@ setcheckLogin(userToken);
     setResources(userData?.package?.resources);
   }, [userData?.package?.resources]);
 
-
   useEffect(() => {
-      const userObject = localStorage?.getItem("user");
+    const userObject = localStorage?.getItem("user");
 
-    if (userObject?.package === null ) {
+    if (userObject?.package === null) {
       setPackageData(false);
-    }else{
+    } else {
       setPackageData(true);
     }
-  }, [])
+  }, []);
   return (
     <div className="w-full relative z-[100]">
       {/* Fixed Navigation Container */}
@@ -181,24 +180,25 @@ setcheckLogin(userToken);
               <FaEnvelope /> immigration@training.com
             </span>
           </div>
-        <div className="space-x-4">
-  {!checklogin || checklogin === "undefined" ? (
-  <>
-    <Link href="/login" className="hover:underline font-semibold">
-      Login
-    </Link>
-    <Link href="/signup" className="hover:underline font-semibold">
-      Sign Up
-    </Link>
-  </>
-) : (
-  <button onClick={Logout} className="hover:underline font-semibold">
-    Logout
-  </button>
-)}
-
-</div>
-
+          <div className="space-x-4">
+            {!checklogin || checklogin === "undefined" ? (
+              <>
+                <Link href="/login" className="hover:underline font-semibold">
+                  Login
+                </Link>
+                <Link href="/signup" className="hover:underline font-semibold">
+                  Sign Up
+                </Link>
+              </>
+            ) : (
+              <button
+                onClick={Logout}
+                className="hover:underline font-semibold"
+              >
+                Logout
+              </button>
+            )}
+          </div>
         </div>
 
         {/* Main Navbar */}
@@ -246,14 +246,14 @@ setcheckLogin(userToken);
               Our Products
             </Link>
             {/* {isLoggedIn && !userData?.is_active && ( */}
-           {(!isLoggedIn || !userData?.package) && (
-  <Link
-    className="hover:text-black focus:text-black"
-    href="/pricing"
-  >
-    Pricing
-  </Link>
-)}
+            {(!isLoggedIn || !userData?.package) && (
+              <Link
+                className="hover:text-black focus:text-black"
+                href="/pricing"
+              >
+                Pricing
+              </Link>
+            )}
 
             {/* )} */}
             <Link
@@ -269,44 +269,58 @@ setcheckLogin(userToken);
               Contact Us
             </Link>
 
- {userData?.package?.resources?.length > 0 && (
-      <div ref={dropdownRef} className="relative -mt-2 inline-block text-left">
-        <button
-          onClick={() => setOpen(!open)}
-          className="inline-flex items-center gap-2 px-2 py-2 text-base text-[#90B29F] bg-white rounded-full hover:text-black transition duration-300 ease-in-out "
-        >
-          Resources
-          <svg
-            className={`w-5 h-5 transform transition-transform duration-300 ${open ? "rotate-180" : ""}`}
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-          </svg>
-        </button>
-
-        {open && (
-          <div className="absolute right-0 left-6 z-20 mt-1 w-48 rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 animate-fade-in">
-            <div className="py-2">
-              {userData.package.resources.map((resource, index) => (
-                <Link
-                  key={index}
-                  href={resource == "E-book" ? "/e-book" : resourceLinks[resource] || "#"}
-                  onClick={() => setOpen(false)}
-                  className="block px-5 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#6fbe91] transition duration-200 rounded-md"
+            {userData?.package?.resources?.length > 0 && (
+              <div
+                ref={dropdownRef}
+                className="relative -mt-2 inline-block text-left"
+              >
+                <button
+                  onClick={() => setOpen(!open)}
+                  className="inline-flex items-center gap-2 px-2 py-2 text-base text-[#90B29F] bg-white rounded-full hover:text-black transition duration-300 ease-in-out "
                 >
-                  {resource === "Create Blog" ? "Create Blog" : `${resource}`}
-                </Link>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-    )}
+                  Resources
+                  <svg
+                    className={`w-5 h-5 transform transition-transform duration-300 ${
+                      open ? "rotate-180" : ""
+                    }`}
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </button>
 
-
+                {open && (
+                  <div className="absolute right-0 left-6 z-20 mt-1 w-48 rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 animate-fade-in">
+                    <div className="py-2">
+                      {userData.package.resources.map((resource, index) => (
+                        <Link
+                          key={index}
+                          href={
+                            resource == "E-book"
+                              ? "/e-book"
+                              : resourceLinks[resource] || "#"
+                          }
+                          onClick={() => setOpen(false)}
+                          className="block px-5 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#6fbe91] transition duration-200 rounded-md"
+                        >
+                          {resource === "Create Blog"
+                            ? "Create Blog"
+                            : `${resource}`}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
           </nav>
           <Link href="/request-a-demo">
             <div className="hidden md:block">

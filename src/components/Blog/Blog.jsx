@@ -12,7 +12,7 @@ const ArticleSection = () => {
   useEffect(() => {
     const getArticles = async () => {
       try {
-        const res = await axiosInstance.get('/user/blog/article/article_view/');
+        const res = await axiosInstance.get('/user/blog/article/view/');
         setArticles(res?.data?.data || []);
       } catch (error) {
         console.error('Error fetching articles:', error);
@@ -26,7 +26,7 @@ const ArticleSection = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-28 bg-gray-50">
-      <h2 className="text-3xl font-extrabold text-[#8bb09b] mb-6 text-left">Articles</h2>
+      <h2 className="text-3xl font-extrabold text-[#8bb09b] mb-6 text-left">Blogs</h2>
 
       {loading ? (
         <p className="text-gray-500">Loading articles...</p>
@@ -39,7 +39,7 @@ const ArticleSection = () => {
               key={article.id}
               className="bg-white rounded-xl shadow-md hover:shadow-xl transition duration-300 p-4 group"
             >
-                <Link href={`/article/${article.id}`} className="block">
+                <Link href={`/blogs/${article.id}`} className="block">
               <div className="overflow-hidden rounded-lg cursor-pointer">
                 <Image
                   src={article.image}
@@ -51,7 +51,7 @@ const ArticleSection = () => {
               </div>
               </Link>
               {/* <h3 className="text-blue-600 text-sm font-semibold mt-4">Technology</h3> */}
-              <p className="text-gray-800 mt-4 font-semibold text-base mt-1 line-clamp-2">
+              <p className="text-gray-800 font-semibold text-base mt-1 line-clamp-2">
                 {article.title}
               </p>
               <p className="text-gray-600 text-sm mt-1">{article.heading}</p>
