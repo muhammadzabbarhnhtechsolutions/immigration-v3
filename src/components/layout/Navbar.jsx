@@ -268,6 +268,12 @@ console.log("profile resources",profile?.package?.resources);
             >
               Contact Us
             </Link>
+            <Link
+              className="hover:text-black focus:text-black"
+              href="/video-trailer"
+            >
+              Video Trailors
+            </Link>
 
             {profile?.package?.resources.length > 0 && (
               <div
@@ -300,7 +306,7 @@ console.log("profile resources",profile?.package?.resources);
                   {open && (
                     <div className="absolute right-0 left-6 z-20 mt-1 w-48 rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 animate-fade-in">
                       <div className="py-2">
-                        {userData.package.resources.map((resource, index) => (
+                        {profile?.package?.resources.map((resource, index) => (
                           <Link
                             key={index}
                             href={
