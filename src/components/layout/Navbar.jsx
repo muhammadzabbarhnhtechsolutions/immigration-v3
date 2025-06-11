@@ -30,7 +30,7 @@ export default function Navbar() {
   const [resources, setResources] = useState([]);
   const [packageData, setPackageData] = useState([]);
   const [checklogin, setcheckLogin] = useState("");
-
+console.log("profile resources",profile?.package?.resources);
   useEffect(() => {
     const userToken = localStorage.getItem("user");
     setcheckLogin(userToken);
@@ -246,7 +246,7 @@ export default function Navbar() {
               Our Products
             </Link>
             {/* {isLoggedIn && !userData?.is_active && ( */}
-            {(!isLoggedIn || !userData?.package) && (
+            {(!isLoggedIn || !profile?.package?.resources) && (
               <Link
                 className="hover:text-black focus:text-black"
                 href="/pricing"
@@ -269,7 +269,7 @@ export default function Navbar() {
               Contact Us
             </Link>
 
-            {userData?.package?.resources?.length > 0 && (
+            {profile?.package?.resources.length > 0 && (
               <div
                 ref={dropdownRef}
                 className="relative -mt-2 inline-block text-left"
@@ -294,28 +294,28 @@ export default function Navbar() {
                       strokeWidth={2}
                       d="M19 9l-7 7-7-7"
                     />
-                  </svg>
-                </button>
+                    </svg>
+                  </button>
 
-                {open && (
-                  <div className="absolute right-0 left-6 z-20 mt-1 w-48 rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 animate-fade-in">
-                    <div className="py-2">
-                      {userData.package.resources.map((resource, index) => (
-                        <Link
-                          key={index}
-                          href={
-                            resource == "E-book"
-                              ? "/e-book"
-                              : resourceLinks[resource] || "#"
-                          }
-                          onClick={() => setOpen(false)}
-                          className="block px-5 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#6fbe91] transition duration-200 rounded-md"
-                        >
-                          {resource === "Create Blog"
-                            ? "Create Blog"
-                            : `${resource}`}
-                        </Link>
-                      ))}
+                  {open && (
+                    <div className="absolute right-0 left-6 z-20 mt-1 w-48 rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 animate-fade-in">
+                      <div className="py-2">
+                        {userData.package.resources.map((resource, index) => (
+                          <Link
+                            key={index}
+                            href={
+                              resource == "E-book"
+                                ? "/e-book"
+                                : resourceLinks[resource] || "#"
+                            }
+                            onClick={() => setOpen(false)}
+                            className="block px-5 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#6fbe91] transition duration-200 rounded-md"
+                          >
+                            {resource === "Create Blog"
+                              ? "Create Blog"
+                              : `${resource}`}
+                          </Link>
+                        ))}
                     </div>
                   </div>
                 )}
