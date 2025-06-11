@@ -47,16 +47,13 @@ export default function BookSection() {
                 />
               </div>
               <div className="px-3 py-2">
-                <h3 className="font-semibold text-black line-clamp-2 text-sm leading-tight">
+                <h3 className="font-semibold text-black line-clamp-2 mt-2 text-sm leading-tight">
                   {book?.title}
                 </h3>
                 <p className="text-gray-600 text-xs">{book.author}</p>
                 <div className="flex items-center gap-1 text-xs mt-1">
                   <div>
-                    {/* description */}
-                    <p className="text-gray-500 line-clamp-3">
-                      {book?.description || "No description available."}
-                    </p>
+                 <p className="line-clamp-3" dangerouslySetInnerHTML={{ __html: book?.description || "No description available." }} />
                   </div>
                   {/* <div className="flex items-center text-yellow-500">
                     {Array.from({ length: 5 }).map((_, i) => (

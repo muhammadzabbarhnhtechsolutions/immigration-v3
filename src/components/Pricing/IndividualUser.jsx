@@ -7,6 +7,7 @@ import {
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { useSearchParams } from "next/navigation";
 
 // Icon Components
 const CheckIcon = () => (
@@ -142,6 +143,20 @@ const handlebuyPakages = async (id) => {
     toast.error("Failed to process payment. Try again.");
   }
 };
+
+  const searchParams = useSearchParams();
+  const status = searchParams.get("status");
+
+  useEffect(() => {
+    if (status === "success") {
+      toast.success("Payment successful!");
+      // ✅ Optionally: refresh package data
+      getPricing();
+    } else if (status === "cancel") {
+      toast.error("Payment was cancelled.");
+    }
+  }, [status]);
+
   if (loading) {
     return (
       <div className="mx-auto bg-[#ebf0ed] px-4 mt-8 py-20 text-center">
@@ -182,6 +197,7 @@ const handlebuyPakages = async (id) => {
     );
   }
 
+  
   return (
     <div className="mx-auto bg-[#ebf0ed] px-4 mt-8 py-20">
       <div className="text-center mb-8">
@@ -211,66 +227,67 @@ const handlebuyPakages = async (id) => {
 
       <div className="grid grid-cols-1 md:grid-cols-3 leading-loose gap-8 md:max-w-[988px] mx-auto">
         {filteredPackages.map((pkg) => (
-          <div
-            key={pkg.id}
-            className="bg-[#fbfcfc] rounded-md overflow-hidden relative h-full shadow-sm"
+         <div
+  key={pkg.id}
+  className="bg-[#fbfcfc] rounded-md overflow-hidden relative h-full shadow-sm flex flex-col"
+>
+  {/* Header */}
+  <div className="py-4 text-center bg-[#7bab8e] text-white">
+    <h3 className="font-semibold md:text-[24px] text-xl">
+      {pkg.name}
+    </h3>
+  </div>
+
+  {/* Main content */}
+  <div className="p-6 flex flex-col h-full justify-between flex-grow">
+    <div>
+      {/* Price */}
+      <div className="text-center mb-6">
+        <span className="text-gray-400 text-base font-semibold align-top">
+          £
+        </span>
+        <span className="text-[#7bab8e] text-5xl font-semibold">
+          {parseFloat(pkg.price).toFixed(2)}
+        </span>
+        <span className="text-gray-500 text-sm">
+          {" "}
+          / {billing === "monthly" ? "Monthly" : "Annually"}
+        </span>
+      </div>
+
+      {/* Description */}
+      <p className="text-left text-sm text-gray-600 mb-6 px-4">
+        {pkg.description}
+      </p>
+
+      {/* Features list */}
+      <ul className="space-y-4 px-4">
+        {pkg.resources.map((feature) => (
+          <li
+            key={feature}
+            className="flex items-center border-b border-gray-200 pb-2"
           >
-            {/* Header section */}
-            <div className="py-4 text-center bg-[#7bab8e] text-white">
-              <h3 className="font-semibold md:text-[24px] text-xl">
-                {pkg.name}
-              </h3>
+            <div className="h-5 w-5 rounded-full bg-[#7bab8e] flex items-center justify-center text-white">
+              <CheckIcon />
             </div>
+            <span className="ml-3 text-[#90B29F]">{feature}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
 
-            {/* Main content */}
-            <div className="p-6 flex flex-col h-full">
-              {/* Description moved here */}
+    {/* Button at bottom */}
+    <div className="text-center mt-6">
+      <button
+        onClick={() => handlebuyPakages(pkg.id)}
+        className="bg-[#7bab8e] cursor-pointer mb-2 text-white px-8 py-3 text-sm rounded-md hover:bg-[#6a9a7d] transition-colors uppercase tracking-wider font-medium"
+      >
+        Buy Now
+      </button>
+    </div>
+  </div>
+</div>
 
-              {/* Price */}
-              <div className="text-center mb-6">
-                <span className="text-gray-400 text-base font-semibold align-top">
-                  £
-                </span>
-                <span className="text-[#7bab8e] text-5xl font-semibold">
-                  {parseFloat(pkg.price).toFixed(2)}
-                </span>
-                <span className="text-gray-500 text-sm">
-                  {" "}
-                  / {billing === "monthly" ? "Monthly" : "Annually"}
-                </span>
-              </div>
-
-              {/* Features */}
-              {/* Description before features list */}
-              <p className="text-left text-sm text-gray-600 mb-6 px-4">
-                {pkg.description}
-              </p>
-
-              <ul className="space-y-4 px-4 flex-1">
-                {pkg.resources.map((feature) => (
-                  <li
-                    key={feature}
-                    className="flex items-center border-b border-gray-200 pb-2"
-                  >
-                    <div className="h-5 w-5 rounded-full bg-[#7bab8e] flex items-center justify-center text-white">
-                      <CheckIcon />
-                    </div>
-                    <span className="ml-3 text-[#90B29F]">{feature}</span>
-                  </li>
-                ))}
-                <div className="text-center mt-6">
-                  <button
-                    onClick={() => handlebuyPakages(pkg.id)}
-                    className="bg-[#7bab8e] cursor-pointer mb-4 text-white px-8 py-3 text-sm rounded-md hover:bg-[#6a9a7d] transition-colors uppercase tracking-wider font-medium"
-                  >
-                    Buy Now
-                  </button>
-                </div>
-              </ul>
-
-              {/* Button */}
-            </div>
-          </div>
         ))}
       </div>
     </div>

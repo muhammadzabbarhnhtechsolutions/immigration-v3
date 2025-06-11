@@ -33,7 +33,7 @@ export default function BookSection() {
   return (
     <section className="px-14 py-24 bg-white">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl text-[#88AE98] font-bold mb-6">ProdCast</h2>
+        <h2 className="text-3xl text-[#88AE98] font-bold mb-6">PodCast</h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-6">
           {books?.map((book, index) => (
             <div
@@ -75,10 +75,13 @@ export default function BookSection() {
                   </>
                 )}
               </div>
-              <div className="px-3 py-2">
-                <h3 className="font-semibold text-black line-clamp-2 text-sm leading-tight">
+              <div className="px-3 py-2 mt-2">
+                <h3 className="font-semibold mb-1 text-black line-clamp-2 text-sm leading-tight">
                   {book.title}
                 </h3>
+                <div>
+                 <p className="line-clamp-3" dangerouslySetInnerHTML={{ __html: book?.description || "No description available." }} />
+                  </div>
                 {/* <p className="text-gray-600 text-xs">{book.author}</p>
                 <div className="flex items-center gap-1 text-xs mt-1">
                   <div className="flex items-center text-yellow-500">
