@@ -67,7 +67,8 @@ export default function CoursePage() {
 
             {/* Button */}
             <Link href={`/course-module/${course.id}`}>
-              <button className="w-full bg-[#6b967e] hover:bg-[#88AE98] text-white text-sm font-medium py-3 rounded-lg shadow">
+              <button className="w-full h-12 bg-[#6b967e] hover:bg-[#88AE98] text-white text-sm font-medium rounded-lg shadow">
+
                 VIEW COURSE
               </button>
             </Link>

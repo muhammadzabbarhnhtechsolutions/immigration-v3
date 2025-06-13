@@ -5,7 +5,7 @@ export default function VideoResources() {
   return (
     <>
      {/* Products Section */}
-     <section className="relative bg-[#e6f0f0] py-38 overflow-hidden">
+     <section className="relative bg-[#e6f0f0] py-32 overflow-hidden">
      {/* Diagonal stripes background */}
      <div className="absolute inset-0 w-full h-full">
        {[...Array(5)].map((_, i) => (

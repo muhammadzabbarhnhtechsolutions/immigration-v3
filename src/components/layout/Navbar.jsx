@@ -182,11 +182,11 @@ export default function Navbar() {
             </span>
           </div>
           <div className="space-x-4">
-            {!checklogin || checklogin === "undefined" ? (
+            {checklogin === "undefined" ? (
               <>
-                <a href="/login" className="hover:underline font-semibold">
+                <Link href="/login" className="hover:underline font-semibold">
                   Login
-                </a>
+                </Link>
                 <Link href="/signup" className="hover:underline font-semibold">
                   Sign Up
                 </Link>
@@ -218,22 +218,7 @@ export default function Navbar() {
             <Link className="focus:text-black hover:text-black" href="/">
               Home
             </Link>
-            {profile?.package?.resources.length && (
-              <>
-                {/* <Link
-                  className="text-[#88AE98] focus:text-black hover:text-black"
-                  href="/forum"
-                >
-                  Discussion Forum
-                </Link> */}
-                <Link
-                  className="focus:text-black hover:text-black"
-                  href="/courses"
-                >
-                  Courses
-                </Link>
-              </>
-            )}
+       
             <Link
               className="hover:text-black focus:text-black"
               href="/about-us"
@@ -314,6 +299,8 @@ export default function Navbar() {
                           href = "/e-book";
                         } else if (resource === "General Resource") {
                           href = "/course-topics/resources";
+                        }else if (resource === "Course Videos") {
+                          href = "/courses";
                         } else if (resource === "Reference Material") {
                           href = "/refrence-material";
                         } else if (resourceLinks[resource]) {

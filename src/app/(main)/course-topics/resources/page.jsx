@@ -22,7 +22,12 @@ const Page = () => {
   }, []);
 
   return (
-    <div className="flex items-center justify-center mt-28 mb-20">
+    <>
+
+       <p className="text-3xl mt-28 mx-12 text-[#88AE98] font-bold mb-6 ml-22">
+        General Resources
+         </p>
+    <div className="flex items-center justify-center  mb-20">
       <div className="mt-26 flex flex-row gap-6">
         {documents.map((doc, index) => (
           <a
@@ -44,6 +49,7 @@ const Page = () => {
         ))}
       </div>
     </div>
+    </>
   );
 };
 

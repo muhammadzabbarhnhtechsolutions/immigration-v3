@@ -32,7 +32,7 @@ const newsData = [
 
 export default function Page() {
   return (
-    <div className="min-h-screen  py-26 px-4">
+    <div className="min-h-screen  py-26 mt-32 px-4">
       <div className="max-w-5xl mx-auto mb-16">
         <h2 className="text-center text-3xl md:text-4xl font-semibold mb-12">
           Our <span className="text-[#84a98c]">Latest News</span>

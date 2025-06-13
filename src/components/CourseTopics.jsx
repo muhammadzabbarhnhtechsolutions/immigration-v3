@@ -73,8 +73,7 @@ const Sidebar = ({
         </button>
       </div>
       <h2 className="text-base font-bold mb-6 text-white">
-        Welcome to PIAIC Program
-      </h2>
+Course Topics      </h2>
       <ul className="space-y-2">
         {videos.map((item, idx) => (
           <li
