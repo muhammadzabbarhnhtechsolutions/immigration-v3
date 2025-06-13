@@ -1,0 +1,9 @@
+import Module from "../../../../components/Module/Module";
+
+export default function Page() {
+    return (
+<>
+<Module/>
+</>
+    );
+}

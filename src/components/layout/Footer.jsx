@@ -149,7 +149,7 @@ export default function Footer() {
       {/* Copyright */}
       <div className="border-t border-white py-2 bg-white text-black font-sans">
         <div className="container mx-auto px-4 ">
-          <p className="text-center text-sm">Copyright © 2023 immigrationnavigator - All rights reserved
+          <p className="text-center text-sm">Copyright © 2025 immigrationnavigator - All rights reserved
           </p>
         </div>
       </div>

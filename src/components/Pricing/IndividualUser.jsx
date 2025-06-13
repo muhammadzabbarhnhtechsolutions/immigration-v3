@@ -249,9 +249,8 @@ const handlebuyPakages = async (id) => {
         <span className="text-[#7bab8e] text-5xl font-semibold">
           {parseFloat(pkg.price).toFixed(2)}
         </span>
-        <span className="text-gray-500 text-sm">
-          {" "}
-          / {billing === "monthly" ? "Monthly" : "Annually"}
+        <span className="text-gray-500 text-sm">      
+          / {pkg.package_duration === 1 ? "Monthly" : "Annually"}
         </span>
       </div>
 

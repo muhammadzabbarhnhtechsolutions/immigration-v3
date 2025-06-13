@@ -30,7 +30,7 @@ export default function Navbar() {
   const [resources, setResources] = useState([]);
   const [packageData, setPackageData] = useState([]);
   const [checklogin, setcheckLogin] = useState("");
-console.log("profile resources",profile?.package?.resources);
+  console.log("profile resources", profile?.package?.resources);
   useEffect(() => {
     const userToken = localStorage.getItem("user");
     setcheckLogin(userToken);
@@ -163,15 +163,16 @@ console.log("profile resources",profile?.package?.resources);
     }
   }, []);
   return (
-    <div className="w-full relative z-[100]">
+    <div className="w-full  mb-8 relative z-[100]">
       {/* Fixed Navigation Container */}
       <div
-        className={`fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ${
-          scrollDirection === "down" ? "-translate-y-full" : "translate-y-0"
-        }`}
+        className={`fixed top-0 left-0 mb-12 right-0 z-50 transition-transform duration-300`}
+        //  ${
+        // scrollDirection === "down" ? "-translate-y-full" : "translate-y-0"
+        // }
       >
         {/* Top Contact Bar */}
-        <div className="bg-[#88AE98] text-white px-14 py-2 hidden md:flex justify-between items-center text-sm">
+        <div className="bg-[#88AE98]  text-white px-14 py-2 hidden md:flex justify-between items-center text-sm">
           <div className="flex items-center gap-6">
             <span className="flex items-center gap-2">
               <FaPhone /> 07578979789
@@ -183,9 +184,9 @@ console.log("profile resources",profile?.package?.resources);
           <div className="space-x-4">
             {!checklogin || checklogin === "undefined" ? (
               <>
-                <Link href="/login" className="hover:underline font-semibold">
+                <a href="/login" className="hover:underline font-semibold">
                   Login
-                </Link>
+                </a>
                 <Link href="/signup" className="hover:underline font-semibold">
                   Sign Up
                 </Link>
@@ -217,7 +218,7 @@ console.log("profile resources",profile?.package?.resources);
             <Link className="focus:text-black hover:text-black" href="/">
               Home
             </Link>
-            {isLoggedIn && userData?.is_active && (
+            {profile?.package?.resources.length && (
               <>
                 {/* <Link
                   className="text-[#88AE98] focus:text-black hover:text-black"
@@ -227,7 +228,7 @@ console.log("profile resources",profile?.package?.resources);
                 </Link> */}
                 <Link
                   className="focus:text-black hover:text-black"
-                  href="/videos"
+                  href="/courses"
                 >
                   Courses
                 </Link>
@@ -300,28 +301,38 @@ console.log("profile resources",profile?.package?.resources);
                       strokeWidth={2}
                       d="M19 9l-7 7-7-7"
                     />
-                    </svg>
-                  </button>
+                  </svg>
+                </button>
 
-                  {open && (
-                    <div className="absolute right-0 left-6 z-20 mt-1 w-48 rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 animate-fade-in">
-                      <div className="py-2">
-                        {profile?.package?.resources.map((resource, index) => (
+                {open && (
+                  <div className="absolute right-0 left-6 z-20 mt-1 w-48 rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 animate-fade-in">
+                    <div className="py-2">
+                      {profile?.package?.resources.map((resource, index) => {
+                        let href = "#";
+
+                        if (resource === "E-book") {
+                          href = "/e-book";
+                        } else if (resource === "General Resource") {
+                          href = "/course-topics/resources";
+                        } else if (resource === "Reference Material") {
+                          href = "/refrence-material";
+                        } else if (resourceLinks[resource]) {
+                          href = resourceLinks[resource];
+                        }
+
+                        return (
                           <Link
                             key={index}
-                            href={
-                              resource == "E-book"
-                                ? "/e-book"
-                                : resourceLinks[resource] || "#"
-                            }
+                            href={href}
                             onClick={() => setOpen(false)}
                             className="block px-5 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#6fbe91] transition duration-200 rounded-md"
                           >
                             {resource === "Create Blog"
                               ? "Create Blog"
-                              : `${resource}`}
+                              : resource}
                           </Link>
-                        ))}
+                        );
+                      })}
                     </div>
                   </div>
                 )}

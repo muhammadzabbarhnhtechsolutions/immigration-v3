@@ -50,11 +50,11 @@ const Page = () => {
           {/* <p className="text-gray-600 text-base mb-6">{article.description}</p> */}
 {/*  */}
           {/* Static Quote */}
-          <blockquote className="border-l-4 border-purple-500 pl-4 italic text-gray-600 text-base mb-6">
+          {/* <blockquote className="border-l-4 border-purple-500 pl-4 italic text-gray-600 text-base mb-6">
             "People worry that computers will get too smart and take over the world,
             but the real problem is that they’re too dumb and they’ve already taken
             over the world." – Pedro Domingos
-          </blockquote>
+          </blockquote> */}
         </div>
       ) : (
         <p className="text-gray-500">Loading blog article...</p>

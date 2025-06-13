@@ -4,6 +4,7 @@ import { Star, PlayCircle } from "lucide-react";
 import Image from "next/image";
 import { getVideoTrailor } from "../../services/VideoTrailor"; // Adjust the import path as necessary
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function VideoTrailor() {
   const [playingIndex, setPlayingIndex] = useState(null);
@@ -45,6 +46,7 @@ export default function VideoTrailor() {
               className="group bg-white cursor-pointer rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition duration-300 pb-4 transform hover:-translate-y-1"
             >
               <div className="relative w-full h-64 bg-black">
+                <Link href="/course-module">
                 {playingIndex === index ? (
                   <video
                     src={decodeURIComponent(book.file)}
@@ -76,6 +78,7 @@ export default function VideoTrailor() {
                     </div>
                   </>
                 )}
+                </Link>
               </div>
               <div className="px-3 py-2 mt-2">
                 <h3 className="font-semibold mb-1 text-black line-clamp-2 text-sm leading-tight">
