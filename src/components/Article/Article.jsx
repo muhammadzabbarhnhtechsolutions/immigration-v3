@@ -37,8 +37,9 @@ const ArticleSection = () => {
           {articles.map((article) => (
             <div
               key={article.id}
-              className="bg-white rounded-xl shadow-md hover:shadow-xl transition duration-300 p-4 group"
+              className="bg-white flex justify-between flex-col rounded-xl shadow-md hover:shadow-xl transition duration-300 p-4 group"
             >
+              <div>
                 <Link href={`/article/${article.id}`} className="block">
               <div className="overflow-hidden rounded-lg cursor-pointer">
                 <Image
@@ -55,6 +56,7 @@ const ArticleSection = () => {
                 {article.title}
               </p>
               <p className="text-gray-600 text-sm mt-1">{article.heading}</p>
+              </div>
               <div className="flex justify-between items-center mt-4 text-sm text-gray-500">
                 <div className="flex items-center">
                   <img
