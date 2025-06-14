@@ -72,10 +72,19 @@ console.log(courseId, 'courseId');
       </div>
 
       {/* Main Content */}
+      
       <div className="flex-1 p-8 mt-8">
+                  {modules.map((module) => (
+        <div key={module.id} className="flex items-left mx-1 justify-start mb-6">
+        <p className="text-3xl mt-4 text-[#88AE98] text-left font-bold mb-6">
+          {` Modules of ${module.course_name}`}
+        </p>
+      </div>
+      ))}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {modules.map((module) => (
             <div key={module.id} className="bg-white rounded-lg p-8 shadow-md">
+     
               <h2 className="text-2xl font-normal mb-4">{module.title}</h2>
               <p className="text-gray-600 w-[90%] leading-relaxed mb-6">
                 {module.description}

@@ -182,7 +182,7 @@ export default function Navbar() {
             </span>
           </div>
           <div className="space-x-4">
-            {checklogin === "undefined" ? (
+            {!checklogin || checklogin === "undefined" ? (
               <>
                 <Link href="/login" className="hover:underline font-semibold">
                   Login
