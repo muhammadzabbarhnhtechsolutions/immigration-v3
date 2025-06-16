@@ -18,6 +18,7 @@ import {
 } from "../../utils/localStorage";
 import { GetProfile } from "../../services/postServices";
 import { Dropdown } from "flowbite-react";
+import { LogOut, UserCircle2 } from "lucide-react";
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -29,7 +30,9 @@ export default function Navbar() {
   const [profile, setProfile] = useState();
   const [resources, setResources] = useState([]);
   const [packageData, setPackageData] = useState([]);
-  const [checklogin, setcheckLogin] = useState("");
+  const [checklogin, setcheckLogin] = useState(""); 
+   const [openLogout, setLogoutOpen] = useState(false);
+  const dropdownRefLogout = useRef(null);
   console.log("profile resources", profile?.package?.resources);
   useEffect(() => {
     const userToken = localStorage.getItem("user");
@@ -126,6 +129,19 @@ export default function Navbar() {
     }
   };
 
+  
+
+  // Close dropdown if clicked outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRefLogout.current && !dropdownRefLogout.current.contains(event.target)) {
+        setOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return
+  })
+
   useEffect(() => {
     getProfileData();
   }, []);
@@ -172,7 +188,7 @@ export default function Navbar() {
         // }
       >
         {/* Top Contact Bar */}
-        <div className="bg-[#88AE98]  text-white px-14 py-2 hidden md:flex justify-between items-center text-sm">
+        <div className="bg-[#88AE98]  text-white px-12 py-2 hidden md:flex justify-between items-center text-sm">
           <div className="flex items-center gap-6">
             <span className="flex items-center gap-2">
               <FaPhone /> 07578979789
@@ -192,12 +208,27 @@ export default function Navbar() {
                 </Link>
               </>
             ) : (
-              <button
-                onClick={Logout}
-                className="hover:underline font-semibold"
-              >
-                Logout
-              </button>
+             <div className="relative" ref={dropdownRefLogout}>
+      <button
+        onClick={() => setLogoutOpen(!openLogout)}
+        className="flex items-center justify-center w-10 h-10 bg-gray-100 rounded-full hover:ring-2 hover:ring-[#5bb180] transition"
+      >
+        <UserCircle2 className="w-6 h-6 text-gray-700" />
+      </button>
+
+      {openLogout && (
+        <div className="absolute -right-10 z-20  mt-3 w-36 rounded-lg bg-white shadow-lg ring-1 ring-gray-200">
+          <button
+            onClick={Logout}
+            className="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+          >
+            <LogOut className="w-4 h-4 mr-2" />
+            Logout
+          </button>
+        </div>
+      )}
+    </div>
+
             )}
           </div>
         </div>

@@ -29,7 +29,15 @@ const ArticleSection = () => {
       <h2 className="text-3xl font-extrabold text-[#8bb09b] mb-6 text-left">Articles</h2>
 
       {loading ? (
-        <p className="text-gray-500">Loading articles...</p>
+         <div className="mx-auto bg-[#ebf0ed] px-4 mt-8 py-20 text-center flex flex-col items-center justify-center gap-4 animate-fade-in">
+        {/* Spinner */}
+        <div className="h-10 w-10 border-4 border-[#5bb180] border-t-transparent rounded-full animate-spin"></div>
+
+        {/* Text */}
+        <p className="text-[#5bb180] text-lg font-medium">
+          Loading articles...
+        </p>
+      </div>
       ) : articles.length === 0 ? (
         <p className="text-gray-500">No articles found.</p>
       ) : (
@@ -57,7 +65,7 @@ const ArticleSection = () => {
               </p>
               <p className="text-gray-600 text-sm mt-1">{article.heading}</p>
               </div>
-              <div className="flex justify-between items-center mt-4 text-sm text-gray-500">
+              {/* <div className="flex justify-between items-center mt-4 text-sm text-gray-500">
                 <div className="flex items-center">
                   <img
                     src={`https://i.pravatar.cc/40?img=${Math.floor(Math.random() * 10 + 1)}`}
@@ -67,7 +75,7 @@ const ArticleSection = () => {
                   <span>Admin</span>
                 </div>
                 <span>{new Date().toLocaleDateString()}</span>
-              </div>
+              </div> */}
             </div>
           ))}
         </div>

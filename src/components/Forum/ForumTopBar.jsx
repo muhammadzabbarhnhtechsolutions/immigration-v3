@@ -1,5 +1,10 @@
-'use client'
-import { setNextPage, setPostData, setPreviousPage, setUpdatePost } from "@/app/Redux/features/ForumSlice";
+"use client";
+import {
+  setNextPage,
+  setPostData,
+  setPreviousPage,
+  setUpdatePost,
+} from "@/app/Redux/features/ForumSlice";
 import { AddPosts, GeAllPosts } from "@/services/postServices";
 import { Button, Modal } from "flowbite-react";
 import { Images, Smile } from "lucide-react";
@@ -12,81 +17,80 @@ import { toast } from "react-toastify";
 const ForumTopBar = ({ profileData }) => {
   const [openModal, setOpenModal] = useState(false);
   const [loader, setLoader] = useState(false);
-  const [caption, setCaption] = useState('');
+  const [caption, setCaption] = useState("");
   const [thumbnail, setThumbnail] = useState(null);
   const fileInputRef = useRef(null);
   const dispatch = useDispatch();
   const Profile = useSelector((state) => state.example.profile);
 
   const fetchAllPosts = async () => {
-  setIsLoading(true);
-  try {
-    const result = await GeAllPosts();
+    setIsLoading(true);
+    try {
+      const result = await GeAllPosts();
 
-    if (result && "data" in result) {
-      const Data = result.data;
+      if (result && "data" in result) {
+        const Data = result.data;
 
-      if (Data?.status) {
-        dispatch(setPostData(Data.results));
-        dispatch(setNextPage(Data.next));
-        dispatch(setPreviousPage(Data.previous));
+        if (Data?.status) {
+          dispatch(setPostData(Data.results));
+          dispatch(setNextPage(Data.next));
+          dispatch(setPreviousPage(Data.previous));
+        } else {
+          toast.error(Data.message || "Failed to fetch posts");
+        }
       } else {
-        toast.error(Data.message || "Failed to fetch posts");
+        toast.error(result?.message || "Invalid response from server");
       }
-    } else {
-      toast.error(result?.message || "Invalid response from server");
+    } catch (error) {
+      console.error("Error fetching posts:", error);
+    } finally {
+      setIsLoading(false);
     }
-  } catch (error) {
-    console.error("Error fetching posts:", error);
-  } finally {
-    setIsLoading(false);
-  }
-};
+  };
 
-const AddPost = async () => {
-  const trimmedCaption = caption.trim();
+  const AddPost = async () => {
+    const trimmedCaption = caption.trim();
 
-  if (!trimmedCaption && !thumbnail) {
-    toast.error('Please provide either a caption or a thumbnail before submitting.');
-    return;
-  }
+    if (!trimmedCaption && !thumbnail) {
+      toast.error(
+        "Please provide either a caption or a thumbnail before submitting."
+      );
+      return;
+    }
 
-  setLoader(true);
-  const values = { caption: trimmedCaption, thumbnail };
+    setLoader(true);
+    const values = { caption: trimmedCaption, thumbnail };
 
-  try {
-    const result = await AddPosts(values);
-              fetchAllPosts();
+    try {
+      const result = await AddPosts(values);
+      fetchAllPosts();
 
-    if (result && "data" in result) {
-      const Data = result.data;
+      if (result && "data" in result) {
+        const Data = result.data;
 
-      if (Data?.status === true) {
-        dispatch(setUpdatePost(Data.data));
-        toast.success("Post Added Successfully");
-        setThumbnail(null);
-        setCaption('');
-        setOpenModal(false);
-        
-        // Page reload after post is successfully added
-        window.location.reload();
-              // fetchAllPosts();
+        if (Data?.status === true) {
+          dispatch(setUpdatePost(Data.data));
+          toast.success("Post Added Successfully");
+          setThumbnail(null);
+          setCaption("");
+          setOpenModal(false);
 
+          // Page reload after post is successfully added
+          window.location.reload();
+          // fetchAllPosts();
+        } else {
+          toast.error(Data.message || "Failed to add post");
+        }
       } else {
-        toast.error(Data.message || "Failed to add post");
+        toast.error(result?.message || "Invalid response from server");
       }
-    } else {
-      toast.error(result?.message || "Invalid response from server");
+    } catch (error) {
+      console.error("Error adding post:", error);
+      toast.error("Something went wrong while adding post");
+    } finally {
+      setLoader(false);
     }
-  } catch (error) {
-    console.error("Error adding post:", error);
-    toast.error("Something went wrong while adding post");
-  } finally {
-    setLoader(false);
-  }
-};
-
-
+  };
 
   function onCloseModal() {
     setOpenModal(false);
@@ -115,9 +119,9 @@ const AddPost = async () => {
           header: {
             close: {
               base: "ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-white !bg-gray-200 !text-gray-900  z-[9999]",
-              icon: "h-5 w-5"
-            }
-          }
+              icon: "h-5 w-5",
+            },
+          },
         }}
       >
         <div className="fixed inset-0 rounded-xl flex items-center justify-center p-4">
@@ -129,9 +133,7 @@ const AddPost = async () => {
                 </h3>
               </Modal.Header>
               <Modal.Body className="p-4 rounded-xl bg-[#88AE98]">
-
                 <div className="space-y-4">
-
                   <div className="flex items-center gap-3 mb-2">
                     <div className="w-10 h-10 rounded-full bg-white p-1 overflow-hidden">
                       <Image
@@ -142,37 +144,79 @@ const AddPost = async () => {
                         className="object-cover rounded-full"
                       />
                     </div>
-                    <span className="font-medium text-white">{profileData?.first_name}{" "}{profileData?.last_name}</span>
+                    <span className="font-medium text-white">
+                      {profileData?.first_name} {profileData?.last_name}
+                    </span>
                   </div>
 
                   <div className="flex justify-between text-white">
-                    <p>What's on your mind, {profileData?.first_name} {" "}{profileData?.last_name}?</p>
-                    <p><Smile strokeWidth={1} /></p>
+                    <p>
+                      What's on your mind, {profileData?.first_name}{" "}
+                      {profileData?.last_name}?
+                    </p>
+                    <p>
+                      <Smile strokeWidth={1} />
+                    </p>
                   </div>
-
 
                   <div className="border border-white  rounded-lg p-2 text-center">
                     <div
-                      className={`cursor-pointer ${!thumbnail ? "p-[3.5rem]" : "p-6"} bg-white h-full`}
+                      className={`cursor-pointer ${
+                        !thumbnail ? "p-[3.5rem]" : "p-6"
+                      } bg-white h-full`}
                       onClick={handleThumbnailClick}
                     >
                       {thumbnail ? (
-                        <img
-                          src={typeof thumbnail === "string" ? thumbnail : URL.createObjectURL(thumbnail)}
-                          alt="Preview"
-                          className="max-h-60 mx-auto mb-2 rounded-md"
-                        />
+                        <>
+                          {typeof thumbnail === "string" ? (
+                            <img
+                              src={thumbnail}
+                              alt="Preview"
+                              className="max-h-60 mx-auto mb-2 rounded-md"
+                            />
+                          ) : thumbnail.type.startsWith("image/") ? (
+                            <img
+                              src={URL.createObjectURL(thumbnail)}
+                              alt="Preview"
+                              className="max-h-60 mx-auto mb-2 rounded-md"
+                            />
+                          ) : thumbnail.type.startsWith("video/") ? (
+                            <video
+                              src={URL.createObjectURL(thumbnail)}
+                              controls
+                              className="max-h-60 mx-auto mb-2 rounded-md"
+                            />
+                          ) : thumbnail.type === "application/pdf" ? (
+                            <embed
+                              src={URL.createObjectURL(thumbnail)}
+                              type="application/pdf"
+                              className="w-full h-60 mx-auto mb-2 rounded-md"
+                            />
+                          ) : (
+                            <>
+                              <FaImages className="mx-auto text-[#88AE98] text-4xl mb-2" />
+                              <p className="text-[#88AE98] font-medium">
+                                Unsupported file type
+                              </p>
+                            </>
+                          )}
+                        </>
                       ) : (
                         <>
                           <FaImages className="mx-auto text-[#88AE98] text-4xl mb-2" />
-                          <p className="text-[#88AE98] font-medium">Add photos/videos</p>
-                          <p className="text-[#88AE98] text-sm">or drag and drop</p>
+                          <p className="text-[#88AE98] font-medium">
+                            Add photos/videos
+                          </p>
+                          <p className="text-[#88AE98] text-sm">
+                            or drag and drop
+                          </p>
                         </>
                       )}
+
                       <input
                         ref={fileInputRef}
                         type="file"
-                        accept="image/*,video/*"
+                        accept="image/*,video/*,application/pdf"
                         style={{ display: "none" }}
                         onChange={handleFileChange}
                       />
@@ -195,7 +239,7 @@ const AddPost = async () => {
                       onClick={AddPost}
                       className="bg-white w-full text-[#88AE98] px-6"
                     >
-                      {loader ? 'Posting...' : 'Post'}
+                      {loader ? "Posting..." : "Post"}
                     </Button>
                   </div>
                 </div>

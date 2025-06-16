@@ -457,12 +457,10 @@ const ForumCard = () => {
       const Data = result?.data;
       console.log(Data);
       if (Data?.status === true) {
+        fetchAllPosts()
         console.log("Post deleted:", Data.message);
         dispatch(RemovePost({ curentpostid: id }));
         toast.success("Deleted Successfully");
-        // window.location.reload();
-
-        // ✅ Refresh posts
         fetchAllPosts();
       } else {
         toast.error(Data?.message || "Failed to delete post");
@@ -491,7 +489,7 @@ const ForumCard = () => {
     return () => clearTimeout(timer); // Cleanup
   }, [handleCommentsClick]);
   return (
-    <div ref={scrollableRef} style={{ overflowY: "auto", maxHeight: "500px" }}>
+    <div ref={scrollableRef} style={{ overflowY: "auto", maxHeight: "730px" }}>
       <div className="rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 py-4">
         {isLoading &&
           Array.from({ length: 4 }).map((_, index) => (
@@ -569,12 +567,14 @@ const ForumCard = () => {
 
                 {post.is_my_post == true ? (
                   <div
-                    className="flex items-center gap-2 text-red-600 cursor-pointer hover:bg-red-100 hover:text-red-700 transition-all duration-200 px-8 py-2 rounded-2xl shadow-sm mt-6"
+                    className="flex mr-2 items-center gap-2 text-white bg-gradient-to-r from-red-500 to-red-700 hover:from-red-600 hover:to-red-800 cursor-pointer px-6 py-2 rounded-full shadow-lg hover:scale-105 transform transition duration-200 ease-in-out mt-6"
                     onClick={() => DeleteMyPost(post.id)}
                     title="Delete Post"
                   >
-                    <MdDelete size={22} />
-                    <span className="font-medium hidden sm:inline">Delete</span>
+                    <MdDelete size={20} className="text-white" />
+                    <span className="font-semibold hidden sm:inline">
+                      Delete
+                    </span>
                   </div>
                 ) : (
                   ""

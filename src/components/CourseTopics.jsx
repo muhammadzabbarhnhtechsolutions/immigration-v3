@@ -227,7 +227,15 @@ const LessonLayout = () => {
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
-  if (loading) return <p className="p-10 text-gray-600">Loading lessons...</p>;
+  if (loading) return  <div className="mx-auto bg-[#ebf0ed] px-4 mt-8 py-20 text-center flex flex-col items-center justify-center gap-4 animate-fade-in">
+        {/* Spinner */}
+        <div className="h-10 w-10 border-4 border-[#5bb180] border-t-transparent rounded-full animate-spin"></div>
+
+        {/* Text */}
+        <p className="text-[#5bb180] text-lg font-medium">
+          Loading lessions...
+        </p>
+      </div>;
 
   return (
     <div className="flex relative font-sans">
