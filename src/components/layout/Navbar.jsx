@@ -30,9 +30,12 @@ export default function Navbar() {
   const [profile, setProfile] = useState();
   const [resources, setResources] = useState([]);
   const [packageData, setPackageData] = useState([]);
-  const [checklogin, setcheckLogin] = useState(""); 
-   const [openLogout, setLogoutOpen] = useState(false);
-  const dropdownRefLogout = useRef(null);
+  const [checklogin, setcheckLogin] = useState("");
+    const [openLogout, setLogoutOpen] = useState(false);
+
+const hanldeShowLogoutButton = ()=>{
+  setLogoutOpen(!openLogout)
+}
   console.log("profile resources", profile?.package?.resources);
   useEffect(() => {
     const userToken = localStorage.getItem("user");
@@ -129,19 +132,6 @@ export default function Navbar() {
     }
   };
 
-  
-
-  // Close dropdown if clicked outside
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (dropdownRefLogout.current && !dropdownRefLogout.current.contains(event.target)) {
-        setOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return
-  })
-
   useEffect(() => {
     getProfileData();
   }, []);
@@ -188,7 +178,7 @@ export default function Navbar() {
         // }
       >
         {/* Top Contact Bar */}
-        <div className="bg-[#88AE98]  text-white px-12 py-2 hidden md:flex justify-between items-center text-sm">
+        <div className="bg-[#88AE98]  text-white px-14 py-2 hidden md:flex justify-between items-center text-sm">
           <div className="flex items-center gap-6">
             <span className="flex items-center gap-2">
               <FaPhone /> 07578979789
@@ -198,7 +188,7 @@ export default function Navbar() {
             </span>
           </div>
           <div className="space-x-4">
-            {!checklogin || checklogin === "undefined" ? (
+            {checklogin === "undefined" ? (
               <>
                 <Link href="/login" className="hover:underline font-semibold">
                   Login
@@ -208,9 +198,9 @@ export default function Navbar() {
                 </Link>
               </>
             ) : (
-             <div className="relative" ref={dropdownRefLogout}>
+               <div className="relative">
       <button
-        onClick={() => setLogoutOpen(!openLogout)}
+        onClick={hanldeShowLogoutButton}
         className="flex items-center justify-center w-10 h-10 bg-gray-100 rounded-full hover:ring-2 hover:ring-[#5bb180] transition"
       >
         <UserCircle2 className="w-6 h-6 text-gray-700" />
@@ -228,7 +218,6 @@ export default function Navbar() {
         </div>
       )}
     </div>
-
             )}
           </div>
         </div>
@@ -290,6 +279,11 @@ export default function Navbar() {
               href="/video-trailer"
             >
               Video Trailors
+            </Link>   <Link
+              className="hover:text-black focus:text-black"
+              href="/all-appointments"
+            >
+              Appointments
             </Link>
 
             {profile?.package?.resources.length > 0 && (
