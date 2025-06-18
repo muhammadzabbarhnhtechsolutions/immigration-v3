@@ -1,0 +1,11 @@
+{{e_learning_url}}/user/appointment/meeting_view/?appointment_id=1fb61a4d-7503-488b-b0a9-dce830c4b3cc
+
+{{e_learning_url}}/user/appointment/document_view/?appointment_id=1fb61a4d-7503-488b-b0a9-dce830c4b3cc
+
+
+
+
+PROCESS = 1, "Process"
+    PROCESSING = 2, "Processing"
+    COMPLETE = 3, "Complete"
+    UNCOMPLETE = 4, "UnComplete"
