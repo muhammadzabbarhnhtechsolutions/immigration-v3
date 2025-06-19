@@ -150,3 +150,20 @@ body {
     animation: changeBackgroundColor 8s infinite alternate;
     z-index: -1; /* Place behind the content */
   }
+
+  @layer utilities {
+  @keyframes slideDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-slide-down {
+    animation: slideDown 0.4s ease-out;
+  }
+}
