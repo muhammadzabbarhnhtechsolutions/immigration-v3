@@ -1,10 +1,10 @@
 "use client";
 
 import { useSearchParams, useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, Suspense } from "react";
 import { CheckCircle, XCircle } from "lucide-react";
 
-export default function ResultPage() {
+function ResultContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -13,8 +13,7 @@ export default function ResultPage() {
 
   useEffect(() => {
     if (!score || !total) {
-      // redirect to home if query missing
-      router.push("/");
+      router.replace("/");
     }
   }, [score, total]);
 
@@ -25,7 +24,9 @@ export default function ResultPage() {
       <div className="max-w-md w-full bg-white rounded-xl shadow-lg p-8 text-center">
         <h1 className="text-3xl font-bold text-[#357AFF] mb-6">Your Result</h1>
 
-        <div className="text-6xl font-bold text-[#357AFF] mb-4">{score}/{total}</div>
+        <div className="text-6xl font-bold text-[#357AFF] mb-4">
+          {score}/{total}
+        </div>
         <p className="text-gray-600 text-lg mb-4">
           You scored <strong>{percent}%</strong> on the test.
         </p>
@@ -48,5 +49,13 @@ export default function ResultPage() {
         </button>
       </div>
     </div>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div className="text-center py-20">Loading Result...</div>}>
+      <ResultContent />
+    </Suspense>
   );
 }
