@@ -39,6 +39,9 @@ export default function Page() {
     const res = await SubmitMcqsAnswer(router,payload);
     alert("✅ Submission successful!");
     console.log(res.data);
+    // if(res.status === 200){
+    //   router.push("/course-topics/mcqs-lists/mcqs/result?score=");
+    // }
   } catch (err) {
     console.error("❌ Submission failed:", err);
     alert("Failed to submit answers.");
@@ -51,6 +54,7 @@ export default function Page() {
       try {
         const res = await getMcqWithOptions(router, paramsId);
         setMcqs(res.data);
+
       } catch (err) {
         console.error("Failed to fetch MCQs", err);
       } finally {

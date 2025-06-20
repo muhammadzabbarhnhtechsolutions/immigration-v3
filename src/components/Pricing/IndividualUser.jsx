@@ -4,10 +4,11 @@ import {
   buyPakages,
   getPackageResources,
 } from "@/services/getPackageResources";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useSearchParams } from "next/navigation";
+import { appointmentPakageBuy } from "@/services/appointmentSubscribe";
 
 // Icon Components
 const CheckIcon = () => (
@@ -119,27 +120,47 @@ export default function IndividualUsers() {
   //   }
   // };
 
-  const handlebuyPakages = async (id) => {
-    if (!token) {
-      router.push(`/login?next=/pricing`);
-    }
 
-    try {
-      const res = await buyPakages(id, token); // ✅ Pass token here
+// ...
+
+const pathname = usePathname(); // 👈 Add inside component
+
+const handlebuyPakages = async (id) => {
+  if (!token) {
+    router.push(`/login?next=/pricing`);
+    return;
+  }
+
+  try {
+    // 👇 Check if current tab is "Consultation" and path includes "consultation"
+    if (billing === "Consultation" ) {
+      const formData = new FormData();
+      formData.append("package_id", id);
+
+      const res = await appointmentPakageBuy(router, formData);
+
+      if (res?.checkout_url) {
+        window.open(res.checkout_url, "_blank");
+      } else {
+        toast.error("Failed to initiate consultation payment.");
+      }
+    } else {
+      // Regular service or business plan purchase
+      const res = await buyPakages(id, token);
 
       const checkoutUrl = res?.data?.checkout_url;
-
       if (checkoutUrl && typeof checkoutUrl === "string") {
         window.open(checkoutUrl, "_blank");
       } else {
-        console.error("Invalid checkout URL:", checkoutUrl);
-        toast.error("Something went wrong. Please try again later.");
+        toast.error("Something went wrong. Please try again.");
       }
-    } catch (error) {
-      console.error("Error in handlebuyPakages:", error);
-      toast.error("Failed to process payment. Try again.");
     }
-  };
+  } catch (error) {
+    console.error("Error in handlebuyPakages:", error);
+    toast.error("Failed to process payment. Try again.");
+  }
+};
+
 
   const searchParams = useSearchParams();
   const status = searchParams.get("status");
