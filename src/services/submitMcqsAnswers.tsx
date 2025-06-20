@@ -9,13 +9,13 @@ type ErrorResponse = {
   message?: string;
 };
 
-export const CreateAppointmentDocuments = async (
+export const SubmitMcqsAnswer = async (
   router: AppRouterInstance,
   formData: FormData
 ) => {
   try {
     const response = await axiosInstance.post(
-      `/user/appointment/document_create/`,
+      `/user/mcqs_attempt/`,
       formData
       // ✅ No need to pass headers here at all
     );

@@ -72,8 +72,7 @@ const Sidebar = ({
           <X className="mr-1 w-4 h-4" />
         </button>
       </div>
-      <h2 className="text-base font-bold mb-6 text-white">
-Course Topics      </h2>
+      <h2 className="text-base font-bold mb-6 text-white">Course Topics </h2>
       <ul className="space-y-2">
         {videos.map((item, idx) => (
           <li
@@ -144,7 +143,7 @@ const MainContent = ({ selectedIndex, setSelectedIndex, videos }) => {
             {showDropDown && (
               <div className="origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
                 <div className="py-1">
-                  <Link href="/course-topics/mcqs">
+                  <Link href={`/course-topics/mcqs-lists/${video.id}`}>
                     <button className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                       MCQs
                     </button>
@@ -227,7 +226,9 @@ const LessonLayout = () => {
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
-  if (loading) return  <div className="mx-auto bg-[#ebf0ed] px-4 mt-8 py-20 text-center flex flex-col items-center justify-center gap-4 animate-fade-in">
+  if (loading)
+    return (
+      <div className="mx-auto bg-[#ebf0ed] px-4 mt-8 py-20 text-center flex flex-col items-center justify-center gap-4 animate-fade-in">
         {/* Spinner */}
         <div className="h-10 w-10 border-4 border-[#5bb180] border-t-transparent rounded-full animate-spin"></div>
 
@@ -235,7 +236,8 @@ const LessonLayout = () => {
         <p className="text-[#5bb180] text-lg font-medium">
           Loading lessions...
         </p>
-      </div>;
+      </div>
+    );
 
   return (
     <div className="flex relative font-sans">

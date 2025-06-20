@@ -169,7 +169,7 @@ const hanldeShowLogoutButton = ()=>{
     }
   }, []);
   return (
-    <div className="w-full  mb-8 relative z-[100]">
+    <div className="w-full  mb-8 relative z-[50]">
       {/* Fixed Navigation Container */}
       <div
         className={`fixed top-0 left-0 mb-12 right-0 z-50 transition-transform duration-300`}

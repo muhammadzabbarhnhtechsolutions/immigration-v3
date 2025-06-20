@@ -1,4 +1,4 @@
-// services/appointmentDocumentService.ts
+// services/courseModuleServices.ts
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
@@ -9,19 +9,15 @@ type ErrorResponse = {
   message?: string;
 };
 
-export const CreateAppointmentDocuments = async (
+export const getMcqsLists = async (
   router: AppRouterInstance,
-  formData: FormData
+  video_id: string
 ) => {
   try {
-    const response = await axiosInstance.post(
-      `/user/appointment/document_create/`,
-      formData
-      // ✅ No need to pass headers here at all
+    const response = await axiosInstance.get(
+      `user/list_mcqs_tests/?video_id=${video_id}`
     );
-
-    return response.data;
-    
+    return response.data; // expecting { status, message, data: [...] }
   } catch (error) {
     const axiosError = error as AxiosError<ErrorResponse>;
     const statusCode = axiosError?.response?.status;
@@ -38,4 +34,3 @@ export const CreateAppointmentDocuments = async (
     return null;
   }
 };
-

@@ -1,10 +1,11 @@
 "use client";
 import React, { useState, useRef } from "react";
 import { Upload } from "lucide-react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { CreateAppointmentDocuments } from "../../../../services/createAppointmentDocuments";
+import { toast } from "react-toastify";
 
-export default function FileUploadBox() {
+export default function FileUploadBox({ setShowUpload }) {
   const [file, setFile] = useState(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -15,8 +16,8 @@ export default function FileUploadBox() {
   const [dragOver, setDragOver] = useState(false);
 
   const router = useRouter();
-  const { id: appointmentId } = useParams();
-
+  const documentId = useSearchParams();
+  const id = documentId.get("appointment_id");
   const handleFileChange = (e) => {
     if (e.target.files?.length) {
       setFile(e.target.files[0]);
@@ -25,32 +26,37 @@ export default function FileUploadBox() {
     }
   };
 
-  const handleUpload = async () => {
-    if (!file || !title || !description || !appointmentId) {
-      setMessage("⚠️ All fields are required.");
-      return;
-    }
+ const handleUpload = async () => {
+  if (!file || !title || !description || !id) {
+    setMessage("⚠️ All fields are required.");
+    return;
+  }
 
-    const formData = new FormData();
-    formData.append("appointment", appointmentId);
-    formData.append("title", title);
-    formData.append("description", description);
-    formData.append("document", file);
+  const formData = new FormData();
+  formData.append("appointment", id);
+  formData.append("title", title);
+  formData.append("description", description);
+  formData.append("document", file);
 
-    try {
-      setUploading(true);
-      await CreateAppointmentDocuments(router, formData);
-      setMessage("✅ Upload successful!");
-      setTitle("");
-      setDescription("");
-      setFile(null);
-    } catch (error) {
-      console.error("Upload failed:", error);
-      setMessage("❌ Upload failed.");
-    } finally {
-      setUploading(false);
-    }
-  };
+  try {
+    setUploading(true);
+    const res = await CreateAppointmentDocuments(router, formData);
+
+    // ✅ Upload succeeded — reset + close modal
+    setMessage("Upload successful!");
+    toast.success("Document uploaded successfully!");
+    setTitle("");
+    setDescription("");
+    setFile(null);
+    setShowUpload(true); // ✅ modal closes here
+
+  } catch (error) {
+    console.error("Upload failed:", error);
+    setMessage("❌ Upload failed.");
+  } finally {
+    setUploading(false);
+  }
+};
 
   const handleDrop = (e) => {
     e.preventDefault();
@@ -68,13 +74,14 @@ export default function FileUploadBox() {
         <input
           type="text"
           placeholder="Document Title"
-          className="border border-gray-300 rounded px-4 py-2"
+          className="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#57b17c] focus:border-[#57b17c]"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
+
         <textarea
           placeholder="Description"
-          className="border border-gray-300 rounded px-4 py-2"
+          className="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#57b17c] focus:border-[#57b17c]"
           rows={3}
           value={description}
           onChange={(e) => setDescription(e.target.value)}
@@ -108,11 +115,9 @@ export default function FileUploadBox() {
             type="file"
             onChange={handleFileChange}
             className="hidden"
-            accept=".jpeg,.png,.gif,.mp4,.pdf,.doc,.docx"
+            accept=".pdf,.doc,.docx"
           />
-          <p className="text-sm text-gray-400">
-            Supported: JPEG, PNG, GIF, MP4, PDF, Word
-          </p>
+          <p className="text-sm text-gray-400">Supported: PDF, Word</p>
         </div>
       </div>
 

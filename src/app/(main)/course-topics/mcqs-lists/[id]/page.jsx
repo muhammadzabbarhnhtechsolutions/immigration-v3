@@ -1,0 +1,70 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import { getMcqsLists } from "../../../../../services/getMcqsList";
+import { Sparkles } from "lucide-react";
+
+export default function McqsTestListPage() {
+  const [tests, setTests] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
+  const video_id = useParams().id;
+
+  useEffect(() => {
+    const fetchTests = async () => {
+      try {
+        const res = await getMcqsLists(router, video_id);
+        setTests(res?.data);
+      } catch (err) {
+        console.error("Failed to fetch MCQ tests", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTests();
+  }, []);
+
+  return (
+    <div className="max-w-6xl mx-auto py-20 px-4">
+      <div className="flex items-center gap-2 mb-6">
+        <Sparkles className="text-[#5c967d] w-6 h-6" />
+        <h1 className="text-3xl font-bold text-[#5c967d]">Available MCQ Tests</h1>
+      </div>
+
+      {loading ? (
+        <p className="text-gray-600 text-center text-lg">Loading...</p>
+      ) : tests.length === 0 ? (
+        <p className="text-gray-500 text-center text-lg">No tests available.</p>
+      ) : (
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {tests.map((test, index) => (
+            <div
+              key={index}
+              className="bg-white cursor-pointer border border-[#cce1d8] rounded-xl shadow-md hover:shadow-xl hover:scale-105 duration-500 transition p-6 relative group"
+            >
+              <div className="absolute top-0 right-0 bg-[#5c967d] text-white text-xs px-3 py-1 rounded-bl-xl rounded-tr-xl">
+                Test #{index + 1}
+              </div>
+              <h2 className="text-xl font-semibold text-[#3c7c63] mb-2 group-hover:text-[#5c967d] transition">
+                {test.title || `Test ${index + 1}`}
+              </h2>
+              <p className="text-sm text-gray-600 mb-6 min-h-[48px]">
+                {test.description || "No description available."}
+              </p>
+              <div className="flex justify-center">
+                <button
+                  onClick={() => router.push(`/course-topics/mcqs-lists/mcqs/${test.id}`)}
+                  className="px-5 py-2 bg-[#5c967d] text-white rounded-full hover:bg-[#3c7c63] transition font-medium"
+                >
+                  Start Test
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
