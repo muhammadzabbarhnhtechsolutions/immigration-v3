@@ -147,7 +147,7 @@ export default function MainComponent() {
             <button
               type="submit"
               disabled={loading}
-              className="w-24 py-2 px-4 cursor-pointer bg-[#87AA9C] text-white rounded hover:bg-[#769589]"
+               className="mt-6 inline-block px-6 py-2.5 rounded-full bg-[#5aaa7c] text-white font-semibold shadow-md transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-xl active:scale-95"
             >
               Register
             </button>

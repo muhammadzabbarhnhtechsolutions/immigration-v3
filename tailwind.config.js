@@ -18,5 +18,6 @@ const config = {
   plugins: [
     require('flowbite/plugin')  // ✅ CORRECT plugin path
   ],
+  
 };
 export default config;

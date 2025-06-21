@@ -422,7 +422,7 @@ setResources(newProfileData?.resources || []);
           </nav>
           <Link href="/request-a-demo">
             <div className="hidden md:block">
-              <button className="bg-[#90B29F] cursor-pointer hover:bg-[#7fa98b] transition duration-200 flex items-center gap-2 text-white text-sm font-medium px-4 py-3 rounded-md">
+              <button className="bg-[#8db39d] cursor-pointer hover:bg-[#7fa98b] transition hover:scale-105 hover:shadow-lg duration-200 flex items-center gap-2 text-white text-sm font-medium px-4 py-3 rounded-full">
                 REQUEST A DEMO <FaArrowRight />
               </button>
             </div>

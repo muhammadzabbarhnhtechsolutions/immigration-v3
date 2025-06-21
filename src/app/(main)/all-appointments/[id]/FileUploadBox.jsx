@@ -148,8 +148,7 @@ export default function FileUploadBox({ setShowUpload }) {
       {uploading && (
         <div className="mt-4 w-full bg-gray-200 rounded h-3 overflow-hidden">
           <div
-            className="bg-[#57b17c] h-full transition-all"
-            style={{ width: `${progress}%` }}
+ className="mt-6 inline-block px-6 py-2.5 rounded-full bg-[#5aaa7c] text-white font-semibold shadow-md transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-xl active:scale-95"            style={{ width: `${progress}%` }}
           />
         </div>
       )}

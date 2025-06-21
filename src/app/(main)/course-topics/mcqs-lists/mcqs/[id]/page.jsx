@@ -24,7 +24,7 @@ export default function Page() {
   const selectedOptionIds = Object.values(selectedOptions);
 
   if (selectedOptionIds.length !== mcqs.length) {
-    alert("⚠️ Please answer all questions before submitting.");
+    toast.success("⚠️ Please answer all questions before submitting.");
     return;
   }
 

@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import Plyr from "plyr-react";
+import "plyr-react/plyr.css";
 import {
   VideoIcon,
   Home,
@@ -14,15 +16,14 @@ import {
 import { FaAngleDown } from "react-icons/fa";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
-import { getCourseModuleVideo } from "../services/courseVideoService"; // adjust path as needed
+import { getCourseModuleVideo } from "../services/courseVideoService";
 
-// ================== Sidebar Icons ===================
 const SidebarIcons = ({ toggleSidebar }) => {
   const iconClasses = "w-5 h-5 text-white mb-1";
   const textClasses = "text-xs text-white";
 
   return (
-    <div className="w-[80px] bg-[#5c967d] p-4 flex flex-col gap-6 pt-14 items-center">
+    <div className="w-[80px] bg-[#88ae98] p-4 flex flex-col gap-6 pt-14 items-center">
       <div className="flex flex-col items-center cursor-pointer">
         <Home className={iconClasses} />
         <span className={textClasses}>Home</span>
@@ -50,64 +51,52 @@ const SidebarIcons = ({ toggleSidebar }) => {
   );
 };
 
-// ================== Sidebar ===================
-const Sidebar = ({
-  selectedIndex,
-  setSelectedIndex,
-  isOpen,
-  toggleSidebar,
-  videos,
-}) => {
-  return (
-    <div
-      className={`fixed left-0 h-screen bg-[#588d76] w-64 p-4 pt-6 z-40 shadow-lg transition-transform duration-300 ${
-        isOpen ? "translate-x-0" : "-translate-x-full"
-      }`}
-    >
-      <div className="flex justify-end">
-        <button
-          className="text-white font-semibold flex justify-end mt-3 mb-2"
-          onClick={toggleSidebar}
-        >
-          <X className="mr-1 w-4 h-4" />
-        </button>
-      </div>
-      <h2 className="text-base font-bold mb-6 text-white">Course Topics </h2>
-      <ul className="space-y-2">
-        {videos.map((item, idx) => (
-          <li
-            key={item.id || idx}
-            onClick={() => {
-              setSelectedIndex(idx);
-              toggleSidebar();
-            }}
-            className={`flex items-center px-4 py-3 rounded-lg cursor-pointer transition duration-200 ${
-              selectedIndex === idx
-                ? "bg-[#428568] text-white shadow-md"
-                : "text-white hover:bg-[#5c967d]"
-            }`}
-          >
-            <VideoIcon className="mr-3 text-white w-4 h-4" />
-            <span>
-              {idx + 1}. {item.title}
-            </span>
-          </li>
-        ))}
-      </ul>
+const Sidebar = ({ selectedIndex, setSelectedIndex, isOpen, toggleSidebar, videos }) => (
+  <div
+    className={`fixed left-0 h-screen bg-[#88ae98] w-64 p-4 pt-6 z-40 shadow-lg transition-transform duration-300 ${
+      isOpen ? "translate-x-0" : "-translate-x-full"
+    }`}
+  >
+    <div className="flex justify-end">
+      <button
+        className="text-white font-semibold flex justify-end mt-3 mb-2"
+        onClick={toggleSidebar}
+      >
+        <X className="mr-1 w-4 h-4" />
+      </button>
     </div>
-  );
-};
+    <h2 className="text-base font-bold mb-6 text-white">Course Topics</h2>
+    <ul className="space-y-2">
+      {videos.map((item, idx) => (
+        <li
+          key={item.id || idx}
+          onClick={() => {
+            setSelectedIndex(idx);
+            toggleSidebar();
+          }}
+          className={`flex items-center px-4 py-3 rounded-lg cursor-pointer transition duration-200 ${
+            selectedIndex === idx
+              ? "bg-[#6d9f89] text-white shadow-md"
+              : "text-white hover:bg-[#88ae98]"
+          }`}
+        >
+          <VideoIcon className="mr-3 text-white w-4 h-4" />
+          <span>
+            {idx + 1}. {item.title}
+          </span>
+        </li>
+      ))}
+    </ul>
+  </div>
+);
 
-// ================== MainContent ===================
 const MainContent = ({ selectedIndex, setSelectedIndex, videos }) => {
   const video = videos[selectedIndex];
   const [showDropDown, setShowDropDown] = useState(false);
 
   if (!video) return null;
 
-  const handleDropdownToggle = () => {
-    setShowDropDown(!showDropDown);
-  };
+  const handleDropdownToggle = () => setShowDropDown(!showDropDown);
 
   const handleNext = () => {
     if (selectedIndex < videos.length - 1) {
@@ -118,7 +107,6 @@ const MainContent = ({ selectedIndex, setSelectedIndex, videos }) => {
   return (
     <div className="flex-1 ml-[10px] p-6 mt-[54px]">
       <div className="mb-6 relative">
-        {/* Top bar */}
         <div className="flex justify-between bg-[#162726] items-center py-2.5 px-2">
           <div className="flex items-center gap-4 text-white">
             <button
@@ -129,8 +117,6 @@ const MainContent = ({ selectedIndex, setSelectedIndex, videos }) => {
             </button>
             <p className="text-white -mt-1">{video.title}</p>
           </div>
-
-          {/* Dropdown */}
           <div className="relative inline-block text-left">
             <button
               type="button"
@@ -139,7 +125,6 @@ const MainContent = ({ selectedIndex, setSelectedIndex, videos }) => {
             >
               <FaAngleDown className="w-4 h-4 text-[#162726]" />
             </button>
-
             {showDropDown && (
               <div className="origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
                 <div className="py-1">
@@ -158,31 +143,22 @@ const MainContent = ({ selectedIndex, setSelectedIndex, videos }) => {
             )}
           </div>
         </div>
-
-        {/* Video Player */}
-        {/* <div className="w-full aspect-video -mt-1 rounded overflow-hidden shadow-md bg-black">
-  <video
-    key={video.file}
-    controls
-    className="w-full h-full"
-    poster={video.thumbnail}
-  >
-    <source src={video.file} type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
-</div> */}
-        <video
-          key={video.file}
-          controls
-          className="w-full h-full"
-          poster={video.thumbnail}
-        >
-          <source src={video.file} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+        <div className="w-full aspect-video rounded-lg overflow-hidden mt-4 shadow-lg">
+          <Plyr
+            source={{
+              type: 'video',
+              sources: [
+                {
+                  src: video.file,
+                  provider: 'html5'
+                }
+              ],
+              poster: video.thumbnail
+            }}
+          />
+        </div>
       </div>
 
-      {/* Navigation Buttons */}
       <div className="flex justify-end gap-4 mb-6">
         <button
           className="px-4 py-2 border rounded text-gray-600 hover:bg-gray-100 transition"
@@ -192,7 +168,7 @@ const MainContent = ({ selectedIndex, setSelectedIndex, videos }) => {
           PREVIOUS
         </button>
         <button
-          className="px-6 py-2 bg-[#588d76] text-white rounded hover:bg-green-700 transition"
+          className="px-6 py-2 bg-[#88ae98] text-white rounded hover:bg-[#6d9f89] transition"
           onClick={handleNext}
           disabled={selectedIndex === videos.length - 1}
         >
@@ -203,22 +179,19 @@ const MainContent = ({ selectedIndex, setSelectedIndex, videos }) => {
   );
 };
 
-// ================== Lesson Layout ===================
 const LessonLayout = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
-  const courseId = useParams().id; // Assuming courseId is passed in the URL
-  console.log("sdasdas", courseId);
+  const courseId = useParams().id;
+
   useEffect(() => {
     const fetchVideos = async () => {
       setLoading(true);
       const data = await getCourseModuleVideo(router, courseId);
-      if (data?.data) {
-        setVideos(data.data);
-      }
+      if (data?.data) setVideos(data.data);
       setLoading(false);
     };
     fetchVideos();
@@ -226,18 +199,14 @@ const LessonLayout = () => {
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
-  if (loading)
+  if (loading) {
     return (
       <div className="mx-auto bg-[#ebf0ed] px-4 mt-8 py-20 text-center flex flex-col items-center justify-center gap-4 animate-fade-in">
-        {/* Spinner */}
-        <div className="h-10 w-10 border-4 border-[#5bb180] border-t-transparent rounded-full animate-spin"></div>
-
-        {/* Text */}
-        <p className="text-[#5bb180] text-lg font-medium">
-          Loading lessions...
-        </p>
+        <div className="h-10 w-10 border-4 border-[#88ae98] border-t-transparent rounded-full animate-spin"></div>
+        <p className="text-[#88ae98] text-lg font-medium">Loading lessons...</p>
       </div>
     );
+  }
 
   return (
     <div className="flex relative font-sans">
