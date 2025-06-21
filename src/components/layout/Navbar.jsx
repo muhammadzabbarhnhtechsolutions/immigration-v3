@@ -255,14 +255,14 @@ setResources(newProfileData?.resources || []);
             
             {/* {isLoggedIn && !userData?.is_active && ( */}
             {/* {(!isLoggedIn || !profile?.package?.resources) && ( */}
-            {(!isLoggedIn || Array.isArray(resources) && resources.length === 0) && (
+            {/* {(!isLoggedIn || Array.isArray(resources) && resources.length === 0) && ( */}
               <Link
                 className="hover:text-black focus:text-black"
                 href="/pricing"
               >
                 Pricing
               </Link>
-            )}
+            {/* )} */}
 
             {/* )} */}
             <Link
@@ -458,11 +458,11 @@ setResources(newProfileData?.resources || []);
             <Link href="/our-products" className="text-[#88AE98]">
               Our Products
             </Link>
-            {isLoggedIn && !userData?.is_active && (
+            {/* {isLoggedIn && !userData?.is_active && ( */}
               <Link href="/pricing" className="text-[#88AE98]">
                 Pricing
               </Link>
-            )}
+            {/* )} */}
             <Link href="/latest-news" className="text-[#88AE98]">
               Latest News
             </Link>
