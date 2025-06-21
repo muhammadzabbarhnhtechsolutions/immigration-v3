@@ -43,8 +43,15 @@ export default function McqsTestListPage() {
             </div>
 
             {loading ? (
-        <p className="text-gray-600 text-center text-lg">Loading...</p>
-            ) : tests?.length === 0 ? (
+ <div className="mx-auto bg-[#ebf0ed] px-4 mt-8 py-20 text-center flex flex-col items-center justify-center gap-4 animate-fade-in">
+        {/* Spinner */}
+        <div className="h-10 w-10 border-4 border-[#88ae98] border-t-transparent rounded-full animate-spin"></div>
+
+        {/* Text */}
+        <p className="text-[#88ae98] text-xl font-medium">
+          Loading ...
+        </p>
+      </div>            ) : tests?.length === 0 ? (
         <p className="text-gray-500 text-center text-lg">No tests available.</p>
             ) : (
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -64,10 +71,10 @@ export default function McqsTestListPage() {
               </p>
               <div className="flex justify-center">
                 <button
-                  onClick={() => router.push(checkAttempt === false ? `/course-topics/mcqs-lists/mcqs/${test.id}` : "/course-topics/mcqs-lists/mcqs/result")}
+                  onClick={() => router.push(checkAttempt === false ? `/course-topics/mcqs-lists/mcqs/${test.id}` : `/course-topics/mcqs-lists/mcqs/result/${test.id}`)}
                   className="px-5 py-2 bg-[#5c967d] text-white rounded-full hover:bg-[#3c7c63] transition font-medium"
                 >
-                  Start Test
+                 {checkAttempt == false ?  "Start Test": "Result"}
                 </button>
               </div>
             </div>

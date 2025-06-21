@@ -1,6 +1,6 @@
 "use client";
-import { useParams, useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import { useParams, useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
 import { getAppointmentDocuments } from "../../../../services/getAppointmentsDocuments";
 
 const Page = () => {
@@ -32,7 +32,15 @@ const Page = () => {
       </h2>
 
       {loading ? (
-        <p className="text-center text-gray-500 text-lg">Loading documents...</p>
+        <div className="mx-auto px-4 mt-8 py-20 text-center flex flex-col items-center justify-center gap-4 animate-fade-in">
+          {/* Spinner */}
+          <div className="h-10 w-10 border-4 border-[#88ae98] border-t-transparent rounded-full animate-spin"></div>
+
+          {/* Text */}
+          <p className="text-[#88ae98] text-xl font-medium">
+            Loading Documents..
+          </p>
+        </div>
       ) : documentData?.data?.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {documentData?.data.map((document, index) => (

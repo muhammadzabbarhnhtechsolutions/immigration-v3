@@ -46,11 +46,13 @@ const AppointmentCard = ({ appointment }) => {
   const icon = getStatusIcon(appointment.status);
 
   return (
-    <div className="relative bg-gradient-to-br from-[#5AAA7C]/90 to-[#367f5d]/90 rounded-3xl px-6 py-12 w-full sm:w-[363px] text-white text-center shadow-2xl hover:scale-105 transition-transform duration-300">
-      <Link
-        className="flex"
+    <>
+   
+      <Link  className="flex"
         href={`/all-appointments/data?appointment_id=${appointment.appointment_id}`}
       >
+    <div className="relative bg-gradient-to-br from-[#5AAA7C]/90 to-[#367f5d]/90 rounded-3xl px-6 py-12 w-full sm:w-[363px] text-white text-center shadow-2xl hover:scale-105 transition-transform duration-300">
+      
         {/* Profile Image */}
         <div className="absolute -top-14 left-1/2 transform -translate-x-1/2">
           <img
@@ -74,8 +76,9 @@ const AppointmentCard = ({ appointment }) => {
             Email: {appointment.email}
           </p>
         </div>
-      </Link>
     </div>
+      </Link>
+       </>
   );
 };
 

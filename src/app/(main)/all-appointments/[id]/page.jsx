@@ -95,7 +95,7 @@ export default function AppointmentActions() {
                   {card.title}
                 </button>
               ) : (
-                <Link href={card.title === "Send Meeting Links" ? "/meetings" : "/"}>
+                <Link href="#">
                   <button className="bg-[#5AAA7C] hover:bg-[#46996a] mt-[23px] text-white font-medium py-2 px-4 rounded-full transition">
                     {card.title}
                   </button>
@@ -108,7 +108,7 @@ export default function AppointmentActions() {
       </div>
 
       {showUpload && (
-        <div className="fixed pt-[52px] overflow-scroll inset-0 bg-black bg-opacity-5 flex items-center justify-center z-50">
+        <div className="fixed pt-[52px]  overflow-scroll inset-0 bg-black bg-opacity-5 flex items-center justify-center z-[100]">
           <div className="bg-white p-6 rounded-xl w-full max-w-xl relative transform transition-all duration-500 ease-out animate-slide-down">
             <button
               onClick={() => setShowUpload(false)}
@@ -186,7 +186,7 @@ function FileUploadBox({ setShowUpload }) {
   };
 
   return (
-    <div className="max-w-2xl mx-auto bg-white rounded-xl shadow-xl p-6 space-y-4">
+    <div className="max-w-2xl mt-auto mx-auto bg-white rounded-xl shadow-xl p-6 space-y-4">
       <div className="grid gap-4">
         <input
           type="text"

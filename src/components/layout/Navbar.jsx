@@ -122,7 +122,7 @@ const hanldeShowLogoutButton = ()=>{
       if (result.data) {
         const newProfileData = result?.data?.data;
         setProfile(newProfileData);
-
+setResources(newProfileData?.resources || []);
         // Update localStorage "user" key with latest profile data
         localStorage.setItem("user", JSON?.stringify(newProfileData));
       }
@@ -156,7 +156,8 @@ const hanldeShowLogoutButton = ()=>{
   }, []);
 
   useEffect(() => {
-    setResources(userData?.package?.resources);
+    setResources(userData);
+    console.log("ddd",userData)
   }, [userData?.package?.resources]);
 
   useEffect(() => {
@@ -169,7 +170,7 @@ const hanldeShowLogoutButton = ()=>{
     }
   }, []);
   return (
-    <div className="w-full  mb-8 relative z-[50]">
+    <div className="w-full  mb-8 relative z-[100]">
       {/* Fixed Navigation Container */}
       <div
         className={`fixed top-0 left-0 mb-12 right-0 z-50 transition-transform duration-300`}
@@ -251,8 +252,10 @@ const hanldeShowLogoutButton = ()=>{
             >
               Our Products
             </Link>
+            
             {/* {isLoggedIn && !userData?.is_active && ( */}
-            {(!isLoggedIn || !profile?.package?.resources) && (
+            {/* {(!isLoggedIn || !profile?.package?.resources) && ( */}
+            {(!isLoggedIn || Array.isArray(resources) && resources.length === 0) && (
               <Link
                 className="hover:text-black focus:text-black"
                 href="/pricing"
@@ -285,8 +288,10 @@ const hanldeShowLogoutButton = ()=>{
             >
               Appointments
             </Link>
+            
 
-            {profile?.package?.resources.length > 0 && (
+            {/* {profile?.package?.resources.length > 0 && ( */}
+            {/* {resources > 0 && (
               <div
                 ref={dropdownRef}
                 className="relative -mt-2 inline-block text-left"
@@ -317,7 +322,7 @@ const hanldeShowLogoutButton = ()=>{
                 {open && (
                   <div className="absolute right-0 left-6 z-20 mt-1 w-48 rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 animate-fade-in">
                     <div className="py-2">
-                      {profile?.package?.resources.map((resource, index) => {
+                      {resources?.map((resource, index) => {
                         let href = "#";
 
                         if (resource === "E-book") {
@@ -349,7 +354,71 @@ const hanldeShowLogoutButton = ()=>{
                   </div>
                 )}
               </div>
-            )}
+            )} */}
+
+            {Array.isArray(resources) && resources.length > 0 && (
+  <div
+    ref={dropdownRef}
+    className="relative -mt-2 inline-block text-left"
+  >
+    <button
+      onClick={() => setOpen(!open)}
+      className="inline-flex items-center gap-2 px-2 py-2 text-base text-[#90B29F] bg-white rounded-full hover:text-black transition duration-300 ease-in-out "
+    >
+      Resources
+      <svg
+        className={`w-5 h-5 transform transition-transform duration-300 ${
+          open ? "rotate-180" : ""
+        }`}
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M19 9l-7 7-7-7"
+        />
+      </svg>
+    </button>
+
+    {open && (
+      <div className="absolute right-0 left-6 z-20 mt-1 w-48 rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 animate-fade-in">
+        <div className="py-2">
+          {resources.map((resource, index) => {
+            let href = "#";
+
+            if (resource === "E-book") {
+              href = "/e-book";
+            } else if (resource === "General Resource") {
+              href = "/course-topics/resources";
+            } else if (resource === "Course Videos") {
+              href = "/courses";
+            } else if (resource === "Reference Material") {
+              href = "/refrence-material";
+            } else if (resourceLinks[resource]) {
+              href = resourceLinks[resource];
+            }
+
+            return (
+              <Link
+                key={index}
+                href={href}
+                onClick={() => setOpen(false)}
+                className="block px-5 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#6fbe91] transition duration-200 rounded-md"
+              >
+                {resource === "Create Blog" ? "Create Blog" : resource}
+              </Link>
+            );
+          })}
+        </div>
+      </div>
+    )}
+  </div>
+)}
+
           </nav>
           <Link href="/request-a-demo">
             <div className="hidden md:block">

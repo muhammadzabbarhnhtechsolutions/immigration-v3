@@ -69,7 +69,7 @@ export default function FileUploadBox({ setShowUpload }) {
   };
 
   return (
-    <div className="max-w-2xl mx-auto bg-white rounded-xl shadow-xl p-6 space-y-4">
+    <div className="max-w-2xl mx-auto z-[100] bg-white rounded-xl shadow-xl p-6 space-y-4">
       <div className="grid gap-4">
         <input
           type="text"

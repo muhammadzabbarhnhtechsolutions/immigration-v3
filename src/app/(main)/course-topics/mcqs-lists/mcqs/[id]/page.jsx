@@ -1,24 +1,22 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import axios from "axios";
 import {
-  VideoIcon,
   Home,
   User,
   BookOpen,
   Code2,
   BarChart3,
 } from "lucide-react";
+import { useParams, useRouter } from "next/navigation";
 import { getMcqWithOptions } from "@/services/getAllMcqsWithOptions";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { SubmitMcqsAnswer } from "@/services/submitMcqsAnswers";
+import { toast } from "react-toastify";
 
 export default function Page() {
   const [mcqs, setMcqs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedOptions, setSelectedOptions] = useState({});
-
   const paramsId = useParams().id;
   const router = useRouter();
 
@@ -36,15 +34,25 @@ export default function Page() {
   };
 
   try {
-    const res = await SubmitMcqsAnswer(router,payload);
-    alert("✅ Submission successful!");
-    console.log(res.data);
-    // if(res.status === 200){
-    //   router.push("/course-topics/mcqs-lists/mcqs/result?score=");
-    // }
+    const res = await SubmitMcqsAnswer(router, payload);
+
+    if (res?.status === true) {
+      toast.success("MCQs Successfully Submitted!");
+      router.push(`/course-topics/mcqs-lists/mcqs/result/${paramsId}`);
+      return;
+    }
+
+    if (res?.message === "You have already attempted this test.") {
+      toast.info("You have already attempted this test.");
+      router.push(`/course-topics/mcqs-lists/mcqs/result/${paramsId}`);
+      return;
+    }
+
+    toast.error(res?.message || "Unknown error occurred.");
+    
   } catch (err) {
     console.error("❌ Submission failed:", err);
-    alert("Failed to submit answers.");
+    toast.error("Failed to submit MCQs. Please try again.");
   }
 };
 
@@ -54,93 +62,91 @@ export default function Page() {
       try {
         const res = await getMcqWithOptions(router, paramsId);
         setMcqs(res.data);
-
       } catch (err) {
         console.error("Failed to fetch MCQs", err);
       } finally {
         setLoading(false);
       }
     };
-
     fetchMcqs();
   }, []);
 
   return (
-    <div className="flex mt-6 min-h-screen">
+    <div className="flex min-h-screen mt-16 bg-gray-100">
       {/* Sidebar */}
-      <div className="w-[80px] bg-[#5c967d] p-4 flex flex-col gap-6 pt-14 items-center">
-        {[
-          [<Home />, "Home"],
-          [<User />, "Profile"],
-          [<BookOpen />, "Lessons"],
-          [<Code2 />, "Practice"],
-          [<BarChart3 />, "Progress"],
-        ].map(([Icon, label], i) => (
-          <div key={i} className="flex flex-col items-center cursor-pointer">
-            <div className="w-5 h-5 text-white mb-1">{Icon}</div>
-            <span className="text-xs text-white">{label}</span>
+      <aside className="w-[80px] bg-[#5c967d] p-4 pt-16 flex flex-col items-center gap-8">
+        {[Home, User, BookOpen, Code2, BarChart3].map((Icon, i) => (
+          <div key={i} className="flex flex-col items-center text-white hover:scale-110 transition">
+            <Icon className="w-5 h-5 mb-1" />
+            <span className="text-xs">
+              {["Home", "Profile", "Lessons", "Practice", "Progress"][i]}
+            </span>
           </div>
         ))}
-      </div>
+      </aside>
 
       {/* Main Content */}
-      <div className="flex-1 ml-[30px] mt-14 p-6 bg-white space-y-8">
-        <h1 className="text-2xl font-bold text-[#88ae98]">M.C.Qs</h1>
+      <main className="flex-1 p-8 flex flex-col items-center">
+        <h1 className="text-3xl font-bold text-[#5c967d] mb-8">Multiple Choice Questions</h1>
 
-        {loading ? (
-          <p>Loading MCQs...</p>
-        ) : (
-          mcqs.map((q, index) => (
-            <div
-              key={index}
-              className="border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition duration-300 space-y-4"
-            >
-              <p className="text-base font-semibold text-[#5c967d]">
-                Q{index + 1}. {q.question_text}
-              </p>
+        <div className="w-full max-w-3xl space-y-8">
+          {loading ? (
+ <div className="mx-auto bg-[#ebf0ed] px-4 mt-8 py-20 text-center flex flex-col items-center justify-center gap-4 animate-fade-in">
+        {/* Spinner */}
+        <div className="h-10 w-10 border-4 border-[#88ae98] border-t-transparent rounded-full animate-spin"></div>
 
-              {q.options.map((option, optIndex) => {
-                const letter = String.fromCharCode(65 + optIndex); // A, B, C, D
-                return (
-                  <label
-                    key={option.id}
-                    className="flex items-center gap-3 cursor-pointer"
-                  >
-                   <input
-  type="radio"
-  name={`q${index}`}
-  value={option.id}
-  className="accent-[#7EB69E] w-4 h-4"
-  onChange={() =>
-    setSelectedOptions((prev) => ({ ...prev, [q.id]: option.id }))
-  }
-/>
+        {/* Text */}
+        <p className="text-[#88ae98] text-xl font-medium">
+          Loading Mcqs..
+        </p>
+      </div>          ) : (
+            mcqs.map((q, index) => (
+              <div
+                key={index}
+                className="bg-white border border-gray-200 rounded-2xl p-6 shadow hover:shadow-lg transition duration-300 space-y-4"
+              >
+                <p className="font-semibold text-[#5c967d] text-lg">
+                  Q{index + 1}. {q.question_text}
+                </p>
 
-                    <span className="flex items-center gap-2 text-gray-700">
-                      <span className="bg-[#7EB69E] text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
-                        {letter}
+                {q.options.map((option, optIndex) => {
+                  const letter = String.fromCharCode(65 + optIndex); // A, B, C, D
+                  return (
+                    <label key={option.id} className="flex items-center gap-3 cursor-pointer">
+                      <input
+                        type="radio"
+                        name={`q${index}`}
+                        value={option.id}
+                        className="accent-[#7EB69E] w-4 h-4"
+                        onChange={() =>
+                          setSelectedOptions((prev) => ({ ...prev, [q.id]: option.id }))
+                        }
+                      />
+                      <span className="flex items-center gap-2 text-gray-800">
+                        <span className="bg-[#7EB69E] text-white text-xs w-6 h-6 flex items-center justify-center rounded-full">
+                          {letter}
+                        </span>
+                        {option.option_text}
                       </span>
-                      {option.option_text}
-                    </span>
-                  </label>
-                );
-              })}
+                    </label>
+                  );
+                })}
+              </div>
+            ))
+          )}
+
+          {!loading && (
+            <div className="flex justify-center">
+              <button
+                onClick={handleSubmit}
+                className="px-10 py-3 bg-[#5c967d] text-white rounded-xl text-lg font-medium hover:bg-[#4e826a] transition"
+              >
+                Submit
+              </button>
             </div>
-          ))
-        )}
-
-        {/* Navigation Buttons */}
-        <div className="flex justify-center mt-8">
-       
-          <button
-  onClick={handleSubmit}
-  className="px-14 py-3 bg-[#7EB69E] text-white rounded hover:bg-[#689f89] transition"
->
-  Submit
-</button>
-
+          )}
         </div>
-      </div>
+      </main>
     </div>
   );
 }
