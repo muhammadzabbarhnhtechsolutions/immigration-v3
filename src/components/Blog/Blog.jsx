@@ -39,8 +39,24 @@ const ArticleSection = () => {
         </p>
       </div>
       ) : articles.length === 0 ? (
-        <p className="text-gray-500">No articles found.</p>
-      ) : (
+  <div className="flex flex-col items-center justify-center text-center mt-10 bg-red-50 border border-red-200 text-red-600 px-6 py-4 rounded-xl shadow-sm">
+     <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="h-10 w-10 mb-2 text-red-400"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    strokeWidth={1.5}
+    >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M12 9v2m0 4h.01M12 3.75c-4.56 0-8.25 3.69-8.25 8.25s3.69 8.25 8.25 8.25 8.25-3.69 8.25-8.25S16.56 3.75 12 3.75z"
+    />
+  </svg>
+  <p className="text-lg font-semibold">No Article found</p>
+  <span className="text-sm text-red-400">You don’t have any Article yet.</span>
+</div>      ) : (
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {articles.map((article) => (
             <div
