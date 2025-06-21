@@ -159,6 +159,7 @@ const MainContent = ({ selectedIndex, setSelectedIndex, videos }) => {
         </div>
       </div>
 
+
       <div className="flex justify-end gap-4 mb-6">
         <button
           className="px-4 py-2 border rounded text-gray-600 hover:bg-gray-100 transition"

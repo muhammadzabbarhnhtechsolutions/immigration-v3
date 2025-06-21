@@ -148,6 +148,7 @@ export default function AppointmentActions() {
                 </button>
               )}
             </div>
+            {/* ...... */}
             {showChat && (
               <div className="fixed bottom-8 top-52 right-6 z-[100] w-full max-w-[358px] rounded-2xl shadow-2xl bg-white animate-slide-up border border-gray-300 overflow-hidden transition-all duration-500 ease-in-out">
                 {/* Chat Header */}
