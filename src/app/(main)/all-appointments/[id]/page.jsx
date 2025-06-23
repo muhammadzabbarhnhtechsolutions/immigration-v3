@@ -12,6 +12,8 @@ import {
   MessageCircleCode,
   X,
   SendHorizonal,
+  RotateCw,
+  Upload,
 } from "lucide-react";
 
 // Icons
@@ -20,6 +22,10 @@ import img2 from "../../../../assets/img2.png";
 import img3 from "../../../../assets/img3.png";
 import img4 from "../../../../assets/meeting.png";
 import img5 from "../../../../assets/meeting1.png";
+import {
+  getChatMessages,
+  sendChatMessage,
+} from "../../../../services/chatServices";
 
 const cards = [
   {
@@ -42,36 +48,51 @@ export default function AppointmentActions() {
   const searchParams = useSearchParams();
   const id = searchParams.get("appointment_id");
   const [showUpload, setShowUpload] = useState(false);
-  const [showChat, setShowChat] = useState(false);
-  const [inputMessage, setInputMessage] = useState("");
-  const [messages, setMessages] = useState([
-    { type: "user", text: "Hi Admin" },
-    { type: "bot", text: "Hello! How can I help you?" },
-  ]);
+  const router = useRouter();
+  const appointmentId = searchParams.get("appointment_id") || "";
 
+  const [showChat, setShowChat] = useState(false);
+  const [messages, setMessages] = useState([]);
+  const [inputMessage, setInputMessage] = useState("");
   const chatEndRef = useRef(null);
 
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const handleSend = () => {
-    if (inputMessage.trim() === "") return;
+  const hanldeGetChatsMessages = ()=>{
+     if (showChat && appointmentId) {
+      getChatMessages(appointmentId, router).then((res) => {
+        if (res) {
+          setMessages(
+            res.map((msg) => ({
+              text: msg.message,
+              type: msg.admin ? "admin" : "user",
+            })).reverse()
+          );
+        }
+      });
+    }
+  }
+  useEffect(() => {
+   hanldeGetChatsMessages()
+  }, [showChat, appointmentId]);
 
-    const newMessages = [
-      ...messages,
-      { type: "user", text: inputMessage.trim() },
-    ];
+  const handleSend = async () => {
+    if (!inputMessage.trim() || !appointmentId) return;
 
-    setMessages(newMessages);
+    const newMsg = inputMessage.trim();
+
+    // Optimistically show it in UI
+    setMessages((prev) => [...prev, { type: "user", text: newMsg }]);
     setInputMessage("");
 
-    setTimeout(() => {
-      setMessages((prev) => [
-        ...prev,
-        { type: "bot", text: "This is a response from the Admin Bot." },
-      ]);
-    }, 500);
+    const res = await sendChatMessage(router, appointmentId, newMsg);
+
+    if (res) {
+      // Optionally fetch updated chat again or just confirm it's sent
+      setMessages((prev) => [...prev]);
+    }
   };
 
   const handleEnter = (e) => {
@@ -150,12 +171,21 @@ export default function AppointmentActions() {
             </div>
             {/* ...... */}
             {showChat && (
-              <div className="fixed bottom-8 top-52 right-6 z-[100] w-full max-w-[358px] rounded-2xl shadow-2xl bg-white animate-slide-up border border-gray-300 overflow-hidden transition-all duration-500 ease-in-out">
+              <div className="fixed bottom-8 top-52 right-6 z-[100] w-full max-w-[358px] rounded-2xl shadow-2xl bg-gray-200 animate-slide-up border border-gray-300 overflow-hidden transition-all duration-500 ease-in-out">
                 {/* Chat Header */}
                 <div className="bg-gradient-to-r from-[#5AAA7C] to-[#46996a] text-white px-5 py-4 flex justify-between items-center">
                   <h3 className="font-semibold flex gap-2 text-xl tracking-wide">
                     <MessageCircleCode className="mt-0" /> Admin Bot
                   </h3>
+       <button
+  onClick={hanldeGetChatsMessages}
+  className="w-6 h-6 ml-24 flex justify-center items-center rounded-full bg-green-100 text-green-600 shadow-sm hover:shadow-md hover:scale-110 active:scale-95 transition duration-300"
+  title="Refresh Messages"
+>
+  <RotateCw size={15} />
+</button>
+
+
                   <button
                     onClick={() => setShowChat(false)}
                     className="text-white hover:text-gray-200 text-lg font-bold transition-transform transform hover:scale-125"
@@ -163,24 +193,22 @@ export default function AppointmentActions() {
                     <X />
                   </button>
                 </div>
-{/* ... */}
+                {/* ... */}
                 {/* Chat Body */}
-                <div className="p-4 h-72 overflow-y-auto space-y-3 bg-gray-50">
-                  {messages.map((msg, idx) => (
+                <div className="p-4 h-72 overflow-y-auto bg-white space-y-3 ">
+                  {messages?.map((m, i) => (
                     <div
-                      key={idx}
-                      className={`${
-                        msg.type === "user" ? "text-right" : "text-left"
-                      } animate-fade-in`}
+                      key={i}
+                      className={m.type === "user" ? "text-right" : "text-left"}
                     >
                       <p
-                        className={`inline-block py-2 px-4 rounded-2xl text-[14px] shadow-md ${
-                          msg.type === "user"
+                        className={`inline-block py-2 px-4 rounded-2xl ${
+                          m.type === "user"
                             ? "bg-[#5AAA7C] text-white"
-                            : "bg-white text-gray-800"
+                            : "bg-[#f7f7f7] text-gray-800"
                         }`}
                       >
-                        {msg.text}
+                        {m.text}
                       </p>
                     </div>
                   ))}
