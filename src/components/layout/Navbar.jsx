@@ -287,6 +287,11 @@ setResources(newProfileData?.resources || []);
               href="/all-appointments"
             >
               Appointments
+            </Link> <Link
+              className="hover:text-black focus:text-black"
+              href="/templetes"
+            >
+              Templetes
             </Link>
             
 

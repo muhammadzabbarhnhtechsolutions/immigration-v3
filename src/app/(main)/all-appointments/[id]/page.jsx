@@ -134,7 +134,7 @@ export default function AppointmentActions() {
                         </Link>
                         <Link
                           href={`/all-appointments/meetings/s?type=2&appointment_id=${id}`}
-                          className="block w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
+                          className="  w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
                         >
                           <Image src={img4} alt="Google" className="w-6 h-6" />
                           Google Meeting
