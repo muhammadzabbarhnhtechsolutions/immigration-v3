@@ -32,7 +32,7 @@ export default function Navbar() {
   const [packageData, setPackageData] = useState([]);
   const [checklogin, setcheckLogin] = useState("");
     const [openLogout, setLogoutOpen] = useState(false);
-
+console.log("......",userData,"...............")
 const hanldeShowLogoutButton = ()=>{
   setLogoutOpen(!openLogout)
 }
@@ -207,17 +207,30 @@ setResources(newProfileData?.resources || []);
         <UserCircle2 className="w-6 h-6 text-gray-700" />
       </button>
 
-      {openLogout && (
-        <div className="absolute -right-10 z-20  mt-3 w-36 rounded-lg bg-white shadow-lg ring-1 ring-gray-200">
-          <button
-            onClick={Logout}
-            className="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-          >
-            <LogOut className="w-4 h-4 mr-2" />
-            Logout
-          </button>
-        </div>
-      )}
+          {openLogout && (
+  <div className="absolute -right-10 z-20 mt-3 w-44 rounded-lg bg-white shadow-lg ring-1 ring-gray-200">
+    {/* Logout always shown */}
+    <button
+      onClick={Logout}
+      className="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+    >
+      <LogOut className="w-4 h-4 mr-2" />
+      Logout
+    </button>
+
+    {/* Business Account shown only if any package has package_type === 3 */}
+    {userData?.packages?.some(pkg => pkg.package_type === 3) && (
+      <Link href="/business-account">
+      <button
+            className=" flex w-full  items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+      >
+        {/* <LogOut className="w-4 h-4 mr-2" /> */}
+        Business Account
+      </button>
+      </Link>
+    )}
+  </div>
+)}
     </div>
             )}
           </div>
