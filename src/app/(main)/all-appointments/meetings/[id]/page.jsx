@@ -53,8 +53,10 @@ export default function MeetingCards() {
     }
   }, [appointmentId, type]);
   useEffect(() => {
+    if (appointmentId && !type) {
           setLoading(false);
     fetchDataAll()
+    }
   }, [])
   // ...
   return (
