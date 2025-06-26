@@ -125,7 +125,7 @@ export default function AppointmentActions() {
                     size={20}
                   />
                   <div className="absolute right-0 mt-0 hidden group-hover:block bg-white rounded-lg shadow-lg text-sm text-gray-700 z-10 w-44">
-                    {card.title === "Send Meeting Links" ? (
+                    {card.title === "Meetings" ? (
                       <>
                         <Link
                           href={`/all-appointments/meetings/s?type=1&appointment_id=${id}`}
@@ -154,23 +154,30 @@ export default function AppointmentActions() {
               )}
             </div>
 
-            <div className="pt-16 pb-6 px-6 text-center">
-              {card.title === "Upload Document" ? (
-                <button
-                  onClick={() => setShowUpload(true)}
-                  className="mt-6 inline-block px-6 py-2.5 rounded-full bg-[#5aaa7c] text-white font-semibold shadow-md transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-xl active:scale-95"
-                >
-                  {card.title}
-                </button>
-              ) : (
-                <button
-                  onClick={() => setShowChat(true)}
-                  className="mt-6 inline-block px-6 py-2.5 rounded-full bg-[#5aaa7c] text-white font-semibold shadow-md transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-xl active:scale-95"
-                >
-                  {card.title}
-                </button>
-              )}
-            </div>
+          <div className="pt-16 pb-6 px-6 text-center">
+  {card.title === "Upload Document" ? (
+    <button
+      onClick={() => setShowUpload(true)}
+      className="mt-6 inline-block px-6 py-2.5 rounded-full bg-[#5aaa7c] text-white font-semibold shadow-md transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-xl active:scale-95"
+    >
+      {card.title}
+    </button>
+  ) : card.title === "Send Meeting Links" ? (
+    <button
+      className="mt-6 inline-block px-6 py-2.5 rounded-full bg-[#5aaa7c] text-white font-semibold shadow-md transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-xl active:scale-95"
+    >
+      {card.title}
+    </button>
+  ) : (
+    <button
+      onClick={() => setShowChat(true)}
+      className="mt-6 inline-block px-6 py-2.5 rounded-full bg-[#5aaa7c] text-white font-semibold shadow-md transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-xl active:scale-95"
+    >
+      {card.title}
+    </button>
+  )}
+</div>
+
             {/* ...... */}
             {showChat && (
               <div className="fixed bottom-8 top-52 right-6 z-[100] w-full max-w-[358px] rounded-2xl shadow-2xl bg-gray-200 animate-slide-up border border-gray-300 overflow-hidden transition-all duration-500 ease-in-out">
