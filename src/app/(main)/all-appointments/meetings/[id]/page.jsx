@@ -56,6 +56,7 @@ export default function MeetingCards() {
           setLoading(false);
     fetchDataAll()
   }, [])
+  // ...
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
       <h2 className="text-3xl mt-6 font-bold text-[#71a587] mb-10">Meetings</h2>
