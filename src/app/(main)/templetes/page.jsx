@@ -1,40 +1,77 @@
 "use client";
-import React, { useState } from "react";
+
+import React, { useEffect, useState } from "react";
 import { FileText, File, ChevronDown, Check, X } from "lucide-react";
+import {
+  getVisaCategories,
+  getVisaDocuments,
+} from "../../../services/VisaDocuments"; // ✅ Make sure both functions are exported here
 
 export default function VisaDocumentViewer() {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [documents, setDocuments] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [visaOptions, setVisaOptions] = useState([]);
 
-  const visaOptions = ["Tourist Visa", "Business Visa", "Student Visa"];
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const data = await getVisaCategories();
+      if (data && Array.isArray(data)) {
+        const mapped = data.map((item) => ({
+          label: item.title, // use item.title from the response
+          id: item.id,
+        }));
+        setVisaOptions(mapped);
+      }
+    };
 
-  const allDocuments = [
-    { name: "Passport Copy", type: "pdf", category: "Tourist Visa" },
-    { name: "Invitation Letter", type: "docx", category: "Business Visa" },
-    { name: "Bank Statement", type: "pdf", category: "Student Visa" },
-    { name: "Admission Letter", type: "docx", category: "Student Visa" },
-    { name: "Company Letterhead", type: "pdf", category: "Business Visa" },
-  ];
+    fetchCategories();
+  }, []);
+  const toggleCategory = async (category) => {
+    const alreadySelected = selectedCategories.includes(category.label);
+    let updatedCategories = [];
 
-  const toggleCategory = (category) => {
-    setSelectedCategories((prev) =>
-      prev.includes(category)
-        ? prev.filter((item) => item !== category)
-        : [...prev, category]
+    if (alreadySelected) {
+      updatedCategories = selectedCategories.filter(
+        (c) => c !== category.label
+      );
+    } else {
+      updatedCategories = [...selectedCategories, category.label];
+    }
+
+    setSelectedCategories(updatedCategories);
+
+    if (!alreadySelected) {
+      setLoading(true);
+      const response = await getVisaDocuments(category.id); // returns array
+      if (response) {
+        const docsWithCategory = response.map((doc) => ({
+          id: doc.id,
+          name: doc.title,
+          url: doc.file,
+          category: category.label,
+        }));
+        setDocuments((prev) => [...prev, ...docsWithCategory]);
+      }
+      setLoading(false);
+    } else {
+      setDocuments((prev) =>
+        prev.filter((doc) => doc.category !== category.label)
+      );
+    }
+  };
+
+  const removeCategory = (categoryLabel) => {
+    setSelectedCategories((prev) => prev.filter((c) => c !== categoryLabel));
+    setDocuments((prev) =>
+      prev.filter((doc) => doc.category !== categoryLabel)
     );
   };
 
-  const removeCategory = (category) => {
-    setSelectedCategories((prev) => prev.filter((item) => item !== category));
-  };
-
-  const filteredDocuments = allDocuments.filter((doc) =>
-    selectedCategories.includes(doc.category)
-  );
-
   return (
-    <div className="min-h-screen mt-14 p-6 ">
-      <div className="max-w-5xl mx-auto rounded-2xl  p-10 ">
+    <div className="min-h-screen mt-14 p-6">
+      <div className="max-w-5xl mx-auto rounded-2xl p-10">
         <h1 className="text-4xl font-extrabold mb-8 text-center text-[#88ae98]">
           Visa Document Viewer
         </h1>
@@ -49,23 +86,21 @@ export default function VisaDocumentViewer() {
             className="w-full border-2 border-gray-300 rounded-xl p-3 bg-white flex flex-wrap gap-2 items-center shadow-md hover:border-[#88ae98] transition duration-200"
           >
             {selectedCategories.length > 0 ? (
-              <>
-                {selectedCategories.map((cat) => (
-                  <span
-                    key={cat}
-                    className="flex items-center gap-2 py-2.5 bg-[#e6f4ec] text-[#2e6d57] px-3 rounded-full text-sm font-medium"
-                  >
-                    {cat}
-                    <X
-                      className="h-4 w-4 cursor-pointer hover:text-red-500"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        removeCategory(cat);
-                      }}
-                    />
-                  </span>
-                ))}
-              </>
+              selectedCategories.map((cat) => (
+                <span
+                  key={cat}
+                  className="flex items-center gap-2 py-2.5 bg-[#e6f4ec] text-[#2e6d57] px-3 rounded-full text-sm font-medium"
+                >
+                  {cat}
+                  <X
+                    className="h-4 w-4 cursor-pointer hover:text-red-500"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      removeCategory(cat);
+                    }}
+                  />
+                </span>
+              ))
             ) : (
               <span className="text-gray-500">Choose visa type</span>
             )}
@@ -73,22 +108,22 @@ export default function VisaDocumentViewer() {
           </button>
 
           {dropdownOpen && (
-            <div className="absolute mt-2 z-10 w-full bg-white border border-gray-300 rounded-xl shadow-lg p-4 animate-fade-in">
+            <div className="absolute mt-2 z-10 w-full bg-white border border-gray-300 rounded-xl shadow-lg p-4 animate-fade-in max-h-64 overflow-y-auto">
               {visaOptions.map((option) => (
                 <label
-                  key={option}
+                  key={option.id}
                   className="flex items-center justify-between py-2 px-3 rounded-lg hover:bg-gray-100 cursor-pointer"
                 >
                   <div className="flex items-center gap-2">
                     <input
                       type="checkbox"
-                      checked={selectedCategories.includes(option)}
+                      checked={selectedCategories.includes(option.label)}
                       onChange={() => toggleCategory(option)}
                       className="accent-green-600 checked:text-[#88ae98] focus:ring-0"
                     />
-                    <span className="text-gray-700">{option}</span>
+                    <span className="text-gray-700">{option.label}</span>
                   </div>
-                  {selectedCategories.includes(option) && (
+                  {selectedCategories.includes(option.label) && (
                     <Check className="h-4 w-4 text-green-600" />
                   )}
                 </label>
@@ -100,12 +135,26 @@ export default function VisaDocumentViewer() {
         {/* Documents */}
         <div>
           <h2 className="text-2xl font-bold mb-6 text-gray-700">Documents</h2>
-          {filteredDocuments.length > 0 ? (
+
+          {loading ? (
+            <p className="text-[#88ae98] font-medium text-center">
+              Loading documents...
+            </p>
+          ) : documents.length > 0 ? (
             <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredDocuments.map((doc, idx) => (
+              {documents.map((doc, idx) => (
                 <li
-                  key={idx}
-                  className="border border-gray-200 rounded-xl shadow-md p-5 flex items-center gap-4 bg-gray-50 transition hover:scale-[1.02]"
+                  key={doc.id || idx}
+                  onClick={() => {
+                    const link = document.createElement("a");
+                    link.href = doc.url;
+                    link.download = doc.name || "document"; // Suggested filename
+                    link.target = "_blank";
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                  }}
+                  className="border cursor-pointer border-gray-200 rounded-xl shadow-md p-5 flex items-center gap-4 bg-gray-50 transition hover:scale-[1.02]"
                 >
                   {doc.type === "pdf" ? (
                     <FileText className="text-red-500 w-10 h-10" />
@@ -127,7 +176,7 @@ export default function VisaDocumentViewer() {
         </div>
       </div>
 
-      {/* Dropdown Animation */}
+      {/* Animation */}
       <style jsx>{`
         .animate-fade-in {
           animation: fadeIn 0.2s ease-in-out;
