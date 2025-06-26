@@ -175,6 +175,17 @@ const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState(user.email || "");
   const [password, setPassword] = useState("");
 const [confirmDeleteId, setConfirmDeleteId] = useState(null);
+const [image, setImage] = useState(null);
+const [previewUrl, setPreviewUrl] = useState(null); // ✅
+
+// Show preview when user selects image
+const handleImageChange = (e) => {
+  const file = e.target.files?.[0];
+  if (file) {
+    setImage(file);
+    setPreviewUrl(URL.createObjectURL(file));
+  }
+};
 
 
   const handleSubmit = async () => {
@@ -186,22 +197,26 @@ const [confirmDeleteId, setConfirmDeleteId] = useState(null);
     try {
       if (isEdit) {
         setLoading(true)
-        await UpdateBuisnessAccount(router, {
-          id: user.id,
-          first_name: firstName,
-          last_name: lastName,
-          email,
-        });
+       await UpdateBuisnessAccount(router, {
+  id: user.id,
+  first_name: firstName,
+  last_name: lastName,
+  email,
+  profile: image, // <--- Add this
+});
+
         setLoading(false)
         // toast.success("✅ Updated successfully!");
       } else {
         setLoading(true)
-        await CreateBuisnessAccount(router, {
-          first_name: firstName,
-          last_name: lastName,
-          email,
-          password,
-        });
+      await CreateBuisnessAccount(router, {
+  first_name: firstName,
+  last_name: lastName,
+  email,
+  password,
+  profile: image, // <--- Add this
+});
+
         setLoading(false)
         // toast.success("✅ Created successfully!");
       }
@@ -215,65 +230,92 @@ const [confirmDeleteId, setConfirmDeleteId] = useState(null);
   };
 
   return (
-    <form className="space-y-4">
-      <div>
-        <label className="block text-sm font-medium text-gray-700">First Name</label>
-        <input
-          type="text"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-          className="w-full mt-1 px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#88AE98]"
-        />
-      </div>
-      <div>
-        <label className="block text-sm font-medium text-gray-700">Last Name</label>
-        <input
-          type="text"
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
-          className="w-full mt-1 px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#88AE98]"
-        />
-      </div>
-      <div>
-        <label className="block text-sm font-medium text-gray-700">Email</label>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="w-full mt-1 px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#88AE98]"
-        />
-      </div>
-      {!isEdit && (
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Password</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full mt-1 px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#88AE98]"
-          />
-        </div>
-      )}
+   <form className="space-y-4 ">
+  {/* First Name */}
+  <div>
+    <label className="block text-sm font-medium text-gray-700">First Name</label>
+    <input
+      type="text"
+      value={firstName}
+      onChange={(e) => setFirstName(e.target.value)}
+      className="w-full mt-1 px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#88AE98]"
+    />
+  </div>
 
-     <button
-  type="button"
-  onClick={handleSubmit}
-  disabled={loading}
-  className={`bg-[#88AE98] hover:bg-[#729781] text-white w-full py-2.5 rounded-lg shadow-md flex items-center justify-center ${
-    loading ? "opacity-60 cursor-not-allowed" : ""
-  }`}
->
-  {loading ? (
-    <div className="flex items-center gap-2">
-      <div className="h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-      <span>{isEdit ? "Updating..." : "Creating..."}</span>
+  {/* Last Name */}
+  <div>
+    <label className="block text-sm font-medium text-gray-700">Last Name</label>
+    <input
+      type="text"
+      value={lastName}
+      onChange={(e) => setLastName(e.target.value)}
+      className="w-full mt-1 px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#88AE98]"
+    />
+  </div>
+
+  {/* Email */}
+  <div>
+    <label className="block text-sm font-medium text-gray-700">Email</label>
+    <input
+      type="email"
+      value={email}
+      onChange={(e) => setEmail(e.target.value)}
+      className="w-full mt-1 px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#88AE98]"
+    />
+  </div>
+
+  {/* Password only in add mode */}
+  {!isEdit && (
+    <div>
+      <label className="block text-sm font-medium text-gray-700">Password</label>
+      <input
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        className="w-full mt-1 px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#88AE98]"
+      />
     </div>
-  ) : (
-    <span>{isEdit ? "Update" : "Create"}</span>
   )}
-</button>
 
-    </form>
+  {/* Image Upload */}
+  <div>
+    <label className="block text-sm font-medium text-gray-700">Profile Image</label>
+    <input
+      type="file"
+      accept="image/*"
+      onChange={handleImageChange}
+      className="mt-1 file:rounded-full file:bg-green-400 "
+    />
+  {/* {previewUrl && (
+  <img
+    src={previewUrl}
+    alt="Preview"
+    className="mt-3 h-28 rounded-md border object-cover"
+  />
+)} */}
+
+  </div>
+
+  {/* Submit Button */}
+  <button
+    type="button"
+    onClick={handleSubmit}
+    disabled={loading}
+    className={`bg-[#88AE98] hover:bg-[#729781] text-white w-full py-2.5 rounded-lg shadow-md flex items-center justify-center ${
+      loading ? "opacity-60 cursor-not-allowed" : ""
+    }`}
+  >
+    {loading ? (
+      <div className="flex items-center gap-2">
+        <div className="h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+        <span>{isEdit ? "Updating..." : "Creating..."}</span>
+      </div>
+    ) : (
+      <span>{isEdit ? "Update" : "Create"}</span>
+    )}
+  </button>
+</form>
+
   );
 }
 

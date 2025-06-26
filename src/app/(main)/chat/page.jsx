@@ -41,7 +41,7 @@ export default function ChatWidget() {
         <div className="fixed bottom-24 right-4 w-[380px] max-w-[90%] rounded-xl overflow-hidden shadow-2xl animate-fade-in z-50">
           <div className="bg-white flex flex-col h-[500px] border border-gray-200 rounded-lg">
             <div className="bg-[#5AAA7C] text-white px-4 py-3 flex justify-between items-center">
-              <span className="font-semibold text-lg">Admin Bot</span>
+              <span className="font-semibold text-lg">Chat</span>
               <button onClick={() => setOpen(false)} className="hover:text-gray-200">
                 <X className="w-5 h-5" />
               </button>

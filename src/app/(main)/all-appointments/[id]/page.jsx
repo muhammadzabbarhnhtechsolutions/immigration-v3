@@ -60,22 +60,24 @@ export default function AppointmentActions() {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const hanldeGetChatsMessages = ()=>{
-     if (showChat && appointmentId) {
+  const hanldeGetChatsMessages = () => {
+    if (showChat && appointmentId) {
       getChatMessages(appointmentId, router).then((res) => {
         if (res) {
           setMessages(
-            res.map((msg) => ({
-              text: msg.message,
-              type: msg.admin ? "admin" : "user",
-            })).reverse()
+            res
+              .map((msg) => ({
+                text: msg.message,
+                type: msg.admin ? "admin" : "user",
+              }))
+              .reverse()
           );
         }
       });
     }
-  }
+  };
   useEffect(() => {
-   hanldeGetChatsMessages()
+    hanldeGetChatsMessages();
   }, [showChat, appointmentId]);
 
   const handleSend = async () => {
@@ -175,16 +177,15 @@ export default function AppointmentActions() {
                 {/* Chat Header */}
                 <div className="bg-gradient-to-r from-[#5AAA7C] to-[#46996a] text-white px-5 py-4 flex justify-between items-center">
                   <h3 className="font-semibold flex gap-2 text-xl tracking-wide">
-                    <MessageCircleCode className="mt-0" /> Admin Bot
+                    <MessageCircleCode className="mt-0" /> Chats
                   </h3>
-       <button
-  onClick={hanldeGetChatsMessages}
-  className="w-6 h-6 ml-24 flex justify-center items-center rounded-full bg-green-100 text-green-600 shadow-sm hover:shadow-md hover:scale-110 active:scale-95 transition duration-300"
-  title="Refresh Messages"
->
-  <RotateCw size={15} />
-</button>
-
+                  <button
+                    onClick={hanldeGetChatsMessages}
+                    className="w-6 h-6 ml-28    flex justify-center items-center rounded-full bg-green-100 text-green-600 shadow-sm hover:shadow-md hover:scale-110 active:scale-95 transition duration-300"
+                    title="Refresh Messages"
+                  >
+                    <RotateCw size={15} />
+                  </button>
 
                   <button
                     onClick={() => setShowChat(false)}
