@@ -31,11 +31,11 @@ export default function Navbar() {
   const [resources, setResources] = useState([]);
   const [packageData, setPackageData] = useState([]);
   const [checklogin, setcheckLogin] = useState("");
-    const [openLogout, setLogoutOpen] = useState(false);
-console.log("......",userData,"...............")
-const hanldeShowLogoutButton = ()=>{
-  setLogoutOpen(!openLogout)
-}
+  const [openLogout, setLogoutOpen] = useState(false);
+  console.log("......", userData, "...............");
+  const hanldeShowLogoutButton = () => {
+    setLogoutOpen(!openLogout);
+  };
   console.log("profile resources", profile?.package?.resources);
   useEffect(() => {
     const userToken = localStorage.getItem("user");
@@ -122,7 +122,7 @@ const hanldeShowLogoutButton = ()=>{
       if (result.data) {
         const newProfileData = result?.data?.data;
         setProfile(newProfileData);
-setResources(newProfileData?.resources || []);
+        setResources(newProfileData?.resources || []);
         // Update localStorage "user" key with latest profile data
         localStorage.setItem("user", JSON?.stringify(newProfileData));
       }
@@ -157,7 +157,7 @@ setResources(newProfileData?.resources || []);
 
   useEffect(() => {
     setResources(userData);
-    console.log("ddd",userData)
+    console.log("ddd", userData);
   }, [userData?.package?.resources]);
 
   useEffect(() => {
@@ -199,39 +199,39 @@ setResources(newProfileData?.resources || []);
                 </Link>
               </>
             ) : (
-               <div className="relative">
-      <button
-        onClick={hanldeShowLogoutButton}
-        className="flex items-center justify-center w-10 h-10 bg-gray-100 rounded-full hover:ring-2 hover:ring-[#5bb180] transition"
-      >
-        <UserCircle2 className="w-6 h-6 text-gray-700" />
-      </button>
+              <div className="relative">
+                <button
+                  onClick={hanldeShowLogoutButton}
+                  className="flex items-center justify-center w-10 h-10 bg-gray-100 rounded-full hover:ring-2 hover:ring-[#5bb180] transition"
+                >
+                  <UserCircle2 className="w-6 h-6 text-gray-700" />
+                </button>
 
-          {openLogout && (
-  <div className="absolute -right-10 z-20 mt-3 w-44 rounded-lg bg-white shadow-lg ring-1 ring-gray-200">
-    {/* Logout always shown */}
-    <button
-      onClick={Logout}
-      className="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-    >
-      <LogOut className="w-4 h-4 mr-2" />
-      Logout
-    </button>
+                {openLogout && (
+                  <div className="absolute -right-10 z-20 mt-3 w-44 rounded-lg bg-white shadow-lg ring-1 ring-gray-200">
+                    {/* Logout always shown */}
+                    <button
+                      onClick={Logout}
+                      className="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      <LogOut className="w-4 h-4 mr-2" />
+                      Logout
+                    </button>
 
-    {/* Business Account shown only if any package has package_type === 3 */}
-    {userData?.packages?.some(pkg => pkg.package_type === 3) && (
-      <Link href="/business-account">
-      <button
-            className=" flex w-full  items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-      >
-        {/* <LogOut className="w-4 h-4 mr-2" /> */}
-        Business Account
-      </button>
-      </Link>
-    )}
-  </div>
-)}
-    </div>
+                    {/* Business Account shown only if any package has package_type === 3 */}
+                    {userData?.packages?.some(
+                      (pkg) => pkg.package_type === 3
+                    ) && (
+                      <Link href="/business-account">
+                        <button className=" flex w-full  items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                          {/* <LogOut className="w-4 h-4 mr-2" /> */}
+                          Business Account
+                        </button>
+                      </Link>
+                    )}
+                  </div>
+                )}
+              </div>
             )}
           </div>
         </div>
@@ -252,7 +252,6 @@ setResources(newProfileData?.resources || []);
             <Link className="focus:text-black hover:text-black" href="/">
               Home
             </Link>
-       
             <Link
               className="hover:text-black focus:text-black"
               href="/about-us"
@@ -265,18 +264,13 @@ setResources(newProfileData?.resources || []);
             >
               Our Products
             </Link>
-            
             {/* {isLoggedIn && !userData?.is_active && ( */}
             {/* {(!isLoggedIn || !profile?.package?.resources) && ( */}
             {/* {(!isLoggedIn || Array.isArray(resources) && resources.length === 0) && ( */}
-              <Link
-                className="hover:text-black focus:text-black"
-                href="/pricing"
-              >
-                Pricing
-              </Link>
+            <Link className="hover:text-black focus:text-black" href="/pricing">
+              Pricing
+            </Link>
             {/* )} */}
-
             {/* )} */}
             <Link
               className="hover:text-black focus:text-black"
@@ -295,19 +289,19 @@ setResources(newProfileData?.resources || []);
               href="/video-trailer"
             >
               Video Trailors
-            </Link>   <Link
+            </Link>{" "}
+            <Link
               className="hover:text-black focus:text-black"
               href="/all-appointments"
             >
               Appointments
-            </Link> <Link
+            </Link>{" "}
+            <Link
               className="hover:text-black focus:text-black"
               href="/templetes"
             >
               Templetes
             </Link>
-            
-
             {/* {profile?.package?.resources.length > 0 && ( */}
             {/* {resources > 0 && (
               <div
@@ -373,70 +367,70 @@ setResources(newProfileData?.resources || []);
                 )}
               </div>
             )} */}
-
             {Array.isArray(resources) && resources.length > 0 && (
-  <div
-    ref={dropdownRef}
-    className="relative -mt-2 inline-block text-left"
-  >
-    <button
-      onClick={() => setOpen(!open)}
-      className="inline-flex items-center gap-2 px-2 py-2 text-base text-[#90B29F] bg-white rounded-full hover:text-black transition duration-300 ease-in-out "
-    >
-      Resources
-      <svg
-        className={`w-5 h-5 transform transition-transform duration-300 ${
-          open ? "rotate-180" : ""
-        }`}
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M19 9l-7 7-7-7"
-        />
-      </svg>
-    </button>
-
-    {open && (
-      <div className="absolute right-0 left-6 z-20 mt-1 w-48 rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 animate-fade-in">
-        <div className="py-2">
-          {resources.map((resource, index) => {
-            let href = "#";
-
-            if (resource === "E-book") {
-              href = "/e-book";
-            } else if (resource === "General Resource") {
-              href = "/course-topics/resources";
-            } else if (resource === "Course Videos") {
-              href = "/courses";
-            } else if (resource === "Reference Material") {
-              href = "/refrence-material";
-            } else if (resourceLinks[resource]) {
-              href = resourceLinks[resource];
-            }
-
-            return (
-              <Link
-                key={index}
-                href={href}
-                onClick={() => setOpen(false)}
-                className="block px-5 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#6fbe91] transition duration-200 rounded-md"
+              <div
+                ref={dropdownRef}
+                className="relative -mt-2 inline-block text-left"
               >
-                {resource === "Create Blog" ? "Create Blog" : resource}
-              </Link>
-            );
-          })}
-        </div>
-      </div>
-    )}
-  </div>
-)}
+                <button
+                  onClick={() => setOpen(!open)}
+                  className="inline-flex items-center gap-2 px-2 py-2 text-base text-[#90B29F] bg-white rounded-full hover:text-black transition duration-300 ease-in-out "
+                >
+                  Resources
+                  <svg
+                    className={`w-5 h-5 transform transition-transform duration-300 ${
+                      open ? "rotate-180" : ""
+                    }`}
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </button>
 
+                {open && (
+                  <div className="absolute right-0 left-6 z-20 mt-1 w-48 rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 animate-fade-in">
+                    <div className="py-2">
+                      {resources.map((resource, index) => {
+                        let href = "#";
+
+                        if (resource === "E-book") {
+                          href = "/e-book";
+                        } else if (resource === "General Resource") {
+                          href = "/course-topics/resources";
+                        } else if (resource === "Course Videos") {
+                          href = "/courses";
+                        } else if (resource === "Reference Material") {
+                          href = "/refrence-material";
+                        } else if (resourceLinks[resource]) {
+                          href = resourceLinks[resource];
+                        }
+
+                        return (
+                          <Link
+                            key={index}
+                            href={href}
+                            onClick={() => setOpen(false)}
+                            className="block px-5 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#6fbe91] transition duration-200 rounded-md"
+                          >
+                            {resource === "Create Blog"
+                              ? "Create Blog"
+                              : resource}
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
           </nav>
           <Link href="/request-a-demo">
             <div className="hidden md:block">
@@ -477,9 +471,9 @@ setResources(newProfileData?.resources || []);
               Our Products
             </Link>
             {/* {isLoggedIn && !userData?.is_active && ( */}
-              <Link href="/pricing" className="text-[#88AE98]">
-                Pricing
-              </Link>
+            <Link href="/pricing" className="text-[#88AE98]">
+              Pricing
+            </Link>
             {/* )} */}
             <Link href="/latest-news" className="text-[#88AE98]">
               Latest News

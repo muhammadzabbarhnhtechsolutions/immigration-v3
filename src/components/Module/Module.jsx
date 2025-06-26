@@ -80,18 +80,18 @@ const Module = () => {
 {modules.map((module) => (
   <div
     key={module.id}
-    className="relative bg-white rounded-lg p-8 shadow-md h-full flex flex-col justify-between"
+    className="relative bg-white rounded-2xl p-8 shadow-lg border border-gray-200 hover:shadow-xl transition-transform hover:scale-[1.01] flex flex-col justify-between"
   >
-    {/* Top-right small circular percentage */}
+    {/* Circular Percentage */}
     <div className="absolute top-4 right-4">
-      <div className="relative w-10 h-10">
-        <svg className="w-full h-full transform -rotate-90">
+      <div className="relative w-12 h-12">
+        <svg className="w-full h-full transform -rotate-90" viewBox="0 0 40 40">
           <circle
             cx="20"
             cy="20"
             r="16"
             stroke="#e5e7eb"
-            strokeWidth="3"
+            strokeWidth="4"
             fill="none"
           />
           <circle
@@ -99,39 +99,42 @@ const Module = () => {
             cy="20"
             r="16"
             stroke="#7EB69E"
-            strokeWidth="3"
+            strokeWidth="4"
             fill="none"
             strokeDasharray={2 * Math.PI * 16}
             strokeDashoffset={
-              2 * Math.PI * 16 * (1 - module.progress / 100)
+              2 * Math.PI * 16 * (1 - module.percentage / 100)
             }
             strokeLinecap="round"
           />
         </svg>
-        <div className="absolute inset-0 flex items-center justify-center text-[13px] font-semibold text-[#7EB69E]">
-          {module.progress}%
+        <div className="absolute inset-0 flex items-center justify-center text-xs font-bold text-[#7EB69E]">
+          {Math.round(module.percentage)}%
         </div>
       </div>
     </div>
 
     {/* Content */}
     <div>
-      <h2 className="text-2xl font-normal mb-4">{module.title}</h2>
-      <p className="text-gray-600 w-[90%] leading-relaxed mb-6">
-        {module.description}
+      <h2 className="text-xl font-semibold text-gray-800 mb-3">
+        {module.title}
+      </h2>
+      <p className="text-gray-600 leading-relaxed text-sm">
+        {module.description.length > 160
+          ? module.description.slice(0, 360) + "..."
+          : module.description}
       </p>
     </div>
 
     {/* Continue Button */}
-    <Link href={`/course-topics/${module.id}`}>
-      <div className="flex items-center justify-center mt-auto">
-        <button className="bg-[#7EB69E] text-white px-6 py-2.5 rounded hover:bg-[#6a9884] transition-colors">
-          CONTINUE
-        </button>
-      </div>
+    <Link href={`/course-topics/${module.id}`} className="mt-6">
+      <button className="w-full bg-[#7EB69E] text-white px-4 py-3.5 rounded-xl hover:bg-[#6a9884] transition-colors font-medium text-sm tracking-wide">
+        CONTINUE
+      </button>
     </Link>
   </div>
 ))}
+
 
 
 
