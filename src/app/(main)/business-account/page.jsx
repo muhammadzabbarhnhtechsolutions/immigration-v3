@@ -78,15 +78,18 @@ const [confirmDeleteId, setConfirmDeleteId] = useState(null);
       >
         {/* Top Right: Status + Edit */}
         <div className="absolute top-4 right-4 flex items-center gap-2">
-          <Pencil
-            className="w-5 h-5 text-gray-400 hover:text-[#88AE98] cursor-pointer transition-transform duration-200 hover:scale-125"
-            onClick={() => openEditModal(user)}
-          />
-          <Trash2
-            className="w-5 h-5 text-red-400 hover:text-red-600 cursor-pointer transition-transform duration-200 hover:scale-125"
-onClick={() => setConfirmDeleteId(user.id)}
-          />
-        </div>
+  <Pencil
+    className="w-8 h-8 rounded-lg border border-gray-200  p-1 bg-green-100  text-[#7aad90] hover:text-[#4CAF50] cursor-pointer transition-all duration-200 hover:scale-125 hover:drop-shadow-md"
+    onClick={() => openEditModal(user)}
+    title="Edit"
+  />
+  <Trash2
+    className="w-8 h-8 rounded-lg border border-gray-200  p-1 bg-red-100 text-red-500 hover:text-red-700 cursor-pointer transition-all duration-200 hover:scale-125 hover:drop-shadow-md"
+    onClick={() => setConfirmDeleteId(user.id)}
+    title="Delete"
+  />
+</div>
+
 
         {/* Profile image */}
         <div className="absolute top-10 left-1/2 -translate-x-1/2 bg-gradient-to-tr from-[#88AE98] to-[#6c8a7f] p-[3px] rounded-full shadow-md">

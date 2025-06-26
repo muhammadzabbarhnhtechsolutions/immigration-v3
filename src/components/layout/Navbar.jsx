@@ -6,6 +6,7 @@ import {
   FaArrowRight,
   FaBars,
   FaTimes,
+  FaAccessibleIcon,
 } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
@@ -18,7 +19,7 @@ import {
 } from "../../utils/localStorage";
 import { GetProfile } from "../../services/postServices";
 import { Dropdown } from "flowbite-react";
-import { LogOut, UserCircle2 } from "lucide-react";
+import { Briefcase, BusIcon, LogOut, UserCircle2 } from "lucide-react";
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -189,7 +190,7 @@ export default function Navbar() {
             </span>
           </div>
           <div className="space-x-4">
-            {checklogin === "undefined" ? (
+            {!checklogin ||checklogin === "undefined" ? (
               <>
                 <Link href="/login" className="hover:underline font-semibold">
                   Login
@@ -208,28 +209,30 @@ export default function Navbar() {
                 </button>
 
                 {openLogout && (
-                  <div className="absolute -right-10 z-20 mt-3 w-44 rounded-lg bg-white shadow-lg ring-1 ring-gray-200">
+                  <div className="absolute -right-10 z-20 mt-3 py-1  w-44 rounded-lg bg-white shadow-lg ring-1 ring-gray-200">
                     {/* Logout always shown */}
-                    <button
+                   
+
+                    {/* Business Account shown only if any package has package_type === 3 */}
+                    {userData?.packages?.some(
+                      (pkg) => pkg.package_type === 3
+                    ) && (
+                    <Link href="/business-account">
+  <button className="flex w-full items-center gap-2 px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-all duration-200">
+    <Briefcase className="w-5 h-5 text-gray-600" />
+    Business Account
+  </button>
+</Link>
+                    )}
+                     <button
                       onClick={Logout}
                       className="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     >
                       <LogOut className="w-4 h-4 mr-2" />
                       Logout
                     </button>
-
-                    {/* Business Account shown only if any package has package_type === 3 */}
-                    {userData?.packages?.some(
-                      (pkg) => pkg.package_type === 3
-                    ) && (
-                      <Link href="/business-account">
-                        <button className=" flex w-full  items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                          {/* <LogOut className="w-4 h-4 mr-2" /> */}
-                          Business Account
-                        </button>
-                      </Link>
-                    )}
                   </div>
+                  
                 )}
               </div>
             )}
@@ -242,13 +245,13 @@ export default function Navbar() {
             <Image
               src={logo}
               alt="logo"
-              width={124}
-              height={124}
+              width={24}
+              height={24}
               className="w-[80px] h-[80px] md:w-[119px] md:h-[119px] object-contain"
             />
           </Link>
 
-          <nav className="hidden md:flex space-x-6 text-[#90B29F] font-sans text-[16px]">
+          {/* <nav className="hidden md:flex space-x-6 text-[#90B29F] font-sans text-[16px]">
             <Link className="focus:text-black hover:text-black" href="/">
               Home
             </Link>
@@ -267,41 +270,41 @@ export default function Navbar() {
             {/* {isLoggedIn && !userData?.is_active && ( */}
             {/* {(!isLoggedIn || !profile?.package?.resources) && ( */}
             {/* {(!isLoggedIn || Array.isArray(resources) && resources.length === 0) && ( */}
-            <Link className="hover:text-black focus:text-black" href="/pricing">
+            {/* <Link className="hover:text-black focus:text-black" href="/pricing">
               Pricing
-            </Link>
+            </Link> */}
             {/* )} */}
             {/* )} */}
-            <Link
+            {/* <Link
               className="hover:text-black focus:text-black"
               href="/latest-news"
             >
               Latest News
-            </Link>
-            <Link
+            </Link> */}
+            {/* <Link
               className="hover:text-black focus:text-black"
               href="/contact-us"
             >
               Contact Us
-            </Link>
-            <Link
+            </Link> */}
+            {/* <Link
               className="hover:text-black focus:text-black"
               href="/video-trailer"
             >
               Video Trailors
-            </Link>{" "}
-            <Link
+            </Link>{" "} */}
+            {/* <Link
               className="hover:text-black focus:text-black"
               href="/all-appointments"
             >
               Appointments
-            </Link>{" "}
-            <Link
+            </Link>{" "} */}
+            {/* <Link
               className="hover:text-black focus:text-black"
               href="/templetes"
             >
               Templetes
-            </Link>
+            </Link> */}
             {/* {profile?.package?.resources.length > 0 && ( */}
             {/* {resources > 0 && (
               <div
@@ -367,7 +370,7 @@ export default function Navbar() {
                 )}
               </div>
             )} */}
-            {Array.isArray(resources) && resources.length > 0 && (
+            {/* {Array.isArray(resources) && resources.length > 0 && (
               <div
                 ref={dropdownRef}
                 className="relative -mt-2 inline-block text-left"
@@ -430,11 +433,84 @@ export default function Navbar() {
                   </div>
                 )}
               </div>
-            )}
-          </nav>
+            )} */}
+          {/* </nav>  */}
+
+
+          <nav className="hidden md:flex gap-[15px] text-[#90B29F] font-sans text-[16px]">
+  {[
+    { href: "/", label: "Home" },
+    { href: "/about-us", label: "About Us" },
+    { href: "/our-products", label: "Our Products" },
+    { href: "/pricing", label: "Pricing" },
+    { href: "/latest-news", label: "Latest News" },
+    { href: "/contact-us", label: "Contact Us" },
+    { href: "/video-trailer", label: "Video Trailers" },
+    { href: "/all-appointments", label: "Appointments" },
+    { href: "/templetes", label: "Templates" },
+  ].map((link) => (
+    <Link
+      key={link.href}
+      href={link.href}
+      className="hover:text-black focus:text-black transition"
+    >
+      {link.label}
+    </Link>
+  ))}
+
+  {/* Resources Dropdown */}
+  {Array.isArray(resources) && resources.length > 0 && (
+    <div className="relative">
+      <button
+        onClick={() => setOpen(!open)}
+        className="inline-flex items-center gap-1 px-3 py-1 -mt-1 rounded-full hover:text-black transition"
+      >
+        Resources
+        <svg
+          className={`w-4 h-4 transform transition-transform ${
+            open ? "rotate-180" : ""
+          }`}
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+
+      {open && (
+        <div className="absolute right-0 z-20 mt-2 w-48 rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 animate-fade-in">
+          <div className="py-2">
+            {resources.map((resource, index) => {
+              let href = "#";
+              if (resource === "E-book") href = "/e-book";
+              else if (resource === "General Resource") href = "/course-topics/resources";
+              else if (resource === "Course Videos") href = "/courses";
+              else if (resource === "Reference Material") href = "/refrence-material";
+              else if (resourceLinks[resource]) href = resourceLinks[resource];
+
+              return (
+                <Link
+                  key={index}
+                  href={href}
+                  onClick={() => setOpen(false)}
+                  className="block px-5 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#6fbe91] transition duration-200 rounded-md"
+                >
+                  {resource === "Create Blog" ? "Create Blog" : resource}
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      )}
+    </div>
+  )}
+</nav>
+
           <Link href="/request-a-demo">
             <div className="hidden md:block">
-              <button className="bg-[#8db39d] cursor-pointer hover:bg-[#7fa98b] transition hover:scale-105 hover:shadow-lg duration-200 flex items-center gap-2 text-white text-sm font-medium px-4 py-3 rounded-full">
+              <button className="bg-[#8db39d] cursor-pointer hover:bg-[#7fa98b] transition hover:scale-105 hover:shadow-lg duration-200 flex items-center gap-2 text-white text-sm font-medium px-3 py-3 rounded-full">
                 REQUEST A DEMO <FaArrowRight />
               </button>
             </div>
