@@ -5,7 +5,7 @@ import Image from "next/image";
 import icon2 from "../../../../../assets/meeting.png";
 import icon1 from "../../../../../assets/meeting1.png";
 import { useSearchParams } from "next/navigation";
-import { getMeetingDetails } from "../../../../../services/getAllMeetings.js";
+import { getAllMeetingDetails, getMeetingDetails } from "../../../../../services/getAllMeetings.js";
 import Link from "next/link";
 
 const platformIcons = {
@@ -17,29 +17,45 @@ export default function MeetingCards() {
   const searchParams = useSearchParams();
   const type = searchParams.get("type");
   const appointmentId = searchParams.get("appointment_id");
-
-  console.log("type", type);
   const [meetings, setMeetings] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getMeetingDetails(appointmentId, type);
-        setMeetings(data);
-        console.log("Fetched data:", data);
-      } catch (error) {
-        console.error("Fetch error:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchData = async () => {
+    try {
+      const data = await getMeetingDetails(appointmentId, type);
+      setMeetings(data);
+      console.log("Fetched data:", data);
+    } catch (error) {
+      console.error("Fetch error:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  
 
-    if (appointmentId) {
+  const fetchDataAll = async () => {
+    try {
+      const data = await getAllMeetingDetails(appointmentId);
+      setMeetings(data);
+      console.log("Fetched data:", data);
+    } catch (error) {
+      console.error("Fetch error:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
+  useEffect(() => {
+    if (appointmentId && type) {
+            setLoading(false);
       fetchData();
     }
   }, [appointmentId, type]);
-
+  useEffect(() => {
+          setLoading(false);
+    fetchDataAll()
+  }, [])
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
       <h2 className="text-3xl mt-6 font-bold text-[#71a587] mb-10">Meetings</h2>

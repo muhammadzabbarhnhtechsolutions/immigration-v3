@@ -29,7 +29,7 @@ import {
 
 const cards = [
   {
-    title: "Send Meeting Links",
+    title: "Meetings",
     icon: <Image src={img1} alt="Meeting" className="w-14 h-14" />,
     dropdown: true,
   },
@@ -60,24 +60,22 @@ export default function AppointmentActions() {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const hanldeGetChatsMessages = () => {
-    if (showChat && appointmentId) {
+  const hanldeGetChatsMessages = ()=>{
+     if (showChat && appointmentId) {
       getChatMessages(appointmentId, router).then((res) => {
         if (res) {
           setMessages(
-            res
-              .map((msg) => ({
-                text: msg.message,
-                type: msg.admin ? "admin" : "user",
-              }))
-              .reverse()
+            res.map((msg) => ({
+              text: msg.message,
+              type: msg.admin ? "admin" : "user",
+            })).reverse()
           );
         }
       });
     }
-  };
+  }
   useEffect(() => {
-    hanldeGetChatsMessages();
+   hanldeGetChatsMessages()
   }, [showChat, appointmentId]);
 
   const handleSend = async () => {
@@ -154,7 +152,7 @@ export default function AppointmentActions() {
               )}
             </div>
 
-          <div className="pt-16 pb-6 px-6 text-center">
+                 <div className="pt-16 pb-6 px-6 text-center">
   {card.title === "Upload Document" ? (
     <button
       onClick={() => setShowUpload(true)}
@@ -162,12 +160,14 @@ export default function AppointmentActions() {
     >
       {card.title}
     </button>
-  ) : card.title === "Send Meeting Links" ? (
+  ) : card.title === "Meetings" ? (
+    <Link href={`/all-appointments/meetings/s?appointment_id=${id}`}>
     <button
       className="mt-6 inline-block px-6 py-2.5 rounded-full bg-[#5aaa7c] text-white font-semibold shadow-md transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-xl active:scale-95"
     >
       {card.title}
     </button>
+    </Link>
   ) : (
     <button
       onClick={() => setShowChat(true)}
@@ -177,7 +177,6 @@ export default function AppointmentActions() {
     </button>
   )}
 </div>
-
             {/* ...... */}
             {showChat && (
               <div className="fixed bottom-8 top-52 right-6 z-[100] w-full max-w-[358px] rounded-2xl shadow-2xl bg-gray-200 animate-slide-up border border-gray-300 overflow-hidden transition-all duration-500 ease-in-out">
@@ -186,13 +185,14 @@ export default function AppointmentActions() {
                   <h3 className="font-semibold flex gap-2 text-xl tracking-wide">
                     <MessageCircleCode className="mt-0" /> Chats
                   </h3>
-                  <button
-                    onClick={hanldeGetChatsMessages}
-                    className="w-6 h-6 ml-28    flex justify-center items-center rounded-full bg-green-100 text-green-600 shadow-sm hover:shadow-md hover:scale-110 active:scale-95 transition duration-300"
-                    title="Refresh Messages"
-                  >
-                    <RotateCw size={15} />
-                  </button>
+       <button
+  onClick={hanldeGetChatsMessages}
+  className="w-6 h-6 ml-24 flex justify-center items-center rounded-full bg-green-100 text-green-600 shadow-sm hover:shadow-md hover:scale-110 active:scale-95 transition duration-300"
+  title="Refresh Messages"
+>
+  <RotateCw size={15} />
+</button>
+
 
                   <button
                     onClick={() => setShowChat(false)}
