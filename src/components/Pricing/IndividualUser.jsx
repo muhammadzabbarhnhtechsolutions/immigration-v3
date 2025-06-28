@@ -11,7 +11,7 @@ import { useSearchParams } from "next/navigation";
 import { appointmentPakageBuy } from "@/services/appointmentSubscribe";
 import { filterByResources, getAllResources } from "@/services/getAllResources";
 import { Select } from "flowbite-react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Euro } from "lucide-react";
 
 // Icon Components
 const CheckIcon = () => (
@@ -356,7 +356,7 @@ const toggleSelect = async (id) => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 leading-loose gap-8 md:max-w-[988px] mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-3 leading-loose gap-8 md:max-w-[998px] mx-auto">
         {filteredPackages.map((pkg) => (
           <div
             key={pkg.id}
@@ -364,26 +364,28 @@ const toggleSelect = async (id) => {
           >
             {/* Header */}
             <div className="py-4 text-center bg-[#7bab8e] text-white">
-              <h3 className="font-semibold md:text-[24px] text-xl">
+              <h3 className="font-semibold md:text-[24px] mx-4 text-xl">
                 {pkg.name}
               </h3>
             </div>
 
             {/* Main content */}
-            <div className="p-6 flex flex-col h-full justify-between flex-grow">
+            <div className="px-2 py-6 flex flex-col h-full justify-between flex-grow">
               <div>
                 {/* Price */}
-                <div className="text-center mb-6">
-                  <span className="text-gray-400 text-base font-semibold align-top">
-                    €
-                  </span>
-                  <span className="text-[#7bab8e] text-5xl font-semibold">
-                    {parseFloat(pkg.price).toFixed(2)}
-                  </span>
-                  <span className="text-gray-500 text-sm">
-                    / {pkg.package_duration === 1 ? "Monthly" : "Annually"}
-                  </span>
-                </div>
+             <div className="text-center mb-6">
+  <div className="flex justify-center items-end gap-2 text-[#7bab8e]">
+    <span className="text-5xl flex gap-1 font-semibold">
+    <Euro className="w-6 h-6 mt-2" />
+      {parseFloat(pkg.price).toFixed(2)}
+    </span>
+    <span className="text-gray-500 text-sm mb-1">
+      / {pkg.package_duration === 1 ? "Monthly" : "Annually"}
+    </span>
+  </div>
+</div>
+
+
 
                 {/* Description */}
                 <p className="text-left text-sm text-gray-600 mb-6 px-4">

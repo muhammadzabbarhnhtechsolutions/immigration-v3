@@ -79,10 +79,10 @@ export default function AboutUs() {
 
      {/* CTA Section */}
 <section className="container mx-auto px-2 py-12 mb-12">
-  <div className="bg-[#90b29f ] p-6 md:p-12 flex flex-col md:flex-row md:justify-between items-center rounded-lg gap-6">
+  <div className="bg-[#90b29f] p-6 md:p-12 flex flex-col md:flex-row md:justify-between items-center rounded-lg gap-6">
     {/* Left Content */}
     <div className="flex flex-col text-center md:text-left items-center md:items-start">
-      <h2 className="text-2xl md:text-4xl font-bold text-[#8fb19e] mb-4">
+      <h2 className="text-2xl md:text-4xl font-bold text-[#ffffff] mb-4">
         Start Your Journey Today!
       </h2>
       <p className="text-white mb-6 max-w-2xl">

@@ -179,15 +179,6 @@ function ModalForm({ isEdit = false, user = {}, onClose, router, fetchData }) {
   const [image, setImage] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(user.profile); // ✅
 
-  // Show preview when user selects image
-  // const handleImageChange = (e) => {
-  //   const file = e.target.files?.[0];
-  //   if (file) {
-  //     setImage(file);
-  //     setPreviewUrl(URL.createObjectURL(file));
-  //   }
-  // };
-
   const handleReset = () => {
     setFirstName("");
     setLastName("");
@@ -252,14 +243,6 @@ const payload = {
 if (isNewImage) {
   payload.profile = image;
 }
-
-
-  // // ✅ If new image uploaded (File), use FormData
-  // if (image && image instanceof File) {
-  //   payload.profile = image;
-  // } else if (typeof user.profile === "string") {
-  //   payload.profile = user.profile; // send image URL string only in raw JSON
-  // }
 
   try {
 const res = await UpdateBuisnessAccount(router, payload, isNewImage);
