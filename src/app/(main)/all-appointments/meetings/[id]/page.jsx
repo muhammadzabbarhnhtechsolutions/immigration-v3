@@ -44,8 +44,6 @@ export default function MeetingCards() {
       setLoading(false);
     }
   };
-
-
   useEffect(() => {
     if (appointmentId && type) {
             setLoading(false);

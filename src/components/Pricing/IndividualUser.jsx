@@ -375,7 +375,7 @@ const toggleSelect = async (id) => {
                 {/* Price */}
                 <div className="text-center mb-6">
                   <span className="text-gray-400 text-base font-semibold align-top">
-                    £
+                    €
                   </span>
                   <span className="text-[#7bab8e] text-5xl font-semibold">
                     {parseFloat(pkg.price).toFixed(2)}

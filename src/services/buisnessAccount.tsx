@@ -7,6 +7,16 @@ type ErrorResponse = {
   error?: string;
   message?: string;
 };
+// types.ts
+export interface BusinessAccountPayload {
+  id?: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  password?: string;
+  profile?: File | string | null;
+}
+
 
 export const getBuisnessAccount = async (router: AppRouterInstance) => {
   try {
@@ -29,43 +39,88 @@ export const getBuisnessAccount = async (router: AppRouterInstance) => {
   }
 };
 // Helper to build FormData
-const buildFormData = (body: Record<string, string | Blob | undefined | null>): FormData => {
+export const buildFormData = (
+  body: { [key: string]: any }
+): FormData => {
   const formData = new FormData();
-  Object.entries(body).forEach(([key, value]) => {
-    if (value !== undefined && value !== null) {
+
+  for (const key in body) {
+    const value = body[key];
+
+    // ✅ only append if value is File or Blob
+    if (value instanceof File || value instanceof Blob) {
       formData.append(key, value);
+    } else if (typeof value === "string" || typeof value === "number") {
+      formData.append(key, String(value));
     }
-  });
+    // ❌ skip if it's a URL pretending to be a file
+  }
+
   return formData;
 };
 
-// CREATE
-export const CreateBuisnessAccount = async (router:AppRouterInstance, body:any) => {
+
+
+
+export const CreateBuisnessAccount = async (
+  router: AppRouterInstance,
+  body: BusinessAccountPayload
+): Promise<any> => {
   try {
-    const formData = buildFormData(body);
-    const response = await axiosInstance.post("/user/business/account_create/", formData, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
-    toast.success("Business account created successfully");
-    return response.data;
-  } catch (error) {
-    // error handling as before
+    const formData = buildFormData(body); // ✅ no cast needed
+
+    const response = await axiosInstance.post(
+      "/user/business/account_create/",
+      formData,
+      {
+        headers: { "Content-Type": "multipart/form-data" },
+      }
+    );
+
+    if (response.status === 201 || response.status === 200) {
+      toast.success("Business account created successfully");
+    }
+
+    return response;
+  } catch (error: any) {
+    toast.error(error?.response?.data?.message || "Create failed");
+    throw error;
   }
 };
 
-// UPDATE
-export const UpdateBuisnessAccount = async (router:AppRouterInstance, body:any) => {
+
+
+export const UpdateBuisnessAccount = async (
+  router: AppRouterInstance,
+  body: BusinessAccountPayload,
+  isFormData: boolean
+): Promise<any> => {
   try {
-    const formData = buildFormData(body);
-    const response = await axiosInstance.patch("/user/business/account_update/", formData, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
-    toast.success("Business account updated successfully");
-    return response.data;
-  } catch (error) {
-    // error handling as before
+    const dataToSend = isFormData ? buildFormData(body) : body;
+
+    const response = await axiosInstance.patch(
+      "/user/business/account_update/",
+      dataToSend,
+      {
+        headers: {
+          "Content-Type": isFormData
+            ? "multipart/form-data"
+            : "application/json",
+        },
+      }
+    );
+
+    if (response.status === 200) {
+      toast.success("Business account updated successfully");
+    }
+
+    return response;
+  } catch (error: any) {
+    toast.error(error?.response?.data?.message || "Update failed");
+    throw error;
   }
 };
+
 
 // 🔸 Delete Business Account
 export const DeleteBusinessAccount = async (
