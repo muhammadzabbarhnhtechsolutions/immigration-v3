@@ -199,6 +199,7 @@ const handleCreate = async () => {
     return;
   }
 
+  // ....
   setLoading(true);
   const payload = {
     first_name: firstName,
@@ -212,6 +213,12 @@ const handleCreate = async () => {
     const res = await CreateBuisnessAccount(router, payload);
     if (res?.status === 201 || res?.status === 200) {
       handleReset();
+      setFirstName("");
+    setLastName("");
+    setEmail("");
+    setPreviewUrl("")
+    setPassword("");
+    setImage(null);
       await fetchData();
       onClose();
     }
@@ -248,6 +255,11 @@ if (isNewImage) {
 const res = await UpdateBuisnessAccount(router, payload, isNewImage);
     if (res?.status === 200) {
       handleReset();
+      setFirstName("");
+    setLastName("");
+    setEmail("");
+    setPassword("");
+    setImage(null);
       await fetchData();
       onClose();
     }

@@ -53,7 +53,6 @@ export const buildFormData = (
     } else if (typeof value === "string" || typeof value === "number") {
       formData.append(key, String(value));
     }
-    // ❌ skip if it's a URL pretending to be a file
   }
 
   return formData;

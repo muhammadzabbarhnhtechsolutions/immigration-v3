@@ -53,7 +53,8 @@ export default function IndividualUsers() {
   const [loading, setLoading] = useState(true);
   const [checklogin, setcheckLogin] = useState("");
   const [token, setToken] = useState(null);
-  const [filteredPackagesByResources, setFilteredPackagesByResources] = useState([]);
+  const [filteredPackagesByResources, setFilteredPackagesByResources] =
+    useState([]);
 
   const router = useRouter();
   useEffect(() => {
@@ -95,9 +96,6 @@ export default function IndividualUsers() {
   useEffect(() => {
     getPricing();
   }, []);
-
-
-
 
   // const handlebuyPakages = async (id) => {
   //   if (!token) {
@@ -190,32 +188,33 @@ export default function IndividualUsers() {
   }, [router]);
 
   // Handle selection
-const toggleSelect = async (id) => {
-  const updated = selectedIds.includes(id)
-    ? selectedIds.filter((item) => item !== id)
-    : [...selectedIds, id];
+  const toggleSelect = async (id) => {
+    const updated = selectedIds.includes(id)
+      ? selectedIds.filter((item) => item !== id)
+      : [...selectedIds, id];
 
-  setSelectedIds(updated);
+    setSelectedIds(updated);
 
-  if (updated.length === 0) {
-    setFilteredPackagesByResources([]); // Reset to empty when none selected
-    return;
-  }
+    if (updated.length === 0) {
+      setFilteredPackagesByResources([]); // Reset to empty when none selected
+      return;
+    }
 
-  const res = await filterByResources(updated, router);
-  if (res?.status) {
-    setFilteredPackagesByResources(res.data); // Update card data
-  }
-};
+    const res = await filterByResources(updated, router);
+    if (res?.status) {
+      setFilteredPackagesByResources(res.data); // Update card data
+    }
+  };
 
-  const filteredPackages = (selectedIds.length > 0 ? filteredPackagesByResources : packageData).filter(
-  (pkg) => {
+  const filteredPackages = (
+    selectedIds.length > 0 ? filteredPackagesByResources : packageData
+  ).filter((pkg) => {
     if (billing === "Service") return pkg.package_type === 1;
     if (billing === "Consultation") return pkg.package_type === 2;
-    if (billing === "Business Plan" || billing === "buisness Plan") return pkg.package_type === 3;
+    if (billing === "Business Plan" || billing === "buisness Plan")
+      return pkg.package_type === 3;
     return false;
-  }
-);
+  });
 
   if (loading) {
     return (
@@ -241,38 +240,37 @@ const toggleSelect = async (id) => {
         </h1> */}
 
           <div className="flex justify-center">
-            
             <div className="inline-flex rounded-md gap-4 mb-6 mt-6 p-1">
-                 <div className="relative w-full sm:w-auto max-w-md">
-              <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="w-full sm:w-[240px] px-4 py-2 text-left bg-gray-100 border border-[#d1e7dd] rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-[#5AAA7C] flex justify-between items-center text-gray-800 hover:shadow-lg transition"
-              >
-                {selectedIds?.length === 0
-                  ? "Select Resources"
-                  : `${selectedIds?.length} Selected`}
-                <ChevronDown className="ml-2 text-[#5AAA7C]" size={18} />
-              </button>
+              <div className="relative w-full sm:w-auto max-w-md">
+                <button
+                  onClick={() => setIsOpen(!isOpen)}
+                  className="w-full sm:w-[240px] px-4 py-2 text-left bg-gray-100 border border-[#d1e7dd] rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-[#5AAA7C] flex justify-between items-center text-gray-800 hover:shadow-lg transition"
+                >
+                  {selectedIds?.length === 0
+                    ? "Select Resources"
+                    : `${selectedIds?.length} Selected`}
+                  <ChevronDown className="ml-2 text-[#5AAA7C]" size={18} />
+                </button>
 
-              {isOpen && (
-                <div className="absolute z-50 mt-2 w-full sm:w-[240px] bg-white border border-gray-300 rounded-xl shadow-xl max-h-60 overflow-y-auto">
-                  {resources.map((res) => (
-                    <label
-                      key={res.id}
-                      className="flex items-center px-4 py-2 hover:bg-green-50 cursor-pointer transition-all"
-                    >
-                      <input
-                        type="checkbox"
-                        checked={selectedIds.includes(res.id)}
-                        onChange={() => toggleSelect(res.id)}
-                        className="form-checkbox text-[#5AAA7C] rounded focus:ring-0"
-                      />
-                      <span className="ml-2 text-gray-800">{res.name}</span>
-                    </label>
-                  ))}
-                </div>
-              )}
-            </div>
+                {isOpen && (
+                  <div className="absolute z-50 mt-2 w-full sm:w-[240px] bg-white border border-gray-300 rounded-xl shadow-xl max-h-60 overflow-y-auto">
+                    {resources.map((res) => (
+                      <label
+                        key={res.id}
+                        className="flex items-center px-4 py-2 hover:bg-green-50 cursor-pointer transition-all"
+                      >
+                        <input
+                          type="checkbox"
+                          checked={selectedIds.includes(res.id)}
+                          onChange={() => toggleSelect(res.id)}
+                          className="form-checkbox text-[#5AAA7C] rounded focus:ring-0"
+                        />
+                        <span className="ml-2 text-gray-800">{res.name}</span>
+                      </label>
+                    ))}
+                  </div>
+                )}
+              </div>
               {["Service", "Consultation", "buisness Plan"].map((type) => (
                 <button
                   key={type}
@@ -373,19 +371,19 @@ const toggleSelect = async (id) => {
             <div className="px-2 py-6 flex flex-col h-full justify-between flex-grow">
               <div>
                 {/* Price */}
-             <div className="text-center mb-6">
-  <div className="flex justify-center items-end gap-2 text-[#7bab8e]">
-    <span className="text-5xl flex gap-1 font-semibold">
-    <Euro className="w-6 h-6 mt-2" />
-      {parseFloat(pkg.price).toFixed(2)}
-    </span>
-    <span className="text-gray-500 text-sm mb-1">
-      / {pkg.package_duration === 1 ? "Monthly" : "Annually"}
-    </span>
-  </div>
-</div>
+                <div className="text-center mb-6">
+                  <div className="flex justify-center items-end gap-2 text-[#7bab8e]">
+                    <span className="text-5xl flex gap-1 font-semibold">
+                      <Euro className="w-6 h-6 mt-2" />
+                      {parseFloat(pkg.price).toFixed(2)}
+                    </span>
+                    <span className="text-gray-500 text-sm mb-1">
+                      / {pkg.package_duration === 1 ? "Monthly" : "Annually"}
+                    </span>
+                  </div>
+                </div>
 
-{/* ..... */}
+                {/* ..... */}
 
                 {/* Description */}
                 <p className="text-left text-sm text-gray-600 mb-6 px-4">
