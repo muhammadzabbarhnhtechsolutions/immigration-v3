@@ -71,8 +71,8 @@ export default function VisaDocumentViewer() {
 
   return (
     <div className="min-h-screen mt-14 p-6">
-      <div className="max-w-5xl mx-auto rounded-2xl p-10">
-        <h1 className="text-4xl font-extrabold mb-8 text-center text-[#88ae98]">
+      <div className="max-w-5xl mx-auto rounded-2xl md:p-10">
+        <h1 className="text-3xl font-extrabold mb-8 text-center text-[#88ae98]">
           Visa Document Viewer
         </h1>
 

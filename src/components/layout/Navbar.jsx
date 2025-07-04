@@ -20,6 +20,7 @@ import {
 import { GetProfile } from "../../services/postServices";
 import { Dropdown } from "flowbite-react";
 import { Briefcase, BusIcon, LogOut, UserCircle2 } from "lucide-react";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -33,6 +34,8 @@ export default function Navbar() {
   const [packageData, setPackageData] = useState([]);
   const [checklogin, setcheckLogin] = useState("");
   const [openLogout, setLogoutOpen] = useState(false);
+  const [isMobileResourcesOpen, setMobileResourcesOpen] = useState(false);
+
   console.log("......", userData, "...............");
   const hanldeShowLogoutButton = () => {
     setLogoutOpen(!openLogout);
@@ -171,7 +174,7 @@ export default function Navbar() {
     }
   }, []);
   return (
-    <div className="w-full  mb-8 relative z-[100]">
+    <div className="w-full  md:mb-8 relative z-[100]">
       {/* Fixed Navigation Container */}
       <div
         className={`fixed top-0 left-0 mb-12 right-0 z-50 transition-transform duration-300`}
@@ -251,192 +254,7 @@ export default function Navbar() {
             />
           </Link>
 
-          {/* <nav className="hidden md:flex space-x-6 text-[#90B29F] font-sans text-[16px]">
-            <Link className="focus:text-black hover:text-black" href="/">
-              Home
-            </Link>
-            <Link
-              className="hover:text-black focus:text-black"
-              href="/about-us"
-            >
-              About Us
-            </Link>
-            <Link
-              className="hover:text-black focus:text-black"
-              href="/our-products"
-            >
-              Our Products
-            </Link>
-            {/* {isLoggedIn && !userData?.is_active && ( */}
-            {/* {(!isLoggedIn || !profile?.package?.resources) && ( */}
-            {/* {(!isLoggedIn || Array.isArray(resources) && resources.length === 0) && ( */}
-            {/* <Link className="hover:text-black focus:text-black" href="/pricing">
-              Pricing
-            </Link> */}
-            {/* )} */}
-            {/* )} */}
-            {/* <Link
-              className="hover:text-black focus:text-black"
-              href="/latest-news"
-            >
-              Latest News
-            </Link> */}
-            {/* <Link
-              className="hover:text-black focus:text-black"
-              href="/contact-us"
-            >
-              Contact Us
-            </Link> */}
-            {/* <Link
-              className="hover:text-black focus:text-black"
-              href="/video-trailer"
-            >
-              Video Trailors
-            </Link>{" "} */}
-            {/* <Link
-              className="hover:text-black focus:text-black"
-              href="/all-appointments"
-            >
-              Appointments
-            </Link>{" "} */}
-            {/* <Link
-              className="hover:text-black focus:text-black"
-              href="/templetes"
-            >
-              Templetes
-            </Link> */}
-            {/* {profile?.package?.resources.length > 0 && ( */}
-            {/* {resources > 0 && (
-              <div
-                ref={dropdownRef}
-                className="relative -mt-2 inline-block text-left"
-              >
-                <button
-                  onClick={() => setOpen(!open)}
-                  className="inline-flex items-center gap-2 px-2 py-2 text-base text-[#90B29F] bg-white rounded-full hover:text-black transition duration-300 ease-in-out "
-                >
-                  Resources
-                  <svg
-                    className={`w-5 h-5 transform transition-transform duration-300 ${
-                      open ? "rotate-180" : ""
-                    }`}
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
-                </button>
-
-                {open && (
-                  <div className="absolute right-0 left-6 z-20 mt-1 w-48 rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 animate-fade-in">
-                    <div className="py-2">
-                      {resources?.map((resource, index) => {
-                        let href = "#";
-
-                        if (resource === "E-book") {
-                          href = "/e-book";
-                        } else if (resource === "General Resource") {
-                          href = "/course-topics/resources";
-                        }else if (resource === "Course Videos") {
-                          href = "/courses";
-                        } else if (resource === "Reference Material") {
-                          href = "/refrence-material";
-                        } else if (resourceLinks[resource]) {
-                          href = resourceLinks[resource];
-                        }
-
-                        return (
-                          <Link
-                            key={index}
-                            href={href}
-                            onClick={() => setOpen(false)}
-                            className="block px-5 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#6fbe91] transition duration-200 rounded-md"
-                          >
-                            {resource === "Create Blog"
-                              ? "Create Blog"
-                              : resource}
-                          </Link>
-                        );
-                      })}
-                    </div>
-                  </div>
-                )}
-              </div>
-            )} */}
-            {/* {Array.isArray(resources) && resources.length > 0 && (
-              <div
-                ref={dropdownRef}
-                className="relative -mt-2 inline-block text-left"
-              >
-                <button
-                  onClick={() => setOpen(!open)}
-                  className="inline-flex items-center gap-2 px-2 py-2 text-base text-[#90B29F] bg-white rounded-full hover:text-black transition duration-300 ease-in-out "
-                >
-                  Resources
-                  <svg
-                    className={`w-5 h-5 transform transition-transform duration-300 ${
-                      open ? "rotate-180" : ""
-                    }`}
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
-                </button>
-
-                {open && (
-                  <div className="absolute right-0 left-6 z-20 mt-1 w-48 rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 animate-fade-in">
-                    <div className="py-2">
-                      {resources.map((resource, index) => {
-                        let href = "#";
-
-                        if (resource === "E-book") {
-                          href = "/e-book";
-                        } else if (resource === "General Resource") {
-                          href = "/course-topics/resources";
-                        } else if (resource === "Course Videos") {
-                          href = "/courses";
-                        } else if (resource === "Reference Material") {
-                          href = "/refrence-material";
-                        } else if (resourceLinks[resource]) {
-                          href = resourceLinks[resource];
-                        }
-
-                        return (
-                          <Link
-                            key={index}
-                            href={href}
-                            onClick={() => setOpen(false)}
-                            className="block px-5 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#6fbe91] transition duration-200 rounded-md"
-                          >
-                            {resource === "Create Blog"
-                              ? "Create Blog"
-                              : resource}
-                          </Link>
-                        );
-                      })}
-                    </div>
-                  </div>
-                )}
-              </div>
-            )} */}
-          {/* </nav>  */}
-
-
+        
           <nav className="hidden md:flex gap-[15px] text-[#90B29F] font-sans text-[16px]">
   {[
     { href: "/", label: "Home" },
@@ -525,51 +343,140 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Dropdown Menu */}
-        {isMobileMenuOpen && (
-          <div className="bg-white px-6 py-4 h-screen flex flex-col space-y-4 md:hidden border-t-2 border-gray-100 shadow-md">
-            <Link href="/" className="text-[#88AE98]">
-              Home
-            </Link>
-            {isLoggedIn && userData?.is_active && (
-              <>
-                <Link className="text-[#88AE98]" href="/videos">
-                  Courses
+     {/* Mobile Dropdown Menu */}
+{isMobileMenuOpen && (
+  <div className="bg-white px-6 py-4 h-screen flex flex-col space-y-4 md:hidden border-t-2 border-gray-100 shadow-md overflow-y-auto">
+
+    {/* ─── Main Links ───────────────────────────── */}
+    {[
+      { href: "/", label: "Home" },
+      { href: "/about-us", label: "About Us" },
+      { href: "/our-products", label: "Our Products" },
+      { href: "/pricing", label: "Pricing" },
+      { href: "/latest-news", label: "Latest News" },
+      { href: "/contact-us", label: "Contact Us" },
+      { href: "/video-trailer", label: "Video Trailers" },
+      { href: "/all-appointments", label: "Appointments" },
+      { href: "/templetes", label: "Templates" },
+    ].map((link) => (
+      <Link
+        key={link.href}
+        href={link.href}
+        className="text-[#88AE98]"
+        onClick={() => setIsMobileMenuOpen(false)}
+      >
+        {link.label}
+      </Link>
+    ))}
+
+    {/* ─── Resources (toggle) ───────────────────── */}
+    {Array.isArray(resources) && resources.length > 0 && (
+      <>
+        <button
+          onClick={() => setMobileResourcesOpen(!isMobileResourcesOpen)}
+          className="flex items-center justify-between w-full text-[#88AE98] font-semibold mt-4"
+        >
+          <span>Resources</span>
+          {isMobileResourcesOpen ? (
+            <FaChevronUp className="text-[#88AE98]" />
+          ) : (
+            <FaChevronDown className="text-[#88AE98]" />
+          )}
+        </button>
+
+        {isMobileResourcesOpen && (
+          <div className="flex flex-col text-[#88AE98]  space-y-1 pl-4">
+            {resources.map((resource, idx) => {
+              let href = "#";
+              if (resource === "E-book") href = "/e-book";
+              else if (resource === "General Resource") href = "/course-topics/resources";
+              else if (resource === "Course Videos") href = "/courses";
+              else if (resource === "Reference Material") href = "/refrence-material";
+              else if (resourceLinks[resource]) href = resourceLinks[resource];
+
+              return (
+                <Link
+                  key={idx}
+                  href={href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-base text-[#88AE98] leading-relaxed hover:text-[#51956d] transition"
+                >
+                  {resource === "Create Blog" ? "Create Blog" : resource}
                 </Link>
-                {/* <Link className="text-[#88AE98]" href="/forum">
-                  Discussion Forum
-                </Link> */}
-              </>
-            )}
-            <Link href="/about-us" className="text-[#88AE98]">
-              About Us
-            </Link>
-            <Link href="/our-products" className="text-[#88AE98]">
-              Our Products
-            </Link>
-            {/* {isLoggedIn && !userData?.is_active && ( */}
-            <Link href="/pricing" className="text-[#88AE98]">
-              Pricing
-            </Link>
-            {/* )} */}
-            <Link href="/latest-news" className="text-[#88AE98]">
-              Latest News
-            </Link>
-            <Link href="/contact-us" className="text-[#88AE98]">
-              Contact Us
-            </Link>
-            <div className="flex flex-col space-y-2 pt-4 border-t-2 border-gray-100">
-              <span className="flex items-center gap-2 text-[#88AE98]">
-                <FaPhone /> 07578979789
-              </span>
-              <span className="flex items-center gap-2 text-[#88AE98]">
-                <FaEnvelope /> immigration@training.com
-              </span>
-            </div>
-            <button className="bg-[#90B29F] cursor-pointer hover:bg-[#7fa98b] transition duration-200 flex items-center justify-center gap-2 text-white text-sm font-semibold px-4 py-3 rounded-md">
-              REQUEST A DEMO <FaArrowRight />
-            </button>
+              );
+            })}
           </div>
         )}
+      </>
+    )}
+
+    {/* ─── Auth / Account Section ──────────────── */}
+    <hr className="border-t border-gray-100 my-4" />
+
+    {!isLoggedIn ? (
+      /* ⇢ User NOT logged‑in → show Login / Sign‑up */
+      <>
+        <Link
+          href="/login"
+          className="text-[#88AE98]"
+          onClick={() => setIsMobileMenuOpen(false)}
+        >
+          Login
+        </Link>
+        <Link
+          href="/signup"
+          className="text-[#88AE98]"
+          onClick={() => setIsMobileMenuOpen(false)}
+        >
+          Sign Up
+        </Link>
+      </>
+    ) : (
+      /* ⇢ User logged‑in → Business Account (if package_type 3) + Logout */
+      <>
+        {userData?.packages?.some((pkg) => pkg.package_type === 3) && (
+          <Link
+            href="/business-account"
+            className="flex items-center gap-2 text-[#88AE98]"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            <Briefcase className="w-5 h-5 text-gray-600" /> Business Account
+          </Link>
+        )}
+
+        <button
+          onClick={() => {
+            Logout();
+            setIsMobileMenuOpen(false);
+          }}
+          className="flex items-center gap-2 text-[#88AE98]"
+        >
+          <LogOut className="w-4 h-4 text-gray-600" /> Logout
+        </button>
+      </>
+    )}
+
+    {/* ─── Contact Info ─────────────────────────── */}
+    <div className="flex flex-col space-y-2 pt-4 border-t-2 border-gray-100">
+      <span className="flex items-center gap-2 text-[#88AE98]">
+        <FaPhone /> 07578979789
+      </span>
+      <span className="flex items-center gap-2 text-[#88AE98]">
+        <FaEnvelope /> immigration@training.com
+      </span>
+    </div>
+
+    {/* ─── Request Demo ─────────────────────────── */}
+    <Link href="/request-a-demo" onClick={() => setIsMobileMenuOpen(false)}>
+      <button className="bg-[#90B29F] mt-4 w-full flex items-center justify-center gap-2 text-white text-sm font-semibold py-3 rounded-md hover:bg-[#7fa98b]">
+        REQUEST A DEMO <FaArrowRight />
+      </button>
+    </Link>
+  </div>
+)}
+
+
+
       </div>
 
       {/* Spacer to prevent layout shift */}

@@ -40,12 +40,12 @@ export default function CoursePage() {
   }
 
   return (
-    <main className="bg-gray-50 min-h-screen px-4 py-24">
+    <main className="bg-gray-50 min-h-screen px-4 py-8 md:py-24">
       <h2 className="text-3xl font-bold text-[#88ae98] text-left ml-12 mb-10">
         All Courses
       </h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 gap-10 max-w-7xl mx-12">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 gap-10 max-w-7xl md:mx-12">
         {courses.map((course) => (
           <div
             key={course.id}

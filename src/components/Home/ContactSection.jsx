@@ -32,7 +32,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section className="py-16 px-14 bg-[#E6EDE9] relative overflow-hidden">
+    <section className="py-16 md:px-14 bg-[#E6EDE9] relative overflow-hidden">
       {/* Background pattern */}
       <div className="absolute inset-0 z-0">
         {/* <Image

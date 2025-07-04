@@ -23,7 +23,7 @@ const SidebarIcons = ({ toggleSidebar }) => {
   const textClasses = "text-xs text-white";
 
   return (
-    <div className="w-[80px] bg-[#88ae98] p-4 flex flex-col gap-6 pt-14 items-center">
+    <div className="w-full md:w-[80px] bg-[#88ae98] px-4 py-2.5 flex flex-row md:flex-col gap-4 md:gap-6 items-center md:items-center justify-around md:justify-start md:pt-16 md:py-10 fixed md:static  top-[99px] md:top-auto  z-40">
       <div className="flex flex-col items-center cursor-pointer">
         <Home className={iconClasses} />
         <span className={textClasses}>Home</span>
@@ -53,16 +53,16 @@ const SidebarIcons = ({ toggleSidebar }) => {
 
 const Sidebar = ({ selectedIndex, setSelectedIndex, isOpen, toggleSidebar, videos }) => (
   <div
-    className={`fixed left-0 h-screen bg-[#88ae98] w-64 p-4 pt-6 z-40 shadow-lg transition-transform duration-300 ${
+    className={`fixed  hiddren md:flex flex-col  left-0 h-screen bg-[#88ae98] w-64 p-4 pt-6 z-40 shadow-lg transition-transform duration-300 ${
       isOpen ? "translate-x-0" : "-translate-x-full"
     }`}
   >
-    <div className="flex justify-end">
+    <div className="flex md:mt-6 justify-end">
       <button
         className="text-white font-semibold flex justify-end mt-3 mb-2"
         onClick={toggleSidebar}
       >
-        <X className="mr-1 w-4 h-4" />
+        <X className="mr-1 w-5 h-5" />
       </button>
     </div>
     <h2 className="text-base font-bold mb-6 text-white">Course Topics</h2>
@@ -105,15 +105,15 @@ const MainContent = ({ selectedIndex, setSelectedIndex, videos }) => {
   };
 
   return (
-    <div className="flex-1 ml-[10px] p-6 mt-[54px]">
+<div className="flex-1 ml-0 md:ml-[10px] md:p-6 mt-[99px] md:mt-[54px]">
       <div className="mb-6 relative">
-        <div className="flex justify-between bg-[#162726] items-center py-2.5 px-2">
+        <div className="flex justify-between bg-[#88ae98] items-center py-2.5 px-2">
           <div className="flex items-center gap-4 text-white">
             <button
               onClick={() => setSelectedIndex(Math.max(selectedIndex - 1, 0))}
-              className="px-1.5 ml-2 py-1.5 mb-1 bg-gray-200 text-gray-700 rounded-full hover:bg-gray-300 transition"
+              className="px-1.5 ml-2 py-1.5 mb-1 bg-gray-50 text-gray-700 rounded-xl hover:bg-gray-300 transition"
             >
-              <MoveLeftIcon className="w-6 h-6 text-[#162726]" />
+              <MoveLeftIcon className="w-6 h-6 text-[#82b396]" />
             </button>
             <p className="text-white -mt-1">{video.title}</p>
           </div>
@@ -121,9 +121,9 @@ const MainContent = ({ selectedIndex, setSelectedIndex, videos }) => {
             <button
               type="button"
               onClick={handleDropdownToggle}
-              className="inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-2 py-1.5 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
+              className="inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-2 py-1.5 -mt-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
             >
-              <FaAngleDown className="w-4 h-4 text-[#162726]" />
+              <FaAngleDown className="w-4 h-4 text-[#82b396]" />
             </button>
             {showDropDown && (
               <div className="origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
@@ -160,7 +160,7 @@ const MainContent = ({ selectedIndex, setSelectedIndex, videos }) => {
       </div>
 
 
-      <div className="flex justify-end gap-4 mb-6">
+      <div className="flex justify-center md:justify-end gap-4 mb-6">
         <button
           className="px-4 py-2 border rounded text-gray-600 hover:bg-gray-100 transition"
           disabled={selectedIndex === 0}
@@ -210,20 +210,34 @@ const LessonLayout = () => {
   }
 
   return (
-    <div className="flex relative font-sans">
-      <SidebarIcons toggleSidebar={toggleSidebar} />
+    // return (
+  <div className="flex flex-row md:flex-row relative font-sans min-h-screen">
+    <SidebarIcons toggleSidebar={toggleSidebar} />
+    {/* Mobile toggle button */}
+    <div className="md:hidden fixed top-4 left-4 z-50">
+      <button
+        onClick={toggleSidebar}
+        className="bg-[#88ae98] text-white p-2 rounded shadow-md"
+      >
+        <BookOpen className="w-5 h-5" />
+      </button>
+    </div>
+  
       <Sidebar
-        selectedIndex={selectedIndex}
-        setSelectedIndex={setSelectedIndex}
-        isOpen={sidebarOpen}
-        toggleSidebar={toggleSidebar}
-        videos={videos}
-      />
-      <MainContent
-        selectedIndex={selectedIndex}
-        setSelectedIndex={setSelectedIndex}
-        videos={videos}
-      />
+      selectedIndex={selectedIndex}
+      setSelectedIndex={setSelectedIndex}
+      isOpen={sidebarOpen}
+      toggleSidebar={toggleSidebar}
+      videos={videos}
+    />
+    
+    <MainContent
+      selectedIndex={selectedIndex}
+      setSelectedIndex={setSelectedIndex}
+      videos={videos}
+    />
+
+
     </div>
   );
 };

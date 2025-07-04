@@ -4,9 +4,9 @@ import Link from "next/link";
 
 export default function AboutUs() {
   return (
-    <main className="min-h-screen mx-12 bg-white">
+    <main className="min-h-screen md:mx-12 bg-white">
       {/* Hero Section */}
-      <section className="container  px-4 py-12 md:py-16 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+      <section className="container  md:px-4 py-12 md:py-16 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         <div className="mx-12 mt-12">
           <h1 className="text-3xl md:text-5xl font-semibold text-gray-900 leading-tight">
             Take steps to <br />

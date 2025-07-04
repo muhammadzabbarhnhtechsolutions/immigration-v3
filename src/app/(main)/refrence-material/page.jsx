@@ -26,7 +26,7 @@ const Page = () => {
     <div className='pl-22 '>
     </div>
       <div className='flex items-left mx-8 justify-start mb-6'>
-       <p className="text-3xl mt-24 text-[#88AE98] text-left font-bold mb-6 ml-22">
+       <p className="text-2xl mt-24 text-[#88AE98] text-left font-bold mb-6 ml-22">
          Reference Materials
          </p>
       </div>
