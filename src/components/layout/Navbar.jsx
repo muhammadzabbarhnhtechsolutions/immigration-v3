@@ -218,11 +218,11 @@ export default function Navbar() {
                       (pkg) => pkg.package_type === 3
                     ) && (
                     <Link href="/business-account">
-  <button className="flex w-full items-center gap-2 px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-all duration-200">
-    <Briefcase className="w-5 h-5 text-gray-600" />
-    Business Account
-  </button>
-</Link>
+                <button className="flex w-full items-center gap-2 px-3 py-2 text-sm text-gray-700 hover:bg-gray-100               transition-all duration-200">
+                  <Briefcase className="w-5 h-5 text-gray-600" />
+                  Business Account
+                </button>
+              </Link>
                     )}
                      <button
                       onClick={Logout}
