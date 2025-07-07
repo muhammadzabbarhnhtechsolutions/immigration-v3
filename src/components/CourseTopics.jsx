@@ -51,44 +51,91 @@ const SidebarIcons = ({ toggleSidebar }) => {
   );
 };
 
-const Sidebar = ({ selectedIndex, setSelectedIndex, isOpen, toggleSidebar, videos }) => (
-  <div
-    className={`fixed  hiddren md:flex flex-col  left-0 h-screen bg-[#88ae98] w-64 p-4 pt-6 z-40 shadow-lg transition-transform duration-300 ${
-      isOpen ? "translate-x-0" : "-translate-x-full"
-    }`}
-  >
-    <div className="flex md:mt-6 justify-end">
-      <button
-        className="text-white font-semibold flex justify-end mt-3 mb-2"
-        onClick={toggleSidebar}
-      >
-        <X className="mr-1 w-5 h-5" />
-      </button>
-    </div>
-    <h2 className="text-base font-bold mb-6 text-white">Course Topics</h2>
-    <ul className="space-y-2">
-      {videos.map((item, idx) => (
-        <li
-          key={item.id || idx}
-          onClick={() => {
-            setSelectedIndex(idx);
-            toggleSidebar();
-          }}
-          className={`flex items-center px-4 py-3 rounded-lg cursor-pointer transition duration-200 ${
-            selectedIndex === idx
-              ? "bg-[#6d9f89] text-white shadow-md"
-              : "text-white hover:bg-[#88ae98]"
-          }`}
+const Sidebar = ({ selectedIndex, setSelectedIndex, isOpen, toggleSidebar, videos }) => {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const filteredVideos = videos.filter((item) =>
+    item.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  return (
+    <div
+      className={`fixed md:flex flex-col left-0 h-screen bg-[#88ae98] w-64 p-4 pt-6 z-40 shadow-lg transition-transform duration-300 ${
+        isOpen ? "translate-x-0" : "-translate-x-full"
+      }`}
+    >
+      {/* Close Button */}
+      <div className="flex md:mt-6 justify-end">
+        <button
+          className="text-white font-semibold flex justify-end mt-3 mb-2"
+          onClick={toggleSidebar}
         >
-          <VideoIcon className="mr-3 text-white w-4 h-4" />
-          <span>
-            {idx + 1}. {item.title}
-          </span>
-        </li>
-      ))}
-    </ul>
-  </div>
-);
+          <X className="mr-1 w-5 h-5" />
+        </button>
+      </div>
+
+      <h2 className="text-base font-bold mb-4 text-white">Course Topics</h2>
+
+      {/* 🔍 Search Input */}
+      <div className="mb-4 relative">
+             <span className="absolute inset-y-0 right-0 pr-2 pl-3 flex items-center pointer-events-none">
+              <svg
+                className="h-5 w-5 text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M21 21l-4.35-4.35M10 18a8 8 0 100-16 8 8 0 000 16z"
+                />
+              </svg>
+            </span>
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder="Search topics..."
+          className="w-full px-3 py-2 rounded-lg text-sm text-gray-700 placeholder-gray-400 border border-white focus:outline-none focus:ring-2 focus:border-[#6d9f89] focus:ring-[#6d9f89]"
+        />
+        
+      </div>
+
+      {/* Filtered List */}
+      <ul className="space-y-2 overflow-y-auto">
+        {filteredVideos.length ? (
+          filteredVideos.map((item, idx) => {
+            const originalIndex = videos.indexOf(item); // Required to preserve original index
+            return (
+              <li
+                key={item.id || idx}
+                onClick={() => {
+                  setSelectedIndex(originalIndex);
+                  toggleSidebar();
+                }}
+                className={`flex items-center px-4 py-3 rounded-lg cursor-pointer transition duration-200 ${
+                  selectedIndex === originalIndex
+                    ? "bg-[#6d9f89] text-white shadow-md"
+                    : "text-white hover:bg-[#7aa692]"
+                }`}
+              >
+                <VideoIcon className="mr-3 text-white w-4 h-4" />
+                <span>
+                  {originalIndex + 1}. {item.title}
+                </span>
+              </li>
+            );
+          })
+        ) : (
+          <p className="text-white text-sm items-center text-center px-4">No topics found.</p>
+        )}
+      </ul>
+    </div>
+  );
+};
+
 
 const MainContent = ({ selectedIndex, setSelectedIndex, videos }) => {
   const video = videos[selectedIndex];
