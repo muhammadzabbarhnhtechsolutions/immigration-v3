@@ -40,7 +40,7 @@ useEffect(() => {
         setTotal(res.totalPages || 1);
       }
     }
-
+// ...
     setLoading(false);
   }, 400); // delay for debounce (400ms)
 
