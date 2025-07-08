@@ -1,61 +1,73 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
-import { useRouter } from "next/navigation";
-import { getRefrenceMaterial } from "@/services/refrenceMaterialServices";
-import { FileArchive } from "lucide-react";
-
-const ITEMS_PER_PAGE = 10; // ← ایک صفحے پر کتنی فائلیں
+import { useEffect, useState } from "react";
+import { ChevronLeft, ChevronRight, FileArchive } from "lucide-react";
+import axiosInstance from "@/api/axiosInstance";
 
 export default function ReferenceMaterialPage() {
-  const router = useRouter();
-
   const [documents, setDocuments] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [page, setPage] = useState(1);            // current page
+  const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [hasNext, setHasNext] = useState(false);
+  const [hasPrev, setHasPrev] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
 
-  // ── fetch once ────────────────────────────────────────────────
-  useEffect(() => {
-    (async () => {
-      const res = await getRefrenceMaterial(router);
-      if (res?.data) setDocuments(res.data);
+  const fetchPaginatedDocs = async (pageNum = 1) => {
+    setLoading(true);
+    try {
+      const res = await axiosInstance.get(`/user/reference/material/view/?page=${pageNum}`);
+      const data = res?.data?.data || [];
+
+      setDocuments(data);
+      setHasNext(!!res?.data?.next);
+      setHasPrev(!!res?.data?.previous);
+    } catch (err) {
+      console.error("Pagination error:", err);
+    } finally {
       setLoading(false);
-    })();
-  }, []);
+    }
+  };
 
-  // ── filtered list ─────────────────────────────────────────────
-  const filteredDocs = useMemo(() => {
-    if (!searchQuery.trim()) return documents;
-    return documents.filter((doc) =>
-      doc.title.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  }, [documents, searchQuery]);
+  const searchDocs = async (query) => {
+    setLoading(true);
+    try {
+      const res = await axiosInstance.get(
+        `/user/reference/material/reference_material_search/?title=${query}`
+      );
+      setDocuments(res?.data?.data || []);
+      setHasNext(false);
+      setHasPrev(false);
+    } catch (err) {
+      console.error("Search error:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  // ── pagination slice ──────────────────────────────────────────
-  const totalPages = Math.max(1, Math.ceil(filteredDocs.length / ITEMS_PER_PAGE));
-  const currentDocs = filteredDocs.slice(
-    (page - 1) * ITEMS_PER_PAGE,
-    page * ITEMS_PER_PAGE
-  );
+  const handleSearch = (e) => {
+    const val = e.target.value;
+    setSearchQuery(val);
+    setPage(1);
 
-  // اگر سرچ بدلے یا docs کم/زیادہ ہوں تو page = 1
-  useEffect(() => setPage(1), [searchQuery, documents]);
+    if (val.trim() === "") {
+      setIsSearching(false);
+      fetchPaginatedDocs(1);
+    } else {
+      setIsSearching(true);
+      searchDocs(val);
+    }
+  };
 
-  if (loading) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
-        <div className="h-10 w-10 border-4 border-[#88AE98] border-t-transparent rounded-full animate-spin" />
-        <p className="text-[#88AE98] text-lg font-medium">Loading materials…</p>
-      </div>
-    );
-  }
+  useEffect(() => {
+    fetchPaginatedDocs(page);
+  }, [page]);
 
   return (
     <main className="px-4 md:px-16 py-16 mt-12 bg-gray-50 min-h-screen">
-      {/* Heading + search */}
+      {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-10">
-        <h1 className="text-3xl font-bold text-[#88AE98]">Reference Materials</h1>
+        <h1 className="text-2xl md:text-3xl md:-ml-8 font-bold text-[#88AE98]">Reference Materials</h1>
 
         <div className="relative w-full sm:w-80">
           <span className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -75,93 +87,87 @@ export default function ReferenceMaterialPage() {
           </span>
           <input
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={handleSearch}
             placeholder="Search materials..."
             className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-[#88AE98] focus:outline-none"
           />
         </div>
       </div>
 
+      {/* Loading */}
+      {loading && (
+        <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
+          <div className="h-10 w-10 border-4 border-[#88AE98] border-t-transparent rounded-full animate-spin" />
+          <p className="text-[#88AE98] text-lg font-medium">Loading materials…</p>
+        </div>
+      )}
+
+      {/* No Result */}
+      {!loading && documents.length === 0 && (
+        <div className="col-span-full flex flex-col items-center text-center mt-28 text-gray-500">
+          <svg
+            className="w-12 h-12 text-[#88AE98] mb-4"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15 12H9m12 0A9 9 0 113 12a9 9 0 0118 0z"
+            />
+          </svg>
+          <p className="text-xl font-medium text-[#88AE98]">No Material found</p>
+          <p className="text-[15px] text-gray-400">
+            Try searching with a different keyword.
+          </p>
+        </div>
+      )}
+
       {/* Grid */}
-      {currentDocs.length ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-20 place-items-center mb-12">
-          {currentDocs.map((doc) => (
-            <a
-              key={doc.id}
-              href={doc.file}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-white w-72 rounded-lg border shadow-sm hover:shadow-lg transition p-6 flex flex-col items-center"
-            >
-              <FileArchive className="h-[85px] w-[85px] mb-4 text-[#64B5F6]" />
-              <p className="text-center text-gray-800 font-semibold">
-                {doc.title}
-              </p>
-            </a>
-          ))}
-        </div>
-      ) : (
- <div className="col-span-full flex flex-col items-center text-center mt-28 text-gray-500">
-              <svg
-                className="w-12 h-12 text-[#88AE98] mb-4"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                viewBox="0 0 24 24"
+      {!loading && documents.length > 0 && (
+        <>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-20 place-items-center mb-12">
+            {documents.map((doc) => (
+              <a
+                key={doc.id}
+                href={doc.file}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white w-72 rounded-lg border shadow-sm hover:shadow-lg transition p-6 flex flex-col items-center"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15 12H9m12 0A9 9 0 113 12a9 9 0 0118 0z"
-                />
-              </svg>
-              <p className="text-xl font-medium text-[#88AE98]">
-                No Material found
-              </p>
-              <p className="text-[15px] text-gray-400">
-                Try searching with a different keyword.
-              </p>
-            </div>      )}
-
-      {/* Pagination controls */}
-      {totalPages > 1 && (
-        <div className="flex justify-center items-center gap-4">
-          <button
-            onClick={() => setPage((p) => Math.max(p - 1, 1))}
-            disabled={page === 1}
-            className="px-4 py-2 border rounded disabled:opacity-40 hover:bg-gray-100 transition"
-          >
-            Prev
-          </button>
-
-          {/* Page numbers (max 5 visible) */}
-          {[...Array(totalPages).keys()]
-            .slice(
-              Math.max(0, page - 3),
-              Math.min(totalPages, page + 2)
-            )
-            .map((i) => (
-              <button
-                key={i}
-                onClick={() => setPage(i + 1)}
-                className={`px-3 py-1.5 rounded ${
-                  page === i + 1
-                    ? "bg-[#88AE98] text-white"
-                    : "hover:bg-gray-100"
-                }`}
-              >
-                {i + 1}
-              </button>
+                <FileArchive className="h-[85px] w-[85px] mb-4 text-[#64B5F6]" />
+                <p className="text-center text-gray-800 font-semibold">{doc.title}</p>
+              </a>
             ))}
+          </div>
 
-          <button
-            onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
-            disabled={page === totalPages}
-            className="px-4 py-2 border rounded disabled:opacity-40 hover:bg-gray-100 transition"
-          >
-            Next
-          </button>
-        </div>
+          {/* Pagination */}
+          {!isSearching && (hasPrev || hasNext) && (
+<div className="flex justify-center items-center gap-6 mt-10">
+    <button
+      onClick={() => setPage((p) => Math.max(p - 1, 1))}
+      disabled={!hasPrev || page === 1}
+      className="p-3 rounded-full bg-white border border-[#88AE98] text-[#88AE98] hover:bg-[#88AE98] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300 shadow-sm hover:shadow-lg"
+    >
+      <ChevronLeft className="w-5 h-5" />
+    </button>
+
+    <span className="text-sm font-medium text-[#88AE98] bg-[#ecf5f0] px-4 py-1.5 rounded-full shadow-sm">
+      Page {page}
+    </span>
+
+    <button
+      onClick={() => setPage((p) => p + 1)}
+      disabled={!hasNext}
+      className="p-3 rounded-full bg-white border border-[#88AE98] text-[#88AE98] hover:bg-[#88AE98] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300 shadow-sm hover:shadow-lg"
+    >
+      <ChevronRight className="w-5 h-5" />
+    </button>
+  </div>
+          )}
+        </>
       )}
     </main>
   );
