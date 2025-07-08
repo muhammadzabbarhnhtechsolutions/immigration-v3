@@ -84,10 +84,10 @@ export default function CoursePage() {
           filteredCourses.map((course) => (
             <div
               key={course.id}
-              className="bg-white rounded-xl hover:shadow-xl hover:-translate-y-4 hover:scale-100 transition-all cursor-pointer shadow-sm border border-gray-200 p-4"
-            >
+              className="bg-white flex justify-between flex-col rounded-xl hover:shadow-xl hover:-translate-y-4 hover:scale-100 transition-all cursor-pointer shadow-sm border border-gray-200 p-4"
+            ><div>
               <Link href={`/course-module/${course.id}`}>
-                <div className="relative w-full h-40 rounded-md overflow-hidden mb-4">
+                <div className="relative w-full h-48 rounded-md overflow-hidden mb-4">
                   <Image
                     src={course.thumbnail}
                     alt={course.title}
@@ -102,11 +102,14 @@ export default function CoursePage() {
               <p className="text-sm text-gray-600 mb-4">
                 {course.description?.slice(0, 172)}...
               </p>
+              </div>
+              <div>
               <Link href={`/course-module/${course.id}`}>
                 <button className="w-full h-12 bg-[#6b967e] hover:bg-[#88AE98] text-white text-sm font-medium rounded-lg shadow">
                   VIEW COURSE
                 </button>
               </Link>
+              </div>
             </div>
           ))
         ) : (
