@@ -39,28 +39,29 @@ const Page = () => {
       </h2>
 
       {/* Tabs */}
-      <div className="flex justify-center gap-6 mb-8">
-        <button
-          className={`px-6 py-2 rounded-full font-medium border ${
-            activeTab === "all"
-              ? "bg-[#8abd9f] text-white"
-              : "border-[#8abd9f] text-[#8abd9f]"
-          }`}
-          onClick={() => setActiveTab("all")}
-        >
-          All Documents
-        </button>
-        <button
-          className={`px-6 py-2 rounded-full font-medium border ${
-            activeTab === "your"
-              ? "bg-[#8abd9f] text-white"
-              : "border-[#8abd9f] text-[#8abd9f]"
-          }`}
-          onClick={() => setActiveTab("your")}
-        >
-          Your Documents
-        </button>
-      </div>
+      <div className="flex flex-wrap justify-center gap-3 sm:gap-6 mb-8">
+  <button
+    className={`px-4 sm:px-6 py-2 rounded-full font-medium border transition-all duration-300 ${
+      activeTab === "all"
+        ? "bg-[#8abd9f] text-white shadow-md"
+        : "border-[#8abd9f] text-[#8abd9f] hover:bg-[#f0fdf4]"
+    }`}
+    onClick={() => setActiveTab("all")}
+  >
+    All Documents
+  </button>
+  <button
+    className={`px-4 sm:px-6 py-2 rounded-full font-medium border transition-all duration-300 ${
+      activeTab === "your"
+        ? "bg-[#8abd9f] text-white shadow-md"
+        : "border-[#8abd9f] text-[#8abd9f] hover:bg-[#f0fdf4]"
+    }`}
+    onClick={() => setActiveTab("your")}
+  >
+    Your Documents
+  </button>
+</div>
+
 
       {/* Content */}
       {loading ? (

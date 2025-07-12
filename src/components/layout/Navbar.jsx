@@ -360,7 +360,7 @@ export default function Navbar() {
             {[
               { href: "/", label: "Home" },
               { href: "/about-us", label: "About Us" },
-              { href: "/our-products", label: "Our Products" },
+              { href: "/refrences", label: "Our Products" },
               { href: "/pricing", label: "Pricing" },
               { href: "/latest-news", label: "Latest News" },
               { href: "/contact-us", label: "Contact Us" },

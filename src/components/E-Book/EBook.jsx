@@ -93,7 +93,7 @@ export default function BookSection() {
 
         {/* grid */}
         {currentBooks.length ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-8 sm:gap-6 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-8 sm:gap-6 mb-12">
             {currentBooks.map((book) => (
               <div key={book.id} className="group bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-xl pb-4 transition transform hover:-translate-y-1">
                 <a href={book.file} download target="_blank" rel="noopener noreferrer" className="relative w-full h-64 block">
