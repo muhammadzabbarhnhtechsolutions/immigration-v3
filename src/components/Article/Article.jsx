@@ -20,7 +20,7 @@ const ArticleSection = () => {
   const getPaginatedArticles = async (pageNum = 1) => {
     setLoading(true);
     try {
-      const res = await axiosInstance.get(`/user/blog/article/view/?page=${pageNum}`);
+      const res = await axiosInstance.get(`/user/blog/article/article_view/?page=${pageNum}`);
       const data = res?.data?.data || [];
 
       setArticles(data);
@@ -36,7 +36,7 @@ const ArticleSection = () => {
   const searchArticles = async (title) => {
     setLoading(true);
     try {
-      const res = await axiosInstance.get(`/user/blog/article/blog_search/?title=${title}`);
+      const res = await axiosInstance.get(`/user/blog/article/article_search/?title=${title}`);
       setArticles(res?.data?.data || []);
       setHasNext(false);
       setHasPrev(false);
@@ -75,7 +75,7 @@ const ArticleSection = () => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-24 bg-gray-50">
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
-        <h2 className="text-3xl font-extrabold text-[#8bb09b]">Blogs</h2>
+        <h2 className="text-3xl font-extrabold text-[#8bb09b]">Articles</h2>
         <div className="relative w-full sm:w-80 mt-4 sm:mt-0">
           <span className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
             <svg
