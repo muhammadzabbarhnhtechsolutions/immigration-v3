@@ -69,29 +69,46 @@ const Page = () => {
           <p className="text-[#88ae98] text-xl font-medium">Loading Documents..</p>
         </div>
       ) : filteredDocuments.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {filteredDocuments.map((document, index) => (
-            <a
-              key={index}
-              href={document.document}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-white border rounded-xl shadow-lg p-5 flex flex-col items-center justify-between transition-transform hover:scale-105 hover:shadow-xl"
-            >
-              <img
-                src="https://img.icons8.com/color/96/000000/pdf.png"
-                alt="PDF"
-                className="w-16 h-16 mb-4"
-              />
-              <h3 className="text-lg font-semibold text-center text-gray-800 mb-2">
-                {document.title}
-              </h3>
-              <p className="text-sm text-gray-500 text-center px-2">
-                Click to view document
-              </p>
-            </a>
-          ))}
-        </div>
+        <div className="flex justify-center items-start gap-6">
+  {filteredDocuments.map((document, index) => (
+ <a
+  key={index}
+  href={document.document}
+  target="_blank"
+  rel="noopener noreferrer"
+  className="bg-gradient-to-br from-white to-gray-50 border border-gray-200 rounded-2xl shadow-md hover:shadow-2xl transform hover:scale-[1] transition-all duration-300 p-4 sm:p-5 flex items-center gap-4  px-22 "
+>
+  {/* Icon Circle */}
+  <div className="min-w-[62px] min-h-[60px] sm:min-w-[72px] sm:min-h-[72px] rounded-full bg-[#E6F4EA] flex items-center justify-center shadow-inner">
+   {document.type === 1 ? (
+     <img
+       src="https://img.icons8.com/color/96/000000/pdf.png"
+       alt="PDF"
+       className="w-8 h-8 sm:w-10 sm:h-10"
+     />
+   ) :(
+    <img
+      src="https://cdn1.iconfinder.com/data/icons/application-file-formats/128/microsoft-word-512.png"
+      alt="PDF"
+      className="w-8 h-8 sm:w-10 sm:h-10"
+    />
+   )}
+
+      
+  </div>
+
+  {/* Text Content */}
+  <div className="flex-1">
+    <h3 className="text-sm sm:text-base font-bold text-gray-800 mb-1 line-clamp-1">
+      {document.title}
+    </h3>
+    <p className="text-xs sm:text-sm text-gray-500">Click to view document</p>
+  </div>
+</a>
+
+  ))}
+</div>
+
       ) : (
         <div className="flex flex-col items-center justify-center text-center mt-10 bg-red-50 border border-red-200 text-red-600 px-6 py-4 rounded-xl shadow-sm">
           <svg

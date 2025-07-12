@@ -133,15 +133,16 @@ const IconBtn = ({ icon: Icon, onClick, color }) => {
 
 /* ── Generic Modal Wrapper ── */
 const Modal = ({ title, onClose, children }) => (
-  <div className="fixed inset-0 z-[100] bg-black/5  flex items-center justify-center px-4">
-    <div className="w-[99%] max-w-md bg-white rounded-2xl mt-28 md:mt-1 shadow-xl p-6 max-h-[79vh] md:max-h-[99vh] overflow-y-auto relative">
-      <button className="absolute top-3 right-3 text-gray-400 hover:text-red-500" onClick={onClose}>
-        <X />
-      </button>
-      <h2 className="text-2xl font-bold mb-4 text-[#88AE98]">{title}</h2>
-      {children}
-    </div>
+  <div className="fixed inset-0 z-[100] bg-black/5 flex items-center justify-center px-4">
+  <div className="w-[99%] max-w-md bg-white rounded-2xl mt-28 md:mt-1 shadow-xl p-6 max-h-[79vh] md:max-h-[99vh] overflow-y-auto scroll-hidden relative">
+    <button className="absolute top-3 right-3 text-gray-400 hover:text-red-500" onClick={onClose}>
+      <X />
+    </button>
+    <h2 className="text-2xl font-bold mb-4 text-[#88AE98]">{title}</h2>
+    {children}
   </div>
+</div>
+
 );
 
 /* ── Account Form (Add / Edit) ── */
@@ -190,7 +191,7 @@ function AccountForm({ mode, data = {}, onClose, refresh }) {
 
       {/* Image uploader */}
       <div
-        className={`border-2 border-dashed rounded-xl p-4 text-center transition ${image?"border-[#57b17c] bg-green-50":"border-gray-300"}`}
+        className={`border-2 border-dashed rounded-xl p-8 text-center transition ${image?"border-[#57b17c] bg-green-50":"border-gray-300"}`}
         onDrop={onDrop}
         onDragOver={e=>e.preventDefault()}
       >

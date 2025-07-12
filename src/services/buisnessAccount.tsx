@@ -29,7 +29,7 @@ export const getBuisnessAccount = async (router: AppRouterInstance) => {
       axiosError?.response?.data?.error ||
       axiosError?.response?.data?.message;
 
-    if (statusCode === 403) {
+    if (statusCode === 403 || statusCode === 401 || errorMessage === "Invalid token") {
       router.push("/login");
     } else {
       toast.error(errorMessage || "Something went wrong");

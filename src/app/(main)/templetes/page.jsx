@@ -71,7 +71,7 @@ export default function VisaDocumentViewer() {
 
   return (
     <div className="min-h-screen mt-14 p-6">
-      <div className="max-w-5xl mx-auto rounded-2xl md:p-10">
+      <div className="max-w-6xl mx-auto rounded-2xl md:p-10">
         <h1 className="text-3xl font-extrabold mb-8 text-center text-[#88ae98]">
           Visa Document Viewer
         </h1>
@@ -141,33 +141,45 @@ export default function VisaDocumentViewer() {
               Loading documents...
             </p>
           ) : documents.length > 0 ? (
-            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {documents.map((doc, idx) => (
-                <li
-                  key={doc.id || idx}
-                  onClick={() => {
-                    const link = document.createElement("a");
-                    link.href = doc.url;
-                    link.download = doc.name || "document"; // Suggested filename
-                    link.target = "_blank";
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                  }}
-                  className="border cursor-pointer border-gray-200 rounded-xl shadow-md p-5 flex items-center gap-4 bg-gray-50 transition hover:scale-[1.02]"
-                >
-                  {doc.type === "pdf" ? (
-                    <FileText className="text-red-500 w-10 h-10" />
-                  ) : (
-                    <File className="text-blue-500 w-10 h-10" />
-                  )}
-                  <div>
-                    <p className="font-semibold text-gray-800">{doc.name}</p>
-                    <p className="text-sm text-gray-500">{doc.category}</p>
-                  </div>
-                </li>
-              ))}
-            </ul>
+           <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+  {documents.map((doc, idx) => (
+    <li
+      key={doc.id || idx}
+      onClick={() => {
+        const link = document.createElement("a");
+        link.href = doc.url;
+        link.download = doc.name || "document";
+        link.target = "_blank";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }}
+      className="cursor-pointer hover:-translate-y-3 bg-gradient-to-br from-white to-gray-50 border border-gray-200 rounded-2xl p-5 flex items-center gap-4 shadow-md hover:shadow-xl hover:scale-[1.03] transition-all duration-300"
+    >
+      {/* Icon with circular background */}
+      <div
+        className={`w-16 h-16 rounded-full flex items-center justify-center shadow-inner ${
+          doc.type === 'pdf' ? 'bg-red-100 text-red-600' : 'bg-blue-100 text-blue-600'
+        }`}
+      >
+        {doc.type === "pdf" ? (
+          <FileText className="w-9 h-9" />
+        ) : (
+          <File className="w-9 h-9" />
+        )}
+      </div>
+
+      {/* Document text */}
+      <div className="flex-1">
+        <p className="font-semibold text-gray-800 text-sm sm:text-base truncate">
+          {doc.name}
+        </p>
+        <p className="text-xs text-gray-500">{doc.category}</p>
+      </div>
+    </li>
+  ))}
+</ul>
+
           ) : (
             <p className="text-gray-500 text-center mt-6">
               No documents to show. Select a visa type above.

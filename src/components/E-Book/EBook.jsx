@@ -70,7 +70,7 @@ export default function BookSection() {
   }
 
   return (
-    <section className="px-6 py-24 bg-white">
+    <section className="px-6 md:px-12 py-24 bg-white">
       <div className="max-w-7xl mx-auto">
         {/* heading + search */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
@@ -93,7 +93,7 @@ export default function BookSection() {
 
         {/* grid */}
         {currentBooks.length ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-5 mb-12">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-8 sm:gap-6 mb-12">
             {currentBooks.map((book) => (
               <div key={book.id} className="group bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-xl pb-4 transition transform hover:-translate-y-1">
                 <a href={book.file} download target="_blank" rel="noopener noreferrer" className="relative w-full h-64 block">
@@ -111,7 +111,7 @@ export default function BookSection() {
                     className="text-xs mt-1 line-clamp-3 text-gray-500"
                     dangerouslySetInnerHTML={{ __html: book.description || "No description available." }}
                   />
-                  <a href={book.file} download target="_blank" rel="noopener noreferrer" className="mt-2 inline-block text-sm text-blue-600 hover:underline">
+                  <a href={book.file} download target="_blank" rel="noopener noreferrer" className="mt-2 inline-block text-base text-blue-600 hover:underline">
                     Download PDF
                   </a>
                 </div>

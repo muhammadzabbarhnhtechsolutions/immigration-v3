@@ -50,7 +50,7 @@ export default function AppointmentActions() {
   const [showUpload, setShowUpload] = useState(false);
   const router = useRouter();
   const appointmentId = searchParams.get("appointment_id") || "";
-
+const [unreadCount, setUnreadCount] = useState(3); // You can update this dynamically later
   const [showChat, setShowChat] = useState(false);
   const [messages, setMessages] = useState([]);
   const [inputMessage, setInputMessage] = useState("");
@@ -115,6 +115,11 @@ export default function AppointmentActions() {
             className="relative z-10 bg-white rounded-2xl shadow-xl w-full min-h-[300px] lg:h-[306px] flex flex-col items-center"
           >
             <div className="bg-[#5AAA7C] h-36 rounded-t-xl w-full flex justify-center items-center relative">
+              {card.title === "Chat" && unreadCount > 0 && (
+  <div className="absolute top-2 right-2 bg-white text-[#5AAA7C] text-xs font-bold px-2.5 py-1.5 rounded-full shadow-md animate-pulse">
+    {unreadCount}
+  </div>
+)}
               <div className="bg-white w-24 h-24 sm:w-28 sm:h-28 rounded-full flex items-center justify-center shadow-lg border-4 border-white absolute -bottom-12">
                 {card.icon}
               </div>
