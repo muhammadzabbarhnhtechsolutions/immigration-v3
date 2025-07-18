@@ -4,7 +4,10 @@ import "./globals.css";
 import StoreProvider from "./StoreProvider";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-
+import { ClerkProvider } from "@clerk/nextjs"
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -37,11 +40,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} bg-[#f7f7f7]  antialiased`}
       >
+        <ClerkProvider>
       <StoreProvider >
         {children}
         </StoreProvider> 
         <ToastContainer />
-
+</ClerkProvider>
       </body>
     </html>
   );

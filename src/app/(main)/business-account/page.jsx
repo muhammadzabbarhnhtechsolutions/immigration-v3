@@ -39,7 +39,7 @@ export default function BusinessAccounts() {
         </h1>
         <button
           onClick={() => setShowAddModal(true)}
-          className="bg-[#88AE98] hover:bg-[#729781] text-white px-5 py-2.5 rounded-xl shadow-md transition"
+          className="bg-[#88AE98] hover:bg-[#729781] text-white px-5 py-2.5 rounded-full shadow-md transition"
         >
           Add Business Account
         </button>

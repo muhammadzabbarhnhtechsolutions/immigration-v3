@@ -1,31 +1,39 @@
-import { NextRequest, NextResponse } from 'next/server';
+// middleware.ts
+import { NextResponse, NextRequest } from 'next/server';
+import { clerkMiddleware, getAuth } from '@clerk/nextjs/server';
 
-export function middleware(request: NextRequest) {
+export default clerkMiddleware((auth, request) => {
+  // const { userId } = auth();
   const token = request.cookies.get('access_token')?.value;
   const pathname = request.nextUrl.pathname;
 
-  // Routes not allowed for logged-in users
   const authPages = ['/login', '/signup'];
-  const isAuthPage = authPages.some(path => pathname.startsWith(path));
-
-  // Routes protected for non-logged-in users
   const protectedPages = ['/forum', '/videos'];
-  // const protectedPages = ['/forum', '/pricing', '/videos'];
-  const isProtectedPage = protectedPages.some(path => pathname.startsWith(path));
 
+  const isAuthPage = authPages.some((path) => pathname.startsWith(path));
+  const isProtectedPage = protectedPages.some((path) => pathname.startsWith(path));
+
+  // ✅ If user is logged in and visits login/signup → redirect to home
   if (token && isAuthPage) {
-    // Logged-in users shouldn't access login/signup
     const url = request.nextUrl.clone();
     url.pathname = '/';
     return NextResponse.redirect(url);
   }
 
+  // ❌ If not logged in and tries to access protected page → redirect to login
   if (!token && isProtectedPage) {
-    // Non-logged-in users shouldn't access protected pages
     const url = request.nextUrl.clone();
     url.pathname = '/login';
     return NextResponse.redirect(url);
   }
 
   return NextResponse.next();
-}
+});
+
+// 🔧 Matcher config
+export const config = {
+  matcher: [
+    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
+    '/(api|trpc)(.*)',
+  ],
+};

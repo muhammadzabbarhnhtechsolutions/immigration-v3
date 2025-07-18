@@ -5,10 +5,14 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { SignupAuthService } from "../../../services/authServices";
 import Link from "next/link";
+import Image from "next/image";
+import { toast } from "react-toastify";
+import { useSignUp, useUser } from "@clerk/nextjs";
 
 export default function MainComponent() {
   const router = useRouter();
-
+const {user} = useUser()
+console.log(user)
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -17,7 +21,7 @@ export default function MainComponent() {
     agreeToTerms: false,
     profile: null,
   });
-
+const {} = useSignUp()
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -64,6 +68,32 @@ export default function MainComponent() {
     }
   };
 
+  const { signUp, isLoaded } = useSignUp();
+
+const handleSocialSignup = async (provider) => {
+  if (!isLoaded || !signUp) return;
+
+  try {
+    await signUp.authenticateWithRedirect({
+      strategy: `oauth_${provider}`,
+      redirectUrl: `${window.location.origin}/signup`,
+    });
+  } catch (err) {
+    console.error("OAuth signup error:", err);
+
+    const message =
+      err?.errors?.[0]?.message ||
+      err?.response?.data?.message ||
+      err.message;
+
+    if (message === "Session already exists") {
+      toast.info("You're already signed in. Redirecting...");
+      window.location.href = "/";
+    } else {
+      toast.error("Signup with " + provider + " failed");
+    }
+  }
+};
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#F9FAFB]  px-4 py-10">
       <div className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md animate-fade-in">
@@ -161,6 +191,7 @@ export default function MainComponent() {
         </p>
         {/* Add more detailed paragraphs here as needed */}
       </div>
+      
       <button
         onClick={() => setShowPolicy(false)}
         className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-lg"
@@ -175,12 +206,75 @@ export default function MainComponent() {
 
           </div>
 
-          {error && <div className="text-red-600 text-sm">{error}</div>}
+
+     <div className="mt-8 mb-4">
+  {/* Divider */}
+  <div className="relative mb-6">
+    <div className="absolute inset-0 flex items-center">
+      <div className="w-full border-t border-gray-300"></div>
+    </div>
+    <div className="relative flex justify-center text-sm">
+      <span className="bg-white px-3 text-gray-500 font-medium">Or continue with</span>
+    </div>
+  </div>
+
+  {/* Social Buttons */}
+  <div className="flex justify-center space-x-6">
+    {/* Google */}
+    <button
+      type="button"
+      onClick={() => handleSocialSignup("google")}
+      className="flex items-center justify-center w-12 h-12 rounded-full border-2 border-gray-200 shadow-sm hover:shadow-lg hover:border-[#ea4335] transition-all duration-300"
+      title="Login with Google"
+    >
+      <Image
+        src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png"
+        alt="Google"
+        width={26}
+        height={26}
+        className="w-7 h-7"
+      />
+    </button>
+
+    {/* LinkedIn */}
+    <button
+      type="button"
+      onClick={() => handleSocialSignup("linkedin")}
+      className="flex items-center justify-center w-12 h-12 rounded-full border-2 border-gray-200 shadow-sm hover:shadow-lg hover:border-[#0077b5] transition-all duration-300"
+      title="Login with LinkedIn"
+    >
+      <Image
+        src="https://cdn-icons-png.flaticon.com/512/145/145807.png"
+        alt="LinkedIn"
+        width={26}
+        height={26}
+        className="w-6 h-6"
+      />
+    </button>
+
+    {/* Apple */}
+    <button
+      type="button"
+      onClick={() => handleSocialSignup("apple")}
+      className="flex items-center justify-center w-12 h-12 rounded-full border-2 border-gray-200 shadow-sm hover:shadow-lg hover:border-black transition-all duration-300"
+      title="Login with Apple"
+    >
+      <Image
+        src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"
+        alt="Apple"
+        width={22}
+        height={24}
+        className="w-5 h-6"
+      />
+    </button>
+  </div>
+</div>
+          {error && <div className="text-red-600 mt-2 text-sm">{error}</div>}
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-2.5 bg-[#58a57a] text-white rounded-lg hover:bg-[#5bad7f]  transition-all disabled:opacity-50"
+            className="w-full py-2.5 mt-2 bg-[#58a57a] text-white rounded-lg hover:bg-[#5bad7f]  transition-all disabled:opacity-50"
           >
             {loading ? "Registering..." : "Register"}
           </button>
