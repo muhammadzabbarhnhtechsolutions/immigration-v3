@@ -1,5 +1,6 @@
+"use client"
 import Image from "next/image";
-import React from "react";
+import React, { useRef, useState } from "react";
 import { FaQuoteLeft } from "react-icons/fa";
 
 // Import local images
@@ -9,8 +10,58 @@ import img3 from "../../assets/apply.png";
 import img4 from "../../assets/pic1.png";
 import img5 from "../../assets/pic2.png";
 import img6 from "../../assets/pic3.png";
+import img7 from "../../assets/newUser.jpg";
 import bg from "../../assets/bg33.png"
+import { ArrowLeft, ArrowRight } from "lucide-react";
 const HomeSections = () => {
+    const [current, setCurrent] = useState(0);
+const testimonials = [
+  {
+    name: "John Doe",
+    text: "Immigration Navigator made my visa process super easy. Highly recommended!",
+    role: "Software Engineer",
+    image:img7
+  },
+  {
+    name: "Sara Ali",
+    text: "Great experience! The team guided me step by step.",
+    role: "Student",
+    image:img5
+
+  },
+  {
+    name: "Michael Smith",
+    text: "The best service I have used for visa consultation.",
+    role: "Businessman",
+    image:img6
+
+  },
+];
+// const [current, setCurrent] = useState(0);
+  const startX = useRef(null);
+
+  const handleTouchStart = (e) => {
+    startX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e) => {
+    const endX = e.changedTouches[0].clientX;
+    if (startX.current - endX > 100) {
+      nextCard();
+    } else if (endX - startX.current > 100) {
+      prevCard();
+    }
+  };
+
+  const nextCard = () => {
+    setCurrent((prev) => (prev + 1) % testimonials.length);
+  };
+
+  const prevCard = () => {
+    setCurrent((prev) =>
+      prev === 0 ? testimonials.length - 1 : prev - 1
+    );
+  };
   return (
     <div
   className="w-full bg-cover bg-center"
@@ -111,18 +162,67 @@ const HomeSections = () => {
       </section>
 
       {/* WHAT OUR USERS SAY */}
-      <section className="py-12 bg-gray-50">
-        <h2 className="text-center text-2xl font-bold mb-8">What Our Users Say</h2>
-        <div className="flex justify-center px-4">
-          <div className="bg-white p-6 rounded-xl shadow-lg max-w-md relative">
-            <FaQuoteLeft className="text-blue-500 text-3xl absolute -top-4 left-4" />
-            <p className="text-gray-700 mb-4">
-              "I was overwhelmed before I found this platform. The step-by-step guidance and courses helped me achieve my visa goals with confidence!"
-            </p>
-            <p className="font-semibold text-gray-900">General Public User</p>
-          </div>
+      <section className="py-16 bg-gray-100 px-4 md:px-10">
+      <div className="max-w-4xl mx-auto text-center">
+        <h2 className="text-4xl font-normal text-black mb-10">
+          What Our Users Say
+        </h2>
+
+        <div
+          className="relative w-full h-80 flex justify-center items-center overflow-hidden"
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
+          {testimonials.map((item, index) => {
+            const isActive = index === current;
+            const isPrev =
+              index === (current - 1 + testimonials.length) % testimonials.length;
+            const isNext = index === (current + 1) % testimonials.length;
+
+            return (
+              <div
+                key={index}
+                className={`absolute transition-all duration-500 ease-in-out p-6 rounded-2xl shadow-lg bg-white w-96
+                  ${isActive ? "z-20 scale-100 opacity-100" : ""}
+                  ${isPrev ? "z-10 -translate-x-16 scale-95 opacity-70" : ""}
+                  ${isNext ? "z-10 translate-x-16 scale-95 opacity-70" : ""}
+                  ${!isActive && !isPrev && !isNext ? "opacity-0" : ""}
+                `}
+              >
+                <FaQuoteLeft className="text-3xl text-[#3D61AB] mx-auto mb-4" />
+                <Image
+                  src={item.image}
+                  alt={item.name}
+                  className="w-24 h-24 rounded-full mx-auto border-none mb-3"
+                />
+                <p className="text-gray-700 italic">"{item.text}"</p>
+                <h4 className="mt-4 text-lg font-semibold text-[#3D61AB]">
+                  {item.name}
+                </h4>
+                <span className="text-gray-500 text-sm">{item.role}</span>
+              </div>
+            );
+          })}
         </div>
-      </section>
+
+        {/* Navigation Buttons */}
+        <div className="mt-8 flex justify-center gap-4">
+          <button
+            onClick={prevCard}
+            className="bg-[#3D61AB] text-white px-4 py-2 rounded-full hover:bg-[#2B4570] transition"
+          >
+            <ArrowLeft/>
+          </button>
+          <button
+            onClick={nextCard}
+            className="bg-[#3D61AB] text-white px-4 py-2 rounded-full hover:bg-[#2B4570] transition"
+          >
+            <ArrowRight/>
+          </button>
+        </div>
+      </div>
+    </section>
+
     </div>
   );
 };
