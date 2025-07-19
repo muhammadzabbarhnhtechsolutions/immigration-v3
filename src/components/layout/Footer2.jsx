@@ -6,7 +6,7 @@ const Footer2 = () => {
     <footer className="bg-gradient-to-r from-[#2B4570] to-[#3D61AB] py-12 px-24 text-white">
         <div className="max-w-7xl  px-2 flex flex-row gap-8 text-base">
           {/* Logo Section */}
-
+{/* /.. */}
           <div className="md:w-[324px]">
             <Image
               src={logo}
