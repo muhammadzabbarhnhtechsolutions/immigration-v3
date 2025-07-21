@@ -62,15 +62,17 @@ export default function InfoSection() {
   ];
 
   return (
-    <section className="bg-white text-gray-900 px-12 py-20">
+    <section className="bg-white text-gray-900 px-4 sm:px-8 lg:px-12 py-16 sm:py-24">
       {/* --- KEY FEATURES --- */}
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-4xl font-bold text-gray-800 mb-4">Key Features</h2>
-        <p className="text-lg text-gray-600 mb-12 max-w-3xl">
+        <h2 className="text-3xl sm:text-3xl font-[600] text-gray-800 mb-4">
+          Key Features
+        </h2>
+        <p className="text-base sm:text-lg text-gray-600 mb-10 sm:mb-12 max-w-3xl">
           Our platform provides powerful tools and expert guidance to help you navigate UK immigration law with confidence and ease.
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
           {keyFeatures.map(({ icon, title, text, isSvg }, idx) => (
             <div
               key={idx}
@@ -80,7 +82,13 @@ export default function InfoSection() {
                 {isSvg ? (
                   <File className="text-[#3D61AB] w-[34px] h-[34px]" />
                 ) : (
-                  <Image src={icon} alt={title} width={34} height={34} className="rounded-md" />
+                  <Image
+                    src={icon}
+                    alt={title}
+                    width={34}
+                    height={34}
+                    className="rounded-md"
+                  />
                 )}
               </div>
               <h3 className="font-semibold text-lg text-gray-800 mb-2">{title}</h3>
@@ -91,16 +99,26 @@ export default function InfoSection() {
       </div>
 
       {/* --- WHO IS IT FOR --- */}
-      <div className="max-w-6xl mx-auto mt-28">
-        <h2 className="text-4xl font-bold text-center mb-12">Who Is Immigration Navigator For?</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
+      <div className="max-w-6xl mx-auto mt-20 sm:mt-36 px-2 sm:px-0">
+        <h2 className="text-2xl sm:text-4xl font-[600] md:text-center mb-10 sm:mb-12">
+          Who Is Immigration Navigator For?
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 text-center md:py-12">
           {audience.map(({ icon, title, text }, idx) => (
             <div
               key={idx}
-              className="bg-[#F5F9FF] border border-[#D9E3F2] p-8 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300"
+              className="bg-[#F5F9FF] border border-[#D9E3F2] p-6 sm:p-8 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300"
             >
-              <Image src={icon} alt={title} width={60} height={60} className="mx-auto mb-5" />
-              <h3 className="font-semibold text-xl text-[#1A2B4B] mb-2">{title}</h3>
+              <Image
+                src={icon}
+                alt={title}
+                width={60}
+                height={60}
+                className="mx-auto mb-5"
+              />
+              <h3 className="font-semibold text-lg sm:text-xl text-[#1A2B4B] mb-2">
+                {title}
+              </h3>
               <p className="text-sm text-[#637587] leading-relaxed">{text}</p>
             </div>
           ))}

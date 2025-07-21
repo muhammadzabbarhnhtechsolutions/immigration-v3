@@ -6,6 +6,7 @@ import Navbar1 from "../../components/layout/Navbar2";
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import Footer2 from "../../components/layout/Footer2";
 export default function Page({children}) {
     const pathname = usePathname()
 
@@ -15,10 +16,10 @@ export default function Page({children}) {
        <>
        <Navbar1/>
        {children}
-       {/* { */}
-    {/* //    pathname !== '/forum'  &&
-    // //    <Footer/> */}
-    {/* //    } */}
+       {
+    pathname !== '/forum'  &&
+    <Footer2/> 
+}
        </>
     );
 }
