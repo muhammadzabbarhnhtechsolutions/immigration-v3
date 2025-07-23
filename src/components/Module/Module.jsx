@@ -51,9 +51,9 @@ const Module = () => {
 
   if (loading) {
     return (
-      <div className="mx-auto bg-[#ebf0ed] px-4 mt-8 py-20 text-center flex flex-col items-center justify-center gap-4">
-        <div className="h-10 w-10 border-4 border-[#5bb180] border-t-transparent rounded-full animate-spin" />
-        <p className="text-[#5bb180] text-lg font-medium">Loading modules...</p>
+      <div className="mx-auto bg-[#ebf0ed] px-4 mt-0 py-20 text-center flex flex-col items-center justify-center gap-4">
+        <div className="h-10 w-10 border-4 border-[#3D61AB] border-t-transparent rounded-full animate-spin" />
+        <p className="text-[#3D61AB] text-lg font-medium">Loading modules...</p>
       </div>
     );
   }
@@ -107,7 +107,7 @@ const Module = () => {
       <main className="flex-1 p-4 sm:p-6 md:p-8 mt-12 md:mt-10">
         {/* Heading + search */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold text-[#88AE98]">
+          <h1 className="text-2xl sm:text-3xl font-bold text-[#3D61AB]">
             Course Modules
           </h1>
 

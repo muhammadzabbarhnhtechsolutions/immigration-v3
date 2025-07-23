@@ -11,7 +11,7 @@ const RecentComment = (props) => {
       </div>
       <div className="flex flex-col gap-2 border-b pb-2">
         <h1 className="text-[#27AAE1]">Diana Amber</h1>
-        <h1 className="text-[#5aaa7c]">Lorem ipsum dolor</h1>
+        <h1 className="text-[#3D61AB]">Lorem ipsum dolor</h1>
       </div>
     </div>
   );

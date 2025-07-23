@@ -183,7 +183,7 @@ export default function Navbar() {
         // }
       >
         {/* Top Contact Bar */}
-        <div className="bg-[#88AE98]  text-white px-14 py-2 hidden md:flex justify-between items-center text-sm">
+        <div className="bg-[#3D61AB]  text-white px-14 py-2 hidden md:flex justify-between items-center text-sm">
           <div className="flex items-center gap-6">
             <span className="flex items-center gap-2">
               <FaPhone /> 07578979789
@@ -206,7 +206,7 @@ export default function Navbar() {
               <div className="relative">
                 <button
                   onClick={hanldeShowLogoutButton}
-                  className="flex items-center justify-center w-10 h-10 bg-gray-100 rounded-full hover:ring-2 hover:ring-[#5bb180] transition"
+                  className="flex items-center justify-center w-10 h-10 bg-gray-100 rounded-full hover:ring-2 hover:ring-[#3D61AB] transition"
                 >
                   <UserCircle2 className="w-6 h-6 text-gray-700" />
                 </button>
@@ -253,7 +253,7 @@ export default function Navbar() {
           </Link>
 
           {/* .. */}
-          <nav className="hidden md:flex gap-[15px] text-[#90B29F] font-sans text-[16px]">
+          <nav className="hidden md:flex gap-[15px] text-[#3D61AB] font-sans text-[16px]">
             {[
               { href: "/", label: "Home" },
               { href: "/about-us", label: "About Us" },
@@ -346,7 +346,7 @@ export default function Navbar() {
 
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="text-[#90B29F] cursor-pointer text-2xl md:hidden"
+            className="text-[#3D61AB] cursor-pointer text-2xl md:hidden"
           >
             {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
           </button>
@@ -371,7 +371,7 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-[#88AE98]"
+                className="text-[#3D61AB]"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {link.label}
@@ -383,18 +383,18 @@ export default function Navbar() {
               <>
                 <button
                   onClick={() => setMobileResourcesOpen(!isMobileResourcesOpen)}
-                  className="flex items-center justify-between w-full text-[#88AE98] font-semibold mt-4"
+                  className="flex items-center justify-between w-full text-[#3D61AB] font-semibold mt-4"
                 >
                   <span>Resources</span>
                   {isMobileResourcesOpen ? (
-                    <FaChevronUp className="text-[#88AE98]" />
+                    <FaChevronUp className="text-[#3D61AB]" />
                   ) : (
-                    <FaChevronDown className="text-[#88AE98]" />
+                    <FaChevronDown className="text-[#3D61AB]" />
                   )}
                 </button>
 
                 {isMobileResourcesOpen && (
-                  <div className="flex flex-col text-[#88AE98]  space-y-1 pl-4">
+                  <div className="flex flex-col text-[#3D61AB]  space-y-1 pl-4">
                     {resources.map((resource, idx) => {
                       let href = "#";
                       if (resource === "E-book") href = "/e-book";
@@ -411,7 +411,7 @@ export default function Navbar() {
                           key={idx}
                           href={href}
                           onClick={() => setIsMobileMenuOpen(false)}
-                          className="text-base text-[#88AE98] leading-relaxed hover:text-[#51956d] transition"
+                          className="text-base text-[#3D61AB] leading-relaxed hover:text-[#51956d] transition"
                         >
                           {resource === "Create Blog"
                             ? "Create Blog"
@@ -432,14 +432,14 @@ export default function Navbar() {
               <>
                 <Link
                   href="/login"
-                  className="text-[#88AE98]"
+                  className="text-[#3D61AB]"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Login
                 </Link>
                 <Link
                   href="/signup"
-                  className="text-[#88AE98]"
+                  className="text-[#3D61AB]"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Sign Up
@@ -451,7 +451,7 @@ export default function Navbar() {
                 {userData?.packages?.some((pkg) => pkg.package_type === 3) && (
                   <Link
                     href="/business-account"
-                    className="flex items-center gap-2 text-[#88AE98]"
+                    className="flex items-center gap-2 text-[#3D61AB]"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     <Briefcase className="w-5 h-5 text-gray-600" /> Business
@@ -464,7 +464,7 @@ export default function Navbar() {
                     Logout();
                     setIsMobileMenuOpen(false);
                   }}
-                  className="flex items-center gap-2 text-[#88AE98]"
+                  className="flex items-center gap-2 text-[#3D61AB]"
                 >
                   <LogOut className="w-4 h-4 text-gray-600" /> Logout
                 </button>
@@ -473,10 +473,10 @@ export default function Navbar() {
 
             {/* ─── Contact Info ─────────────────────────── */}
             <div className="flex flex-col space-y-2 pt-4 border-t-2 border-gray-100">
-              <span className="flex items-center gap-2 text-[#88AE98]">
+              <span className="flex items-center gap-2 text-[#3D61AB]">
                 <FaPhone /> 07578979789
               </span>
-              <span className="flex items-center gap-2 text-[#88AE98]">
+              <span className="flex items-center gap-2 text-[#3D61AB]">
                 <FaEnvelope /> immigration@training.com
               </span>
             </div>
@@ -486,7 +486,7 @@ export default function Navbar() {
               href="/request-a-demo"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              <button className="bg-[#90B29F] mt-4 w-full flex items-center justify-center gap-2 text-white text-sm font-semibold py-3 rounded-md hover:bg-[#7fa98b]">
+              <button className="bg-[#3D61AB] mt-4 w-full flex items-center justify-center gap-2 text-white text-sm font-semibold py-3 rounded-md hover:bg-[#7fa98b]">
                 REQUEST A DEMO <FaArrowRight />
               </button>
             </Link>

@@ -23,7 +23,7 @@ const SidebarIcons = ({ toggleSidebar }) => {
   const textClasses = "text-xs text-white";
 
   return (
-    <div className="w-full md:w-[80px] bg-[#88ae98] px-4 py-2.5 flex flex-row md:flex-col gap-4 md:gap-6 items-center md:items-center justify-around md:justify-start md:pt-16 md:py-10 fixed md:static  top-[99px] md:top-auto  z-40">
+    <div className="w-full md:w-[80px] bg-[#3D61AB] px-4 py-2.5 flex flex-row md:flex-col gap-4 md:gap-6 items-center md:items-center justify-around md:justify-start md:pt-16 md:py-10 fixed md:static  top-[99px] md:top-auto  z-40">
       <div className="flex flex-col items-center cursor-pointer">
         <Home className={iconClasses} />
         <span className={textClasses}>Home</span>
@@ -60,7 +60,7 @@ const Sidebar = ({ selectedIndex, setSelectedIndex, isOpen, toggleSidebar, video
 
   return (
     <div
-      className={`fixed md:flex flex-col left-0 h-screen bg-[#88ae98] w-64 p-4 pt-6 z-40 shadow-lg transition-transform duration-300 ${
+      className={`fixed md:flex flex-col left-0 h-screen bg-[#3D61AB] w-64 p-4 pt-6 z-40 shadow-lg transition-transform duration-300 ${
         isOpen ? "translate-x-0" : "-translate-x-full"
       }`}
     >
@@ -154,7 +154,7 @@ const MainContent = ({ selectedIndex, setSelectedIndex, videos }) => {
   return (
 <div className="flex-1 ml-0 md:ml-[10px] md:p-6 mt-[99px] md:mt-[54px]">
       <div className="mb-6 relative">
-        <div className="flex justify-between bg-[#88ae98] items-center py-2.5 px-2">
+        <div className="flex justify-between bg-[#3D61AB] items-center py-2.5 px-2">
           <div className="flex items-center gap-4 text-white">
             <button
               onClick={() => setSelectedIndex(Math.max(selectedIndex - 1, 0))}
@@ -216,7 +216,7 @@ const MainContent = ({ selectedIndex, setSelectedIndex, videos }) => {
           PREVIOUS
         </button>
         <button
-          className="px-6 py-2 bg-[#88ae98] text-white rounded hover:bg-[#6d9f89] transition"
+          className="px-6 py-2 bg-[#3D61AB] text-white rounded hover:bg-[#6d9f89] transition"
           onClick={handleNext}
           disabled={selectedIndex === videos.length - 1}
         >
@@ -249,9 +249,9 @@ const LessonLayout = () => {
 
   if (loading) {
     return (
-      <div className="mx-auto bg-[#ebf0ed] px-4 mt-8 py-20 text-center flex flex-col items-center justify-center gap-4 animate-fade-in">
-        <div className="h-10 w-10 border-4 border-[#88ae98] border-t-transparent rounded-full animate-spin"></div>
-        <p className="text-[#88ae98] text-lg font-medium">Loading lessons...</p>
+      <div className="mx-auto bg-[#ebf0ed] px-4 mt-0 py-20 text-center flex flex-col items-center justify-center gap-4 animate-fade-in">
+        <div className="h-10 w-10 border-4 border-[#3D61AB] border-t-transparent rounded-full animate-spin"></div>
+        <p className="text-[#3D61AB] text-lg font-medium">Loading lessons...</p>
       </div>
     );
   }
@@ -264,7 +264,7 @@ const LessonLayout = () => {
     <div className="md:hidden fixed top-4 left-4 z-50">
       <button
         onClick={toggleSidebar}
-        className="bg-[#88ae98] text-white p-2 rounded shadow-md"
+        className="bg-[#3D61AB] text-white p-2 rounded shadow-md"
       >
         <BookOpen className="w-5 h-5" />
       </button>

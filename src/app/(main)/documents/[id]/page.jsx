@@ -33,7 +33,7 @@ const Page = () => {
       : documentData;
 
   return (
-    <div className="max-w-7xl mx-auto px-12 py-12 mt-8">
+    <div className="max-w-7xl mx-auto px-12 py-12 mt-0">
       <h2 className="text-3xl mt-12 font-bold text-[#8abd9f] mb-10 text-center">
         Appointment Documents
       </h2>
@@ -65,9 +65,9 @@ const Page = () => {
 
       {/* Content */}
       {loading ? (
-        <div className="mx-auto px-4 mt-8 py-20 text-center flex flex-col items-center justify-center gap-4 animate-fade-in">
-          <div className="h-10 w-10 border-4 border-[#88ae98] border-t-transparent rounded-full animate-spin"></div>
-          <p className="text-[#88ae98] text-xl font-medium">Loading Documents..</p>
+        <div className="mx-auto px-4 mt-0 py-20 text-center flex flex-col items-center justify-center gap-4 animate-fade-in">
+          <div className="h-10 w-10 border-4 border-[#3D61AB] border-t-transparent rounded-full animate-spin"></div>
+          <p className="text-[#3D61AB] text-xl font-medium">Loading Documents..</p>
         </div>
       ) : filteredDocuments.length > 0 ? (
         <div className="flex justify-center items-start gap-6">

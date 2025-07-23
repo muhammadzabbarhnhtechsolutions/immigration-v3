@@ -43,7 +43,7 @@ export default function MainComponent() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="bg-[#f2f6f4] p-8 rounded-lg shadow-sm w-full max-w-md">
-          <h1 className="text-2xl text-center text-[#87AA9C] mb-8">Register</h1>
+          <h1 className="text-2xl text-center text-[#3D61AB] mb-8">Register</h1>
   
           <form  className="space-y-4">
             <div className="flex gap-4">
@@ -147,7 +147,7 @@ export default function MainComponent() {
             <button
               type="submit"
               disabled={loading}
-               className="mt-6 inline-block px-6 py-2.5 rounded-full bg-[#5aaa7c] text-white font-semibold shadow-md transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-xl active:scale-95"
+               className="mt-6 inline-block px-6 py-2.5 rounded-full bg-[#3D61AB] text-white font-semibold shadow-md transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-xl active:scale-95"
             >
               Register
             </button>

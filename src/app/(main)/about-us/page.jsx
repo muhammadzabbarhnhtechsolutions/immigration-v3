@@ -11,7 +11,7 @@ export default function AboutUs() {
           <h1 className="text-3xl md:text-5xl font-semibold text-gray-900 leading-tight">
             Take steps to <br />
             succeed, grow & <br />
-            <span className="text-[#90B29F]">
+            <span className="text-[#3D61AB]">
               elevate your <br />
               practice
             </span>
@@ -21,7 +21,7 @@ export default function AboutUs() {
             chance to further your practice in UK Immigration Law through our
             wide range of services.
           </p>
-          <button className="mt-6 flex cursor-pointer items-center bg-[#3F855DBD] text-white px-6 py-3 rounded-md font-medium hover:bg-[#3F855DBD] transition-colors">
+          <button className="mt-6 flex cursor-pointer items-center bg-[#3D61AB] text-white px-6 py-3 rounded-md font-medium hover:bg-[#3F855DBD] transition-colors">
             Explore Products <ArrowRightIcon className="ml-2 h-5 w-5" />
           </button>
         </div>
@@ -37,10 +37,10 @@ export default function AboutUs() {
       </section>
 
       {/* Our Story & Mission Section */}
-      <section className="bg-[#90B29F14] container  px-4 py-8">
+      <section className="bg-[#3D61AB14] container  px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
           <div className="p-6 rounded-lg">
-            <h2 className="text-2xl md:text-[35px] font-bold text-[#90B29F] font-sans mb-4">Our Story</h2>
+            <h2 className="text-2xl md:text-[35px] font-bold text-[#3D61AB] font-sans mb-4">Our Story</h2>
             <p className="text-[#676767] mb-4 md:text-[14px]">
               At Immigration Navigator, our story is one driven by a passion for
               excellence in UK Immigration Law. Founded by experienced legal
@@ -57,7 +57,7 @@ export default function AboutUs() {
             </p>
           </div>
           <div className="p-6 rounded-lg ">
-            <h2 className="text-2xl md:text-[35px] font-sans font-bold text-[#90B29F] mb-4">
+            <h2 className="text-2xl md:text-[35px] font-sans font-bold text-[#3D61AB] mb-4">
               Our Mission
             </h2>
             <p className="text-[#676767] mb-4 md:text-[14px]">
@@ -79,7 +79,7 @@ export default function AboutUs() {
 
      {/* CTA Section */}
 <section className="container mx-auto px-2 py-12 mb-12">
-  <div className="bg-[#90b29f] p-6 md:p-12 flex flex-col md:flex-row md:justify-between items-center rounded-lg gap-6">
+  <div className="bg-[#3D61AB] p-6 md:p-12 flex flex-col md:flex-row md:justify-between items-center rounded-lg gap-6">
     {/* Left Content */}
     <div className="flex flex-col text-center md:text-left items-center md:items-start">
       <h2 className="text-2xl md:text-4xl font-bold text-[#ffffff] mb-4">

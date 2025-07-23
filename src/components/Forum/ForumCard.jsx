@@ -519,7 +519,7 @@ const ForumCard = () => {
                   <div className="flex items-center justify-between w-full">
                     <div className="flex gap-2">
                       <h1 className="text-[#27AAE1]">{post.post_by}</h1>
-                      <h4 className="text-[#5aaa7c]">following</h4>
+                      <h4 className="text-[#3D61AB]">following</h4>
                     </div>
                   </div>
                   <div className="opacity-70 text-[13px]">
@@ -559,7 +559,7 @@ const ForumCard = () => {
                     toggleComments(post.id);
                     handleCommentsClick(post);
                   }}
-                  className="m-auto mt-8 flex items-center gap-2 px-4 ml-4 py-2 rounded-full bg-orange-100 text-orange-600 hover:bg-orange-200 hover:text-orange-700 transition-all duration-200 shadow-sm font-medium"
+                  className="m-auto mt-0 flex items-center gap-2 px-4 ml-4 py-2 rounded-full bg-orange-100 text-orange-600 hover:bg-orange-200 hover:text-orange-700 transition-all duration-200 shadow-sm font-medium"
                 >
                   <MessageSquare fill="#EC8949" />
                   <span>{post.comments_count} Comments</span>

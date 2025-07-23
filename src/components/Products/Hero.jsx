@@ -41,7 +41,7 @@ export default function VideoResources() {
       <div className="text-center mb-12">
         <h1 className="text-2xl md:text-4xl font-bold mb-2">
           <span className="text-black">Video </span>
-          <span className="text-[#7bab8e]">Resources</span>
+          <span className="text-[#3D61AB]">Resources</span>
         </h1>
         <p className="text-sm max-w-xl mx-auto">
           A next-generation video library containing pertinent information relating to the application process.
@@ -51,7 +51,7 @@ export default function VideoResources() {
       {/* Main Content Section */}
       <div className="flex flex-col md:flex-row gap-8 mb-16">
         <div className="md:w-1/2 flex flex-col justify-center mb-20">
-          <h2 className="text-2xl md:text-[32px] md:font-medium font-sans text-gray-800 font-medium text-[#7bab8e] mb-6 leading-relaxed">
+          <h2 className="text-2xl md:text-[32px] md:font-medium font-sans text-gray-800 font-medium text-[#3D61AB] mb-6 leading-relaxed">
             The only service which guides you through the application process
           </h2>
           <p className="text-sm md:text-[14px] mb-8 text-gray-700 leading-relaxed">
@@ -62,7 +62,7 @@ export default function VideoResources() {
           <div>
             <Link
               href="/pricing"
-              className="bg-[#7bab8e] text-white px-6 py-3 text-sm md:text-[14.8px] rounded-md inline-block hover:bg-[#6a9a7d] transition-colors font-semibold font-sans"
+              className="bg-[#3D61AB] text-white px-6 py-3 text-sm md:text-[14.8px] rounded-md inline-block hover:bg-[#6a9a7d] transition-colors font-semibold font-sans"
             >
               See Pricing Plans →
             </Link>

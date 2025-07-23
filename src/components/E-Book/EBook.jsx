@@ -62,9 +62,9 @@ export default function BookSection() {
 
   if (loading) {
     return (
-      <div className="mx-auto bg-[#ebf0ed] px-4 mt-8 py-20 text-center flex flex-col items-center justify-center gap-4">
-        <div className="h-10 w-10 border-4 border-[#88ae98] border-t-transparent rounded-full animate-spin" />
-        <p className="text-[#88ae98]">Loading e‑books…</p>
+      <div className="mx-auto bg-[#ebf0ed] px-4 mt-0 py-20 text-center flex flex-col items-center justify-center gap-4">
+        <div className="h-10 w-10 border-4 border-[#3D61AB] border-t-transparent rounded-full animate-spin" />
+        <p className="text-[#3D61AB]">Loading e‑books…</p>
       </div>
     );
   }
@@ -74,7 +74,7 @@ export default function BookSection() {
       <div className="max-w-7xl mx-auto">
         {/* heading + search */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
-          <h2 className="text-3xl text-[#88AE98] font-bold">E‑Books</h2>
+          <h2 className="text-3xl text-[#3D61AB] font-bold">E‑Books</h2>
 
           <div className="relative w-full sm:w-80">
             <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -86,7 +86,7 @@ export default function BookSection() {
               value={query}
               onChange={handleSearchChange}
               placeholder="Search title…"
-              className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-[#88AE98] focus:outline-none"
+              className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-[#3D61AB] focus:outline-none"
             />
           </div>
         </div>
@@ -120,7 +120,7 @@ export default function BookSection() {
           </div>
         ) : (
           <div className="col-span-full flex flex-col items-center text-center mt-28 text-gray-500">
-            <p className="text-xl font-medium text-[#88AE98]">No E‑Book found</p>
+            <p className="text-xl font-medium text-[#3D61AB]">No E‑Book found</p>
             <p className="text-[15px] text-gray-400">Try another keyword.</p>
           </div>
         )}
@@ -131,19 +131,19 @@ export default function BookSection() {
     <button
       onClick={() => setPage((p) => Math.max(p - 1, 1))}
       disabled={!hasPrev || page === 1}
-      className="p-3 rounded-full bg-white border border-[#88AE98] text-[#88AE98] hover:bg-[#88AE98] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300 shadow-sm hover:shadow-lg"
+      className="p-3 rounded-full bg-white border border-[#3D61AB] text-[#3D61AB] hover:bg-[#3D61AB] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300 shadow-sm hover:shadow-lg"
     >
       <ChevronLeft className="w-5 h-5" />
     </button>
 
-    <span className="text-sm font-medium text-[#88AE98] bg-[#ecf5f0] px-4 py-1.5 rounded-full shadow-sm">
+    <span className="text-sm font-medium text-[#3D61AB] bg-[#ecf5f0] px-4 py-1.5 rounded-full shadow-sm">
       Page {page}
     </span>
 
     <button
       onClick={() => setPage((p) => p + 1)}
       disabled={!hasNext}
-      className="p-3 rounded-full bg-white border border-[#88AE98] text-[#88AE98] hover:bg-[#88AE98] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300 shadow-sm hover:shadow-lg"
+      className="p-3 rounded-full bg-white border border-[#3D61AB] text-[#3D61AB] hover:bg-[#3D61AB] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300 shadow-sm hover:shadow-lg"
     >
       <ChevronRight className="w-5 h-5" />
     </button>

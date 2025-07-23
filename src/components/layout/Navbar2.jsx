@@ -49,12 +49,14 @@ export default function Navbar1() {
 
         {/* Buttons */}
         <div className="hidden md:flex items-center space-x-4">
-          <Link href="#signup" className="font-semibold hover:underline">
+          <Link href="/signup" className="font-semibold ">
             Sign Up
           </Link>
+          <Link href="/login" className="font-semibold flex">
           <button className="bg-[#F0F2F5] text-black px-5 py-2.5 rounded-xl hover:bg-gray-100 transition">
             Login
           </button>
+          </Link>
         </div>
 
         {/* Mobile Menu Icon */}

@@ -72,7 +72,7 @@ export default function VisaDocumentViewer() {
   return (
     <div className="min-h-screen mt-14 p-6">
       <div className="max-w-6xl mx-auto rounded-2xl md:p-10">
-        <h1 className="text-3xl font-extrabold mb-8 text-center text-[#88ae98]">
+        <h1 className="text-3xl font-extrabold mb-8 text-center text-[#3D61AB]">
           Visa Document Viewer
         </h1>
 
@@ -83,7 +83,7 @@ export default function VisaDocumentViewer() {
           </label>
           <button
             onClick={() => setDropdownOpen(!dropdownOpen)}
-            className="w-full border-2 border-gray-300 rounded-xl p-3 bg-white flex flex-wrap gap-2 items-center shadow-md hover:border-[#88ae98] transition duration-200"
+            className="w-full border-2 border-gray-300 rounded-xl p-3 bg-white flex flex-wrap gap-2 items-center shadow-md hover:border-[#3D61AB] transition duration-200"
           >
             {selectedCategories.length > 0 ? (
               selectedCategories.map((cat) => (
@@ -119,7 +119,7 @@ export default function VisaDocumentViewer() {
                       type="checkbox"
                       checked={selectedCategories.includes(option.label)}
                       onChange={() => toggleCategory(option)}
-                      className="accent-green-600 checked:text-[#88ae98] focus:ring-0"
+                      className="accent-green-600 checked:text-[#3D61AB] focus:ring-0"
                     />
                     <span className="text-gray-700">{option.label}</span>
                   </div>
@@ -137,7 +137,7 @@ export default function VisaDocumentViewer() {
           <h2 className="text-2xl font-bold mb-6 text-gray-700">Documents</h2>
 
           {loading ? (
-            <p className="text-[#88ae98] font-medium text-center">
+            <p className="text-[#3D61AB] font-medium text-center">
               Loading documents...
             </p>
           ) : documents.length > 0 ? (

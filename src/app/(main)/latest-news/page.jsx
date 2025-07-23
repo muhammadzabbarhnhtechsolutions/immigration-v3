@@ -35,7 +35,7 @@ export default function Page() {
     <div className="min-h-screen  py-26 mt-32 px-4">
       <div className="max-w-5xl mx-auto mb-16">
         <h2 className="text-center text-3xl md:text-4xl font-semibold mb-12">
-          Our <span className="text-[#84a98c]">Latest News</span>
+          Our <span className="text-[#4168b4]">Latest News</span>
         </h2>
 
         <div className="grid md:grid-cols-3 overflow-hidden gap-6">
@@ -57,7 +57,7 @@ export default function Page() {
                 </div>
               <div className="relative">
               </div>
-              <div className="p-6 bg-[#84a98c]">
+              <div className="p-6 bg-[#4168b4]">
                 <h3 className="text-xl font-medium mb-3 text-white">{item.title}</h3>
                 <p className="text-white/90 mb-4">{item.description}</p>
                 <button className="text-white cursor-pointer text-sm font-semibold hover:text-white/80">

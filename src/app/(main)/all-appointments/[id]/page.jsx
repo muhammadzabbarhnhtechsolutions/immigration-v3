@@ -104,7 +104,7 @@ const [unreadCount, setUnreadCount] = useState(3); // You can update this dynami
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
-      <h2 className="text-2xl sm:text-3xl mt-6 font-bold text-[#71a587] mb-10 text-center sm:text-left">
+      <h2 className="text-2xl sm:text-3xl mt-6 font-bold text-[#3D61AB] mb-10 text-center sm:text-left">
         Appointment
       </h2>
 
@@ -114,9 +114,9 @@ const [unreadCount, setUnreadCount] = useState(3); // You can update this dynami
             key={index}
             className="relative z-10 bg-white rounded-2xl shadow-xl w-full min-h-[300px] lg:h-[306px] flex flex-col items-center"
           >
-            <div className="bg-[#5AAA7C] h-36 rounded-t-xl w-full flex justify-center items-center relative">
+            <div className="bg-[#3D61AB] h-36 rounded-t-xl w-full flex justify-center items-center relative">
               {card.title === "Chat" && unreadCount > 0 && (
-  <div className="absolute top-2 right-2 bg-white text-[#5AAA7C] text-xs font-bold px-2.5 py-1.5 rounded-full shadow-md animate-pulse">
+  <div className="absolute top-2 right-2 bg-white text-[#3D61AB] text-xs font-bold px-2.5 py-1.5 rounded-full shadow-md animate-pulse">
     {unreadCount}
   </div>
 )}
@@ -168,7 +168,7 @@ const [unreadCount, setUnreadCount] = useState(3); // You can update this dynami
                       ) : (
                         <Link href={`/documents/${id}`}>
                           <button className="w-full text-left px-2 py-2 hover:bg-[#f0fdf4] flex items-center gap-3 transition-all duration-200 rounded-md">
-                            <span className="bg-[#5AAA7C] text-white p-1 rounded-full">
+                            <span className="bg-[#3D61AB] text-white p-1 rounded-full">
                               <Eye
                                 size={16}
                                 className="transition-transform group-hover:scale-110"
@@ -190,7 +190,7 @@ const [unreadCount, setUnreadCount] = useState(3); // You can update this dynami
               {card.title === "Upload Document" ? (
                 <button
                   onClick={() => setShowUpload(true)}
-                  className="mt-6 px-6 py-2.5 rounded-full bg-[#5aaa7c] text-white font-semibold shadow-md hover:scale-105 transition"
+                  className="mt-6 px-6 py-2.5 rounded-full bg-[#3D61AB] text-white font-semibold shadow-md hover:scale-105 transition"
                 >
                   {card.title}
                 </button>
@@ -198,14 +198,14 @@ const [unreadCount, setUnreadCount] = useState(3); // You can update this dynami
                 <Link
                   href={`/all-appointments/meetings/s?appointment_id=${id}`}
                 >
-                  <button className="mt-6 px-6 py-2.5 rounded-full bg-[#5aaa7c] text-white font-semibold shadow-md hover:scale-105 transition">
+                  <button className="mt-6 px-6 py-2.5 rounded-full bg-[#3D61AB] text-white font-semibold shadow-md hover:scale-105 transition">
                     {card.title}
                   </button>
                 </Link>
               ) : (
                 <button
                   onClick={() => setShowChat(true)}
-                  className="mt-6 px-6 py-2.5 rounded-full bg-[#5aaa7c] text-white font-semibold shadow-md hover:scale-105 transition"
+                  className="mt-6 px-6 py-2.5 rounded-full bg-[#3D61AB] text-white font-semibold shadow-md hover:scale-105 transition"
                 >
                   {card.title}
                 </button>
@@ -215,7 +215,7 @@ const [unreadCount, setUnreadCount] = useState(3); // You can update this dynami
             {/* Responsive Chat Box */}
             {showChat && (
               <div className="fixed my-2  inset-x-0 bottom-0 md:inset-auto md:bottom-8 md:right-6 md:top-52  z-[100] w-full max-w-sm mx-auto md:mx-0 md:max-w-[358px] rounded-2xl shadow-2xl bg-gray-200 animate-slide-up border border-gray-300 overflow-hidden">
-                <div className="bg-gradient-to-r from-[#5AAA7C] to-[#46996a] text-white px-5 py-4 flex justify-between items-center">
+                <div className="bg-gradient-to-r from-[#3D61AB] to-[#46996a] text-white px-5 py-4 flex justify-between items-center">
                   <h3 className="font-semibold flex gap-2 text-lg sm:text-xl">
                     <MessageCircleCode /> Chats
                   </h3>
@@ -245,7 +245,7 @@ const [unreadCount, setUnreadCount] = useState(3); // You can update this dynami
                       <p
                         className={`inline-block py-2 px-4 rounded-2xl ${
                           m.type === "user"
-                            ? "bg-[#5AAA7C] text-white"
+                            ? "bg-[#3D61AB] text-white"
                             : "bg-[#f7f7f7] text-gray-800"
                         }`}
                       >
@@ -263,11 +263,11 @@ const [unreadCount, setUnreadCount] = useState(3); // You can update this dynami
                     value={inputMessage}
                     onChange={(e) => setInputMessage(e.target.value)}
                     onKeyDown={handleEnter}
-                    className="w-full px-4 py-2 rounded-l-full text-sm border border-gray-300 focus:ring-2 focus:ring-[#5AAA7C] outline-none transition"
+                    className="w-full px-4 py-2 rounded-l-full text-sm border border-gray-300 focus:ring-2 focus:ring-[#3D61AB] outline-none transition"
                   />
                   <button
                     onClick={handleSend}
-                    className="bg-[#5AAA7C] hover:bg-[#46996a] text-white px-4 py-2 rounded-r-full font-medium hover:scale-105 transition"
+                    className="bg-[#3D61AB] hover:bg-[#46996a] text-white px-4 py-2 rounded-r-full font-medium hover:scale-105 transition"
                   >
                     <SendHorizonal />
                   </button>
@@ -364,13 +364,13 @@ function FileUploadBox({ setShowUpload }) {
         <input
           type="text"
           placeholder="Document Title"
-          className="w-full border border-gray-300 rounded px-4 py-2 sm:py-3 focus:outline-none focus:ring-2 focus:ring-[#57b17c] focus:border-[#57b17c] text-sm sm:text-base"
+          className="w-full border border-gray-300 rounded px-4 py-2 sm:py-3 focus:outline-none focus:ring-2 focus:ring-[#3D61AB] focus:border-[#3D61AB] text-sm sm:text-base"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
         <textarea
           placeholder="Description"
-          className="w-full border border-gray-300 rounded px-4 py-2 sm:py-3 focus:outline-none focus:ring-2 focus:ring-[#57b17c] focus:border-[#57b17c] text-sm sm:text-base"
+          className="w-full border border-gray-300 rounded px-4 py-2 sm:py-3 focus:outline-none focus:ring-2 focus:ring-[#3D61AB] focus:border-[#3D61AB] text-sm sm:text-base"
           rows={3}
           value={description}
           onChange={(e) => setDescription(e.target.value)}
@@ -380,7 +380,7 @@ function FileUploadBox({ setShowUpload }) {
       {/* Drop Zone */}
       <div
         className={`border-2 border-dashed rounded-xl p-4 sm:p-6 md:p-10 text-center transition ${
-          dragOver ? "border-[#57b17c] bg-green-50" : "border-gray-300"
+          dragOver ? "border-[#3D61AB] bg-green-50" : "border-gray-300"
         }`}
         onDrop={handleDrop}
         onDragOver={(e) => {
@@ -390,7 +390,7 @@ function FileUploadBox({ setShowUpload }) {
         onDragLeave={() => setDragOver(false)}
       >
         <div className="flex flex-col items-center space-y-3">
-          <Upload className="text-[#57b17c] w-8 h-8 sm:w-10 sm:h-10" />
+          <Upload className="text-[#3D61AB] w-8 h-8 sm:w-10 sm:h-10" />
           <p className="text-sm sm:text-base md:text-lg font-semibold text-gray-700 text-center">
             Drag & drop files or{" "}
             <span
@@ -434,7 +434,7 @@ function FileUploadBox({ setShowUpload }) {
       <button
         onClick={handleUpload}
         disabled={uploading}
-        className="w-full mt-4 bg-[#57b17c] hover:bg-green-600 text-white font-semibold py-3 rounded-lg transition-all duration-300 text-sm sm:text-base"
+        className="w-full mt-4 bg-[#3D61AB] hover:bg-green-600 text-white font-semibold py-3 rounded-lg transition-all duration-300 text-sm sm:text-base"
       >
         {uploading ? "Uploading..." : "Upload Document"}
       </button>
@@ -443,7 +443,7 @@ function FileUploadBox({ setShowUpload }) {
       {uploading && (
         <div className="w-full bg-gray-200 rounded h-3 overflow-hidden mt-4">
           <div
-            className="bg-[#57b17c] h-full transition-all"
+            className="bg-[#3D61AB] h-full transition-all"
             style={{ width: `${progress}%` }}
           />
         </div>

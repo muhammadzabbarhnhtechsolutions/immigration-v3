@@ -39,7 +39,7 @@ const ResourcesSection = () => {
               href={href}
               className="bg-white border rounded-xl hover:-translate-y-2 cursor-pointer shadow hover:shadow-lg transition duration-300 p-6 flex flex-col items-center text-center"
             >
-              <div className="w-24 h-24 bg-[#5AAA7CC9] rounded-full flex items-center justify-center mb-3 overflow-hidden">
+              <div className="w-24 h-24 bg-[#3D61ABC9] rounded-full flex items-center justify-center mb-3 overflow-hidden">
                 {/* External images need width/height */}
                 <Image
                   src={icon}
@@ -49,7 +49,7 @@ const ResourcesSection = () => {
                   className="object-contain"
                 />
               </div>
-              <span className="text-xl font-bold text-[#5AAA7CC9]">{title}</span>
+              <span className="text-xl font-bold text-[#3D61ABC9]">{title}</span>
             </Link>
           );
         })}

@@ -47,9 +47,9 @@ export default function GeneralResourcesPage() {
 
   if (loading) {
     return (
-       <div className="mx-auto bg-[#ebf0ed] px-4 mt-8 py-20 text-center flex flex-col items-center justify-center gap-4 animate-fade-in">
-        <div className="h-10 w-10 border-4 border-[#88ae98] border-t-transparent rounded-full animate-spin"></div>
-        <p className="text-[#88ae98] text-lg font-medium">Loading Resources...</p>
+       <div className="mx-auto bg-[#ebf0ed] px-4 mt-0 py-20 text-center flex flex-col items-center justify-center gap-4 animate-fade-in">
+        <div className="h-10 w-10 border-4 border-[#3D61AB] border-t-transparent rounded-full animate-spin"></div>
+        <p className="text-[#3D61AB] text-lg font-medium">Loading Resources...</p>
       </div>
     );
   }
@@ -58,7 +58,7 @@ export default function GeneralResourcesPage() {
     <section className="px-4 sm:px-12 py-16">
       {/* Heading + search */}
       <div className="flex flex-col sm:flex-row items-start md:mt-6 sm:items-center justify-between gap-4 mb-10">
-        <h2 className="text-[26px] sm:text-3xl font-bold text-[#88AE98]">
+        <h2 className="text-[26px] sm:text-3xl font-bold text-[#3D61AB]">
           General Resources
         </h2>
 
@@ -83,7 +83,7 @@ export default function GeneralResourcesPage() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search by type or file…"
-            className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-[#88AE98] focus:outline-none"
+            className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-[#3D61AB] focus:outline-none"
           />
         </div>
       </div>
@@ -112,7 +112,7 @@ export default function GeneralResourcesPage() {
       ) : (
 <div className="col-span-full flex flex-col items-center text-center mt-22 text-gray-500">
               <svg
-                className="w-12 h-12 text-[#88AE98] mb-4"
+                className="w-12 h-12 text-[#3D61AB] mb-4"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="1.5"
@@ -124,7 +124,7 @@ export default function GeneralResourcesPage() {
                   d="M15 12H9m12 0A9 9 0 113 12a9 9 0 0118 0z"
                 />
               </svg>
-              <p className="text-lg font-medium text-[#88AE98]">
+              <p className="text-lg font-medium text-[#3D61AB]">
                 No Resources found
               </p>
               <p className="text-[13px] text-gray-400">
@@ -151,7 +151,7 @@ export default function GeneralResourcesPage() {
                 onClick={() => setPage(i + 1)}
                 className={`px-3 py-1.5 rounded ${
                   page === i + 1
-                    ? "bg-[#88AE98] text-white"
+                    ? "bg-[#3D61AB] text-white"
                     : "hover:bg-gray-100"
                 }`}
               >

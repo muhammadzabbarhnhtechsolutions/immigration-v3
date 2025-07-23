@@ -97,7 +97,7 @@ const handleSocialSignup = async (provider) => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#F9FAFB]  px-4 py-10">
       <div className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md animate-fade-in">
-        <h1 className="text-3xl font-semibold text-center text-[#5bb180] mb-6">Create an Account</h1>
+        <h1 className="text-3xl font-semibold text-center text-[#3D61AB] mb-6">Create an Account</h1>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="flex gap-4">
@@ -112,7 +112,7 @@ const handleSocialSignup = async (provider) => {
                   value={formData[field]}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5bb180] bg-gray-50"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3D61AB] bg-gray-50"
                 />
               </div>
             ))}
@@ -128,7 +128,7 @@ const handleSocialSignup = async (provider) => {
               value={formData.email}
               onChange={handleInputChange}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5bb180] bg-gray-50"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3D61AB] bg-gray-50"
             />
           </div>
 
@@ -143,7 +143,7 @@ const handleSocialSignup = async (provider) => {
                 value={formData.password}
                 onChange={handleInputChange}
                 required
-                className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5bb180] bg-gray-50"
+                className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3D61AB] bg-gray-50"
               />
               <span
                 onClick={() => setShowPassword((prev) => !prev)}
@@ -161,7 +161,7 @@ const handleSocialSignup = async (provider) => {
     name="agreeToTerms"
     checked={formData.agreeToTerms}
     onChange={handleInputChange}
-    className="mt-1 mr-2 h-4 w-4 text-[#5bb180] border-gray-300 rounded"
+    className="mt-1 mr-2 h-4 w-4 text-[#3D61AB] border-gray-300 rounded"
   />
   <p className="text-[13.3px]">
     I agree to the{" "}
@@ -176,7 +176,7 @@ const handleSocialSignup = async (provider) => {
   {showPolicy && (
   <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/5 bg-opacity-50">
     <div className="bg-white rounded-xl shadow-xl max-w-lg w-full p-6 relative animate-fade-in">
-      <h2 className="text-xl font-semibold text-[#5bb180] mb-4">Privacy Policy</h2>
+      <h2 className="text-xl font-semibold text-[#3D61AB] mb-4">Privacy Policy</h2>
       <div className="text-gray-700 text-sm max-h-[300px] overflow-y-auto space-y-3">
         <p>
           We value your privacy. Your personal information will only be used to create your account,
@@ -207,7 +207,7 @@ const handleSocialSignup = async (provider) => {
           </div>
 
 
-     <div className="mt-8 mb-4">
+     <div className="mt-0 mb-4">
   {/* Divider */}
   <div className="relative mb-6">
     <div className="absolute inset-0 flex items-center">
@@ -274,7 +274,7 @@ const handleSocialSignup = async (provider) => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-2.5 mt-2 bg-[#58a57a] text-white rounded-lg hover:bg-[#5bad7f]  transition-all disabled:opacity-50"
+            className="w-full py-2.5 mt-2 bg-[#4168b4] text-white rounded-lg hover:bg-[#3D61AB]  transition-all disabled:opacity-50"
           >
             {loading ? "Registering..." : "Register"}
           </button>

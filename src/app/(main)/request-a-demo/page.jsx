@@ -26,8 +26,8 @@ export default function ContactSection() {
         {/* Right: Contact Form */}
         <div className="bg-white p-6  sm:p-8 rounded-sm shadow-lg w-full max-w-xl mx-auto">
           <h3 className="text-2xl font-semibold mb-6 text-gray-800">
-            <span className="border-b-3 pb-2 border-[#84a98c]">Reque</span>st A{' '}
-            <span className="text-[#84a98c]">Demo</span>
+            <span className="border-b-3 pb-2 border-[#3D61AB]">Reque</span>st A{' '}
+            <span className="text-[#3D61AB]">Demo</span>
           </h3>
 
           <form className="space-y-4 mb-6">
@@ -58,7 +58,7 @@ export default function ContactSection() {
             <div className="flex justify-center items-center">
               <button
                 type="submit"
-                className="bg-[#84a98c] cursor-pointer text-white px-6 py-2 rounded-md mt-2 hover:bg-[#769b8e] transition-colors"
+                className="bg-[#3D61AB] cursor-pointer text-white px-6 py-2 rounded-md mt-2 hover:bg-[#769b8e] transition-colors"
               >
                 SUBMIT
               </button>

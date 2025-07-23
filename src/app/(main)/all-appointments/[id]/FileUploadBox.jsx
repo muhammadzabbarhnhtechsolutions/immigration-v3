@@ -74,14 +74,14 @@ export default function FileUploadBox({ setShowUpload }) {
         <input
           type="text"
           placeholder="Document Title"
-          className="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#57b17c] focus:border-[#57b17c]"
+          className="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#3D61AB] focus:border-[#3D61AB]"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
 
         <textarea
           placeholder="Description"
-          className="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#57b17c] focus:border-[#57b17c]"
+          className="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#3D61AB] focus:border-[#3D61AB]"
           rows={3}
           value={description}
           onChange={(e) => setDescription(e.target.value)}
@@ -90,7 +90,7 @@ export default function FileUploadBox({ setShowUpload }) {
 
       <div
         className={`border-2 border-dashed rounded-xl p-10 text-center transition ${
-          dragOver ? "border-[#57b17c] bg-green-50" : "border-gray-300"
+          dragOver ? "border-[#3D61AB] bg-green-50" : "border-gray-300"
         }`}
         onDrop={handleDrop}
         onDragOver={(e) => {
@@ -100,7 +100,7 @@ export default function FileUploadBox({ setShowUpload }) {
         onDragLeave={() => setDragOver(false)}
       >
         <div className="flex flex-col items-center space-y-3">
-          <Upload className="text-[#57b17c] w-10 h-10" />
+          <Upload className="text-[#3D61AB] w-10 h-10" />
           <p className="text-lg font-semibold text-gray-700">
             Drag & drop files or{" "}
             <span
@@ -140,7 +140,7 @@ export default function FileUploadBox({ setShowUpload }) {
       <button
         onClick={handleUpload}
         disabled={uploading}
-        className="mt-4 w-full bg-[#57b17c] hover:bg-green-600 text-white font-semibold py-3 rounded-lg transition"
+        className="mt-4 w-full bg-[#3D61AB] hover:bg-green-600 text-white font-semibold py-3 rounded-lg transition"
       >
         {uploading ? "Uploading..." : "Upload Document"}
       </button>
@@ -148,7 +148,7 @@ export default function FileUploadBox({ setShowUpload }) {
       {uploading && (
         <div className="mt-4 w-full bg-gray-200 rounded h-3 overflow-hidden">
           <div
- className="mt-6 inline-block px-6 py-2.5 rounded-full bg-[#5aaa7c] text-white font-semibold shadow-md transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-xl active:scale-95"            style={{ width: `${progress}%` }}
+ className="mt-6 inline-block px-6 py-2.5 rounded-full bg-[#3D61AB] text-white font-semibold shadow-md transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-xl active:scale-95"            style={{ width: `${progress}%` }}
           />
         </div>
       )}

@@ -94,7 +94,7 @@ const PlatformBenefits = () => {
     </Swiper>
   )}
 
-  <button className="mt-8 md:mt-12 bg-[#3D61AB] text-white text-sm sm:text-base px-5 sm:px-6 py-3 sm:py-3 rounded-full hover:bg-blue-700 transition-all">
+  <button className="mt-0 md:mt-12 bg-[#3D61AB] text-white text-sm sm:text-base px-5 sm:px-6 py-3 sm:py-3 rounded-full hover:bg-blue-700 transition-all">
     Request a Demo
   </button>
 </section>

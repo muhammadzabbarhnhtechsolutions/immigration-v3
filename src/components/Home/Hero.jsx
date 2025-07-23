@@ -142,7 +142,7 @@ export default function Hero() {
 
           {/* Text Content */}
           <div className="w-full md:w-1/2 text-left">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-[#90B29F] mb-6">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-[#3D61AB] mb-6">
               What We Do
             </h2>
             <div className="space-y-4 w-[100%] text-gray-900 text-[14px] sm:text-[14px]">
@@ -155,7 +155,7 @@ export default function Hero() {
               <div className="mt-6">
                 <Link
                   href="#learn-more"
-                  className="inline-flex font-semibold items-center bg-[#90B29F] text-white px-5 py-2 rounded hover:bg-[#7aa18e] transition-colors"
+                  className="inline-flex font-semibold items-center bg-[#3D61AB] text-white px-5 py-2 rounded hover:bg-[#7aa18e] transition-colors"
                 >
                   Read More <span className="ml-1"><ArrowRight /></span>
                 </Link>

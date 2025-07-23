@@ -238,7 +238,7 @@ body {
   cursor: pointer;
   padding: 12px 14px;
   border: none;
-  background: #57b17c;
+  background: #3D61AB;
   color: ghostwhite;
   overflow: hidden;
   transition: transform 0.2s ease-in-out;
@@ -249,7 +249,7 @@ body {
   width: 6px;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #5aaa7c;
+  background-color: #3D61AB;
   border-radius: 10px;
 }
 

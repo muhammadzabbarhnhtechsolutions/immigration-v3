@@ -168,25 +168,25 @@ export default function IndividualUsers() {
 
   if (loading) {
     return (
-      <div className="mx-auto bg-[#ebf0ed] px-4 mt-8 py-20 text-center flex flex-col items-center justify-center gap-4 animate-fade-in">
-        <div className="h-10 w-10 border-4 border-[#5bb180] border-t-transparent rounded-full animate-spin"></div>
-        <p className="text-[#5bb180] text-lg font-medium">Loading packages...</p>
+      <div className="mx-auto  bg-[#ebf0ed] px-4 mt-0 py-20 text-center flex flex-col items-center justify-center gap-4 animate-fade-in">
+        <div className="h-10 w-10 border-4 border-[#3D61AB] border-t-transparent rounded-full animate-spin"></div>
+        <p className="text-[#3D61AB] text-lg font-medium">Loading packages...</p>
       </div>
     );
   }
 
   return (
-    <div className="mx-auto bg-[#ebf0ed] px-4 sm:px-6 lg:px-8 mt-8 py-12 sm:py-16">
+    <div className="mx-auto bg-[#ebf0ed] px-4 sm:px-6 lg:px-8 mt-0 py-12 sm:py-16 md:px-22">
       <div className="text-center mb-8">
         <div className="flex justify-center">
           <div className="inline-flex flex-wrap justify-start items-center gap-4 mb-6 mt-6 px-4 py-3 rounded-2xl border border-gray-200 w-full sm:w-auto">
             <div className="relative w-full sm:w-auto max-w-xs">
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="w-full sm:w-[210px] px-4 py-2 text-left bg-gray-100 border border-[#d1e7dd] rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-[#5AAA7C] flex justify-between items-center text-gray-800 hover:shadow-lg transition"
+                className="w-full sm:w-[210px] px-4 py-2 text-left bg-gray-100 border border-[#d1e7dd] rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-[#4168b4] flex justify-between items-center text-gray-800 hover:shadow-lg transition"
               >
                 {selectedIds?.length === 0 ? "Select Resources" : `${selectedIds?.length} Selected`}
-                <ChevronDown className="ml-2 text-[#5AAA7C]" size={18} />
+                <ChevronDown className="ml-2 text-[#4168b4]" size={18} />
               </button>
               {isOpen && (
                 <div className="absolute z-50 mt-2 w-full sm:w-[240px] bg-white border border-gray-300 rounded-xl shadow-xl max-h-60 overflow-y-auto">
@@ -199,7 +199,7 @@ export default function IndividualUsers() {
                         type="checkbox"
                         checked={selectedIds.includes(res.id)}
                         onChange={() => toggleSelect(res.id)}
-                        className="form-checkbox text-[#5AAA7C] rounded focus:ring-0"
+                        className="form-checkbox text-[#4168b4] rounded focus:ring-0"
                       />
                       <span className="ml-2 text-gray-800">{res.name}</span>
                     </label>
@@ -214,8 +214,8 @@ export default function IndividualUsers() {
                   onClick={() => setBilling(type)}
                   className={`px-5 py-2.5 font-semibold text-sm sm:text-base rounded-full transition duration-300 ${
                     billing === type
-                      ? "bg-[#5AAA7C] text-white shadow-md"
-                      : "bg-gray-100 text-gray-700 hover:bg-[#e7f6ee] hover:text-[#5AAA7C]"
+                      ? "bg-[#4168b4] text-white shadow-md"
+                      : "bg-gray-100 text-gray-700 hover:bg-[#e7f6ee] hover:text-[#4168b4]"
                   }`}
                 >
                   {type}
@@ -230,13 +230,13 @@ export default function IndividualUsers() {
           <p>No {billing} packages available at the moment.</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-screen-xl mx-auto px-2 sm:px-0">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-screen-xl  px-2 mx-20">
           {filteredPackages.map((pkg) => (
             <div
               key={pkg.id}
-              className="bg-[#fbfcfc] rounded-lg overflow-hidden shadow-sm flex flex-col"
+              className="bg-[#fbfcfc] rounded-lg overflow-hidden shadow-sm flex flex-col  md:px-22  "
             >
-              <div className="py-4 text-center bg-[#7bab8e] text-white">
+              <div className="py-4 text-center bg-[#4168b4] text-white">
                 <h3 className="font-semibold text-xl sm:text-2xl md:text-[24px] mx-4">
                   {pkg.name}
                 </h3>
@@ -244,7 +244,7 @@ export default function IndividualUsers() {
               <div className="px-4 py-6 flex flex-col flex-grow justify-between">
                 <div>
                   <div className="text-center mb-6">
-                    <div className="flex justify-center items-end gap-2 text-[#7bab8e]">
+                    <div className="flex justify-center items-end gap-2 text-[#4168b4]">
                       <span className="text-3xl sm:text-4xl font-semibold flex items-center gap-1">
                         <Euro className="w-5 h-5 mt-1" />
                         {parseFloat(pkg.price).toFixed(2)}
@@ -261,10 +261,10 @@ export default function IndividualUsers() {
                         key={feature}
                         className="flex items-center border-b border-gray-200 pb-2"
                       >
-                        <div className="h-5 w-5 rounded-full bg-[#7bab8e] flex items-center justify-center text-white">
+                        <div className="h-5 w-5 rounded-full bg-[#4168b4] flex items-center justify-center text-white">
                           <CheckIcon />
                         </div>
-                        <span className="ml-3 text-[#90B29F]">{feature}</span>
+                        <span className="ml-3 text-[#3D61AB]">{feature}</span>
                       </li>
                     ))}
                   </ul>
@@ -272,7 +272,7 @@ export default function IndividualUsers() {
                 <div className="text-center mt-6">
                   <button
                     onClick={() => handlebuyPakages(pkg.id)}
-                    className="bg-[#7bab8e] cursor-pointer text-white px-6 py-3 text-sm rounded-md hover:bg-[#6a9a7d] transition uppercase tracking-wider font-medium w-full"
+                    className="bg-[#4168b4] cursor-pointer text-white px-6 py-3 text-sm rounded-md hover:bg-[#6a9a7d] transition uppercase tracking-wider font-medium w-full"
                   >
                     Buy Now
                   </button>

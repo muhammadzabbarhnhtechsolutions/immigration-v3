@@ -33,12 +33,12 @@ function ResultContent() {
 
   if (loading) {
     return (
-      <div className="mx-auto bg-[#ebf0ed] px-4 mt-8 py-20 text-center flex flex-col items-center justify-center gap-4 animate-fade-in">
+      <div className="mx-auto bg-[#ebf0ed] px-4 mt-0 py-20 text-center flex flex-col items-center justify-center gap-4 animate-fade-in">
         {/* Spinner */}
-        <div className="h-10 w-10 border-4 border-[#88ae98] border-t-transparent rounded-full animate-spin"></div>
+        <div className="h-10 w-10 border-4 border-[#3D61AB] border-t-transparent rounded-full animate-spin"></div>
 
         {/* Text */}
-        <p className="text-[#88ae98] text-xl font-medium">
+        <p className="text-[#3D61AB] text-xl font-medium">
           Loading Your Result..
         </p>
       </div>
@@ -51,7 +51,7 @@ function ResultContent() {
    px-4"
     >
       <div className="w-full max-w-xl bg-white rounded-3xl shadow-xl p-10 text-center relative overflow-hidden animate-fade-in">
-        <h1 className="text-4xl font-extrabold text-[#88AE98] mb-8">
+        <h1 className="text-4xl font-extrabold text-[#3D61AB] mb-8">
           Test Result
         </h1>
 
@@ -69,7 +69,7 @@ function ResultContent() {
               cx="50%"
               cy="50%"
               r="60"
-              stroke="#88AE98" // ✅ Changed from #357AFF to #88AE98
+              stroke="#3D61AB" // ✅ Changed from #357AFF to #3D61AB
               strokeWidth="14"
               strokeLinecap="round"
               fill="none"
@@ -78,7 +78,7 @@ function ResultContent() {
               className="transition-all duration-1000"
             />
           </svg>
-          <div className="absolute inset-0 flex items-center justify-center text-3xl font-bold text-[#88AE98]">
+          <div className="absolute inset-0 flex items-center justify-center text-3xl font-bold text-[#3D61AB]">
             {percent}%
           </div>
         </div>
@@ -99,7 +99,7 @@ function ResultContent() {
 
         <button
           onClick={() => router.push("/")}
-          className="mt-8 bg-[#88AE98] text-white px-6 py-3 rounded-xl text-lg hover:bg-[#7fb193] transition-all duration-300 shadow-md"
+          className="mt-0 bg-[#3D61AB] text-white px-6 py-3 rounded-xl text-lg hover:bg-[#7fb193] transition-all duration-300 shadow-md"
         >
           Go to Home
         </button>

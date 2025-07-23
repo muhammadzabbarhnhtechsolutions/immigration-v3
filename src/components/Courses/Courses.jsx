@@ -38,9 +38,9 @@ export default function CoursePage() {
 
   if (loading) {
     return (
-      <div className="mx-auto bg-[#ebf0ed] px-4 mt-8 py-20 text-center flex flex-col items-center justify-center gap-4 animate-fade-in">
-        <div className="h-10 w-10 border-4 border-[#5bb180] border-t-transparent rounded-full animate-spin"></div>
-        <p className="text-[#5bb180] text-lg font-medium">Loading courses...</p>
+      <div className="mx-auto bg-[#ebf0ed] px-4 mt-0 py-20 text-center flex flex-col items-center justify-center gap-4 animate-fade-in">
+        <div className="h-10 w-10 border-4 border-[#3D61AB] border-t-transparent rounded-full animate-spin"></div>
+        <p className="text-[#3D61AB] text-lg font-medium">Loading courses...</p>
       </div>
     );
   }
@@ -49,7 +49,7 @@ export default function CoursePage() {
     <main className="bg-gray-50 min-h-screen px-4 py-8 md:py-24">
       {/* Heading + Search */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 max-w-7xl md:mx-12 mb-10">
-        <h2 className="text-3xl font-bold text-[#88ae98]">All Courses</h2>
+        <h2 className="text-3xl font-bold text-[#3D61AB]">All Courses</h2>
 
         {/* 🔍 Search Bar */}
         <div className="relative w-full sm:w-96">
@@ -105,7 +105,7 @@ export default function CoursePage() {
               </div>
               <div>
               <Link href={`/course-module/${course.id}`}>
-                <button className="w-full h-12 bg-[#6b967e] hover:bg-[#88AE98] text-white text-sm font-medium rounded-lg shadow">
+                <button className="w-full h-12 bg-[#6b967e] hover:bg-[#3D61AB] text-white text-sm font-medium rounded-lg shadow">
                   VIEW COURSE
                 </button>
               </Link>

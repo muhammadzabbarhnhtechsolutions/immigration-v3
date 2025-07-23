@@ -26,7 +26,7 @@ const Page = () => {
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <h2 className="text-3xl mt-6 font-bold text-[#71a587] mb-10">Blog Details</h2>
+      <h2 className="text-3xl mt-6 font-bold text-[#3D61AB] mb-10">Blog Details</h2>
 
       {article ? (
         <div className="mb-16">
@@ -57,12 +57,12 @@ const Page = () => {
           </blockquote> */}
         </div>
       ) : (
- <div className="mx-auto bg-[#ebf0ed] px-4 mt-8 py-20 text-center flex flex-col items-center justify-center gap-4 animate-fade-in">
+ <div className="mx-auto bg-[#ebf0ed] px-4 mt-0 py-20 text-center flex flex-col items-center justify-center gap-4 animate-fade-in">
         {/* Spinner */}
-        <div className="h-10 w-10 border-4 border-[#5bb180] border-t-transparent rounded-full animate-spin"></div>
+        <div className="h-10 w-10 border-4 border-[#3D61AB] border-t-transparent rounded-full animate-spin"></div>
 
         {/* Text */}
-        <p className="text-[#5bb180] text-lg font-medium">
+        <p className="text-[#3D61AB] text-lg font-medium">
           Loading Blog Articles...
         </p>
       </div>      )}

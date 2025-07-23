@@ -11,7 +11,7 @@ export default function WhyImmigrationNavigator() {
           </h2>
   
           <div className="grid md:grid-cols-3 gap-6">
-            <div className="bg-[#8BAC9A73] border border-[#90B29F] p-10 rounded-lg text-center">
+            <div className="bg-[#8BAC9A73] border border-[#3D61AB] p-10 rounded-lg text-center">
               <div className="flex justify-center mb-4">
                 <div className="w-24 h-16 flex items-center justify-center">
                 <Image
@@ -30,7 +30,7 @@ export default function WhyImmigrationNavigator() {
               </p>
             </div>
   
-            <div className="bg-[#8BAC9A73] border border-[#90B29F] p-10 rounded-lg text-center">
+            <div className="bg-[#8BAC9A73] border border-[#3D61AB] p-10 rounded-lg text-center">
               <div className="flex justify-center mb-4">
                 <div className="w-20 h-16 flex items-center justify-center">
                 <Image
@@ -51,7 +51,7 @@ export default function WhyImmigrationNavigator() {
               </p>
             </div>
   
-            <div className="bg-[#8BAC9A73] border border-[#90B29F] p-10 rounded-lg text-center">
+            <div className="bg-[#8BAC9A73] border border-[#3D61AB] p-10 rounded-lg text-center">
               <div className="flex justify-center mb-4">
                 <div className="w-20 h-16 flex items-center justify-center">
                   <Image
@@ -75,10 +75,10 @@ export default function WhyImmigrationNavigator() {
   
         <style jsx global>{`
           .text-sage-600 {
-            color: #84a98c;
+            color: #3D61AB;
           }
           .bg-sage-400 {
-            background-color: #84a98c;
+            background-color: #3D61AB;
           }
           .bg-sage-500 {
             background-color: #76998a;
@@ -87,7 +87,7 @@ export default function WhyImmigrationNavigator() {
             background-color: #e8f1e9;
           }
           .text-sage-400 {
-            color: #84a98c;
+            color: #3D61AB;
           }
           .bg-sage-100 {
             background-color: #e8f1e9;

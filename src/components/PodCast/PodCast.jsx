@@ -68,7 +68,7 @@ export default function BookSection() {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
-          <h2 className="text-3xl text-[#88AE98] font-bold mb-4 sm:mb-0">PodCast</h2>
+          <h2 className="text-3xl text-[#3D61AB] font-bold mb-4 sm:mb-0">PodCast</h2>
           <div className="relative w-full sm:w-80">
             <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -80,16 +80,16 @@ export default function BookSection() {
               placeholder="Search podcasts..."
               value={searchQuery}
               onChange={handleSearchChange}
-              className="w-full px-10 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#88AE98] focus:outline-none"
+              className="w-full px-10 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3D61AB] focus:outline-none"
             />
           </div>
         </div>
 
         {/* Loading */}
         {loading && books.length === 0 && (
-          <div className="mx-auto px-4 mt-8 py-20 text-center flex flex-col items-center justify-center gap-4">
-            <div className="h-10 w-10 border-4 border-[#88ae98] border-t-transparent rounded-full animate-spin" />
-            <p className="text-[#88ae98]">Loading Podcasts…</p>
+          <div className="mx-auto px-4 mt-0 py-20 text-center flex flex-col items-center justify-center gap-4">
+            <div className="h-10 w-10 border-4 border-[#3D61AB] border-t-transparent rounded-full animate-spin" />
+            <p className="text-[#3D61AB]">Loading Podcasts…</p>
           </div>
         )}
 
