@@ -39,7 +39,7 @@ export default function BusinessAccounts() {
         </h1>
         <button
           onClick={() => setShowAddModal(true)}
-          className="bg-[#3D61AB] hover:bg-[#729781] text-white px-5 py-2.5 rounded-full shadow-md transition"
+          className="bg-[#3D61AB] hover:bg-[#4168b4] text-white px-5 py-2.5 rounded-full shadow-md transition"
         >
           Add Business Account
         </button>
@@ -104,18 +104,18 @@ const AccountCard = ({ user, onEdit, onDelete }) => (
   <div className="relative bg-white rounded-3xl mt-12 p-6 pt-16 shadow-md hover:shadow-xl border border-gray-100 transition hover:-translate-y-1">
     {/* Action Icons */}
     <div className="absolute top-4 right-4 flex items-center gap-2 flex-wrap">
-      <IconBtn icon={Pencil} onClick={onEdit} color="green" />
+      <IconBtn icon={Pencil} onClick={onEdit} color="blue" />
       <IconBtn icon={Trash2} onClick={onDelete} color="red" />
     </div>
 
     {/* Avatar */}
-    <div className="absolute -top-14 left-1/2 -translate-x-1/2 bg-gradient-to-tr from-[#3D61AB] to-[#6c8a7f] p-[3px] rounded-full">
+    <div className="absolute -top-14 left-1/2 -translate-x-1/2 bg-gradient-to-tr from-[#3D61AB] to-[#4168b4] p-[3px] rounded-full">
       <img src={user.profile} className="w-28 h-28 rounded-full object-cover border-4 border-white" />
     </div>
 
     {/* Info */}
     <div className="mt-6 text-center">
-      <p className="text-lg md:text-[21px] font-bold text-[#73a086]">
+      <p className="text-lg md:text-[21px] font-bold text-[#4168b4]">
         {user.first_name} {user.last_name}
       </p>
       <p className="text-gray-500">{user.email}</p>
@@ -125,8 +125,8 @@ const AccountCard = ({ user, onEdit, onDelete }) => (
 
 const IconBtn = ({ icon: Icon, onClick, color }) => {
   const base = "w-8 h-8 p-1 rounded-lg border cursor-pointer transition hover:scale-110";
-  const colors = color === "green"
-    ? "bg-green-100 text-[#7aad90] hover:text-[#4CAF50]"
+  const colors = color === "blue"
+    ? "bg-blue-100 text-[#7aad90] hover:text-[#4CAF50]"
     : "bg-red-100 text-red-500 hover:text-red-700";
   return <Icon className={`${base} ${colors}`} onClick={onClick} />;
 };
@@ -191,13 +191,13 @@ function AccountForm({ mode, data = {}, onClose, refresh }) {
 
       {/* Image uploader */}
       <div
-        className={`border-2 border-dashed rounded-xl p-8 text-center transition ${image?"border-[#3D61AB] bg-green-50":"border-gray-300"}`}
+        className={`border-2 border-dashed rounded-xl p-8 text-center transition ${image?"border-[#3D61AB] bg-blue-50":"border-gray-300"}`}
         onDrop={onDrop}
         onDragOver={e=>e.preventDefault()}
       >
         <Upload className="w-8 h-8 text-[#3D61AB] mx-auto mb-2"/>
         <p className="text-sm font-semibold text-gray-700">
-          Drag & drop or <span className="text-[#4aa36f] underline cursor-pointer" onClick={()=>fileRef.current?.click()}>Browse</span>
+          Drag & drop or <span className="text-[#4168b4] underline cursor-pointer" onClick={()=>fileRef.current?.click()}>Browse</span>
         </p>
         <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={onInput}/>
       </div>
@@ -210,7 +210,7 @@ function AccountForm({ mode, data = {}, onClose, refresh }) {
       )}
 
       <button type="button" onClick={submit} disabled={loading}
-        className={`w-full py-2.5 rounded-lg text-white bg-[#3D61AB] hover:bg-[#729781] shadow-md flex justify-center ${loading&&"opacity-60 cursor-not-allowed"}`}>
+        className={`w-full py-2.5 rounded-lg text-white bg-[#3D61AB] hover:bg-[#4168b4] shadow-md flex justify-center ${loading&&"opacity-60 cursor-not-allowed"}`}>
         {loading ? <Spinner label={mode==="add"?"Creating…":"Updating…"} /> : (mode==="add"?"Create":"Update")}
       </button>
     </form>

@@ -103,7 +103,7 @@ const [unreadCount, setUnreadCount] = useState(3); // You can update this dynami
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-10">
+    <div className="max-w-6xl mx-auto px-4 py-6">
       <h2 className="text-2xl sm:text-3xl mt-6 font-bold text-[#3D61AB] mb-10 text-center sm:text-left">
         Appointment
       </h2>
@@ -214,15 +214,15 @@ const [unreadCount, setUnreadCount] = useState(3); // You can update this dynami
 
             {/* Responsive Chat Box */}
             {showChat && (
-              <div className="fixed my-2  inset-x-0 bottom-0 md:inset-auto md:bottom-8 md:right-6 md:top-52  z-[100] w-full max-w-sm mx-auto md:mx-0 md:max-w-[358px] rounded-2xl shadow-2xl bg-gray-200 animate-slide-up border border-gray-300 overflow-hidden">
-                <div className="bg-gradient-to-r from-[#3D61AB] to-[#46996a] text-white px-5 py-4 flex justify-between items-center">
-                  <h3 className="font-semibold flex gap-2 text-lg sm:text-xl">
+              <div className="fixed my-2  inset-x-0 bottom-0 md:inset-auto md:bottom-8 md:right-6 md:top-22  z-[100] w-full max-w-sm mx-auto md:mx-0 md:max-w-[358px] rounded-2xl shadow-2xl bg-gray-200 animate-slide-up border border-gray-300 overflow-hidden">
+                <div className="bg-gradient-to-r from-[#3D61AB] to-[#3D61AB] text-white px-5 py-4 flex justify-between items-center">
+                  <h3 className="font-semibold  flex gap-2 text-lg sm:text-xl">
                     <MessageCircleCode /> Chats
                   </h3>
                   <div className="flex gap-4">
                     <button
                       onClick={hanldeGetChatsMessages}
-                      className="w-6 h-6 flex  justify-center items-center rounded-full bg-green-100 text-green-600 shadow-sm hover:scale-110 transition"
+                      className="w-6 h-6 flex  justify-center items-center rounded-full bg-green-100 text-blue-600 shadow-sm hover:scale-110 transition"
                       title="Refresh Messages"
                     >
                       <RotateCw size={15} className="" />
@@ -284,7 +284,7 @@ const [unreadCount, setUnreadCount] = useState(3); // You can update this dynami
           <div className="bg-white p-4 sm:p-6 rounded-xl w-full max-w-xl relative animate-slide-down">
             <button
               onClick={() => setShowUpload(false)}
-              className="absolute top-2 right-3 text-green-500 hover:text-red-500 text-2xl"
+              className="absolute top-2 right-3 text-blue-500 hover:text-red-500 text-2xl"
             >
               &times;
             </button>
@@ -434,7 +434,7 @@ function FileUploadBox({ setShowUpload }) {
       <button
         onClick={handleUpload}
         disabled={uploading}
-        className="w-full mt-4 bg-[#3D61AB] hover:bg-green-600 text-white font-semibold py-3 rounded-lg transition-all duration-300 text-sm sm:text-base"
+        className="w-full mt-4 bg-[#3D61AB] hover:bg-blue -600 text-white font-semibold py-3 rounded-lg transition-all duration-300 text-sm sm:text-base"
       >
         {uploading ? "Uploading..." : "Upload Document"}
       </button>

@@ -1,11 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Briefcase, LogOut, Menu, UserCircle2, X } from "lucide-react";
 import logo from "../../assets/finnal logo.png";
+import { useRouter } from "next/navigation";
 
 export default function Navbar1() {
   const [isOpen, setIsOpen] = useState(false);
+const [ checklogin,setcheckLogin ] = useState("");
+  const [openLogout, setLogoutOpen] = useState(false);
 
   const navLinks = [
     { href: "/", label: "Home" },
@@ -19,6 +22,27 @@ export default function Navbar1() {
     { href: "/templetes", label: "Templates" },
   ];
 
+  const router = useRouter();
+
+
+  useEffect(() => {
+    const userToken = localStorage.getItem("user");
+    setcheckLogin(userToken);
+  }, []);
+
+  const Logout = () => {
+    router.push("/login");
+    // Remove tokens from storage
+    localStorage.removeItem("user");
+    localStorage.removeItem("course_id");
+    Cookies.remove("access_token"); // Agar cookie use ho rahi hai
+
+    // Redirect to login page
+  };
+
+        const hanldeShowLogoutButton = () => {
+    setLogoutOpen(!openLogout);
+  };
   return (
     <nav className="w-full  top-0 left-0 z-50 bg-white/90 backdrop-blur-md text-[#3D61AB] shadow-md">
       <div className="container mx-auto px-4 sm:px-6 flex justify-between items-center py-2">
@@ -48,6 +72,7 @@ export default function Navbar1() {
         </ul>
 
         {/* Buttons */}
+        {!checklogin ? (
         <div className="hidden md:flex items-center space-x-4">
           <Link href="/signup" className="font-semibold ">
             Sign Up
@@ -58,6 +83,39 @@ export default function Navbar1() {
           </button>
           </Link>
         </div>
+        ):(
+           <div className="relative">
+                <button
+                  onClick={hanldeShowLogoutButton}
+                  className="flex items-center justify-center w-12 h-12 bg-gray-100 rounded-full hover:ring-2 hover:ring-[#3D61AB] transition"
+                >
+                  <UserCircle2 className="w-7 h-7 text-gray-700" />
+                </button>
+
+                {openLogout && (
+                  <div className="absolute -right-4 z-20 mt-3 py-1  w-44 rounded-lg bg-white shadow-lg ring-1 ring-gray-200">
+                    {/* Logout always shown */}
+
+                    {/* Business Account shown only if any package has package_type === 3 */}
+                   
+                      <Link href="/business-account">
+                        <button onClick={()=>setLogoutOpen(!openLogout)} className="flex w-full items-center gap-2 px-3 py-2 text-sm text-gray-700 hover:bg-gray-100               transition-all duration-200">
+                          <Briefcase className="w-5 h-5 text-gray-600" />
+                          Business Account
+                        </button>
+                      </Link>
+                  
+                    <button
+                      onClick={Logout}
+                      className="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      <LogOut className="w-4 h-4 mr-2" />
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+        )}
 
         {/* Mobile Menu Icon */}
         <div className="md:hidden">

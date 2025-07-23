@@ -22,7 +22,7 @@ const getStatusIcon = (status) => {
       );
     case 3: // COMPLETE
       return (
-        <div className="bg-green-600 p-2 rounded-full shadow-lg">
+        <div className="bg-blue-600 p-2 rounded-full shadow-lg">
           <CheckCircle className="text-white" size={20} />
         </div>
       );
