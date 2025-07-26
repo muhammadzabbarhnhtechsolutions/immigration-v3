@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getGeneralResource } from "@/services/generalResourcesServices";
-import { FileArchive } from "lucide-react";
+import { ChevronLeft, ChevronRight, FileArchive } from "lucide-react";
 
 const ITEMS_PER_PAGE = 8; // فی صفحہ کتنے ریسورس
 
@@ -47,7 +47,7 @@ export default function GeneralResourcesPage() {
 
   if (loading) {
     return (
-       <div className="mx-auto bg-[#ebf0ed] px-4 mt-0 py-20 text-center flex flex-col items-center justify-center gap-4 animate-fade-in">
+       <div className="mx-auto  px-4 mt-0 py-20 text-center flex flex-col items-center justify-center gap-4 animate-fade-in">
         <div className="h-10 w-10 border-4 border-[#3D61AB] border-t-transparent rounded-full animate-spin"></div>
         <p className="text-[#3D61AB] text-lg font-medium">Loading Resources...</p>
       </div>
@@ -99,7 +99,7 @@ export default function GeneralResourcesPage() {
               rel="noopener noreferrer"
               className="bg-white w-full sm:w-[240px] md:w-[260px] rounded-xl shadow-lg border border-gray-100 px-6 py-6 flex flex-col items-center hover:shadow-xl transition"
             >
-              <FileArchive className="h-16 w-16 mb-3 text-[#64B5F6]" />
+              <FileArchive className="h-16 w-16 mb-3 text-[#3D61AB]" />
               <p className="text-gray-800 font-semibold mb-1">
                 Resource {idx + 1}
               </p>
@@ -138,33 +138,18 @@ export default function GeneralResourcesPage() {
           <button
             onClick={() => setPage((p) => Math.max(p - 1, 1))}
             disabled={page === 1}
-            className="px-4 py-2 border rounded disabled:opacity-40 hover:bg-gray-100 transition"
-          >
-            Prev
-          </button>
+ className="p-3 rounded-full bg-white border border-[#3D61AB] text-[#3D61AB] hover:bg-[#3D61AB] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300 shadow-sm hover:shadow-lg"          >
+        <ChevronLeft className="w-5 font-bold h-5" />
+    </button>
 
-          {[...Array(totalPages).keys()]
-            .slice(Math.max(0, page - 3), Math.min(totalPages, page + 2))
-            .map((i) => (
-              <button
-                key={i}
-                onClick={() => setPage(i + 1)}
-                className={`px-3 py-1.5 rounded ${
-                  page === i + 1
-                    ? "bg-[#3D61AB] text-white"
-                    : "hover:bg-gray-100"
-                }`}
-              >
-                {i + 1}
-              </button>
-            ))}
-
+    <span className="px-4 py-2 text-sm bg-[#f0f7f4] rounded-full text-[#3D61AB] font-semibold shadow-sm">
+      Page {totalPages}
+    </span>
           <button
             onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
             disabled={page === totalPages}
-            className="px-4 py-2 border rounded disabled:opacity-40 hover:bg-gray-100 transition"
-          >
-            Next
+ className="p-3 rounded-full bg-white border border-[#3D61AB] text-[#3D61AB] hover:bg-[#3D61AB] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300 shadow-sm hover:shadow-lg"          >
+            <ChevronRight className="w-5 font-bold h-5"/>
           </button>
         </div>
       )}

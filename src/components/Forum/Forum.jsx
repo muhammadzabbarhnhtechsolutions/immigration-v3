@@ -66,7 +66,7 @@ const Forum = () => {
             </div>
 
             <div className="flex   gap-4 mt-4">
-              <div className="w-full lg:w-full overflow-y-auto  h-[100vh]">
+              <div className="w-full lg:w-full overflow-y-auto  h-[120vh]">
                 <ForumList  refreshPosts={AllPosts} />
               </div>
 

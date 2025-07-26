@@ -85,7 +85,7 @@ const ForumLeftSide = ({profileData}) => {
 
 
   return (
-    <div className="flex flex-col ">
+    <div className="flex flex-col border border-gray-200">
       {/* <SearchBar /> */}
         <div className="relative rounded-lg overflow-hidden cursor-pointer ">
       {/* Background with purple overlay */}

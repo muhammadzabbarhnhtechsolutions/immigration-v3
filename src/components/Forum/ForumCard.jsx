@@ -489,8 +489,8 @@ const ForumCard = () => {
     return () => clearTimeout(timer); // Cleanup
   }, [handleCommentsClick]);
   return (
-    <div ref={scrollableRef} style={{ overflowY: "auto", maxHeight: "730px" }}>
-      <div className="rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 py-4">
+    <div ref={scrollableRef} style={{ overflowY: "auto", maxHeight: "690px" }}>
+      <div className="rounded-md border border-gray-200 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 py-2">
         {isLoading &&
           Array.from({ length: 4 }).map((_, index) => (
             <PostPlaceholder key={index} />

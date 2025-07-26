@@ -38,7 +38,7 @@ export default function CoursePage() {
 
   if (loading) {
     return (
-      <div className="mx-auto bg-[#ebf0ed] px-4 mt-0 py-20 text-center flex flex-col items-center justify-center gap-4 animate-fade-in">
+      <div className="mx-auto px-4 mt-0 py-20 text-center flex flex-col items-center justify-center gap-4 animate-fade-in">
         <div className="h-10 w-10 border-4 border-[#3D61AB] border-t-transparent rounded-full animate-spin"></div>
         <p className="text-[#3D61AB] text-lg font-medium">Loading courses...</p>
       </div>
@@ -73,7 +73,7 @@ export default function CoursePage() {
             value={searchQuery}
             onChange={handleSearch}
             placeholder="Search courses..."
-            className="w-full pl-10 pr-4 py-2.5 border border-gray-300 focus:ring-[#7EB69E] rounded-xl shadow-sm  focus:ring-2 focus:outline-none focus:border-none  transition"
+            className="w-full pl-10 pr-4 py-2.5 border border-gray-300 focus:ring-[#3D61AB] rounded-xl shadow-sm  focus:ring-2 focus:outline-none focus:border-none  transition"
           />
         </div>
       </div>
@@ -115,7 +115,7 @@ export default function CoursePage() {
         ) : (
           <div className="col-span-full flex flex-col items-center justify-center text-center mt-10 text-gray-500">
             <svg
-              className="w-12 h-12 text-[#7EB69E] mb-4"
+              className="w-12 h-12 text-[#3D61AB] mb-4"
               fill="none"
               stroke="currentColor"
               strokeWidth="1.5"
@@ -127,7 +127,7 @@ export default function CoursePage() {
                 d="M15 12H9m12 0A9 9 0 113 12a9 9 0 0118 0z"
               />
             </svg>
-            <p className="text-lg font-medium text-[#7EB69E]">
+            <p className="text-lg font-medium text-[#3D61AB]">
               No courses found
             </p>
             <p className="text-sm text-gray-400">

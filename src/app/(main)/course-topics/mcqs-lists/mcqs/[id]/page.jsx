@@ -91,7 +91,7 @@ export default function Page() {
 
         <div className="w-full max-w-3xl space-y-8">
           {loading ? (
- <div className="mx-auto bg-[#ebf0ed] px-4 mt-0 py-20 text-center flex flex-col items-center justify-center gap-4 animate-fade-in">
+ <div className="mx-auto  px-4 mt-0 py-20 text-center flex flex-col items-center justify-center gap-4 animate-fade-in">
         {/* Spinner */}
         <div className="h-10 w-10 border-4 border-[#3D61AB] border-t-transparent rounded-full animate-spin"></div>
 
@@ -117,13 +117,13 @@ export default function Page() {
                         type="radio"
                         name={`q${index}`}
                         value={option.id}
-                        className="accent-[#7EB69E] w-4 h-4"
+                        className="accent-[#3D61AB] w-4 h-4"
                         onChange={() =>
                           setSelectedOptions((prev) => ({ ...prev, [q.id]: option.id }))
                         }
                       />
                       <span className="flex items-center gap-2 text-gray-800">
-                        <span className="bg-[#7EB69E] text-white text-xs w-6 h-6 flex items-center justify-center rounded-full">
+                        <span className="bg-[#3D61AB] text-white text-xs w-6 h-6 flex items-center justify-center rounded-full">
                           {letter}
                         </span>
                         {option.option_text}

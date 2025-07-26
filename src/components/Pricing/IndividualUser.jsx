@@ -176,7 +176,7 @@ export default function IndividualUsers() {
   }
 
   return (
-    <div className="mx-auto bg-[#ebf0ed] px-4 sm:px-6 lg:px-8 mt-0 py-12 sm:py-16 md:px-22">
+    <div className="mx-auto px-4 sm:px-6 lg:px-8 mt-0 py-12 sm:py-16 md:px-22">
       <div className="text-center mb-8">
         <div className="flex justify-center">
           <div className="inline-flex flex-wrap justify-start items-center gap-4 mb-6 mt-6 px-4 py-3 rounded-2xl border border-gray-200 w-full sm:w-auto">

@@ -51,7 +51,7 @@ const Module = () => {
 
   if (loading) {
     return (
-      <div className="mx-auto bg-[#ebf0ed] px-4 mt-0 py-20 text-center flex flex-col items-center justify-center gap-4">
+      <div className="mx-auto px-4 mt-0 py-20 text-center flex flex-col items-center justify-center gap-4">
         <div className="h-10 w-10 border-4 border-[#3D61AB] border-t-transparent rounded-full animate-spin" />
         <p className="text-[#3D61AB] text-lg font-medium">Loading modules...</p>
       </div>
@@ -133,7 +133,7 @@ const Module = () => {
               value={searchQuery}
               onChange={handleSearch}
               placeholder="Search modules..."
-              className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-xl shadow-sm focus:ring-1 focus:border-[#7EB69E] focus:ring-[#7EB69E]  focus:outline-none transition"
+              className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-xl shadow-sm focus:ring-1 focus:border-[#3D61AB] focus:ring-[#3D61AB]  focus:outline-none transition"
             />
           </div>
         </div>
@@ -165,7 +165,7 @@ const Module = () => {
                         cx="20"
                         cy="20"
                         r="16"
-                        stroke="#7EB69E"
+                        stroke="#3D61AB"
                         strokeWidth="4"
                         fill="none"
                         strokeDasharray={2 * Math.PI * 16}
@@ -175,7 +175,7 @@ const Module = () => {
                         strokeLinecap="round"
                       />
                     </svg>
-                    <div className="absolute inset-0 flex items-center justify-center text-xs font-bold text-[#7EB69E]">
+                    <div className="absolute inset-0 flex items-center justify-center text-xs font-bold text-[#3D61AB]">
                       {Math.round(m.percentage)}%
                     </div>
                   </div>
@@ -195,7 +195,7 @@ const Module = () => {
 
                 {/* Button */}
                 <Link href={`/course-topics/${m.id}`} className="mt-6">
-                  <button className="w-full bg-[#7EB69E] text-white px-4 py-3 rounded-xl hover:bg-[#6a9884] transition text-sm font-medium">
+                  <button className="w-full bg-[#3D61AB] text-white px-4 py-3 rounded-xl hover:bg-[#6a9884] transition text-sm font-medium">
                     CONTINUE
                   </button>
                 </Link>
@@ -204,7 +204,7 @@ const Module = () => {
           ) : (
             <div className="col-span-full flex flex-col items-center text-center mt-10 text-gray-500">
               <svg
-                className="w-12 h-12 text-[#7EB69E] mb-4"
+                className="w-12 h-12 text-[#3D61AB] mb-4"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="1.5"
@@ -216,7 +216,7 @@ const Module = () => {
                   d="M15 12H9m12 0A9 9 0 113 12a9 9 0 0118 0z"
                 />
               </svg>
-              <p className="text-lg font-medium text-[#7EB69E]">
+              <p className="text-lg font-medium text-[#3D61AB]">
                 No modules found
               </p>
               <p className="text-sm text-gray-400">

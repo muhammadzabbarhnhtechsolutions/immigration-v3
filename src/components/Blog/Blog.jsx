@@ -20,7 +20,9 @@ const ArticleSection = () => {
   const getPaginatedArticles = async (pageNum = 1) => {
     setLoading(true);
     try {
-      const res = await axiosInstance.get(`/user/blog/article/view/?page=${pageNum}`);
+      const res = await axiosInstance.get(
+        `/user/blog/article/view/?page=${pageNum}`
+      );
       const data = res?.data?.data || [];
 
       setArticles(data);
@@ -36,7 +38,9 @@ const ArticleSection = () => {
   const searchArticles = async (title) => {
     setLoading(true);
     try {
-      const res = await axiosInstance.get(`/user/blog/article/blog_search/?title=${title}`);
+      const res = await axiosInstance.get(
+        `/user/blog/article/blog_search/?title=${title}`
+      );
       setArticles(res?.data?.data || []);
       setHasNext(false);
       setHasPrev(false);
@@ -75,7 +79,7 @@ const ArticleSection = () => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-24 bg-gray-50">
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
-        <h2 className="text-3xl font-extrabold text-[#8bb09b]">Blogs</h2>
+        <h2 className="text-3xl font-extrabold text-[#3D61AB]">Blogs</h2>
 
         <div className="relative w-full sm:w-80 mt-4 sm:mt-0">
           <span className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -106,7 +110,9 @@ const ArticleSection = () => {
       {loading && articles.length === 0 && (
         <div className="mx-auto px-4 mt-0 py-20 text-center flex flex-col items-center justify-center gap-4">
           <div className="h-10 w-10 border-4 border-[#3D61AB] border-t-transparent rounded-full animate-spin"></div>
-          <p className="text-[#3D61AB] text-lg font-medium">Loading articles...</p>
+          <p className="text-[#3D61AB] text-lg font-medium">
+            Loading articles...
+          </p>
         </div>
       )}
 
@@ -135,7 +141,10 @@ const ArticleSection = () => {
       {/* Articles */}
       <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {currentArticles.map((article) => (
-          <div key={article.id} className="bg-white rounded-xl shadow-md hover:shadow-xl transition duration-300 p-4 group">
+          <div
+            key={article.id}
+            className="bg-white rounded-xl shadow-md hover:shadow-xl transition duration-300 p-4 group"
+          >
             <Link href={`/blogs/${article.id}`} className="block">
               <div className="overflow-hidden rounded-lg cursor-pointer">
                 <Image
@@ -147,36 +156,37 @@ const ArticleSection = () => {
                 />
               </div>
             </Link>
-            <p className="text-gray-800 font-semibold text-base mt-1 line-clamp-2">{article.title}</p>
+            <p className="text-gray-800 font-semibold text-base mt-1 line-clamp-2">
+              {article.title}
+            </p>
             <p className="text-gray-600 text-sm mt-1">{article.heading}</p>
           </div>
         ))}
       </div>
-{/* Pagination Icons */}
-{!loading && !isSearching && (hasPrev || hasNext) && (
-  <div className="flex justify-center items-center gap-6 mt-14">
-    <button
-      onClick={() => setPage((p) => Math.max(p - 1, 1))}
-      disabled={!hasPrev || page === 1}
-      className="p-3 rounded-full bg-white border border-[#8bb09b] text-[#8bb09b] hover:bg-[#8bb09b] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300 shadow-md hover:shadow-lg"
-    >
-      <ChevronLeft className="w-5 font-bold h-5" />
-    </button>
+      {/* Pagination Icons */}
+      {!loading && !isSearching && (hasPrev || hasNext) && (
+        <div className="flex justify-center items-center gap-6 mt-14">
+          <button
+            onClick={() => setPage((p) => Math.max(p - 1, 1))}
+            disabled={!hasPrev || page === 1}
+            className="p-3 rounded-full bg-white border border-[#8bb09b] text-[#8bb09b] hover:bg-[#8bb09b] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300 shadow-md hover:shadow-lg"
+          >
+            <ChevronLeft className="w-5 font-bold h-5" />
+          </button>
 
-    <span className="px-4 py-2 text-sm bg-[#f0f7f4] rounded-full text-[#5b8f79] font-semibold shadow-sm">
-      Page {page}
-    </span>
+          <span className="px-4 py-2 text-sm bg-[#f0f7f4] rounded-full text-[#3D61AB] font-semibold shadow-sm">
+            Page {page}
+          </span>
 
-    <button
-      onClick={() => setPage((p) => p + 1)}
-      disabled={!hasNext}
-      className="p-3 rounded-full bg-white border border-[#8bb09b] text-[#8bb09b] hover:bg-[#8bb09b] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300 shadow-md hover:shadow-lg"
-    >
-      <ChevronRight className="w-5 h-5" />
-    </button>
-  </div>
-)}
-
+          <button
+            onClick={() => setPage((p) => p + 1)}
+            disabled={!hasNext}
+            className="p-3 rounded-full bg-white border border-[#3D61AB] text-[#3D61AB] hover:bg-[#3D61AB] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300 shadow-md hover:shadow-lg"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </div>
+      )}
     </div>
   );
 };

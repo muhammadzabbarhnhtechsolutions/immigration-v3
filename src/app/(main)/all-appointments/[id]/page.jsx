@@ -17,9 +17,9 @@ import {
 } from "lucide-react";
 
 // Icons
-import img1 from "../../../../assets/img1.png";
-import img2 from "../../../../assets/img2.png";
-import img3 from "../../../../assets/img3.png";
+import img1 from "../../../../assets/a.png";
+import img2 from "../../../../assets/b.png";
+import img3 from "../../../../assets/c.png";
 import img4 from "../../../../assets/meeting.png";
 import img5 from "../../../../assets/meeting1.png";
 import {
@@ -267,7 +267,7 @@ const [unreadCount, setUnreadCount] = useState(3); // You can update this dynami
                   />
                   <button
                     onClick={handleSend}
-                    className="bg-[#3D61AB] hover:bg-[#46996a] text-white px-4 py-2 rounded-r-full font-medium hover:scale-105 transition"
+                    className="bg-[#3D61AB] hover:bg-[#3D61AB] text-white px-4 py-2 rounded-r-full font-medium hover:scale-105 transition"
                   >
                     <SendHorizonal />
                   </button>
@@ -394,7 +394,7 @@ function FileUploadBox({ setShowUpload }) {
           <p className="text-sm sm:text-base md:text-lg font-semibold text-gray-700 text-center">
             Drag & drop files or{" "}
             <span
-              className="text-[#4aa36f] underline cursor-pointer"
+              className="text-[#3D61AB] underline cursor-pointer"
               onClick={() => fileInputRef.current?.click()}
             >
               Browse

@@ -75,7 +75,7 @@ const ArticleSection = () => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-24 bg-gray-50">
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
-        <h2 className="text-3xl font-extrabold text-[#8bb09b]">Articles</h2>
+        <h2 className="text-3xl font-extrabold text-[#3D61AB]">Articles</h2>
         <div className="relative w-full sm:w-80 mt-4 sm:mt-0">
           <span className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
             <svg
@@ -163,19 +163,19 @@ const ArticleSection = () => {
           <button
             onClick={() => setPage((p) => Math.max(p - 1, 1))}
             disabled={!hasPrev || page === 1}
-            className="p-3 rounded-full bg-white border-2 border-[#8bb09b] text-[#8bb09b] hover:bg-[#8bb09b] hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 shadow-md hover:shadow-lg"
+            className="p-3 rounded-full bg-white border-2 border-[#3D61AB] text-[#3D61AB] hover:bg-[#3D61AB] hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 shadow-md hover:shadow-lg"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
 
-          <span className="px-4 py-2 text-sm bg-[#f0f7f4] rounded-full text-[#5b8f79] font-semibold shadow-sm">
+          <span className="px-4 py-2 text-sm bg-[#f0f7f4] rounded-full text-[#3D61AB] font-semibold shadow-sm">
             Page {page}
           </span>
 
           <button
             onClick={() => setPage((p) => p + 1)}
             disabled={!hasNext}
-            className="p-3 rounded-full bg-white border-2 border-[#8bb09b] text-[#8bb09b] hover:bg-[#8bb09b] hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 shadow-md hover:shadow-lg"
+            className="p-3 rounded-full bg-white border-2 border-[#3D61AB] text-[#3D61AB] hover:bg-[#3D61AB] hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 shadow-md hover:shadow-lg"
           >
             <ChevronRight className="w-5 h-5" />
           </button>

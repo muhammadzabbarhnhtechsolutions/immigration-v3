@@ -31,7 +31,7 @@ export default function ChatWidget() {
       <div className="fixed bottom-4 right-4 z-50">
         <button
           onClick={() => setOpen(!open)}
-          className="bg-[#3D61AB] hover:bg-[#46996a] text-white py-3 px-5 rounded-full shadow-xl flex items-center gap-2 transition-all duration-300 hover:scale-105"
+          className="bg-[#3D61AB] hover:bg-[#3D61AB] text-white py-3 px-5 rounded-full shadow-xl flex items-center gap-2 transition-all duration-300 hover:scale-105"
         >
           <Plus className="w-5 h-5" /> Chat with Admin Bot
         </button>
@@ -64,7 +64,7 @@ export default function ChatWidget() {
               />
               <button
                 onClick={handleSend}
-                className="bg-[#3D61AB] hover:bg-[#46996a] text-white px-5 py-2 rounded-full shadow-md transition hover:scale-105"
+                className="bg-[#3D61AB] hover:bg-[#3D61AB] text-white px-5 py-2 rounded-full shadow-md transition hover:scale-105"
               >
                 Send
               </button>

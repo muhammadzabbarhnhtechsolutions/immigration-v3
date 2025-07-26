@@ -32,12 +32,9 @@ const [ checklogin,setcheckLogin ] = useState("");
 
   const Logout = () => {
     router.push("/login");
-    // Remove tokens from storage
     localStorage.removeItem("user");
     localStorage.removeItem("course_id");
-    Cookies.remove("access_token"); // Agar cookie use ho rahi hai
-
-    // Redirect to login page
+    Cookies.remove("access_token"); 
   };
 
         const hanldeShowLogoutButton = () => {

@@ -20,16 +20,16 @@ export default function VideoResources() {
      <div className="container mx-auto px-4 relative z-10">
        <div className="max-w-2xl mx-auto text-center">
          <h2 className="text-3xl md:text-[40px] font-sans font-bold mb-4">
-           Our <span className="text-[#3F855DBD]">Products</span>
+           Our <span className="text-[#3D61AB]">Products</span>
          </h2>
          <p className="text-gray-600 mb-8">
            Experience our cutting edge and innovative resources, and elevate your expertise.
          </p>
          <div className="flex flex-wrap justify-center gap-4">
-           <button className="bg-[#6ca183]  text-white px-6 cursor-pointer py-3 rounded-md  text-base hover:bg-[#3F855DBD]transition-colors">
+           <button className="bg-[#6ca183]  text-white px-6 cursor-pointer py-3 rounded-md  text-base hover:bg-[#3D61AB]transition-colors">
              Buy Now
            </button>
-           <button className="bg-[#6ca183]  text-white px-6 cursor-pointer py-3 rounded-md  text-base hover:bg-[#3F855DBD]transition-colors">
+           <button className="bg-[#6ca183]  text-white px-6 cursor-pointer py-3 rounded-md  text-base hover:bg-[#3D61AB]transition-colors">
              Request A Demo
            </button>
          </div>

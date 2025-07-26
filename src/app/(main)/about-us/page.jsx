@@ -21,7 +21,7 @@ export default function AboutUs() {
             chance to further your practice in UK Immigration Law through our
             wide range of services.
           </p>
-          <button className="mt-6 flex cursor-pointer items-center bg-[#3D61AB] text-white px-6 py-3 rounded-md font-medium hover:bg-[#3F855DBD] transition-colors">
+          <button className="mt-6 flex cursor-pointer items-center bg-[#3D61AB] text-white px-6 py-3 rounded-md font-medium hover:bg-[#3D61AB] transition-colors">
             Explore Products <ArrowRightIcon className="ml-2 h-5 w-5" />
           </button>
         </div>
@@ -93,7 +93,7 @@ export default function AboutUs() {
 
     {/* Right Button */}
     <div>
-      <button className="bg-white flex items-center justify-center px-6 py-3 text-[#3F855DBD] rounded-md font-medium hover:bg-[#3F855DBD] hover:text-white transition-colors">
+      <button className="bg-white flex items-center justify-center px-6 py-3 text-[#3D61AB] rounded-md font-medium hover:bg-[#3D61AB] hover:text-white transition-colors">
         Explore Our Products <ArrowRightIcon className="ml-2 h-5 w-5" />
       </button>
     </div>
