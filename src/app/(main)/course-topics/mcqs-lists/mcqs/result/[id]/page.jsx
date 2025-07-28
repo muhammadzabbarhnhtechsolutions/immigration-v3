@@ -65,6 +65,7 @@ function ResultContent() {
               strokeWidth="12"
               fill="none"
             />
+            {/* ... */}
             <circle
               cx="50%"
               cy="50%"
