@@ -55,7 +55,7 @@ function ResultContent() {
           Test Result
         </h1>
 
-        <div className="relative w-44 h-44 mx-auto mb-6">
+        <div className="relative w-44 h-44 mx-auto mb-1">
           <svg className="absolute top-0 left-0 w-full h-full transform rotate-[-90deg]">
             <circle
               cx="50%"
@@ -70,7 +70,7 @@ function ResultContent() {
               cy="50%"
               r="60"
               stroke="#3D61AB" // ✅ Changed from #357AFF to #3D61AB
-              strokeWidth="14"
+              strokeWidth="10"
               strokeLinecap="round"
               fill="none"
               strokeDasharray={2 * Math.PI * 60}
@@ -83,12 +83,12 @@ function ResultContent() {
           </div>
         </div>
 
-        <p className="text-xl text-gray-700 mb-6">
+        <p className="text-xl text-gray-700 mb-3">
           You scored <strong>{score}</strong> out of <strong>{total}</strong>
         </p>
 
         {passed ? (
-          <div className="flex items-center justify-center gap-2 text-green-600 font-semibold text-lg">
+          <div className="flex items-center justify-center gap-2 text-[#2d53a0] font-semibold text-lg">
             <CheckCircle className="w-6 h-6" /> Congratulations! You passed.
           </div>
         ) : (
@@ -99,7 +99,7 @@ function ResultContent() {
 
         <button
           onClick={() => router.push("/")}
-          className="mt-0 bg-[#3D61AB] text-white px-6 py-3 rounded-xl text-lg hover:bg-[#7fb193] transition-all duration-300 shadow-md"
+          className="mt-0 bg-[#3D61AB] text-white px-6 mt-8 py-3 rounded-xl text-lg hover:bg-[#3a63b6] transition-all duration-300 shadow-md"
         >
           Go to Home
         </button>

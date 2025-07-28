@@ -72,7 +72,7 @@ const Module = () => {
       <aside
         className={`fixed md:relative inset-y-0 left-0 z-40 transform ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
-        } w-60 md:w-[80px] bg-[#5c967d] p-4 flex flex-col gap-6 pt-24 items-center transition-transform duration-300 ease-in-out`}
+        } w-60 md:w-[80px] bg-[#3D61AB] p-4 flex flex-col gap-6 pt-24 items-center transition-transform duration-300 ease-in-out`}
       >
         {/* Close btn (mobile) */}
         <button
@@ -100,7 +100,7 @@ const Module = () => {
         className="fixed top-4 left-4 p-2 bg-white rounded-full shadow-md md:hidden z-20"
         onClick={() => setSidebarOpen(true)}
       >
-        <Menu className="w-5 h-5 text-[#5c967d]" />
+        <Menu className="w-5 h-5 text-[#3D61AB]" />
       </button>
 
       {/* ── Main ── */}
@@ -195,7 +195,7 @@ const Module = () => {
 
                 {/* Button */}
                 <Link href={`/course-topics/${m.id}`} className="mt-6">
-                  <button className="w-full bg-[#3D61AB] text-white px-4 py-3 rounded-xl hover:bg-[#6a9884] transition text-sm font-medium">
+                  <button className="w-full bg-[#3D61AB] text-white px-4 py-3 rounded-xl hover:bg-[#3D61AB] transition text-sm font-medium">
                     CONTINUE
                   </button>
                 </Link>

@@ -72,9 +72,9 @@ export default function Page() {
   }, []);
 
   return (
-    <div className="flex min-h-screen mt-16 bg-gray-100">
+    <div className="flex min-h-screen bg-gray-100">
       {/* Sidebar */}
-      <aside className="w-[80px] bg-[#5c967d] p-4 pt-16 flex flex-col items-center gap-8">
+      <aside className="w-[80px] bg-[#3D61AB] p-4 pt-16 flex flex-col items-center gap-8">
         {[Home, User, BookOpen, Code2, BarChart3].map((Icon, i) => (
           <div key={i} className="flex flex-col items-center text-white hover:scale-110 transition">
             <Icon className="w-5 h-5 mb-1" />
@@ -87,7 +87,7 @@ export default function Page() {
 
       {/* Main Content */}
       <main className="flex-1 p-8 flex flex-col items-center">
-        <h1 className="text-3xl font-bold text-[#5c967d] mb-8">Multiple Choice Questions</h1>
+        <h1 className="text-3xl font-bold text-[#3D61AB] mb-8">Multiple Choice Questions</h1>
 
         <div className="w-full max-w-3xl space-y-8">
           {loading ? (
@@ -105,7 +105,7 @@ export default function Page() {
                 key={index}
                 className="bg-white border border-gray-200 rounded-2xl p-6 shadow hover:shadow-lg transition duration-300 space-y-4"
               >
-                <p className="font-semibold text-[#5c967d] text-lg">
+                <p className="font-semibold text-[#3D61AB] text-lg">
                   Q{index + 1}. {q.question_text}
                 </p>
 
@@ -139,7 +139,7 @@ export default function Page() {
             <div className="flex justify-center">
               <button
                 onClick={handleSubmit}
-                className="px-10 py-3 bg-[#5c967d] text-white rounded-xl text-lg font-medium hover:bg-[#4e826a] transition"
+                className="px-10 py-3 bg-[#3f6cc5] text-white rounded-xl text-lg font-medium hover:bg-[#4270ce] transition"
               >
                 Submit
               </button>

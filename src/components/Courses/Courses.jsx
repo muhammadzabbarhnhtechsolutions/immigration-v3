@@ -105,7 +105,7 @@ export default function CoursePage() {
               </div>
               <div>
               <Link href={`/course-module/${course.id}`}>
-                <button className="w-full h-12 bg-[#6b967e] hover:bg-[#3D61AB] text-white text-sm font-medium rounded-lg shadow">
+                <button className="w-full h-12 bg-[#3D61AB] hover:bg-[#3D61AB] text-white text-sm font-medium rounded-lg shadow">
                   VIEW COURSE
                 </button>
               </Link>

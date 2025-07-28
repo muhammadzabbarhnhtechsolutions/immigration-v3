@@ -98,7 +98,7 @@ const Sidebar = ({ selectedIndex, setSelectedIndex, isOpen, toggleSidebar, video
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Search topics..."
-          className="w-full px-3 py-2 rounded-lg text-sm text-gray-700 placeholder-gray-400 border border-white focus:outline-none focus:ring-2 focus:border-[#6d9f89] focus:ring-[#6d9f89]"
+          className="w-full px-3 py-2 rounded-lg text-sm text-gray-700 placeholder-gray-400 border border-white focus:outline-none focus:ring-2 focus:border-[#3D61AB] focus:ring-[#3D61AB]"
         />
         
       </div>
@@ -117,8 +117,8 @@ const Sidebar = ({ selectedIndex, setSelectedIndex, isOpen, toggleSidebar, video
                 }}
                 className={`flex items-center px-4 py-3 rounded-lg cursor-pointer transition duration-200 ${
                   selectedIndex === originalIndex
-                    ? "bg-[#6d9f89] text-white shadow-md"
-                    : "text-white hover:bg-[#7aa692]"
+                    ? "bg-[#3D61AB] text-white shadow-md"
+                    : "text-white hover:bg-[#315baf]"
                 }`}
               >
                 <VideoIcon className="mr-3 text-white w-4 h-4" />
@@ -160,7 +160,7 @@ const MainContent = ({ selectedIndex, setSelectedIndex, videos }) => {
               onClick={() => setSelectedIndex(Math.max(selectedIndex - 1, 0))}
               className="px-1.5 ml-2 py-1.5 mb-1 bg-gray-50 text-gray-700 rounded-xl hover:bg-gray-300 transition"
             >
-              <MoveLeftIcon className="w-6 h-6 text-[#82b396]" />
+              <MoveLeftIcon className="w-6 h-6 text-[#3D61AB]" />
             </button>
             <p className="text-white -mt-1">{video.title}</p>
           </div>
@@ -170,7 +170,7 @@ const MainContent = ({ selectedIndex, setSelectedIndex, videos }) => {
               onClick={handleDropdownToggle}
               className="inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-2 py-1.5 -mt-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
             >
-              <FaAngleDown className="w-4 h-4 text-[#82b396]" />
+              <FaAngleDown className="w-4 h-4 text-[#3D61AB]" />
             </button>
             {showDropDown && (
               <div className="origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
@@ -216,7 +216,7 @@ const MainContent = ({ selectedIndex, setSelectedIndex, videos }) => {
           PREVIOUS
         </button>
         <button
-          className="px-6 py-2 bg-[#3D61AB] text-white rounded hover:bg-[#6d9f89] transition"
+          className="px-6 py-2 bg-[#3D61AB] text-white rounded hover:bg-[#3D61AB] transition"
           onClick={handleNext}
           disabled={selectedIndex === videos.length - 1}
         >
