@@ -54,7 +54,7 @@ function ResultContent() {
         <h1 className="text-4xl font-extrabold text-[#3D61AB] mb-8">
           Test Result
         </h1>
-
+{/* .. */}
         <div className="relative w-44 h-44 mx-auto mb-1">
           <svg className="absolute top-0 left-0 w-full h-full transform rotate-[-90deg]">
             <circle
