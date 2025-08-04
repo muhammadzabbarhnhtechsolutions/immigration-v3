@@ -7,35 +7,41 @@ import { useRouter } from "next/navigation";
 
 export default function Navbar1() {
   const [isOpen, setIsOpen] = useState(false);
-const [ checklogin,setcheckLogin ] = useState("");
+const [checklogin, setCheckLogin] = useState(false);
   const [openLogout, setLogoutOpen] = useState(false);
 
-  const navLinks = [
-    { href: "/", label: "Home" },
-    { href: "/about-us", label: "About Us" },
-    { href: "/refrences", label: "Our Products" },
-    { href: "/pricing", label: "Pricing" },
-    { href: "/latest-news", label: "Latest News" },
-    { href: "/contact-us", label: "Contact Us" },
-    { href: "/video-trailer", label: "Video Trailers" },
-    { href: "/all-appointments", label: "Appointments" },
-    { href: "/templetes", label: "Templates" },
-  ];
+const navLinks = [
+  { href: "/", label: "Home" },
+  { href: "/about-us", label: "About Us" },
+...(checklogin ? [{ href: "/refrences", label: "Our Products" }] : []),
+  { href: "/pricing", label: "Pricing" },
+  { href: "/latest-news", label: "Latest News" },
+  { href: "/contact-us", label: "Contact Us" },
+  { href: "/video-trailer", label: "Video Trailers" },
+  { href: "/all-appointments", label: "Appointments" },
+  { href: "/templetes", label: "Templates" },
+];
+
 
   const router = useRouter();
 // ....
 
-  useEffect(() => {
-    const userToken = localStorage.getItem("user");
-    setcheckLogin(userToken);
-  }, []);
 
-  const Logout = () => {
-    router.push("/login");
-    localStorage.removeItem("user");
-    localStorage.removeItem("course_id");
-    Cookies.remove("access_token"); 
-  };
+useEffect(() => {
+  const userToken = localStorage.getItem("user");
+  setCheckLogin(!!userToken); // Converts to true/false
+}, []);
+
+
+const Logout = () => {
+  localStorage.removeItem("user");
+  localStorage.removeItem("access_token");
+  localStorage.removeItem("course_id");
+  // Cookies.remove("access_token");
+  setCheckLogin(false); 
+  router.push("/login");
+};
+
 
         const hanldeShowLogoutButton = () => {
     setLogoutOpen(!openLogout);

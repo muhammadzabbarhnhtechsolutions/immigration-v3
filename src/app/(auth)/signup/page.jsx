@@ -207,8 +207,7 @@ const handleSocialSignup = async (provider) => {
           </div>
 
 
-     <div className="mt-0 mb-4">
-  {/* Divider */}
+     {/* <div className="mt-0 mb-4">
   <div className="relative mb-6">
     <div className="absolute inset-0 flex items-center">
       <div className="w-full border-t border-gray-300"></div>
@@ -218,9 +217,7 @@ const handleSocialSignup = async (provider) => {
     </div>
   </div>
 
-  {/* Social Buttons */}
   <div className="flex justify-center space-x-6">
-    {/* Google */}
     <button
       type="button"
       onClick={() => handleSocialSignup("google")}
@@ -236,7 +233,6 @@ const handleSocialSignup = async (provider) => {
       />
     </button>
 
-    {/* LinkedIn */}
     <button
       type="button"
       onClick={() => handleSocialSignup("linkedin")}
@@ -252,7 +248,6 @@ const handleSocialSignup = async (provider) => {
       />
     </button>
 
-    {/* Apple */}
     <button
       type="button"
       onClick={() => handleSocialSignup("apple")}
@@ -268,7 +263,7 @@ const handleSocialSignup = async (provider) => {
       />
     </button>
   </div>
-</div>
+</div> */}
           {error && <div className="text-red-600 mt-2 text-sm">{error}</div>}
 
           <button

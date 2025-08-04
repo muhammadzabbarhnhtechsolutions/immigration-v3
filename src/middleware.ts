@@ -5,6 +5,7 @@ import { clerkMiddleware, getAuth } from '@clerk/nextjs/server';
 export default clerkMiddleware((auth, request) => {
   // const { userId } = auth();
   const token = request.cookies.get('access_token')?.value;
+  // const token = request.cookies.get('access_token')?.value || null;
   const pathname = request.nextUrl.pathname;
 
   const authPages = ['/login', '/signup'];
@@ -14,11 +15,11 @@ export default clerkMiddleware((auth, request) => {
   const isProtectedPage = protectedPages.some((path) => pathname.startsWith(path));
 
   // ✅ If user is logged in and visits login/signup → redirect to home
-  if (token && isAuthPage) {
-    const url = request.nextUrl.clone();
-    url.pathname = '/';
-    return NextResponse.redirect(url);
-  }
+  // if (token && isAuthPage) {
+  //   const url = request.nextUrl.clone();
+  //   url.pathname = '/';
+  //   return NextResponse.redirect(url);
+  // }
 
   // ❌ If not logged in and tries to access protected page → redirect to login
   if (!token && isProtectedPage) {

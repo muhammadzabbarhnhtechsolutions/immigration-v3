@@ -118,21 +118,21 @@ const handleSocialLogin = async (provider) => {
           </div>
 
           {/* Social Login Section */}
-        <div className="mt-0">
+        {/* <div className="mt-0">
   {/* Divider */}
-  <div className="relative mb-6">
+  {/* <div className="relative mb-6">
     <div className="absolute inset-0 flex items-center">
       <div className="w-full border-t border-gray-300"></div>
     </div>
     <div className="relative flex justify-center text-sm">
       <span className="bg-white px-3 text-gray-500 font-medium">Or continue with</span>
     </div>
-  </div>
+  </div> */}
 
   {/* Social Buttons */}
-  <div className="flex justify-center space-x-6">
+  {/* <div className="flex justify-center space-x-6">
     {/* Google */}
-    <button
+    {/* <button
       type="button"
       onClick={() => handleSocialLogin("google")}
       className="flex items-center justify-center w-12 h-12 rounded-full border-2 border-gray-200 shadow-sm hover:shadow-lg hover:border-[#ea4335] transition-all duration-300"
@@ -148,7 +148,7 @@ const handleSocialLogin = async (provider) => {
     </button>
 
     {/* LinkedIn */}
-    <button
+    {/* <button
       type="button"
       onClick={() => handleSocialLogin("linkedin")}
       className="flex items-center justify-center w-12 h-12 rounded-full border-2 border-gray-200 shadow-sm hover:shadow-lg hover:border-[#0077b5] transition-all duration-300"
@@ -161,10 +161,10 @@ const handleSocialLogin = async (provider) => {
         height={26}
         className="w-6 h-6"
       />
-    </button>
+    </button> */}
 
     {/* Apple */}
-    <button
+    {/* <button
       type="button"
       onClick={() => handleSocialLogin("apple")}
       className="flex items-center justify-center w-12 h-12 rounded-full border-2 border-gray-200 shadow-sm hover:shadow-lg hover:border-black transition-all duration-300"
@@ -176,10 +176,10 @@ const handleSocialLogin = async (provider) => {
         width={22}
         height={24}
         className="w-5 h-6"
-      />
-    </button>
-  </div>
-</div>
+      /> */}
+    {/* </button>  */}
+  {/* </div>  */}
+{/* </div>  */}
 
 
           {/* Submit Button */}
