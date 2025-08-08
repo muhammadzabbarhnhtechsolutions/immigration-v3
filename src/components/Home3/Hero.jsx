@@ -22,14 +22,14 @@ export default function HeroSection() {
         
         {/* Left Content */}
         <div className="w-full md:w-1/2 max-w-xl text-center md:text-left">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 leading-tight">
-            Learn. Apply. <span className="text-white">Succeed.</span>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 leading-[188px]">
+            Master UK Immigration <br />  Law. Anytime. Anywhere.
+<span className="text-white"></span>
           </h1>
-          <p className="text-base sm:text-lg mb-4 sm:mb-6 text-gray-200">
-            An all-in-one e-learning platform for UK Immigration Lawyers,
-            Students, and the General Public.
+          <p className="text-base sm:text-lg mb-4 sm:mb-6 text-white">
+            Courses, templates, forums, and expert insights for lawyers, students, and the public.
           </p>
-          <button className="bg-transparent flex mx-auto md:mx-0 items-center gap-2 border-2 border-white text-white font-semibold px-4 sm:px-6 py-2 sm:py-3 rounded-md shadow-md hover:bg-white hover:text-[#2B4570] transition-all">
+          <button className="bg-transparent flex mx-auto md:mx-0 items-center gap-2 border-2 border-white text-white font-semibold px-4 sm:px-6 py-2 sm:py-3 rounded-md shadow-md hover:bg-white hover:text-[#88B29A] transition-all">
             Request A Demo
             <ArrowRight className="transition-transform duration-300 hover:translate-x-2" />
           </button>

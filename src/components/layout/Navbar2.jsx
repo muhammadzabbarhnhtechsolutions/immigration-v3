@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Briefcase, LogOut, Menu, UserCircle2, X } from "lucide-react";
-import logo from "../../assets/finnal logo.png";
+import logo from "../../assets/logo1.png";
 import { useRouter } from "next/navigation";
 
 export default function Navbar1() {
@@ -47,7 +47,7 @@ const Logout = () => {
     setLogoutOpen(!openLogout);
   };
   return (
-    <nav className="w-full  top-0 left-0 z-50 bg-white/90 backdrop-blur-md text-[#3D61AB] shadow-md">
+    <nav className="w-full  top-0 left-0 z-50 bg-white/90 backdrop-blur-md text-[#88B29A] shadow-md">
       <div className="container mx-auto px-4 sm:px-6 flex justify-between items-center py-2">
         {/* Logo */}
         <Link href="/" className="">
@@ -66,7 +66,7 @@ const Logout = () => {
             <li key={link.href}>
               <Link
                 href={link.href}
-                className="hover:text-[#2B4570] transition-colors duration-200"
+                className="hover:text-[#62af84] transition-colors duration-200"
               >
                 {link.label}
               </Link>
@@ -90,7 +90,7 @@ const Logout = () => {
            <div className="relative">
                 <button
                   onClick={hanldeShowLogoutButton}
-                  className="flex items-center justify-center w-12 h-12 bg-gray-100 rounded-full hover:ring-2 hover:ring-[#3D61AB] transition"
+                  className="flex items-center justify-center w-12 h-12 bg-gray-100 rounded-full hover:ring-2 hover:ring-[#88B29A] transition"
                 >
                   <UserCircle2 className="w-7 h-7 text-gray-700" />
                 </button>
@@ -130,12 +130,12 @@ const Logout = () => {
 
       {/* Mobile Dropdown */}
       {isOpen && (
-        <div className="md:hidden bg-white text-[#3D61AB] px-6 pt-4 pb-6 space-y-4 shadow-md animate-slideDown">
+        <div className="md:hidden bg-white text-[#88B29A] px-6 pt-4 pb-6 space-y-4 shadow-md animate-slideDown">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="block hover:text-[#2B4570] transition"
+              className="block hover:text-[#88B29A] transition"
               onClick={() => setIsOpen(false)}
             >
               {link.label}
