@@ -11,7 +11,7 @@ export default function Page() {
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          <div className="bg-[#d8e5dd] border border-[#3D61AB] p-6 rounded-lg text-center">
+          <div className="bg-[#d8e5dd] border border-[#88B29A] p-6 rounded-lg text-center">
             <div className="flex justify-center mb-10">
               <div className="w-24 h-16 flex items-center justify-center">
                 <Image
@@ -29,7 +29,7 @@ export default function Page() {
             </p>
           </div>
 
-          <div className="bg-[#d8e5dd] border border-[#3D61AB] p-6 rounded-lg text-center">
+          <div className="bg-[#d8e5dd] border border-[#88B29A] p-6 rounded-lg text-center">
             <div className="flex justify-center mb-10">
               <div className="w-20 h-16 flex items-center justify-center">
                 <Image
@@ -47,7 +47,7 @@ export default function Page() {
             </p>
           </div>
 
-          <div className="bg-[#d8e5dd] border border-[#3D61AB] p-6 rounded-lg text-center">
+          <div className="bg-[#d8e5dd] border border-[#88B29A] p-6 rounded-lg text-center">
             <div className="flex justify-center mb-4">
               <div className="w-20 h-16 flex items-center justify-center">
                 <Image
@@ -69,10 +69,10 @@ export default function Page() {
 
       <style jsx global>{`
         .text-sage-600 {
-          color: #3D61AB;
+          color: #88B29A;
         }
         .bg-sage-400 {
-          background-color: #3D61AB;
+          background-color: #88B29A;
         }
         .bg-sage-500 {
           background-color: #76998a;
@@ -81,7 +81,7 @@ export default function Page() {
           background-color: #e8f1e9;
         }
         .text-sage-400 {
-          color: #3D61AB;
+          color: #88B29A;
         }
         .bg-sage-100 {
           background-color: #e8f1e9;

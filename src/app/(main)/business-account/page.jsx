@@ -34,12 +34,12 @@ export default function BusinessAccounts() {
     <div className="min-h-screen bg-gray-100 py-16 px-4 sm:px-6 md:px-8">
       {/* ── Top Bar ── */}
       <div className="flex flex-col sm:flex-row justify-center md:justify-between items-center md:items-center gap-4">
-        <h1 className="text-2xl sm:text-3xl font-bold text-[#3D61AB] mt-4">
+        <h1 className="text-2xl sm:text-3xl font-bold text-[#88B29A] mt-4">
           Business Accounts
         </h1>
         <button
           onClick={() => setShowAddModal(true)}
-          className="bg-[#3D61AB] hover:bg-[#4168b4] text-white px-5 py-2.5 rounded-full shadow-md transition"
+          className="bg-[#88B29A] hover:bg-[#88B29A] text-white px-5 py-2.5 rounded-full shadow-md transition"
         >
           Add Business Account
         </button>
@@ -94,7 +94,7 @@ export default function BusinessAccounts() {
 /* ─────────────────────── COMPONENTS ─────────────────────── */
 
 const LoadingSpinner = () => (
-  <div className="mt-16 flex flex-col items-center gap-4 text-[#3D61AB]">
+  <div className="mt-16 flex flex-col items-center gap-4 text-[#88B29A]">
     <div className="h-10 w-10 border-4 border-current border-t-transparent rounded-full animate-spin"/>
     <p className="text-lg font-medium">Loading&nbsp;Accounts…</p>
   </div>
@@ -109,13 +109,13 @@ const AccountCard = ({ user, onEdit, onDelete }) => (
     </div>
 
     {/* Avatar */}
-    <div className="absolute -top-14 left-1/2 -translate-x-1/2 bg-gradient-to-tr from-[#3D61AB] to-[#4168b4] p-[3px] rounded-full">
+    <div className="absolute -top-14 left-1/2 -translate-x-1/2 bg-gradient-to-tr from-[#88B29A] to-[#88B29A] p-[3px] rounded-full">
       <img src={user.profile} className="w-28 h-28 rounded-full object-cover border-4 border-white" />
     </div>
 
     {/* Info */}
     <div className="mt-6 text-center">
-      <p className="text-lg md:text-[21px] font-bold text-[#4168b4]">
+      <p className="text-lg md:text-[21px] font-bold text-[#88B29A]">
         {user.first_name} {user.last_name}
       </p>
       <p className="text-gray-500">{user.email}</p>
@@ -138,7 +138,7 @@ const Modal = ({ title, onClose, children }) => (
     <button className="absolute top-3 right-3 text-gray-400 hover:text-red-500" onClick={onClose}>
       <X />
     </button>
-    <h2 className="text-2xl font-bold mb-4 text-[#3D61AB]">{title}</h2>
+    <h2 className="text-2xl font-bold mb-4 text-[#88B29A]">{title}</h2>
     {children}
   </div>
 </div>
@@ -191,13 +191,13 @@ function AccountForm({ mode, data = {}, onClose, refresh }) {
 
       {/* Image uploader */}
       <div
-        className={`border-2 border-dashed rounded-xl p-8 text-center transition ${image?"border-[#3D61AB] bg-blue-50":"border-gray-300"}`}
+        className={`border-2 border-dashed rounded-xl p-8 text-center transition ${image?"border-[#88B29A] bg-blue-50":"border-gray-300"}`}
         onDrop={onDrop}
         onDragOver={e=>e.preventDefault()}
       >
-        <Upload className="w-8 h-8 text-[#3D61AB] mx-auto mb-2"/>
+        <Upload className="w-8 h-8 text-[#88B29A] mx-auto mb-2"/>
         <p className="text-sm font-semibold text-gray-700">
-          Drag & drop or <span className="text-[#4168b4] underline cursor-pointer" onClick={()=>fileRef.current?.click()}>Browse</span>
+          Drag & drop or <span className="text-[#88B29A] underline cursor-pointer" onClick={()=>fileRef.current?.click()}>Browse</span>
         </p>
         <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={onInput}/>
       </div>
@@ -210,7 +210,7 @@ function AccountForm({ mode, data = {}, onClose, refresh }) {
       )}
 
       <button type="button" onClick={submit} disabled={loading}
-        className={`w-full py-2.5 rounded-lg text-white bg-[#3D61AB] hover:bg-[#4168b4] shadow-md flex justify-center ${loading&&"opacity-60 cursor-not-allowed"}`}>
+        className={`w-full py-2.5 rounded-lg text-white bg-[#88B29A] hover:bg-[#88B29A] shadow-md flex justify-center ${loading&&"opacity-60 cursor-not-allowed"}`}>
         {loading ? <Spinner label={mode==="add"?"Creating…":"Updating…"} /> : (mode==="add"?"Create":"Update")}
       </button>
     </form>
@@ -222,7 +222,7 @@ const FormInput = ({label,value,setValue,type="text"})=>(
   <div>
     <label className="block text-sm font-medium text-gray-700">{label}</label>
     <input type={type} value={value} onChange={e=>setValue(e.target.value)}
-      className="w-full mt-1 px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3D61AB]"/>
+      className="w-full mt-1 px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#88B29A]"/>
   </div>
 );
 const Spinner = ({label})=>(

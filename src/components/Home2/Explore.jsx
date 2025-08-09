@@ -55,7 +55,7 @@ const ExploreSections = () => {
         </div>
 
         <div className="flex justify-center mt-6">
-          <button className="bg-[#3D61AB] text-white px-6 py-3 rounded-full shadow hover:bg-[#2B4570] transition">
+          <button className="bg-[#88B29A] text-white px-6 py-3 rounded-full shadow hover:bg-[#2B4570] transition">
             Book a Demo
           </button>
         </div>
@@ -99,7 +99,7 @@ const ExploreSections = () => {
               ></textarea>
               <button
                 type="submit"
-                className="bg-[#3D61AB] hover:bg-[#2B4570] text-white px-6 py-3 rounded-full shadow transition-all"
+                className="bg-[#88B29A] hover:bg-[#2B4570] text-white px-6 py-3 rounded-full shadow transition-all"
               >
                 Submit
               </button>

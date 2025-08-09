@@ -35,10 +35,10 @@ function ResultContent() {
     return (
       <div className="mx-auto px-4 mt-0 py-20 text-center flex flex-col items-center justify-center gap-4 animate-fade-in">
         {/* Spinner */}
-        <div className="h-10 w-10 border-4 border-[#3D61AB] border-t-transparent rounded-full animate-spin"></div>
+        <div className="h-10 w-10 border-4 border-[#88B29A] border-t-transparent rounded-full animate-spin"></div>
 
         {/* Text */}
-        <p className="text-[#3D61AB] text-xl font-medium">
+        <p className="text-[#88B29A] text-xl font-medium">
           Loading Your Result..
         </p>
       </div>
@@ -51,7 +51,7 @@ function ResultContent() {
    px-4"
     >
       <div className="w-full max-w-xl bg-white rounded-3xl shadow-xl p-10 text-center relative overflow-hidden animate-fade-in">
-        <h1 className="text-4xl font-extrabold text-[#3D61AB] mb-8">
+        <h1 className="text-4xl font-extrabold text-[#88B29A] mb-8">
           Test Result
         </h1>
 {/* .. */}
@@ -71,7 +71,7 @@ function ResultContent() {
               cx="50%"
               cy="50%"
               r="60"
-              stroke="#3D61AB" // ✅ Changed from #357AFF to #3D61AB
+              stroke="#88B29A" // ✅ Changed from #357AFF to #88B29A
               strokeWidth="10"
               strokeLinecap="round"
               fill="none"
@@ -80,7 +80,7 @@ function ResultContent() {
               className="transition-all duration-1000"
             />
           </svg>
-          <div className="absolute inset-0 flex items-center justify-center text-3xl font-bold text-[#3D61AB]">
+          <div className="absolute inset-0 flex items-center justify-center text-3xl font-bold text-[#88B29A]">
             {percent}%
           </div>
         </div>
@@ -101,7 +101,7 @@ function ResultContent() {
 
         <button
           onClick={() => router.push("/")}
-          className="mt-0 bg-[#3D61AB] text-white px-6 mt-8 py-3 rounded-xl text-lg hover:bg-[#3a63b6] transition-all duration-300 shadow-md"
+          className="mt-0 bg-[#88B29A] text-white px-6 mt-8 py-3 rounded-xl text-lg hover:bg-[#3a63b6] transition-all duration-300 shadow-md"
         >
           Go to Home
         </button>

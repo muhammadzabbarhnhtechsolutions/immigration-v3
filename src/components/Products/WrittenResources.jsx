@@ -9,7 +9,7 @@ export default function WrittenResources() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-20">
           <div className="text-center mb-8">
             <h2 className="text-3xl md:text-4xl font-semibold mb-2">
-              Written <span className="text-[#3D61AB]">Resources</span>
+              Written <span className="text-[#88B29A]">Resources</span>
             </h2>
             <p className="text-gray-600">
               Read our expertly crafted resources which will elevate your practice.
@@ -28,7 +28,7 @@ export default function WrittenResources() {
             </div>
 
             <div className="text-center lg:text-left ">
-              <h3 className="text-2xl leading-relaxed md:text-3xl font-medium text-[#3D61AB] mb-6">
+              <h3 className="text-2xl leading-relaxed md:text-3xl font-medium text-[#88B29A] mb-6">
                 Resources that you can refer
                 <br className="hidden  sm:block" />
                 back to time and time again
@@ -39,7 +39,7 @@ export default function WrittenResources() {
               </p>
               <Link
                 href="/pricing"
-                className="inline-flex items-center justify-center bg-[#3D61AB] text-white px-6 py-3 rounded-md font-medium hover:bg-[#3D61AB] transition-colors"
+                className="inline-flex items-center justify-center bg-[#88B29A] text-white px-6 py-3 rounded-md font-medium hover:bg-[#88B29A] transition-colors"
               >
                 See Pricing Plans
                 <svg

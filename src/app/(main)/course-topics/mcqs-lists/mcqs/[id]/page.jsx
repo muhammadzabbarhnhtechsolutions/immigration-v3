@@ -74,7 +74,7 @@ export default function Page() {
   return (
     <div className="flex min-h-screen bg-gray-100">
       {/* Sidebar */}
-      <aside className="w-[80px] bg-[#3D61AB] p-4 pt-16 flex flex-col items-center gap-8">
+      <aside className="w-[80px] bg-[#88B29A] p-4 pt-16 flex flex-col items-center gap-8">
         {[Home, User, BookOpen, Code2, BarChart3].map((Icon, i) => (
           <div key={i} className="flex flex-col items-center text-white hover:scale-110 transition">
             <Icon className="w-5 h-5 mb-1" />
@@ -87,16 +87,16 @@ export default function Page() {
 
       {/* Main Content */}
       <main className="flex-1 p-8 flex flex-col items-center">
-        <h1 className="text-3xl font-bold text-[#3D61AB] mb-8">Multiple Choice Questions</h1>
+        <h1 className="text-3xl font-bold text-[#88B29A] mb-8">Multiple Choice Questions</h1>
 
         <div className="w-full max-w-3xl space-y-8">
           {loading ? (
  <div className="mx-auto  px-4 mt-0 py-20 text-center flex flex-col items-center justify-center gap-4 animate-fade-in">
         {/* Spinner */}
-        <div className="h-10 w-10 border-4 border-[#3D61AB] border-t-transparent rounded-full animate-spin"></div>
+        <div className="h-10 w-10 border-4 border-[#88B29A] border-t-transparent rounded-full animate-spin"></div>
 
         {/* Text */}
-        <p className="text-[#3D61AB] text-xl font-medium">
+        <p className="text-[#88B29A] text-xl font-medium">
           Loading Mcqs..
         </p>
       </div>          ) : (
@@ -105,7 +105,7 @@ export default function Page() {
                 key={index}
                 className="bg-white border border-gray-200 rounded-2xl p-6 shadow hover:shadow-lg transition duration-300 space-y-4"
               >
-                <p className="font-semibold text-[#3D61AB] text-lg">
+                <p className="font-semibold text-[#88B29A] text-lg">
                   Q{index + 1}. {q.question_text}
                 </p>
 
@@ -117,13 +117,13 @@ export default function Page() {
                         type="radio"
                         name={`q${index}`}
                         value={option.id}
-                        className="accent-[#3D61AB] w-4 h-4"
+                        className="accent-[#88B29A] w-4 h-4"
                         onChange={() =>
                           setSelectedOptions((prev) => ({ ...prev, [q.id]: option.id }))
                         }
                       />
                       <span className="flex items-center gap-2 text-gray-800">
-                        <span className="bg-[#3D61AB] text-white text-xs w-6 h-6 flex items-center justify-center rounded-full">
+                        <span className="bg-[#88B29A] text-white text-xs w-6 h-6 flex items-center justify-center rounded-full">
                           {letter}
                         </span>
                         {option.option_text}
@@ -139,7 +139,7 @@ export default function Page() {
             <div className="flex justify-center">
               <button
                 onClick={handleSubmit}
-                className="px-10 py-3 bg-[#3f6cc5] text-white rounded-xl text-lg font-medium hover:bg-[#4270ce] transition"
+                className="px-10 py-3 bg-[#88B29A] text-white rounded-xl text-lg font-medium hover:bg-[#88B29A] transition"
               >
                 Submit
               </button>

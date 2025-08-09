@@ -59,15 +59,15 @@ export default function MeetingCards() {
   // ...
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
-      <h2 className="text-3xl mt-6 font-bold text-[#3D61AB] mb-10">Meetings</h2>
+      <h2 className="text-3xl mt-6 font-bold text-[#88B29A] mb-10">Meetings</h2>
 
       {loading ? (
         <div className="mx-auto -4 mt-0 py-20 text-center flex flex-col items-center justify-center gap-4 animate-fade-in">
           {/* Spinner */}
-          <div className="h-10 w-10 border-4 border-[#3D61AB] border-t-transparent rounded-full animate-spin"></div>
+          <div className="h-10 w-10 border-4 border-[#88B29A] border-t-transparent rounded-full animate-spin"></div>
 
           {/* Text */}
-          <p className="text-[#3D61AB] text-lg font-medium">Loading ...</p>
+          <p className="text-[#88B29A] text-lg font-medium">Loading ...</p>
         </div>
       ) : meetings.length === 0 ? (
         <div className="flex flex-col items-center justify-center text-center mt-10 bg-red-50 border border-red-200 text-red-600 px-6 py-4 rounded-xl shadow-sm">
@@ -94,7 +94,7 @@ export default function MeetingCards() {
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-8">
           {meetings.map((meeting, index) => (
             <Link href={meeting.link} key={meeting.id || index} target="_blank">
-              <div className="bg-[#3D61AB] cursor-pointer shadow-xl relative hover:scale-105 transition-transform duration-300 rounded-2xl px-6 py-8 text-white text-center">
+              <div className="bg-[#88B29A] cursor-pointer shadow-xl relative hover:scale-105 transition-transform duration-300 rounded-2xl px-6 py-8 text-white text-center">
                 <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-white w-24 h-24 rounded-full flex items-center justify-center shadow-md border-4 p-4 border-white">
                   <Image
                     src={meeting.type === 1 ? icon1 : icon2} // ✅ proper conditional logic

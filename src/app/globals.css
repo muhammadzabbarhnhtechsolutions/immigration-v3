@@ -201,24 +201,24 @@ body {
 
 /* override default plyr color */
 .plyr--full-ui input[type='range'] {
-  color: #3D61AB !important;
+  color: #88B29A!important;
 }
 
 /* play button and other UI elements */
 .plyr__control {
-  background: #3D61AB !important;
+  background: #88B29A!important;
 }
 
 /* progress bar fill */
 .plyr__progress .plyr__progress--played,
 .plyr__volume input[type=range]::-webkit-slider-thumb {
-  background: #3D61AB !important;
+  background: #88B29A!important;
 }
 
 
 @layer components {
   .plyr__control {
-    @apply bg-[#3D61AB] !important;
+    @apply bg-[#88B29A] !important;
   }
 }
 
@@ -240,7 +240,7 @@ body {
   cursor: pointer;
   padding: 12px 14px;
   border: none;
-  background: #3D61AB;
+  background: #88B29A;
   color: ghostwhite;
   overflow: hidden;
   transition: transform 0.2s ease-in-out;
@@ -251,7 +251,7 @@ body {
   width: 6px;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #3D61AB;
+  background-color: #88B29A;
   border-radius: 10px;
 }
 

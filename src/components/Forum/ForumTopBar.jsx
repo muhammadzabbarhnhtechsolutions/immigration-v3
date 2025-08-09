@@ -107,7 +107,7 @@ const ForumTopBar = ({ profileData }) => {
   };
 
   return (
-    <div className="bg-[#3D61AB] rounded-lg shadow p-4 mb-4">
+    <div className="bg-[#88B29A] rounded-lg shadow p-4 mb-4">
       <Modal
         show={openModal}
         size="md"
@@ -126,13 +126,13 @@ const ForumTopBar = ({ profileData }) => {
       >
         <div className="fixed inset-0 rounded-xl flex items-center justify-center p-4">
           <div className="relative  w-full max-w-xl max-h-full">
-            <div className="relative  bg-[#3D61AB] rounded-lg shadow">
-              <Modal.Header className="relative border-b p-4 rounded-t-xl bg-[#3D61AB] text-white">
+            <div className="relative  bg-[#88B29A] rounded-lg shadow">
+              <Modal.Header className="relative border-b p-4 rounded-t-xl bg-[#88B29A] text-white">
                 <h3 className="text-xl text-white font-medium text-center w-full absolute left-0">
                   Create post
                 </h3>
               </Modal.Header>
-              <Modal.Body className="p-4 rounded-xl bg-[#3D61AB]">
+              <Modal.Body className="p-4 rounded-xl bg-[#88B29A]">
                 <div className="space-y-4">
                   <div className="flex items-center gap-3 mb-2">
                     <div className="w-10 h-10 rounded-full bg-white p-1 overflow-hidden">
@@ -194,8 +194,8 @@ const ForumTopBar = ({ profileData }) => {
                             />
                           ) : (
                             <>
-                              <FaImages className="mx-auto text-[#3D61AB] text-4xl mb-2" />
-                              <p className="text-[#3D61AB] font-medium">
+                              <FaImages className="mx-auto text-[#88B29A] text-4xl mb-2" />
+                              <p className="text-[#88B29A] font-medium">
                                 Unsupported file type
                               </p>
                             </>
@@ -203,11 +203,11 @@ const ForumTopBar = ({ profileData }) => {
                         </>
                       ) : (
                         <>
-                          <FaImages className="mx-auto text-[#3D61AB] text-4xl mb-2" />
-                          <p className="text-[#3D61AB] font-medium">
+                          <FaImages className="mx-auto text-[#88B29A] text-4xl mb-2" />
+                          <p className="text-[#88B29A] font-medium">
                             Add photos/videos
                           </p>
-                          <p className="text-[#3D61AB] text-sm">
+                          <p className="text-[#88B29A] text-sm">
                             or drag and drop
                           </p>
                         </>
@@ -237,7 +237,7 @@ const ForumTopBar = ({ profileData }) => {
                     <Button
                       disabled={loader || (!caption.trim() && !thumbnail)}
                       onClick={AddPost}
-                      className="bg-white w-full text-[#3D61AB] px-6"
+                      className="bg-white w-full text-[#88B29A] px-6"
                     >
                       {loader ? "Posting..." : "Post"}
                     </Button>

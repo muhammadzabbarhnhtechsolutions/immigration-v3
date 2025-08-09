@@ -132,27 +132,27 @@ export default function IndividualUsers() {
           >
             {plan.popular && (
               <div className="absolute top-0 right-0">
-                <div className="bg-[#3D61AB] text-white text-xs py-1 px-4 rotate-45 translate-x-[30%] translate-y-[40%] w-28 text-center">
+                <div className="bg-[#88B29A] text-white text-xs py-1 px-4 rotate-45 translate-x-[30%] translate-y-[40%] w-28 text-center">
                   Popular
                 </div>
               </div>
             )}
-              <div className={`${plan.popular ? "bg-white " : "bg-[#3D61AB]"} p-6`}>
-                <h3 className={`text-xl md:text-[24px] font-semibold items-center flex justify-center ${plan.popular ? "text-[#3D61AB]" : "text-white"}`}>{plan.name}</h3>
+              <div className={`${plan.popular ? "bg-white " : "bg-[#88B29A]"} p-6`}>
+                <h3 className={`text-xl md:text-[24px] font-semibold items-center flex justify-center ${plan.popular ? "text-[#88B29A]" : "text-white"}`}>{plan.name}</h3>
               </div>
               <div className="p-6">
                 <div className="flex items-center justify-center">
-                  <span className="text-2xl font-light text-[#3D61AB]">£</span>
-                  <span className="text-5xl font-bold text-[#3D61AB]">{plan.price}</span>
+                  <span className="text-2xl font-light text-[#88B29A]">£</span>
+                  <span className="text-5xl font-bold text-[#88B29A]">{plan.price}</span>
                   <span className="ml-2 text-gray-500">/{billing.charAt(0).toUpperCase() + billing.slice(1)}</span>
                 </div>
                 <ul className="mt-0 space-y-4 px-4">
                   {Object.entries(plan.features).map(([feature, enabled]) => (
                     <li key={feature} className="flex items-center border-b border-gray-200 ">
-                      <div className="h-5 w-5 rounded-full bg-[#3D61AB] flex items-center justify-center mr-2 mb-3 text-white">
+                      <div className="h-5 w-5 rounded-full bg-[#88B29A] flex items-center justify-center mr-2 mb-3 text-white">
                         {enabled ? <CheckIcon /> : <CrossIcon />}
                       </div>
-                      <span className="ml-3 mb-4 text-[#3D61AB]">{feature}</span>
+                      <span className="ml-3 mb-4 text-[#88B29A]">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -167,10 +167,10 @@ export default function IndividualUsers() {
 
       <style jsx global>{`
         .text-sage-600 {
-          color: #3D61AB;
+          color: #88B29A;
         }
         .bg-sage-400 {
-          background-color: #3D61AB;
+          background-color: #88B29A;
         }
         .bg-sage-500 {
           background-color: #76998a;
@@ -179,7 +179,7 @@ export default function IndividualUsers() {
           background-color: #e8f1e9;
         }
         .text-sage-400 {
-          color: #3D61AB;
+          color: #88B29A;
         }
       `}</style>
     </div>

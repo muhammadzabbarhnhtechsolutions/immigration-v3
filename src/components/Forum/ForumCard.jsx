@@ -519,7 +519,7 @@ const ForumCard = () => {
                   <div className="flex items-center justify-between w-full">
                     <div className="flex gap-2">
                       <h1 className="text-[#27AAE1]">{post.post_by}</h1>
-                      <h4 className="text-[#3D61AB]">following</h4>
+                      <h4 className="text-[#88B29A]">following</h4>
                     </div>
                   </div>
                   <div className="opacity-70 text-[13px]">

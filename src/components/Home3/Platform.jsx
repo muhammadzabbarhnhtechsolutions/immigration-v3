@@ -11,7 +11,7 @@ export default function Platform() {
   };
 
   return (
- <section className="bg-[#3D61AB] text-white py-16 leading-relaxed md:py-28 px-4 sm:px-8 md:px-16 lg:px-20">
+ <section className="bg-[#88B29A] text-white py-16 leading-relaxed md:py-28 px-4 sm:px-8 md:px-16 lg:px-20">
   <div className="flex flex-col md:flex-row items-center gap-8 md:gap-10 lg:gap-16">
     
     {/* Text Section */}

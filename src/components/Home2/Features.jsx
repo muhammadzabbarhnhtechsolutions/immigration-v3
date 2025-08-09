@@ -76,11 +76,11 @@ export default function InfoSection() {
           {keyFeatures.map(({ icon, title, text, isSvg }, idx) => (
             <div
               key={idx}
-              className="bg-[#3D61AB24] cursor-pointer border border-gray-200 p-6 rounded-2xl hover:shadow-xl transition-all duration-300"
+              className="bg-[#88B29A24] cursor-pointer border border-gray-200 p-6 rounded-2xl hover:shadow-xl transition-all duration-300"
             >
               <div className="mb-4 h-[34px] w-[34px] flex items-center justify-center">
                 {isSvg ? (
-                  <File className="text-[#3D61AB] w-[34px] h-[34px]" />
+                  <File className="text-[#88B29A] w-[34px] h-[34px]" />
                 ) : (
                   <Image
                     src={icon}

@@ -26,10 +26,10 @@ export default function VideoTrailor() {
     return (
       <div className="mx-auto  px-4 mt-0 py-20 text-center flex flex-col items-center justify-center gap-4 animate-fade-in">
         {/* Spinner */}
-        <div className="h-10 w-10 border-4 border-[#3D61AB] border-t-transparent rounded-full animate-spin"></div>
+        <div className="h-10 w-10 border-4 border-[#88B29A] border-t-transparent rounded-full animate-spin"></div>
 
         {/* Text */}
-        <p className="text-[#3D61AB] text-lg font-medium">
+        <p className="text-[#88B29A] text-lg font-medium">
           Loading Video Trailor...
         </p>
       </div>
@@ -39,7 +39,7 @@ export default function VideoTrailor() {
   return (
    <section className="px-4 sm:px-8 lg:px-14 py-14 sm:py-20 lg:py-24 bg-white">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl text-[#3D61AB] font-bold mb-6">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl text-[#88B29A] font-bold mb-6">
           Video Trailers
         </h2>
 

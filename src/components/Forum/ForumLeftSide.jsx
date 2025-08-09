@@ -90,7 +90,7 @@ const ForumLeftSide = ({profileData}) => {
         <div className="relative rounded-lg overflow-hidden cursor-pointer ">
       {/* Background with purple overlay */}
       <div className="absolute inset-0 bg-[url('/your-background.jpg')] bg-cover bg-center" />
-      <div className="absolute inset-0 bg-[#3D61AB]" />
+      <div className="absolute inset-0 bg-[#88B29A]" />
 
       {/* Content */}
       <div className="relative z-10 flex items-center gap-4 p-4">

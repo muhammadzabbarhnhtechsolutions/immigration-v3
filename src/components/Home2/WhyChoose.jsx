@@ -81,7 +81,7 @@ const PlatformBenefits = () => {
               />
             </div>
             <div className="p-4 sm:p-5 text-left">
-              <h3 className="text-lg sm:text-xl font-semibold text-[#3D61AB] mb-2">
+              <h3 className="text-lg sm:text-xl font-semibold text-[#88B29A] mb-2">
                 {benefit.title}
               </h3>
               <p className="text-gray-700 text-sm sm:text-base leading-relaxed">
@@ -94,7 +94,7 @@ const PlatformBenefits = () => {
     </Swiper>
   )}
 
-  <button className="mt-0 md:mt-12 bg-[#3D61AB] text-white text-sm sm:text-base px-5 sm:px-6 py-3 sm:py-3 rounded-full hover:bg-blue-700 transition-all">
+  <button className="mt-0 md:mt-12 bg-[#88B29A] text-white text-sm sm:text-base px-5 sm:px-6 py-3 sm:py-3 rounded-full hover:bg-blue-700 transition-all">
     Request a Demo
   </button>
 </section>

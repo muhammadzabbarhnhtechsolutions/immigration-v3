@@ -68,7 +68,7 @@ export default function BookSection() {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
-          <h2 className="text-3xl text-[#3D61AB] font-bold mb-4 sm:mb-0">PodCast</h2>
+          <h2 className="text-3xl text-[#88B29A] font-bold mb-4 sm:mb-0">PodCast</h2>
           <div className="relative w-full sm:w-80">
             <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -80,7 +80,7 @@ export default function BookSection() {
               placeholder="Search podcasts..."
               value={searchQuery}
               onChange={handleSearchChange}
-              className="w-full px-10 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3D61AB] focus:outline-none"
+              className="w-full px-10 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#88B29A] focus:outline-none"
             />
           </div>
         </div>
@@ -88,8 +88,8 @@ export default function BookSection() {
         {/* Loading */}
         {loading && books.length === 0 && (
           <div className="mx-auto px-4 mt-0 py-20 text-center flex flex-col items-center justify-center gap-4">
-            <div className="h-10 w-10 border-4 border-[#3D61AB] border-t-transparent rounded-full animate-spin" />
-            <p className="text-[#3D61AB]">Loading Podcasts…</p>
+            <div className="h-10 w-10 border-4 border-[#88B29A] border-t-transparent rounded-full animate-spin" />
+            <p className="text-[#88B29A]">Loading Podcasts…</p>
           </div>
         )}
 
@@ -159,19 +159,19 @@ export default function BookSection() {
             <button
               onClick={() => setPage((p) => Math.max(p - 1, 1))}
               disabled={!hasPrev || page === 1}
-              className="p-3 rounded-full bg-white border border-[#3D61AB] text-[#3D61AB] hover:bg-[#3D61AB] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300 shadow-md hover:shadow-lg"
+              className="p-3 rounded-full bg-white border border-[#88B29A] text-[#88B29A] hover:bg-[#88B29A] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300 shadow-md hover:shadow-lg"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
 
-            <span className="px-4 py-2 text-sm bg-[#f0f7f4] rounded-full text-[#3D61AB] font-semibold shadow-sm">
+            <span className="px-4 py-2 text-sm bg-[#f0f7f4] rounded-full text-[#88B29A] font-semibold shadow-sm">
               Page {page}
             </span>
 
             <button
               onClick={() => setPage((p) => p + 1)}
               disabled={!hasNext}
-              className="p-3 rounded-full bg-white border border-[#3D61AB] text-[#3D61AB] hover:bg-[#3D61AB] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300 shadow-md hover:shadow-lg"
+              className="p-3 rounded-full bg-white border border-[#88B29A] text-[#88B29A] hover:bg-[#88B29A] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300 shadow-md hover:shadow-lg"
             >
               <ChevronRight className="w-5 h-5" />
             </button>

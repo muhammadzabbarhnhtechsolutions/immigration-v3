@@ -68,7 +68,7 @@ const handleSocialLogin = async (provider) => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#F9FAFB] px-4 py-10">
       <div className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md animate-fade-in">
-        <h1 className="text-3xl font-semibold text-center text-[#3D61AB] mb-6">Welcome Back</h1>
+        <h1 className="text-3xl font-semibold text-center text-[#88B29A] mb-6">Welcome Back</h1>
 
         <form onSubmit={(e) => { e.preventDefault(); handleSignIn(); }} className="space-y-5">
           {/* Email Input */}
@@ -79,7 +79,7 @@ const handleSocialLogin = async (provider) => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#3D61AB]"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#88B29A]"
             />
           </div>
 
@@ -92,7 +92,7 @@ const handleSocialLogin = async (provider) => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#3D61AB]"
+                className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#88B29A]"
               />
               <span
                 onClick={() => setShowPassword((prev) => !prev)}
@@ -108,7 +108,7 @@ const handleSocialLogin = async (provider) => {
             <label className="flex items-center">
               <input
                 type="checkbox"
-                className="h-4 w-4 text-[#3D61AB] border-gray-300 rounded mr-2"
+                className="h-4 w-4 text-[#88B29A] border-gray-300 rounded mr-2"
               />
               Remember me
             </label>
@@ -186,7 +186,7 @@ const handleSocialLogin = async (provider) => {
           <button
             type="submit"
             disabled={loader}
-            className="w-full py-2.5 bg-[#4168b4] text-white rounded-lg hover:bg-[#3D61AB] transition-all disabled:opacity-50"
+            className="w-full py-2.5 bg-[#88B29A] text-white rounded-lg hover:bg-[#88B29A] transition-all disabled:opacity-50"
           >
             {loader ? "Logging in..." : "Login"}
           </button>

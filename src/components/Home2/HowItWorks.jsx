@@ -78,7 +78,7 @@ const HomeSections = () => {
           ))}
         </div>
         <div className="flex justify-center mt-12">
-          <button className="bg-[#3D61AB] text-white px-5 sm:px-6 py-2 sm:py-2.5 font-semibold rounded-full shadow hover:bg-[#2B4570] transition">
+          <button className="bg-[#88B29A] text-white px-5 sm:px-6 py-2 sm:py-2.5 font-semibold rounded-full shadow hover:bg-[#2B4570] transition">
             Request a Demo
           </button>
         </div>
@@ -117,7 +117,7 @@ const HomeSections = () => {
           ))}
         </div>
         <div className="flex justify-center mt-10">
-          <button className="bg-[#3D61AB] text-white px-5 sm:px-6 py-2 sm:py-2.5 font-semibold rounded-full shadow hover:bg-[#2B4570] transition">
+          <button className="bg-[#88B29A] text-white px-5 sm:px-6 py-2 sm:py-2.5 font-semibold rounded-full shadow hover:bg-[#2B4570] transition">
             Browse All Courses
           </button>
         </div>
@@ -148,7 +148,7 @@ const HomeSections = () => {
                   ${!isActive && !isPrev && !isNext ? "opacity-0" : ""}
                 `}
                 >
-                  <FaQuoteLeft className="text-2xl sm:text-3xl text-[#3D61AB] mx-auto mb-4" />
+                  <FaQuoteLeft className="text-2xl sm:text-3xl text-[#88B29A] mx-auto mb-4" />
                   <Image
                     src={item.image}
                     alt={item.name}
@@ -157,7 +157,7 @@ const HomeSections = () => {
                   <p className="text-gray-700 italic text-sm sm:text-base">
                     "{item.text}"
                   </p>
-                  <h4 className="mt-4 text-base sm:text-lg font-semibold text-[#3D61AB]">
+                  <h4 className="mt-4 text-base sm:text-lg font-semibold text-[#88B29A]">
                     {item.name}
                   </h4>
                   <span className="text-gray-500 text-xs sm:text-sm">{item.role}</span>
@@ -168,13 +168,13 @@ const HomeSections = () => {
           <div className="mt-6 flex justify-center gap-4">
             <button
               onClick={prevCard}
-              className="bg-[#3D61AB] text-white p-2 sm:px-4 sm:py-2 rounded-full hover:bg-[#2B4570] transition"
+              className="bg-[#88B29A] text-white p-2 sm:px-4 sm:py-2 rounded-full hover:bg-[#2B4570] transition"
             >
               <ArrowLeft />
             </button>
             <button
               onClick={nextCard}
-              className="bg-[#3D61AB] text-white p-2 sm:px-4 sm:py-2 rounded-full hover:bg-[#2B4570] transition"
+              className="bg-[#88B29A] text-white p-2 sm:px-4 sm:py-2 rounded-full hover:bg-[#2B4570] transition"
             >
               <ArrowRight />
             </button>
