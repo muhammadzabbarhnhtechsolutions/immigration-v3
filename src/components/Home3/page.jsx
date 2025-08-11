@@ -10,9 +10,9 @@ const page = () => {
     <div>
       <HeroSection/>
       <PlatformIntro/>
-      <PlatformBenefits/>
       {/* <Platform/> */}
       <App/>
+      <PlatformBenefits/>
       <ExploreSections/>
     </div>
   )

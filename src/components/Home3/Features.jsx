@@ -54,17 +54,17 @@ export default function InfoSection() {
     {
       icon: i7,
       title: 'Lawyers',
-      text: 'Stay ahead with CPD-ready content and templates.',
+      text: 'Stay updated with legal training',
     },
     {
       icon: i8,
       title: 'Students',
-      text: 'Learn immigration law clearly and confidently.',
+      text: 'Learn how to apply the right way',
     },
     {
       icon: i9,
       title: 'General Public',
-      text: 'Understand your options and application process.',
+      text: 'Understand your immigration options',
     },
   ];
 
@@ -94,7 +94,7 @@ export default function InfoSection() {
           height={64}
           className="rounded-lg"
         />
-        <h3 className="font-semibold text-2xl sm:text-xl ml-2 text-[#1A2B4B]">
+        <h3 style={{ fontFamily: 'Marcellus, serif' }} className="font-semibold text-2xl sm:text-2xl ml-2 text-[#1A2B4B]">
           {title}
         </h3>
       </div>
@@ -107,7 +107,7 @@ export default function InfoSection() {
 
       </div>
 
-        <div className="max-w-7xl mt-14 md:mt-36 ">
+        <div className="max-w-7xl mt-14 md:mt-30 ">
         <h2 style={{ fontFamily: 'Marcellus, serif' }} className="text-3xl text-center sm:text-5xl  text-gray-800 mb-14">
           Why Choose Us?
         </h2>

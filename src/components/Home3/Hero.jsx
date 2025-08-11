@@ -30,7 +30,7 @@ export default function HeroSection() {
             Courses, templates, forums, and expert insights for lawyers, students, and the public.
           </p>
           <button className="bg-transparent flex mx-auto md:mx-0 items-center gap-2 border-2 border-white text-white font-semibold px-4 sm:px-6 py-2 sm:py-3 rounded-md shadow-md hover:bg-white hover:text-[#88B29A] transition-all">
-            Request A Demo
+            Browse Courses
             <ArrowRight className="transition-transform duration-300 hover:translate-x-2" />
           </button>
         </div>
