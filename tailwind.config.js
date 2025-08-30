@@ -40,6 +40,9 @@ const config = {
         slideInLeft: "slideInLeft 0.8s ease-out forwards",
         slideInRight: "slideInRight 0.8s ease-out forwards",
       },
+      fontFamily: {
+  marko: ['var(--font-marko)', 'serif'],
+},
     },
   },
   

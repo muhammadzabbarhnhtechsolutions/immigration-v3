@@ -11,32 +11,31 @@ export default function HeroSection() {
 
   return (
     <section
-      className="text-white bg- px-4 sm:px-8 lg:px-12 py-12 sm:py-28"
+      className="text-white  px-4 h-screen sm:px-8 lg:px-8 py-12 sm:py-28"
       style={{
         backgroundImage: `url(${bgImage.src})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
     >
-      <div className="container mx-auto flex flex-col-reverse md:flex-row items-center justify-between gap-10 md:gap-16">
+      <div className="container mx-auto mt-6 flex flex-col-reverse md:flex-row items-center justify-between gap-10 md:gap-1">
         
         {/* Left Content */}
-        <div className="w-full md:w-1/2 max-w-xl text-center md:text-left">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 leading-[188px]">
-            Master UK Immigration <br />  Law. Anytime. Anywhere.
-<span className="text-white"></span>
+        <div className="w-full md:w-4xl max-w-4xl text-center md:text-left">
+          <h1 style={{lineHeight:"62px"}} className="text-3xl font-marko sm:text-5xl md:text-4.5xl font-bold mb-4 sm:mb-6 leading-[188px]">
+            Master UK Immigration   Law. Anytime. Anywhere.
           </h1>
-          <p className="text-base sm:text-lg mb-4 sm:mb-6 text-white">
-            Courses, templates, forums, and expert insights for lawyers, students, and the public.
+          <p className="text-base  font-medium sm:text-xl mb-4 sm:mb-6 text-white">
+            Courses, templates, forums, and expert insights for lawyers, <br/>  students, and the public.
           </p>
-          <button className="bg-transparent flex mx-auto md:mx-0 items-center gap-2 border-2 border-white text-white font-semibold px-4 sm:px-6 py-2 sm:py-3 rounded-md shadow-md hover:bg-white hover:text-[#88B29A] transition-all">
+          <button className="bg-transparent flex mx-auto md:mx-0 items-center gap-2 border-2 border-white text-white font-medium px-4 sm:px-6 py-2 sm:py-3 rounded-md shadow-md hover:bg-white hover:text-[#88B29A] transition-all">
             Browse Courses
             <ArrowRight className="transition-transform duration-300 hover:translate-x-2" />
           </button>
         </div>
 
         {/* Right Video/Image Content */}
-        <div className="relative w-full md:w-1/2 max-w-sm sm:max-w-md md:max-w-lg">
+        <div className="relative w-full md:w-xl max-w-sm sm:max-w-XL md:max-w-md">
           {isPlaying ? (
             <div className="relative w-full h-[220px] sm:h-[280px] md:h-[330px]">
               <iframe

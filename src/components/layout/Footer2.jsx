@@ -66,7 +66,7 @@ const Footer2 = () => {
     </div>
   </div>
 
-  <div className="text-center mt-10 text-gray-300 text-xs sm:text-sm border-t border-gray-500 pt-4">
+  <div className="text-center mt-10 text-white text-xs sm:text-sm border-t border-gray-300 pt-4">
     © 2025 Immigration Navigator. All Rights Reserved.
   </div>
 </footer>
