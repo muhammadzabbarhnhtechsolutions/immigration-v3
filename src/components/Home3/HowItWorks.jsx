@@ -12,7 +12,8 @@ import img5 from "../../assets/ig2.png";
 import img6 from "../../assets/ig3.png";
 import img7 from "../../assets/newUser.jpg";
 import bg from "../../assets/bg33.png";
-// ...
+// ..
+// .
 const HomeSections = () => {
   const [current, setCurrent] = useState(0);
   const startX = useRef(null);
