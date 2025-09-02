@@ -8,7 +8,7 @@ import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 
 const ExploreSections = () => {
   return (
-    <div className="w-full mt-12 mb-20">
+    <div className="w-full mt-2 mb-20">
       {/* Title */}
       <h2 className="text-center flex justify-center mx-auto items-center max-w-3xl font-marko py-12 text-2xl sm:text-5xl font-[400]">
         Get Free Immigration Tips & Templates Weekly

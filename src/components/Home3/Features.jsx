@@ -71,7 +71,7 @@ export default function InfoSection() {
   ];
 
   return (
-    <section className="bg-white text-gray-900 px-4 sm:px-8 lg:px-12 py-16 sm:py-24">
+    <section className="bg-white text-gray-900 px-4 sm:px-8 lg:px-12 py-16 sm:py-16">
       {/* --- KEY FEATURES --- */}
 
       {/* --- WHO IS IT FOR --- */}
@@ -109,7 +109,7 @@ export default function InfoSection() {
         </div>
       </div>
 
-      <div className="max-w-7xl mt-28 md:mt-20 ">
+      <div className="max-w-7xl mt-28 md:mt-14 ">
         <h2 className="text-3xl font-marko text-center sm:text-5xl  text-gray-800 mb-14">
           Why Choose Us?
         </h2>

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Briefcase, LogOut, Menu, UserCircle2, X } from "lucide-react";
 import logo from "../../assets/logo1.png";
 import { useRouter } from "next/navigation";
-
+import imgContact from "../../assets/contactIcon.png"
 export default function Navbar1() {
   const [isOpen, setIsOpen] = useState(false);
 const [checklogin, setCheckLogin] = useState(false);
@@ -13,13 +13,13 @@ const [checklogin, setCheckLogin] = useState(false);
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/about-us", label: "About Us" },
-...(checklogin ? [{ href: "/refrences", label: "Our Products" }] : []),
+  { href: "/video-trailer", label: "Video Trailers" },
+  { href: "/templetes", label: "Templates" },
   { href: "/pricing", label: "Pricing" },
   { href: "/latest-news", label: "Latest News" },
-  { href: "/contact-us", label: "Contact Us" },
-  { href: "/video-trailer", label: "Video Trailers" },
   { href: "/all-appointments", label: "Appointments" },
-  { href: "/templetes", label: "Templates" },
+  { href: "/contact-us", label: "Contact Us" },
+...(checklogin ? [{ href: "/refrences", label: "Our Products" }] : []),
 ];
 
 
@@ -74,51 +74,67 @@ const Logout = () => {
           ))}
         </ul>
 
-        {/* Buttons */}
-        {!checklogin ? (
-        <div className="hidden md:flex items-center space-x-4">
-          <Link href="/signup" className="font-semibold ">
-            Sign Up
-          </Link>
-          <Link href="/login" className="font-semibold flex">
-          <button className="bg-[#F0F2F5] text-black px-5 py-2.5 rounded-xl hover:bg-gray-100 transition">
-            Login
+    {/* Buttons */}
+{!checklogin ? (
+  // Agar login nahi hai => Sign Up + Login dikhaye
+  <div className="hidden md:flex items-center space-x-4">
+    <Link href="/signup" className="font-semibold">
+      Sign Up
+    </Link>
+    <Link href="/login" className="font-semibold flex">
+      <button className="bg-[#F0F2F5] text-black px-5 py-2.5 rounded-xl hover:bg-gray-100 transition">
+        Login
+      </button>
+    </Link>
+       <button
+         id="#contact"
+      className="flex items-center justify-center w-7 h-7 transition"
+    >
+      <Image  src={imgContact} width={100} height={100} alt="contact" />
           </button>
-          </Link>
-        </div>
-        ):(
-           <div className="relative">
-                <button
-                  onClick={hanldeShowLogoutButton}
-                  className="flex items-center justify-center w-12 h-12 bg-gray-100 rounded-full hover:ring-2 hover:ring-[#88B29A] transition"
-                >
-                  <UserCircle2 className="w-7 h-7 text-gray-700" />
-                </button>
+  </div>
+) : (
+  // Agar login hai => Sirf profile icon + dropdown
+  <div className="relative flex gap-4">
+    <button
+      onClick={hanldeShowLogoutButton}
+      className="flex items-center justify-center w-12 h-12 bg-gray-100 rounded-full hover:ring-2 hover:ring-[#88B29A] transition"
+    >
+      <UserCircle2 className="w-7 h-7 text-gray-700" />
+    </button>
+     <button
+         id="#contact"
+      className="flex items-center justify-center w-7 h-7 mt-2 transition"
+    >
+      <Image  src={imgContact} width={100} height={100} alt="contact" />
+          </button>
 
-                {openLogout && (
-                  <div className="absolute -right-4 z-20 mt-3 py-1  w-44 rounded-lg bg-white shadow-lg ring-1 ring-gray-200">
-                    {/* Logout always shown */}
+    {openLogout && (
+      <div className="absolute -right-4 z-20 mt-3 py-1 w-44 rounded-lg bg-white shadow-lg ring-1 ring-gray-200">
+        {/* Business Account */}
+        <Link href="/business-account">
+          <button
+            onClick={() => setLogoutOpen(false)}
+            className="flex w-full items-center gap-2 px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-all duration-200"
+          >
+            <Briefcase className="w-5 h-5 text-gray-600" />
+            Business Account
+          </button>
+        </Link>
 
-                    {/* Business Account shown only if any package has package_type === 3 */}
-                   
-                      <Link href="/business-account">
-                        <button onClick={()=>setLogoutOpen(!openLogout)} className="flex w-full items-center gap-2 px-3 py-2 text-sm text-gray-700 hover:bg-gray-100               transition-all duration-200">
-                          <Briefcase className="w-5 h-5 text-gray-600" />
-                          Business Account
-                        </button>
-                      </Link>
-                  
-                    <button
-                      onClick={Logout}
-                      className="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      <LogOut className="w-4 h-4 mr-2" />
-                      Logout
-                    </button>
-                  </div>
-                )}
-              </div>
-        )}
+        {/* Logout */}
+        <button
+          onClick={Logout}
+          className="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+        >
+          <LogOut className="w-4 h-4 mr-2" />
+          Logout
+        </button>
+      </div>
+    )}
+  </div>
+)}
+
 
         {/* Mobile Menu Icon */}
         <div className="md:hidden">

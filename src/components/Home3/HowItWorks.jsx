@@ -12,7 +12,7 @@ import img5 from "../../assets/ig2.png";
 import img6 from "../../assets/ig3.png";
 import img7 from "../../assets/newUser.jpg";
 import bg from "../../assets/bg33.png";
-// ..
+
 // .
 const HomeSections = () => {
   const [current, setCurrent] = useState(0);
@@ -61,11 +61,11 @@ const HomeSections = () => {
       {/* HOW IT WORKS */}
       <section className="py-10 px-4 bg-[#EFEFEF] sm:px-8 lg:px-12">
         {/* Heading */}
-        <h2 className="text-center font-marko text-2xl py-12 sm:text-[38px] font-[400] mb-2 relative after:content-[''] after:block after:w-16 after:h-1 after:bg-[#88B29A] after:mx-auto after:mt-3">
+        <h2 className="text-center font-marko text-2xl py-2 sm:text-[38px] font-[400] mb-2 relative after:content-[''] after:block after:w-16 after:h-1 after:bg-[#88B29A] after:mx-auto after:mt-3">
           HOW IT WORKS
         </h2>
         {/* Steps */}
-        <div className="flex flex-col md:flex-row mt-1  md:ml-16 md:py-8 justify-center items-center gap-12 relative">
+        <div className="flex flex-col md:flex-row mt-1  md:ml-16 md:py-0 justify-center items-center gap-12 relative">
           {[
             { img: img1, title: "Sign Up", desc: "Choose your goals." },
             {
@@ -103,7 +103,7 @@ const HomeSections = () => {
         </div>
 
         {/* Button */}
-        <div className="flex justify-center mt-10">
+        <div className="flex justify-center mt-4">
           <button className="bg-[#88B29A] hover:bg-[#6FA589] text-white px-6 sm:px-8 py-3 sm:py-3.5 font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
             Request a Demo
           </button>

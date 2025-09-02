@@ -29,56 +29,57 @@ const PlatformBenefits = () => {
   const startX = useRef(null);
 
 
+const testimonials = [
+  {
+    id: 1,
+    text: "“This platform simplified the Global Talent Visa process for me. The guidance was spot-on!”",
+    name: "Amelia Clarke",
+    role: "Tech Professional",
+    avatar: img7,
+    badge: img11,
+  },
+  {
+    id: 2,
+    text: "“The templates and resources saved me countless hours. Highly recommend it to lawyers and clients alike.”",
+    name: "James Patel",
+    role: "Immigration Lawyer",
+    avatar: img6,
+    badge: img11,
+  },
+  {
+    id: 3,
+    text: "“As an entrepreneur, I found the visa route guidance extremely clear and practical.”",
+    name: "Sophia Martinez",
+    role: "Startup Founder",
+    avatar: img5,
+    badge: img11,
+  },
+  {
+    id: 4,
+    text: "“I was nervous about applying, but this platform made the entire process stress-free.”",
+    name: "David Nguyen",
+    role: "Healthcare Specialist",
+    avatar: img7,
+    badge: img11,
+  },
+  {
+    id: 5,
+    text: "“Clear instructions, expert advice, and step-by-step support. Couldn’t ask for more.”",
+    name: "Olivia Brown",
+    role: "Software Engineer",
+    avatar: img6,
+    badge: img11,
+  },
+  {
+    id: 6,
+    text: "“The community and lawyer insights gave me confidence to apply successfully.”",
+    name: "Ethan Wilson",
+    role: "Researcher",
+    avatar: img5,
+    badge: img11,
+  },
+];
 
-   const testimonials = [
-    {
-      id: 1,
-      text: "“As a junior lawyer, this platform helped me master the Global Talent Visa route.”",
-      name: "General Public User",
-      role: "Built by immigration lawyers",
-      avatar: img7, // replace with your image
-      badge: img11, // replace with your image
-    },
-    {
-      id: 2,
-      text: "“As a junior lawyer, this platform helped me master the Global Talent Visa route.”",
-      name: "General Public User",
-      role: "Built by immigration lawyers",
-      avatar: img6,
-      badge: img11,
-    },
-    {
-      id: 3,
-      text: "“As a junior lawyer, this platform helped me master the Global Talent Visa route.”",
-      name: "General Public User",
-      role: "Built by immigration lawyers",
-      avatar: img5,
-      badge: img11,
-    },   {
-      id: 1,
-      text: "“As a junior lawyer, this platform helped me master the Global Talent Visa route.”",
-      name: "General Public User",
-      role: "Built by immigration lawyers",
-      avatar: img7, // replace with your image
-      badge: img11, // replace with your image
-    },
-    {
-      id: 2,
-      text: "“As a junior lawyer, this platform helped me master the Global Talent Visa route.”",
-      name: "General Public User",
-      role: "Built by immigration lawyers",
-      avatar: img6,
-      badge: img11,
-    },
-    {
-      id: 3,
-      text: "“As a junior lawyer, this platform helped me master the Global Talent Visa route.”",
-      name: "General Public User",
-      role: "Built by immigration lawyers",
-      avatar: img5,
-      badge: img11,
-    },  
-  ];
 
   const handleTouchStart = (e) => {
     startX.current = e.touches[0].clientX;
@@ -143,7 +144,7 @@ const PlatformBenefits = () => {
     modules={[Pagination]}
     spaceBetween={20}
     slidesPerView={1}
-    pagination={{ clickable: true }}
+    // pagination={{ clickable: true }}
     breakpoints={{
       640: { slidesPerView: 1 },
       768: { slidesPerView: 2 },
@@ -205,55 +206,53 @@ const PlatformBenefits = () => {
     768: { slidesPerView: 2 },
     1024: { slidesPerView: 3 },
   }}
-    className="h-[380px]" // 👈 Swiper container ki height
+    className="h-[330px]" // 👈 Swiper container ki height
 
 >
   {/* slides */}
 
         {testimonials.map((item) => (
           <SwiperSlide key={item.id}>
-            <div className="bg-white shadow-md h-[250px]  rounded-xl p-6 relative">
-            <div className="flex -mt-1 justify-between items-start">
-                <span className="w-12 h-12 md-mt-12 rounded-b-md">
-               <Image
-                  src={img12}
-                  alt="Badge"
-                  width={30}
-                  height={80}
-                  className="object-contain"
-                />                </span>
-              {/* Top Bookmark Icon + Badge */}
-                <Image
-                  src={item.badge}
-                  alt="Badge"
-                  width={30}
-                  height={30}
-                  className="object-contain"
-                />
-              </div>
+          <div className="bg-white shadow-md h-[270px] rounded-xl p-6 flex flex-col justify-between">
+  {/* Top Section */}
+  <div>
+    <div className="flex -mt-1 justify-between items-start">
+      <span className="w-12 h-12 md-mt-12 rounded-b-md">
+        <Image
+          src={img12}
+          alt="Badge"
+          width={30}
+          height={80}
+          className="object-contain"
+        />
+      </span>
+      <Image
+        src={item.badge}
+        alt="Badge"
+        width={30}
+        height={30}
+        className="object-contain"
+      />
+    </div>
+    <p className="text-gray-700 text-[15px] mt-4 italic">{item.text}</p>
+  </div>
 
-              {/* Text */}
-              <p className="text-gray-700 text-[15px] mt-4 italic">{item.text}</p>
+  {/* User Section → stays at bottom */}
+  <div className="flex items-center gap-3 mt-6">
+    <Image
+      src={item.avatar}
+      alt={item.name}
+      width={46}
+      height={46}
+      className="rounded-full"
+    />
+    <div>
+      <h4 className="text-gray-800 font-medium text-base">{item.name}</h4>
+      <p className="text-sm text-green-600 font-semibold">{item.role}</p>
+    </div>
+  </div>
+</div>
 
-              {/* User */}
-              <div className="flex items-center gap-3 mt-12">
-                <Image
-                  src={item.avatar}
-                  alt={item.name}
-                  width={46}
-                  height={46}
-                  className="rounded-full"
-                />
-                <div>
-                  <h4 className="text-gray-800 font-medium text-base">
-                    {item.name}
-                  </h4>
-                  <p className="text-sm text-green-600 font-semibold">
-                    {item.role}
-                  </p>
-                </div>
-              </div>
-            </div>
           </SwiperSlide>
         ))}
       </Swiper>

@@ -28,7 +28,7 @@ export default function HeroSection() {
           <p className="text-base  font-medium sm:text-xl mb-4 sm:mb-6 text-white">
             Courses, templates, forums, and expert insights for lawyers, <br/>  students, and the public.
           </p>
-          <button className="bg-transparent flex mx-auto md:mx-0 items-center gap-2 border-2 border-white text-white font-medium px-4 sm:px-6 py-2 sm:py-3 rounded-md shadow-md hover:bg-white hover:text-[#88B29A] transition-all">
+          <button className="bg-transparent flex mx-auto md:mx-0 items-center gap-2 border-2 border-white text-white font-medium px-4 sm:px-6 py-2 sm:py-3 rounded-md shadow-md hover:bg-white hover:text-[#88B29A] transition-all text-lg">
             Browse Courses
             <ArrowRight className="transition-transform duration-300 hover:translate-x-2" />
           </button>
