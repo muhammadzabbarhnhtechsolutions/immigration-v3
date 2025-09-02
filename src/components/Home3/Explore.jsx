@@ -5,7 +5,7 @@ import img2 from "../../assets/pic5.png";
 import img3 from "../../assets/pic6.png";
 import logo from "../../assets/logo2.0.png";
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
-
+// ...
 const ExploreSections = () => {
   return (
     <div className="w-full mt-2 mb-20">
