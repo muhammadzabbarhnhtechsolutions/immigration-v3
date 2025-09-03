@@ -6,7 +6,7 @@ type Props = {};
 
 const page = (props: Props) => {
   return (
-    <div className="mt-8">
+    <div className="mt-0">
       {/* <Videos /> */}
       <Suspense>
         <Video />

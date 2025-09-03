@@ -5,34 +5,33 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { SignupAuthService } from "../../../services/authServices";
 import Link from "next/link";
+import Image from "next/image";
+import { toast } from "react-toastify";
+import { useSignUp, useUser } from "@clerk/nextjs";
 
 export default function MainComponent() {
   const router = useRouter();
-
+const {user} = useUser()
+console.log(user)
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
-    // username: "",
     email: "",
     password: "",
     agreeToTerms: false,
-    profile: null, // Image file
+    profile: null,
   });
-
+const {} = useSignUp()
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [showPolicy, setShowPolicy] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value, type, checked, files } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]:
-        type === "checkbox"
-          ? checked
-          : type === "file"
-          ? files[0]
-          : value,
+      [name]: type === "checkbox" ? checked : type === "file" ? files[0] : value,
     }));
   };
 
@@ -69,135 +68,216 @@ export default function MainComponent() {
     }
   };
 
+  const { signUp, isLoaded } = useSignUp();
+
+const handleSocialSignup = async (provider) => {
+  if (!isLoaded || !signUp) return;
+
+  try {
+    await signUp.authenticateWithRedirect({
+      strategy: `oauth_${provider}`,
+      redirectUrl: `${window.location.origin}/signup`,
+    });
+  } catch (err) {
+    console.error("OAuth signup error:", err);
+
+    const message =
+      err?.errors?.[0]?.message ||
+      err?.response?.data?.message ||
+      err.message;
+
+    if (message === "Session already exists") {
+      toast.info("You're already signed in. Redirecting...");
+      window.location.href = "/";
+    } else {
+      toast.error("Signup with " + provider + " failed");
+    }
+  }
+};
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="bg-[#f2f6f4] p-8 rounded-lg shadow-sm w-full max-w-md">
-        <h1 className="text-2xl text-center text-[#87AA9C] mb-8">Register</h1>
+    <div className="min-h-screen flex items-center justify-center bg-[#F9FAFB]  px-4 py-10">
+      <div className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md animate-fade-in">
+        <h1 className="text-3xl font-semibold text-center text-[#88B29A] mb-6">Create an Account</h1>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="flex gap-4">
-            <div className="flex-1">
-              <label className="block text-sm mb-1">First Name</label>
-              <input
-                type="text"
-                name="firstName"
-                value={formData.firstName}
-                onChange={handleInputChange}
-                className="w-full px-3 bg-white py-2 border border-gray-200 rounded"
-                required
-              />
-            </div>
-            <div className="flex-1">
-              <label className="block text-sm mb-1">Last Name</label>
-              <input
-                type="text"
-                name="lastName"
-                value={formData.lastName}
-                onChange={handleInputChange}
-                className="w-full px-3 bg-white py-2 border border-gray-200 rounded"
-                required
-              />
-            </div>
+            {["firstName", "lastName"].map((field, idx) => (
+              <div className="w-1/2" key={idx}>
+                <label className="block text-sm font-medium text-gray-600 mb-1 capitalize">
+                  {field === "firstName" ? "First Name" : "Last Name"}
+                </label>
+                <input
+                  type="text"
+                  name={field}
+                  value={formData[field]}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#88B29A] bg-gray-50"
+                />
+              </div>
+            ))}
           </div>
 
-          {/* <div>
-            <label className="block text-sm mb-1">
-              Username <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              name="username"
-              value={formData.username}
-              onChange={handleInputChange}
-              className="w-full px-3 py-2 bg-white border border-gray-200 rounded"
-              required
-            />
-          </div> */}
-
           <div>
-            <label className="block text-sm mb-1">
-              Email address <span className="text-red-500">*</span>
+            <label className="block text-sm font-medium text-gray-600 mb-1">
+              Email Address
             </label>
             <input
               type="email"
               name="email"
               value={formData.email}
               onChange={handleInputChange}
-              className="w-full px-3 bg-white py-2 border border-gray-200 rounded"
               required
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#88B29A] bg-gray-50"
             />
           </div>
 
-          <div className="relative item-center">
-            <label className="block text-sm mb-1">
-              Password <span className="text-red-500">*</span>
+          <div>
+            <label className="block text-sm font-medium text-gray-600 mb-1">
+              Password
             </label>
-            <div className="flex justify-center items-center">
+            <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
                 name="password"
                 value={formData.password}
                 onChange={handleInputChange}
-                className="w-full bg-white px-3 py-2 border border-gray-200 rounded pr-10"
                 required
+                className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#88B29A] bg-gray-50"
               />
-              <div
-                className="absolute right-0 cursor-pointer text-white bg-blue-600 px-3 py-[11px] hover:text-gray-700"
-                onClick={() => setShowPassword(prev => !prev)}
+              <span
+                onClick={() => setShowPassword((prev) => !prev)}
+                className="absolute inset-y-0 right-0 flex items-center px-3 text-gray-500 cursor-pointer"
               >
-                {showPassword ? (
-                  <EyeOff className="text-white" size={20} />
-                ) : (
-                  <Eye size={20} />
-                )}
-              </div>
+                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              </span>
             </div>
           </div>
 
-          {/* <div>
-            <label className="block text-sm mb-1">Profile Image</label>
-            <input
-              type="file"
-              name="profile"
-              accept="image/*"
-              onChange={handleInputChange}
-              className="w-full px-3 bg-white py-2 border border-gray-200 rounded"
-            />
-          </div> */}
+          <div className="flex items-start text-sm text-gray-700">
+<div className="flex items-start text-sm text-gray-700">
+  <input
+    type="checkbox"
+    name="agreeToTerms"
+    checked={formData.agreeToTerms}
+    onChange={handleInputChange}
+    className="mt-1 mr-2 h-4 w-4 text-[#88B29A] border-gray-300 rounded"
+  />
+  <p className="text-[13.3px]">
+    I agree to the{" "}
+    <button
+      type="button"
+      onClick={() => setShowPolicy(true)}
+      className="text-blue-600 underline hover:text-blue-800 transition"
+    >
+      Privacy Policy
+    </button>
+  </p>
+  {showPolicy && (
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/5 bg-opacity-50">
+    <div className="bg-white rounded-xl shadow-xl max-w-lg w-full p-6 relative animate-fade-in">
+      <h2 className="text-xl font-semibold text-[#88B29A] mb-4">Privacy Policy</h2>
+      <div className="text-gray-700 text-sm max-h-[300px] overflow-y-auto space-y-3">
+        <p>
+          We value your privacy. Your personal information will only be used to create your account,
+          support your experience, and comply with legal obligations.
+        </p>
+        <p>
+          We do not share your data with third parties without your consent. For full details, please
+          read this policy carefully.
+        </p>
+        <p>
+          By continuing, you acknowledge and agree to our terms outlined here.
+        </p>
+        {/* Add more detailed paragraphs here as needed */}
+      </div>
+      
+      <button
+        onClick={() => setShowPolicy(false)}
+        className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-lg"
+      >
+        ×
+      </button>
+    </div>
+  </div>
+)}
 
-          <div className="flex items-start mt-4">
-            <input
-              type="checkbox"
-              name="agreeToTerms"
-              checked={formData.agreeToTerms}
-              onChange={handleInputChange}
-              className="mt-1 h-4 w-4 text-blue-600 rounded border-gray-300"
-            />
-            <label className="ml-2 text-sm">
-              Your personal data will be used to support your experience across
-              Immigration Navigator, to manage access to your account and for
-              other purposes described in our{" "}
-              <a href="#" className="text-blue-600">
-                privacy policy
-              </a>
-              .
-            </label>
+</div>
+
           </div>
 
-          {error && <div className="text-red-500 text-sm">{error}</div>}
+
+     {/* <div className="mt-0 mb-4">
+  <div className="relative mb-6">
+    <div className="absolute inset-0 flex items-center">
+      <div className="w-full border-t border-gray-300"></div>
+    </div>
+    <div className="relative flex justify-center text-sm">
+      <span className="bg-white px-3 text-gray-500 font-medium">Or continue with</span>
+    </div>
+  </div>
+
+  <div className="flex justify-center space-x-6">
+    <button
+      type="button"
+      onClick={() => handleSocialSignup("google")}
+      className="flex items-center justify-center w-12 h-12 rounded-full border-2 border-gray-200 shadow-sm hover:shadow-lg hover:border-[#ea4335] transition-all duration-300"
+      title="Login with Google"
+    >
+      <Image
+        src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png"
+        alt="Google"
+        width={26}
+        height={26}
+        className="w-7 h-7"
+      />
+    </button>
+
+    <button
+      type="button"
+      onClick={() => handleSocialSignup("linkedin")}
+      className="flex items-center justify-center w-12 h-12 rounded-full border-2 border-gray-200 shadow-sm hover:shadow-lg hover:border-[#0077b5] transition-all duration-300"
+      title="Login with LinkedIn"
+    >
+      <Image
+        src="https://cdn-icons-png.flaticon.com/512/145/145807.png"
+        alt="LinkedIn"
+        width={26}
+        height={26}
+        className="w-6 h-6"
+      />
+    </button>
+
+    <button
+      type="button"
+      onClick={() => handleSocialSignup("apple")}
+      className="flex items-center justify-center w-12 h-12 rounded-full border-2 border-gray-200 shadow-sm hover:shadow-lg hover:border-black transition-all duration-300"
+      title="Login with Apple"
+    >
+      <Image
+        src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"
+        alt="Apple"
+        width={22}
+        height={24}
+        className="w-5 h-6"
+      />
+    </button>
+  </div>
+</div> */}
+          {error && <div className="text-red-600 mt-2 text-sm">{error}</div>}
 
           <button
             type="submit"
             disabled={loading}
-            className="w-24 py-2 px-4 bg-[#87AA9C] text-white rounded hover:bg-[#769589] disabled:opacity-50"
+            className="w-full py-2.5 mt-2 bg-[#88B29A] text-white rounded-lg hover:bg-[#88B29A]  transition-all disabled:opacity-50"
           >
-            {loading ? "..." : "Register"}
+            {loading ? "Registering..." : "Register"}
           </button>
-          <div className="mt-2 text-sm text-gray-700">
+
+          <div className="text-center text-sm text-gray-700 mt-4">
             Already have an account?{" "}
-            <Link
-           href="/login" className="text-blue-600 hover:underline">
-              login
+            <Link href="/login" className="text-blue-600 hover:underline">
+              Login here
             </Link>
           </div>
         </form>

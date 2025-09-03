@@ -65,7 +65,7 @@ export default function VideoWithSidebar() {
           </div>
           <div className='w-full bg-[#474747] relative h-4 xs:h-6 sm:h-7 md:h-8 lg:h-16'>
             <div className='row'>
-              <div className='col-md-12 flex justify-center items-center text-[#88ae98] text-[1.3rem] xs:text-[1rem] sm:text-[2.2rem] md:text-[2.5rem] lg:text-[3em] uppercase' style={{fontFamily:"cursive",fontWeight:"bolder"}}>
+              <div className='col-md-12 flex justify-center items-center text-[#88B29A] text-[1.3rem] xs:text-[1rem] sm:text-[2.2rem] md:text-[2.5rem] lg:text-[3em] uppercase' style={{fontFamily:"cursive",fontWeight:"bolder"}}>
                 {video?.video_title}
               </div>
             </div>

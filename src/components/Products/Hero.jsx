@@ -5,7 +5,7 @@ export default function VideoResources() {
   return (
     <>
      {/* Products Section */}
-     <section className="relative bg-[#e6f0f0] py-38 overflow-hidden">
+     <section className="relative bg-[#e6f0f0] py-32 overflow-hidden">
      {/* Diagonal stripes background */}
      <div className="absolute inset-0 w-full h-full">
        {[...Array(5)].map((_, i) => (
@@ -20,16 +20,16 @@ export default function VideoResources() {
      <div className="container mx-auto px-4 relative z-10">
        <div className="max-w-2xl mx-auto text-center">
          <h2 className="text-3xl md:text-[40px] font-sans font-bold mb-4">
-           Our <span className="text-[#3F855DBD]">Products</span>
+           Our <span className="text-[#88B29A]">Products</span>
          </h2>
          <p className="text-gray-600 mb-8">
            Experience our cutting edge and innovative resources, and elevate your expertise.
          </p>
          <div className="flex flex-wrap justify-center gap-4">
-           <button className="bg-[#6ca183]  text-white px-6 cursor-pointer py-3 rounded-md  text-base hover:bg-[#3F855DBD]transition-colors">
+           <button className="bg-[#6ca183]  text-white px-6 cursor-pointer py-3 rounded-md  text-base hover:bg-[#88B29A]transition-colors">
              Buy Now
            </button>
-           <button className="bg-[#6ca183]  text-white px-6 cursor-pointer py-3 rounded-md  text-base hover:bg-[#3F855DBD]transition-colors">
+           <button className="bg-[#6ca183]  text-white px-6 cursor-pointer py-3 rounded-md  text-base hover:bg-[#88B29A]transition-colors">
              Request A Demo
            </button>
          </div>
@@ -41,7 +41,7 @@ export default function VideoResources() {
       <div className="text-center mb-12">
         <h1 className="text-2xl md:text-4xl font-bold mb-2">
           <span className="text-black">Video </span>
-          <span className="text-[#7bab8e]">Resources</span>
+          <span className="text-[#88B29A]">Resources</span>
         </h1>
         <p className="text-sm max-w-xl mx-auto">
           A next-generation video library containing pertinent information relating to the application process.
@@ -51,7 +51,7 @@ export default function VideoResources() {
       {/* Main Content Section */}
       <div className="flex flex-col md:flex-row gap-8 mb-16">
         <div className="md:w-1/2 flex flex-col justify-center mb-20">
-          <h2 className="text-2xl md:text-[32px] md:font-medium font-sans text-gray-800 font-medium text-[#7bab8e] mb-6 leading-relaxed">
+          <h2 className="text-2xl md:text-[32px] md:font-medium font-sans text-gray-800 font-medium text-[#88B29A] mb-6 leading-relaxed">
             The only service which guides you through the application process
           </h2>
           <p className="text-sm md:text-[14px] mb-8 text-gray-700 leading-relaxed">
@@ -62,7 +62,7 @@ export default function VideoResources() {
           <div>
             <Link
               href="/pricing"
-              className="bg-[#7bab8e] text-white px-6 py-3 text-sm md:text-[14.8px] rounded-md inline-block hover:bg-[#6a9a7d] transition-colors font-semibold font-sans"
+              className="bg-[#88B29A] text-white px-6 py-3 text-sm md:text-[14.8px] rounded-md inline-block hover:bg-[#6a9a7d] transition-colors font-semibold font-sans"
             >
               See Pricing Plans →
             </Link>

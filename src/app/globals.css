@@ -1,4 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Marcellus&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Marko+One&display=swap');
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -146,7 +150,179 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: linear-gradient(147.92deg, rgba(65, 212, 156, 0.5) 10.41%, hsla(0, 0%, 100%, 0) 89.25%);
+    background-image: linear-gradient(147.92deg, rgba(234, 238, 237, 0.5) 10.41%, hsla(0, 0%, 100%, 0) 89.25%);
     animation: changeBackgroundColor 8s infinite alternate;
     z-index: -1; /* Place behind the content */
   }
+
+  @layer utilities {
+  @keyframes slideDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-slide-down {
+    animation: slideDown 0.4s ease-out;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-in-out both;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.4s ease-in-out both;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+}
+
+
+/* override default plyr color */
+.plyr--full-ui input[type='range'] {
+  color: #88B29A!important;
+}
+
+/* play button and other UI elements */
+.plyr__control {
+  background: #88B29A!important;
+}
+
+/* progress bar fill */
+.plyr__progress .plyr__progress--played,
+.plyr__volume input[type=range]::-webkit-slider-thumb {
+  background: #88B29A!important;
+}
+
+
+@layer components {
+  .plyr__control {
+    @apply bg-[#88B29A] !important;
+  }
+}
+
+/* Settings dropdown background white */
+.plyr__menu__container {
+  background-color: white !important;
+  color: black !important; /* Optional: text color readable ho */
+  border-radius: 8px;       /* Optional: rounded corners */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Optional: subtle shadow */
+}
+
+.cssbuttons-io {
+  position: relative;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: 0.05em;
+  border-radius: 1em;
+  cursor: pointer;
+  padding: 12px 14px;
+  border: none;
+  background: #88B29A;
+  color: ghostwhite;
+  overflow: hidden;
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Add this to your global CSS (e.g. globals.css) */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #88B29A;
+  border-radius: 10px;
+}
+
+
+.cssbuttons-io svg {
+  width: 1.2em;
+  height: 1.2em;
+  margin-right: 0.5em;
+}
+
+.cssbuttons-io span {
+  position: relative;
+  z-index: 10;
+  transition: color 0.4s;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.8em 1.2em 0.8em 1.05em;
+}
+
+.cssbuttons-io::before,
+.cssbuttons-io::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.cssbuttons-io::before {
+  content: "";
+  background: #50b178;
+  width: 120%;
+  left: -10%;
+  transform: skew(30deg);
+  transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1);
+}
+
+.cssbuttons-io:hover::before {
+  transform: translate3d(100%, 0, 0);
+}
+
+.cssbuttons-io:active {
+  transform: scale(0.95);
+}
+
+
+@layer utilities {
+  @keyframes fadeInScale {
+    0% {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .animate-fadeInScale {
+    animation: fadeInScale 0.3s ease-out;
+  }
+}
+
+.scroll-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-hidden {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}

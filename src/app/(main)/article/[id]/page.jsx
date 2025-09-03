@@ -20,13 +20,13 @@ const Page = () => {
         console.error("Error fetching article:", error);
       }
     };
-
+// ..
     if (params?.id) getArticle();
   }, [params?.id]);
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <h2 className="text-3xl mt-6 font-bold text-[#71a587] mb-10">Blog</h2>
+      <h2 className="text-3xl mt-6 font-bold text-[#88B29A] mb-10">Article Details</h2>
 
       {article ? (
         <div className="mb-16">
@@ -46,18 +46,26 @@ const Page = () => {
           <p className="text-gray-700 text-lg leading-relaxed mb-6">{article.heading}</p>
 
           {/* Optional Description */}
-          <p className="text-gray-600 text-base mb-6">{article.description}</p>
-
+          <p className="text-gray-600 text-base mb-6" dangerouslySetInnerHTML={{__html:article.description}} />
+          {/* <p className="text-gray-600 text-base mb-6">{article.description}</p> */}
+{/*  */}
           {/* Static Quote */}
-          <blockquote className="border-l-4 border-purple-500 pl-4 italic text-gray-600 text-base mb-6">
+          {/* <blockquote className="border-l-4 border-purple-500 pl-4 italic text-gray-600 text-base mb-6">
             "People worry that computers will get too smart and take over the world,
             but the real problem is that they’re too dumb and they’ve already taken
             over the world." – Pedro Domingos
-          </blockquote>
+          </blockquote> */}
         </div>
       ) : (
-        <p className="text-gray-500">Loading blog article...</p>
-      )}
+ <div className="mx-auto px-4 mt-0 py-20 text-center flex flex-col items-center justify-center gap-4 animate-fade-in">
+        {/* Spinner */}
+        <div className="h-10 w-10 border-4 border-[#88B29A] border-t-transparent rounded-full animate-spin"></div>
+
+        {/* Text */}
+        <p className="text-[#88B29A] text-lg font-medium">
+          Loading Blog Articles...
+        </p>
+      </div>      )}
     </div>
   );
 };

@@ -16,9 +16,9 @@ const CourseSidebar = ({ coursedata }) => {
   }, [coursedata]);
 
   return (
-    <div className="border p-5 xl:p-9 rounded-xl border-[#88ae98]">
+    <div className="border p-5 xl:p-9 rounded-xl border-[#88B29A]">
       <span className="justify-end lg:flex hidden">
-        <FaBars color="#88ae98" size={25} />
+        <FaBars color="#88B29A" size={25} />
       </span>
       <p className="font-ubuntu text-secondary text-[36px] font-[700] mb-5">
         IMIGRATION NAVIGATOR
@@ -30,7 +30,7 @@ const CourseSidebar = ({ coursedata }) => {
         Course Modules
       </p>
 
-      <Accordion className="border border-[#88ae98] p-4 px-5 rounded-xl w-full">
+      <Accordion className="border border-[#88B29A] p-4 px-5 rounded-xl w-full">
         {coursedata?.data?.map((module) => {
           const isLocked = !module.unlock;
           return (
@@ -113,7 +113,7 @@ export function Sidebar() {
           onClick={() => setIsOpen(true)}
           className="text-white bg-primary hover:dark focus:outline-none focus:ring-1 focus:ring-secondary font-medium rounded-lg border-none text-sm px-5 py-2.5 me-2 mb-2"
         >
-          <FaBars color="#5aaa7c" size={25} />
+          <FaBars color="#88B29A" size={25} />
         </button>
         <Drawer open={isOpen} onClose={handleClose}>
           <Drawer.Header title="Course" />

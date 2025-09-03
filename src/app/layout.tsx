@@ -1,9 +1,21 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono,Poppins } from "next/font/google";
+import { Marko_One } from "next/font/google";
 import "./globals.css";
 import StoreProvider from "./StoreProvider";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { ClerkProvider } from "@clerk/nextjs"
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
+
+const marko = Marko_One({
+  weight: "400", // only available weight
+  subsets: ["latin"],
+  variable: "--font-marko", // css variable
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,13 +47,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable}  antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${marko.variable}  antialiased`}
       >
+        <ClerkProvider>
       <StoreProvider >
         {children}
         </StoreProvider> 
         <ToastContainer />
-
+</ClerkProvider>
       </body>
     </html>
   );

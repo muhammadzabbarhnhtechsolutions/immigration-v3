@@ -22,6 +22,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "tailwind.config.js", "src/components/video/tabs.tsx", "src/components/video/videos.jsx", "src/components/video/index.jsx", "src/components/video/sidebar.jsx", "src/components/video/videoWithSidebar.jsx", "src/usable/dropdown.jsx", "src/usable/player.jsx", "src/usable/progressBarblue.jsx", "src/usable/progressBar.jsx", "src/utils/localStorage.js", "src/utils/constants.js", "src/utils/validation.js", "src/components/ui/DescriptionBox.jsx", "src/components/videos/Videos.jsx", "src/components/Forum/ForumCard.jsx", "src/components/Forum/Forum.jsx", "src/components/Forum/Comment.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "tailwind.config.js", "src/components/video/tabs.tsx", "src/components/video/videos.jsx", "src/components/video/index.jsx", "src/components/video/sidebar.jsx", "src/components/video/videoWithSidebar.jsx", "src/usable/dropdown.jsx", "src/usable/player.jsx", "src/usable/progressBarblue.jsx", "src/usable/progressBar.jsx", "src/utils/localStorage.js", "src/utils/constants.js", "src/utils/validation.js", "src/components/ui/DescriptionBox.jsx", "src/components/videos/Videos.jsx", "src/components/Forum/ForumCard.jsx", "src/components/Forum/Forum.jsx", "src/components/Forum/Comment.jsx", "src/services/getAllMeetings.js"],
   "exclude": ["node_modules"]
 }

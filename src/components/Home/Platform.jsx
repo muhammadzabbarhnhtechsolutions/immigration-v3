@@ -23,7 +23,7 @@ export default function Page() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-semibold mb-4">
-              The complete <span className="text-[#84a98c]">platform</span>
+              The complete <span className="text-[#88B29A]">platform</span>
             </h2>
             <p className="text-gray-800 text-[14px] max-w-2xl mx-auto">
               We understand that it can sometimes be difficult to grasp the
@@ -39,7 +39,7 @@ export default function Page() {
                 onClick={() => setActiveTab("video")}
                 className={`cursor-pointer p-6 rounded-lg ${
                   activeTab === "video"
-                    ? "bg-[#8cb09c1c] border border-[#88b29a] shadow-4xl"
+                    ? "bg-[#88B29A] border border-[#88b29a] shadow-4xl"
                     : "bg-white"
                 }`}
                 style={{
@@ -58,7 +58,7 @@ export default function Page() {
               <div
                 onClick={() => setActiveTab("written")}
                 className={`cursor-pointer p-6 rounded-lg shadow-sm ${
-                  activeTab === "written" ? "bg-[#8cb09c1c] border border-[#88b29a]" : "bg-white"
+                  activeTab === "written" ? "bg-[#88B29A] border border-[#88b29a]" : "bg-white"
                 }`}
                 style={{
                   boxShadow:
@@ -78,7 +78,7 @@ export default function Page() {
               <div
                 onClick={() => setActiveTab("templates")}
                 className={`cursor-pointer p-8 rounded-lg shadow-sm ${
-                  activeTab === "templates" ? "bg-[#8cb09c1c] border border-[#88b29a]" : "bg-white"
+                  activeTab === "templates" ? "bg-[#88B29A] border border-[#88b29a]" : "bg-white"
                 }`}
                 style={{
                   boxShadow:
@@ -95,7 +95,7 @@ export default function Page() {
                   required.
                 </p>
               </div>
-              <button className="bg-[#84a98c] flex gap-2 item-center cursor-pointer text-white px-6 py-2 rounded hover:bg-[#76998a] transition-colors">
+              <button className="bg-[#88B29A] flex gap-2 item-center cursor-pointer text-white px-6 py-2 rounded hover:bg-[#76998a] transition-colors">
                 Learn More <ArrowRight />
               </button>
             </div>

@@ -20,9 +20,9 @@ export default function Page() {
         {/* Left Contact Form */}
         <div className="bg-white p-8 rounded-sm border-2 border-[#e6e8e7]/30 shadow-2xl w-full md:w-3/4">
           <h2 className="text-3xl font-semibold mb-2">
-            Contact <span className="text-[#84a98c]">Us</span>
+            Contact <span className="text-[#88B29A]">Us</span>
           </h2>
-          <p className="text-[#84a98c] mb-8 font-sans">WE'D LOVE TO HEAR FROM YOU</p>
+          <p className="text-[#88B29A] mb-8 font-sans">WE'D LOVE TO HEAR FROM YOU</p>
 
           <form className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -30,13 +30,13 @@ export default function Page() {
                 type="text"
                 name="firstName"
                 placeholder="First Name"
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-[#84a98c] border-[#84a98c]"
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-[#88B29A] border-[#88B29A]"
               />
               <input
                 type="text"
                 name="lastName"
                 placeholder="Last Name"
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-[#84a98c] border-[#84a98c]"
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-[#88B29A] border-[#88B29A]"
               />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -44,13 +44,13 @@ export default function Page() {
                 type="text"
                 name="phone"
                 placeholder="phone"
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-[#84a98c] border-[#84a98c]"
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-[#88B29A] border-[#88B29A]"
               />
               <input
                 type="text"
                 name="Email Address"
                 placeholder="Email Address"
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-[#84a98c] border-[#84a98c]"
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-[#88B29A] border-[#88B29A]"
               />
             </div>
        
@@ -58,11 +58,11 @@ export default function Page() {
               name="message"
               placeholder="Message"
               rows={6}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-[#84a98c] border-[#84a98c]"
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-[#88B29A] border-[#88B29A]"
             ></textarea>
             <button
               type="submit"
-              className="bg-[#84a98c] cursor-pointer text-white px-8 py-2 rounded-md hover:bg-[#76998a] transition-colors"
+              className="bg-[#88B29A] cursor-pointer text-white px-8 py-2 rounded-md hover:bg-[#76998a] transition-colors"
             >
               SUBMIT
             </button>
@@ -70,7 +70,7 @@ export default function Page() {
         </div>
 
         {/* Right Contact Info */}
-        <div className="bg-[#84a98c] p-8 rounded-md text-white w-full md:w-1/4 slide-in">
+        <div className="bg-[#88B29A] p-8 rounded-md text-white w-full md:w-1/4 slide-in">
       <h3 className="text-xl font-semibold mb-8 border-l-2 pl-2">CONTACT US</h3>
 
       <div className="space-y-6">
@@ -79,7 +79,7 @@ export default function Page() {
           <h4 className="font-medium mb-2">Email</h4>
           <div className="flex items-center gap-2">
             <div className="bg-white rounded-full p-1">
-              <svg className="w-5 h-5 text-[#7bab8e]" viewBox="0 0 24 24" fill="currentColor">
+              <svg className="w-5 h-5 text-[#88B29A]" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M20 4H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
               </svg>
             </div>
@@ -92,7 +92,7 @@ export default function Page() {
           <h4 className="font-medium mb-2">Telephone</h4>
           <div className="flex items-center gap-2">
             <div className="bg-white rounded-full p-1">
-              <svg className="w-5 h-5 text-[#7bab8e]" viewBox="0 0 24 24" fill="currentColor">
+              <svg className="w-5 h-5 text-[#88B29A]" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z" />
               </svg>
             </div>

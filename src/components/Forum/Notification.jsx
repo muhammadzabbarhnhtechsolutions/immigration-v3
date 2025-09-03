@@ -7,7 +7,7 @@ const Notification = (props) => {
   return (
     <div className="flex flex-col gap-2">
       {[1, 2, 3, 4].map(() => (
-        <div className="before:absolute before:top-0 before:left-1/2 before:transform before:-translate-x-1/2 before:w-1/2 before:h-[1px] before:bg-gradient-to-r before:from-transparent before:via-[#5aaa7c] before:to-transparent before:rounded-xl rounded-xl flex gap-2 items-center bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 py-4 px-2">
+        <div className="before:absolute before:top-0 before:left-1/2 before:transform before:-translate-x-1/2 before:w-1/2 before:h-[1px] before:bg-gradient-to-r before:from-transparent before:via-[#88B29A] before:to-transparent before:rounded-xl rounded-xl flex gap-2 items-center bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 py-4 px-2">
           <div>
             <Image src={"/assets/user.png"} alt="user" width={30} height={30} />
           </div>
