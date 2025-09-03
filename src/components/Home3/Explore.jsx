@@ -13,7 +13,7 @@ const ExploreSections = () => {
       <h2 className="text-center flex justify-center mx-auto items-center max-w-3xl font-marko py-12 text-2xl sm:text-5xl font-[400]">
         Get Free Immigration Tips & Templates Weekly
       </h2>
-
+{/* .. */}
       {/* Section */}
       <section className=" bg-[#88B29A4D] flex justify-center">
         <div className="max-w-7xl w-full grid grid-cols-1 md:grid-cols-2 gap-6  rounded-lg  overflow-hidden">
