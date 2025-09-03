@@ -49,7 +49,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${marko.variable}  antialiased`}
       >
-        <ClerkProvider publishableKey={"pk_test_bGVhZGluZy1jaXZldC0zMy5jbGVyay5hY2NvdW50cy5kZXYk"}>
+        <ClerkProvider >
       <StoreProvider >
         {children}
         </StoreProvider> 
