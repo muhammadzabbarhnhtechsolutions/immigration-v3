@@ -4,46 +4,43 @@ import { useEffect, useState } from "react";
 import { Briefcase, LogOut, Menu, UserCircle2, X } from "lucide-react";
 import logo from "../../assets/logo1.png";
 import { useRouter } from "next/navigation";
-import imgContact from "../../assets/contactIcon.png"
+import imgContact from "../../assets/contactIcon.png";
 export default function Navbar1() {
   const [isOpen, setIsOpen] = useState(false);
-const [checklogin, setCheckLogin] = useState(false);
+  const [checklogin, setCheckLogin] = useState(false);
   const [openLogout, setLogoutOpen] = useState(false);
 
-const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/about-us", label: "About Us" },
-  { href: "/video-trailer", label: "Video Trailers" },
-  { href: "/templetes", label: "Templates" },
-  { href: "/pricing", label: "Pricing" },
-  { href: "/latest-news", label: "Latest News" },
-  { href: "/all-appointments", label: "Appointments" },
-  { href: "/contact-us", label: "Contact Us" },
-...(checklogin ? [{ href: "/refrences", label: "Our Products" }] : []),
-];
-
+  const navLinks = [
+    { href: "/", label: "Home" },
+    { href: "/about-us", label: "About Us" },
+    { href: "/video-trailer", label: "Video Trailers" },
+    { href: "/templetes", label: "Templates" },
+    { href: "/pricing", label: "Pricing" },
+    { href: "/latest-news", label: "Latest News" },
+    { href: "/all-appointments", label: "Appointments" },
+    { href: "/contact-us", label: "Contact Us" },
+    ...(checklogin ? [{ href: "/refrences", label: "Our Products" }] : []),
+  ];
 
   const router = useRouter();
-// ....
+  // ....
 
+  useEffect(() => {
+    const userToken = localStorage.getItem("user");
+    setCheckLogin(!!userToken); // Converts to true/false
+  }, []);
+  // ...
 
-useEffect(() => {
-  const userToken = localStorage.getItem("user");
-  setCheckLogin(!!userToken); // Converts to true/false
-}, []);
-// ...
+  const Logout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("course_id");
+    // Cookies.remove("access_token");
+    setCheckLogin(false);
+    router.push("/login");
+  };
 
-const Logout = () => {
-  localStorage.removeItem("user");
-  localStorage.removeItem("access_token");
-  localStorage.removeItem("course_id");
-  // Cookies.remove("access_token");
-  setCheckLogin(false); 
-  router.push("/login");
-};
-
-
-        const hanldeShowLogoutButton = () => {
+  const hanldeShowLogoutButton = () => {
     setLogoutOpen(!openLogout);
   };
   return (
@@ -74,67 +71,66 @@ const Logout = () => {
           ))}
         </ul>
 
-    {/* Buttons */}
-{!checklogin ? (
-  // Agar login nahi hai => Sign Up + Login dikhaye
-  <div className="hidden md:flex items-center space-x-4">
-    <Link href="/signup" className="font-semibold">
-      Sign Up
-    </Link>
-    <Link href="/login" className="font-semibold flex">
-      <button className="bg-[#F0F2F5] text-black px-5 py-2.5 rounded-xl hover:bg-gray-100 transition">
-        Login
-      </button>
-    </Link>
-       <button
-         id="#contact"
-      className="flex items-center justify-center w-7 h-7 transition"
-    >
-      <Image  src={imgContact} width={100} height={100} alt="contact" />
-          </button>
-  </div>
-) : (
-  // Agar login hai => Sirf profile icon + dropdown
-  <div className="relative flex gap-4">
-    <button
-      onClick={hanldeShowLogoutButton}
-      className="flex items-center justify-center w-12 h-12 bg-gray-100 rounded-full hover:ring-2 hover:ring-[#88B29A] transition"
-    >
-      <UserCircle2 className="w-7 h-7 text-gray-700" />
-    </button>
-     <button
-         id="#contact"
-      className="flex items-center justify-center w-7 h-7 mt-2 transition"
-    >
-      <Image  src={imgContact} width={100} height={100} alt="contact" />
-          </button>
+        {/* Buttons */}
+        {!checklogin ? (
+          // Agar login nahi hai => Sign Up + Login dikhaye
+          <div className="hidden md:flex items-center space-x-4">
+            <Link href="/signup" className="font-semibold">
+              Sign Up
+            </Link>
+            <Link href="/login" className="font-semibold flex">
+              <button className="bg-[#F0F2F5] text-black px-5 py-2.5 rounded-xl hover:bg-gray-100 transition">
+                Login
+              </button>
+            </Link>
+            <a
+              href="#contact"
+              className="flex items-center justify-center w-7 h-7 mt-2 transition"
+            >
+              <Image src={imgContact} width={100} height={100} alt="contact" />
+            </a>
+          </div>
+        ) : (
+          // Agar login hai => Sirf profile icon + dropdown
+          <div className="relative flex gap-4">
+            <button
+              onClick={hanldeShowLogoutButton}
+              className="flex items-center justify-center w-12 h-12 bg-gray-100 rounded-full hover:ring-2 hover:ring-[#88B29A] transition"
+            >
+              <UserCircle2 className="w-7 h-7 text-gray-700" />
+            </button>
+            <a
+              href="#contact"
+              className="flex items-center justify-center w-7 h-7 mt-2 transition"
+            >
+              <Image src={imgContact} width={100} height={100} alt="contact" />
+            </a>
 
-    {openLogout && (
-      <div className="absolute -right-4 z-20 mt-3 py-1 w-44 rounded-lg bg-white shadow-lg ring-1 ring-gray-200">
-        {/* Business Account */}
-        <Link href="/business-account">
-          <button
-            onClick={() => setLogoutOpen(false)}
-            className="flex w-full items-center gap-2 px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-all duration-200"
-          >
-            <Briefcase className="w-5 h-5 text-gray-600" />
-            Business Account
-          </button>
-        </Link>
+            {openLogout && (
+              <div className="absolute -right-4 z-20 mt-3 py-1 w-44 rounded-lg bg-white shadow-lg ring-1 ring-gray-200">
+                {/* Business Account */}
+                <Link href="/business-account">
+                  <button
+                    onClick={() => setLogoutOpen(false)}
+                    className="flex w-full items-center gap-2 px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-all duration-200"
+                  >
+                    <Briefcase className="w-5 h-5 text-gray-600" />
+                    Business Account
+                  </button>
+                </Link>
 
-        {/* Logout */}
-        <button
-          onClick={Logout}
-          className="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-        >
-          <LogOut className="w-4 h-4 mr-2" />
-          Logout
-        </button>
-      </div>
-    )}
-  </div>
-)}
-
+                {/* Logout */}
+                <button
+                  onClick={Logout}
+                  className="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >
+                  <LogOut className="w-4 h-4 mr-2" />
+                  Logout
+                </button>
+              </div>
+            )}
+          </div>
+        )}
 
         {/* Mobile Menu Icon */}
         <div className="md:hidden">

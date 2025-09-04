@@ -34,23 +34,22 @@ const Footer2 = () => {
     </div>
 
     {/* Contact Us */}
-   <div className="space-y-4 leading-relaxed md:w-[300px]">
+<div
+  id="contact"
+  className="space-y-4 leading-relaxed md:w-[300px]"
+>
   <h3 className="text-lg font-semibold">Contact Us</h3>
-
   <p className="text-white text-sm sm:text-base">
     <span className="font-semibold">Address:</span> <br />
     Level 17 Dashwood House, 69 Old Broad Street London EC2M1QS
   </p>
-
   <p className="text-white text-sm sm:text-base">
     <span className="font-semibold">Tel:</span> 07578979789
   </p>
-
   <p className="text-white text-sm sm:text-base">
     <span className="font-semibold">Email:</span> info@healthcarenavigator.co.uk
   </p>
 </div>
-
 
     {/* Quick Links */}
     <div>
