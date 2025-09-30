@@ -45,6 +45,7 @@ const ExploreSections = () => {
         <div className="max-w-7xl w-full grid grid-cols-1 md:grid-cols-2 gap-6 rounded-lg overflow-hidden">
           {/* Left - Map */}
           {/* .. */}
+          {/* .. */}
           <motion.div
             variants={sectionVariant}
             className="w-full h-[350px] md:h-[430px]"
