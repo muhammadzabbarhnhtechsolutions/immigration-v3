@@ -74,6 +74,8 @@ export default function Navbar1() {
         {/* Buttons */}
         {!checklogin ? (
           // Agar login nahi hai => Sign Up + Login dikhaye
+          // ....
+          // ...
           <div className="hidden md:flex items-center space-x-4">
             <Link href="/signup" className="font-semibold">
               Sign Up
