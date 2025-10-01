@@ -25,7 +25,6 @@ const PlatformBenefits = () => {
     setIsClient(true);
   }, []);
 
-  // ✅ Animation Variants
   const cardVariant = {
     hidden: { opacity: 0, y: 60, scale: 0.95 },
     visible: (i) => ({
@@ -157,7 +156,7 @@ const PlatformBenefits = () => {
           </Swiper>
         )}
 
-        <button className="mt-10 bg-[#76a088] text-white text-sm sm:text-base px-5 sm:px-6 py-3 rounded-full hover:bg-[#94c2a8] transition-all">
+        <button className="mt-10 bg-[#76a088] text-white text-sm sm:text-base px-5 sm:px-6 py-3 rounded-full hover:bg-[#94c2a8] transition-all animate-pulse">
           Request a Demo
         </button>
       </section>

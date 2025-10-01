@@ -41,9 +41,9 @@ export default function HomeSections() {
       style={{ backgroundImage: `url(${bg.src})` }}
     >
       {/* --- HOW IT WORKS --- */}
-      <section className="py-16 px-4 bg-gradient-to-b from-[#F8FAF9] via-[#EFEFEF] to-[#F8FAF9] sm:px-8 lg:px-12">
+      {/* <section className="py-16 px-4 bg-gradient-to-b from-[#F8FAF9] via-[#EFEFEF] to-[#F8FAF9] sm:px-8 lg:px-12">
         {/* Title */}
-        <motion.h2
+        {/* <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
@@ -55,7 +55,7 @@ export default function HomeSections() {
         </motion.h2>
 
         {/* Cards */}
-        <div className="flex flex-col md:flex-row justify-center items-center gap-12 relative">
+        {/* <div className="flex flex-col md:flex-row justify-center items-center gap-12 relative">
           {[
             { img: img1, title: "Sign Up", desc: "Choose your goals." },
             { img: img2, title: "Start Learning", desc: "Watch, read, and engage" },
@@ -85,19 +85,19 @@ export default function HomeSections() {
               )}
             </React.Fragment>
           ))}
-        </div>
+        </div> */}
 
         {/* Button */}
-        <div className="flex justify-center mt-10">
+        {/* <div className="flex justify-center mt-10">
           <motion.button
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-[#88B29A] hover:bg-[#6FA589] text-white px-7 sm:px-9 py-3 font-semibold rounded-full shadow-md hover:shadow-xl transition-all duration-300"
+            className="bg-[#88B29A] hover:bg-[#6FA589] text-white px-7 sm:px-9 py-3 font-semibold rounded-full shadow-md hover:shadow-xl transition-all duration-300 animate-pulse"
           >
             Request a Demo
           </motion.button>
-        </div>
-      </section>
+        </div>  */}
+      {/* </section>  */}
 
       {/* --- EXPLORE COURSES --- */}
       <section className="py-20 bg-gradient-to-b from-white via-[#F9FAFB] to-[#F3F7F5] px-4 sm:px-8 lg:px-12">
@@ -109,7 +109,7 @@ export default function HomeSections() {
           viewport={{ once: true }}
           className="text-center font-marko text-2xl sm:text-[40px] font-[400] mb-14"
         >
-          Explore Courses
+          Content Teaser
           <span className="block w-20 h-1 bg-[#88B29A] mx-auto mt-4 rounded-full"></span>
         </motion.h2>
 
@@ -140,10 +140,10 @@ export default function HomeSections() {
               <div className="absolute bottom-0 p-6 text-white">
                 <h3 className="font-semibold text-xl mb-2">
                   {idx === 0
-                    ? "Spouse Visa Application 2025"
+                    ? "Spouse Visa"
                     : idx === 1
-                    ? "Global Talent Visa Essentials"
-                    : "Student to Skilled Worker Route"}
+                    ? "Skilled Worker Visa"
+                    : "Innovator Visa"}
                 </h3>
                 <p className="text-sm text-gray-200 leading-relaxed">
                   {idx === 0

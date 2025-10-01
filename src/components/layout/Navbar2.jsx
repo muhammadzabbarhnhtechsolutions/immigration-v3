@@ -11,15 +11,12 @@ export default function Navbar1() {
   const [openLogout, setLogoutOpen] = useState(false);
 
   const navLinks = [
-    { href: "/", label: "Home" },
     { href: "/about-us", label: "About Us" },
-    { href: "/video-trailer", label: "Video Trailers" },
-    { href: "/templetes", label: "Templates" },
     { href: "/pricing", label: "Pricing" },
-    { href: "/latest-news", label: "Latest News" },
-    { href: "/all-appointments", label: "Appointments" },
+    { href: "/legal-advice", label: "Legal Advice" },
+    { href: "/podcast", label: "Podcast" },
+    { href: "/community", label: "Community" },
     { href: "/contact-us", label: "Contact Us" },
-    ...(checklogin ? [{ href: "/refrences", label: "Our Products" }] : []),
   ];
 
   const router = useRouter();
@@ -45,55 +42,54 @@ export default function Navbar1() {
   };
   return (
     <nav className="w-full  top-0 left-0 z-50 bg-white/90 backdrop-blur-md text-[#88B29A] shadow-md">
-      <div className="container mx-auto px-4 sm:px-6 flex justify-between items-center py-2">
+      <div className="container px-4 sm:px-6 flex justify-between items-center py-1">
         {/* Logo */}
         <Link href="/" className="">
           <Image
             src={logo}
             alt="logo"
-            width={80} // Pehle 48 tha
-            height={80} // Pehle 48 tha
-            className="h-20 w-auto object-fill" // Pehle h-14 tha
+            width={160} // Made bigger
+            height={160} // Made bigger
+            className="h-32 w-auto object-fill" // Adjusted height
           />
         </Link>
 
         {/* Desktop Menu */}
-        <ul className="hidden md:flex space-x-4 font-medium">
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                className="hover:text-[#62af84] transition-colors duration-200"
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
+          {/* Desktop Menu */}
+        <div className="hidden md:flex flex-col items-center space-y-2">
+          <ul className="flex space-x-6 font-medium">
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className="hover:text-[#62af84] transition-colors duration-200"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-        {/* Buttons */}
+        {/* Right Side Buttons */}
         {!checklogin ? (
-          // Agar login nahi hai => Sign Up + Login dikhaye
-          // ....
-          // ...
-          // ...
           <div className="hidden md:flex items-center space-x-4">
-            <Link href="/signup" className="font-semibold">
+            <Link href="/signup" className="font-semibold hover:text-[#62af84]">
               Sign Up
             </Link>
-            <Link href="/login" className="font-semibold flex">
+            <Link href="/login">
               <button className="bg-[#F0F2F5] text-black px-5 py-2.5 rounded-xl hover:bg-gray-100 transition">
                 Login
               </button>
             </Link>
-            <a
+            <Link
               href="#contact"
               className="flex items-center justify-center w-7 h-7 mt-2 transition"
             >
-              <Image src={imgContact} width={100} height={100} alt="contact" />
-            </a>
+              <Image src={imgContact} alt="contact" className="w-7 h-7" />
+            </Link>
           </div>
-        ) : (
+        )  : (
           // Agar login hai => Sirf profile icon + dropdown
           <div className="relative flex gap-4">
             <button

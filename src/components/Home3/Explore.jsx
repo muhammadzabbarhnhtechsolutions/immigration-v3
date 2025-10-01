@@ -43,9 +43,6 @@ const ExploreSections = () => {
         className=" bg-[#88B29A4D] flex justify-center"
       >
         <div className="max-w-7xl w-full grid grid-cols-1 md:grid-cols-2 gap-6 rounded-lg overflow-hidden">
-          {/* Left - Map */}
-          {/* .. */}
-          {/* .. */}
           <motion.div
             variants={sectionVariant}
             className="w-full h-[350px] md:h-[430px]"
@@ -99,7 +96,7 @@ const ExploreSections = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 type="submit"
-                className="bg-[#88B29A] hover:bg-[#6e9d81] text-white px-8 py-3 rounded-full shadow transition-all"
+                className="bg-[#88B29A] hover:bg-[#6e9d81] text-white px-8 py-3 rounded-full shadow transition-all animate-pulse"
               >
                 Submit
               </motion.button>

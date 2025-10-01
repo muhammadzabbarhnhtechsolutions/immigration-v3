@@ -1,13 +1,14 @@
 'use client';
 import Image from "next/image";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
-import icon1 from "../../assets/i1.png";
-import icon2 from "../../assets/i2.png";
-import icon3 from "../../assets/i3.png";
-import icon4 from "../../assets/i4.png";
-import icon5 from "../../assets/i6.png";
-import icon9 from "../../assets/i5.png";
+import icon1 from "../../assets/1.gif";
+import icon2 from "../../assets/2.gif";
+import icon3 from "../../assets/3.gif";
+import icon4 from "../../assets/4.gif";
+import icon5 from "../../assets/5.gif";
+import icon9 from "../../assets/6.gif";
 import i7 from "../../assets/i7.png";
 import i8 from "../../assets/i8.png";
 import i9 from "../../assets/i9.png";
@@ -23,9 +24,9 @@ export default function InfoSection() {
   ];
 
   const audience = [
-    { icon: i7, title: "Lawyers", text: "Stay updated with legal training" },
-    { icon: i8, title: "Students", text: "Learn how to apply the right way" },
-    { icon: i9, title: "General Public", text: "Understand your immigration options" },
+    { icon: i7, title: "Lawyers", text: "Stay updated with legal training", route: "/lawyers" },
+    { icon: i8, title: "Students", text: "Learn how to apply the right way", route: "/students" },
+    { icon: i9, title: "General Public", text: "Understand your immigration options", route: "/general-public" },
   ];
 
   // Animation variants
@@ -52,38 +53,37 @@ export default function InfoSection() {
           Who Is Immigration Navigator For?
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:py-12">
-          {audience.map(({ icon, title, text }, idx) => (
-            <motion.div
-              key={idx}
-              className="bg-[#3F855D40] transform transition-all duration-300 cursor-pointer hover:-translate-y-3 hover:shadow-xl bg-opacity-20 border border-[#D9E3F2] p-6 sm:p-8 rounded-2xl shadow-sm"
-              variants={cardVariant}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once:true }}
-              custom={idx}
-              // whileHover="hover"
-            >
+          {audience.map(({ icon, title, text, route }, idx) => (
+            <Link key={idx} href={route}>
               <motion.div
-                className="flex items-center gap-4 mb-4"
-                variants={iconVariant}
+                className="bg-[#3F855D40] transform transition-all duration-300 cursor-pointer hover:-translate-y-3 hover:shadow-xl bg-opacity-20 border border-[#D9E3F2] p-6 sm:p-8 rounded-2xl shadow-sm"
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                custom={idx}
               >
-                <Image
-                  src={icon}
-                  alt={title}
-                  width={64}
-                  height={64}
-                  className="rounded-lg"
-                />
-                <h3
-                  style={{ fontFamily: "Marcellus, serif" }}
-                  className="font-semibold text-2xl sm:text-2xl ml-2 text-[#1A2B4B]"
+                <motion.div
+                  className="flex items-center gap-4 mb-4"
+                  variants={iconVariant}
                 >
-                  {title}
-                </h3>
+                  <Image
+                    src={icon}
+                    alt={title}
+                    width={64}
+                    height={64}
+                    className="rounded-lg"
+                  />
+                  <h3
+                    style={{ fontFamily: "Marcellus, serif" }}
+                    className="font-semibold text-2xl sm:text-2xl ml-2 text-[#1A2B4B]"
+                  >
+                    {title}
+                  </h3>
+                </motion.div>
+                <p className="text-sm text-[#637587] leading-relaxed">{text}</p>
               </motion.div>
-
-              <p className="text-sm text-[#637587] leading-relaxed">{text}</p>
-            </motion.div>
+            </Link>
           ))}
         </div>
       </div>

@@ -28,7 +28,7 @@ export default function HeroSection() {
 
   return (
     <section
-      className="text-white px-4 h-screen sm:px-8 lg:px-8 py-12 sm:py-28 relative overflow-hidden"
+      className="text-white px-4 h-[555px] sm:px-8 lg:px-8 py-12 sm:py-28 relative overflow-hidden"
       style={{
         backgroundImage: `url(${bgImage.src})`,
         backgroundSize: 'cover',
@@ -55,15 +55,32 @@ export default function HeroSection() {
             Courses, templates, forums, and expert insights for lawyers, <br /> students, and the public.
           </p>
 
-          <motion.button
-            className="bg-transparent flex mx-auto md:mx-0 items-center gap-2 border-2 border-white text-white font-medium px-4 sm:px-6 py-2 sm:py-3 rounded-md shadow-md hover:bg-white hover:text-[#88B29A] transition-all text-lg"
-            whileHover={{ scale: 1.05, rotate: 2 }}
-            whileTap={{ scale: 0.95 }}
-            variants={buttonVariant}
-          >
-            Browse Courses
-            <ArrowRight className="transition-transform duration-300 hover:translate-x-2" />
-          </motion.button>
+        <motion.button
+      className="relative overflow-hidden bg-transport border border-white flex items-center gap-2 text-white font-semibold px-6 py-3 rounded-full shadow-lg text-lg"
+      whileHover={{ scale: 1.08, rotate: 1 }}
+      whileTap={{ scale: 0.92 }}
+      transition={{ type: "spring", stiffness: 300 }}
+    >
+      {/* Shiny glow effect */}
+      <motion.span
+        className="absolute inset-0 bg-white/20"
+        initial={{ x: "-100%" }}
+        whileHover={{ x: "100%" }}
+        transition={{ duration: 0.8, repeat: Infinity, repeatType: "reverse" }}
+      />
+
+      {/* Text */}
+      <span className="relative z-10">Browse Courses</span>
+
+      {/* Animated Arrow */}
+      <motion.span
+        className="relative z-10"
+        animate={{ x: [0, 6, 0] }}
+        transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+      >
+        <ArrowRight className="w-5 h-5" />
+      </motion.span>
+    </motion.button>
         </motion.div>
 
         {/* Right Video/Image Content */}
@@ -93,7 +110,7 @@ export default function HeroSection() {
               />
               <motion.button
                 onClick={handlePlay}
-                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full text-white"
+                className="absolute top-[112px] left-[186px] transform -translate-x-1/2 -translate-y-1/2 rounded-full text-white"
                 whileHover={{ scale: 1.2, rotate: 10 }}
                 whileTap={{ scale: 0.95 }}
                 initial={{ scale: 0 }}

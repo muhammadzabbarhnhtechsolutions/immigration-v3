@@ -65,6 +65,19 @@ const Footer2 = () => {
     </div>
   </div>
 
+  {/* Banner */}
+  <div className="bg-[#88B29A] text-white py-8 px-4 sm:px-8 lg:px-12 text-center">
+    <h3 className="text-lg sm:text-xl font-semibold mb-4">
+      Enhance Your UK Immigration Knowledge Today
+    </h3>
+    <p className="text-sm sm:text-base mb-6">
+      We specialise in delivering tailored Courses, Materials, Resources and Legal Advice through our platform
+    </p>
+    <button className="bg-white text-[#88B29A] px-6 py-3 font-semibold rounded-full shadow-md hover:bg-gray-100 transition-all animate-pulse">
+      Free Demo
+    </button>
+  </div>
+
   <div className="text-center mt-10 text-white text-xs sm:text-sm border-t border-gray-300 pt-4">
     © 2025 Immigration Navigator. All Rights Reserved.
   </div>
