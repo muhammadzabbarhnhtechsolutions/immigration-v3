@@ -11,6 +11,7 @@ export default function AboutUs() {
   
     const handlePlay = () => setIsPlaying(true);
   // ..
+  // ..
     // Animation variants
     const textVariant = {
       hidden: { opacity: 0, y: 50 },
