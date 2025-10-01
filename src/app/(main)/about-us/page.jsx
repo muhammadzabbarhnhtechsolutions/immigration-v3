@@ -10,7 +10,8 @@ export default function AboutUs() {
     const [isPlaying, setIsPlaying] = useState(false);
   
     const handlePlay = () => setIsPlaying(true);
-  // ..
+  // .....
+  // .
   // ..
     // Animation variants
     const textVariant = {
