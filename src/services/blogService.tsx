@@ -1,36 +1,9 @@
-<<<<<<< HEAD
-=======
 // services/blogService.ts
->>>>>>> feat/v3
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
 import axiosInstance from "@/api/axiosInstance";
 
-<<<<<<< HEAD
-type ErrorResponse = {
-  error?: string;
-  message?: string;
-};
-
-export const getEBooks = async (router: AppRouterInstance) => {
-  try {
-    const response = await axiosInstance.get("user/e-book/view/");
-    return response.data; // assuming { data: [...] }
-  } catch (error) {
-    const axiosError = error as AxiosError<ErrorResponse>;
-    const statusCode = axiosError?.response?.status;
-    const errorMessage =
-      axiosError?.response?.data?.error ||
-      axiosError?.response?.data?.message;
-
-    if (statusCode === 403) {
-      router.push("/login");
-    } else {
-      toast.error(errorMessage || "Something went wrong");
-    }
-
-=======
 type ErrorResponse = { error?: string; message?: string };
 
 export const getPaginatedEBooks = async (
@@ -67,7 +40,6 @@ export const searchEBooks = async (
       axiosErr.response?.data?.error || axiosErr.response?.data?.message;
     if (status === 403) router.push("/login");
     else toast.error(msg || "Something went wrong");
->>>>>>> feat/v3
     return null;
   }
 };

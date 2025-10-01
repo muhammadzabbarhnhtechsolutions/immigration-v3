@@ -91,95 +91,6 @@ export default function IndividualUsers() {
     getPricing();
   }, []);
 
-<<<<<<< HEAD
-const filteredPackages = packageData.filter((pkg) => {
-  if (billing === "Service") return pkg.package_type === 1;
-  if (billing === "Consultation") return pkg.package_type === 2;
-  if (billing === "buisness Plan") return pkg.package_type === 3;
-  return false;
-});
-
-
-// const handlebuyPakages = async (id) => {
-//   if (!token) {
-//     return router.push("/signup");
-//   }
-
-//   try {
-//     const res = await buyPakages(id);
-
-//     const checkoutUrl = res?.data?.checkout_url;
-
-//     if (checkoutUrl && typeof checkoutUrl === "string") {
-//       window.open(checkoutUrl, "_blank");
-//     } else {
-//       console.error("Invalid checkout URL:", checkoutUrl);
-//       toast.error("Something went wrong. Please try again later.");
-//     }
-//   } catch (error) {
-//     console.error("Error in handlebuyPakages:", error);
-//     toast.error("Failed to process payment. Try again.");
-//   }
-// };
-
-const handlebuyPakages = async (id) => {
-  if (!token) {
-    return router.push("/signup");
-  }
-
-  try {
-    const res = await buyPakages(id, token); // ✅ Pass token here
-
-    const checkoutUrl = res?.data?.checkout_url;
-
-    if (checkoutUrl && typeof checkoutUrl === "string") {
-      window.open(checkoutUrl, "_blank");
-    } else {
-      console.error("Invalid checkout URL:", checkoutUrl);
-      toast.error("Something went wrong. Please try again later.");
-    }
-  } catch (error) {
-    console.error("Error in handlebuyPakages:", error);
-    toast.error("Failed to process payment. Try again.");
-  }
-};
-  if (loading) {
-    return (
-      <div className="mx-auto bg-[#ebf0ed] px-4 mt-8 py-20 text-center">
-        <p>Loading packages...</p>
-      </div>
-    );
-  }
-
-  if (filteredPackages.length === 0) {
-    return (
-      <div className="mx-auto px-4 mt-8 py-20 text-center">
-         <div className="text-center mb-8">
-        <h1 className="text-2xl md:text-[40px] font-bold mb-6">
-          <span className="text-black">Individual </span>
-          <span className="text-[#7bab8e]">Users</span>
-        </h1>
-
-        <div className="flex justify-center">
-          <div className="inline-flex rounded-md gap-4 mb-6 mt-6 p-1">
-            {["Service", "Consultation","buisness Plan"].map((type) => (
-              <button
-                key={type}
-                onClick={() => setBilling(type)}
-                className={`px-5 py-3 mb-8 font-semibold cursor-pointer text-base md:text-[18px] rounded-md transition-colors ${
-                  billing === type
-                    ? "bg-[#7bab8e] text-white"
-                    : "text-gray-600 hover:bg-gray-100"
-                }`}
-              >
-                {type.charAt(0).toUpperCase() + type.slice(1)}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-        <p>No {billing} packages available at the moment.</p>
-=======
   const handlebuyPakages = async (id) => {
     if (!token) {
       router.push(`/login?next=/pricing`);
@@ -260,7 +171,6 @@ const handlebuyPakages = async (id) => {
       <div className="mx-auto  bg-[#ebf0ed] px-4 mt-0 py-20 text-center flex flex-col items-center justify-center gap-4 animate-fade-in">
         <div className="h-10 w-10 border-4 border-[#88B29A] border-t-transparent rounded-full animate-spin"></div>
         <p className="text-[#88B29A] text-lg font-medium">Loading packages...</p>
->>>>>>> feat/v3
       </div>
     );
   }
@@ -269,13 +179,8 @@ const handlebuyPakages = async (id) => {
     <div className="mx-auto px-4 sm:px-6 lg:px-8 mt-0 py-12 sm:py-16 md:px-22">
       <div className="text-center mb-8">
         <div className="flex justify-center">
-<<<<<<< HEAD
-          <div className="inline-flex rounded-md gap-4 mb-6 mt-6 p-1">
-            {["Service", "Consultation","buisness Plan"].map((type) => (
-=======
           <div className="inline-flex flex-wrap justify-start items-center gap-4 mb-6 mt-6 px-4 py-3 rounded-2xl border border-gray-200 w-full sm:w-auto">
             <div className="relative w-full sm:w-auto max-w-xs">
->>>>>>> feat/v3
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="w-full sm:w-[210px] px-4 py-2 text-left bg-gray-100 border border-[#d1e7dd] rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-[#88B29A] flex justify-between items-center text-gray-800 hover:shadow-lg transition"
