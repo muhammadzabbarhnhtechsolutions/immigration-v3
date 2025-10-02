@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { FaPlayCircle } from "react-icons/fa";
 
 export default function LegalAdvicePage() {
   const [formData, setFormData] = useState({
@@ -24,12 +25,32 @@ export default function LegalAdvicePage() {
     alert("Appointment booked! (Payment Integration Here)");
   };
 
+  const [isPlaying, setIsPlaying] = useState(false);
+  
+    const handlePlay = () => setIsPlaying(true);
+  
+    // Animation variants
+    const textVariant = {
+      hidden: { opacity: 0, y: 50 },
+      visible: { opacity: 1, y: 0, transition: { duration: 1 } },
+    };
+  
+    const buttonVariant = {
+      hidden: { opacity: 0, scale: 0.8 },
+      visible: { opacity: 1, scale: 1, transition: { delay: 0.5, duration: 0.5 } },
+    };
+  
+    const imageVariant = {
+      hidden: { opacity: 0, scale: 0.95 },
+      visible: { opacity: 1, scale: 1, transition: { duration: 1 } },
+    };
+  
   return (
     <main className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="container mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <section className="container mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-2 gap-22 items-center">
         {/* Left */}
-        <div>
+        <div className="ml-4">
           <h1 style={{lineHeight:"54px"}} className="text-3xl md:text-4xl font-bold text-[#88B29A] mb-6">
             Legal Advice & Confidential Consultation
           </h1>
@@ -38,8 +59,8 @@ export default function LegalAdvicePage() {
             clear, expert immigration advice tailored to your circumstances.
           </p>
           <p className="text-gray-700 text-lg leading-relaxed mb-4">
-            Choose a <span className="font-semibold">30-minute session (£150 + VAT)</span> 
-            or a <span className="font-semibold">60-minute session (£300 + VAT)</span> 
+            Choose a <span className="font-semibold">30-minute session (£150 + VAT)</span>
+            or a <span className="font-semibold">60-minute session (£300 + VAT)</span>
             to get answers you can trust and practical guidance on your next steps.
           </p>
           <p className="text-gray-700 text-lg leading-relaxed">
@@ -50,13 +71,33 @@ export default function LegalAdvicePage() {
         </div>
 
         {/* Right - Video */}
-        <div className="rounded-lg overflow-hidden shadow-lg">
-          <iframe
-            className="w-full h-64 md:h-96 rounded-lg"
-            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-            title="Legal Advice Video"
-            allowFullScreen
-          ></iframe>
+        <div className="relative w-full max-w-lg mx-auto ">
+          {isPlaying ? (
+            <div className="relative w-full h-[220px] sm:h-[280px] md:h-[330px] rounded-xl overflow-hidden shadow-lg">
+              <iframe
+                className="w-full h-full rounded-xl shadow-lg"
+                src="https://www.youtube.com/embed/9C2fSBHryiQ?autoplay=1&controls=1"
+                title="YouTube video player"
+                frameBorder="0"
+                allow="autoplay; encrypted-media"
+                allowFullScreen
+              ></iframe>
+            </div>
+          ) : (
+            <div className="relative group">
+              <img
+                src="https://immigrationnavigator.co.uk/wp-content/uploads/2023/06/creative-copywriters-working-on-articles.jpg"
+                alt="People discussing immigration law"
+                className="w-full rounded-xl shadow-lg transition-transform duration-500 group-hover:scale-105"
+              />
+              <button
+                onClick={handlePlay}
+                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full text-white"
+              >
+                <FaPlayCircle className="text-5xl sm:text-6xl drop-shadow-xl" />
+              </button>
+            </div>
+          )}
         </div>
       </section>
 

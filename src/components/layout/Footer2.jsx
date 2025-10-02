@@ -4,7 +4,21 @@ import logo from "../../assets/logo2.0.png";
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 const Footer2 = () => {
   return (
-  <footer className="bg-[#88B29A] py-10 px-6 sm:px-12 md:px-24 text-white">
+    <>
+    
+    <div className="bg-[#99b9a7] mb-42 text-white py-8 px-4 sm:px-8 lg:px-12 text-center">
+    <h3 className="text-lg sm:text-xl font-semibold mb-4">
+      Enhance Your UK Immigration Knowledge Today
+    </h3>
+    <p className="text-sm sm:text-base mb-6">
+      We specialise in delivering tailored Courses, Materials, Resources and Legal Advice through our platform
+    </p>
+    <button className="bg-white text-[#88B29A] px-6 py-3 font-semibold rounded-full shadow-md hover:bg-gray-100 transition-all animate-pulse">
+      Free Demo
+    </button>
+  </div>
+
+  <footer className="bg-[#88B29A] mt-24 py-10 px-6 sm:px-12 md:px-24 text-white">
   <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:justify-between md:gap-8 gap-10 text-base">
     {/* Logo Section */}
     <div className="md:w-[324px]">
@@ -66,7 +80,7 @@ const Footer2 = () => {
   </div>
 
   {/* Banner */}
-  <div className="bg-[#88B29A] text-white py-8 px-4 sm:px-8 lg:px-12 text-center">
+  {/* <div className="bg-[#88B29A] text-white py-8 px-4 sm:px-8 lg:px-12 text-center">
     <h3 className="text-lg sm:text-xl font-semibold mb-4">
       Enhance Your UK Immigration Knowledge Today
     </h3>
@@ -76,13 +90,13 @@ const Footer2 = () => {
     <button className="bg-white text-[#88B29A] px-6 py-3 font-semibold rounded-full shadow-md hover:bg-gray-100 transition-all animate-pulse">
       Free Demo
     </button>
-  </div>
+  </div> */}
 
   <div className="text-center mt-10 text-white text-xs sm:text-sm border-t border-gray-300 pt-4">
     © 2025 Immigration Navigator. All Rights Reserved.
   </div>
 </footer>
-
+</>
   )
 }
 

@@ -149,11 +149,15 @@ export default function AboutUs() {
           </div>
 
           {/* Right Button Updated */}
-          <div>
-            <button className="bg-white flex items-center justify-center px-6 py-3 text-[#88B29A] rounded-md font-medium hover:bg-[#6f967f] hover:text-white transition-colors">
-              Free Demo <ArrowRightIcon className="ml-2 h-5 w-5" />
-            </button>
-          </div>
+         <div>
+  <button
+    className="bg-white flex items-center justify-center px-6 py-3 text-[#88B29A] rounded-md font-medium hover:bg-[#6f967f] hover:text-white transition-colors 
+               animate-pulse"
+  >
+    Free Demo <ArrowRightIcon className="ml-2 h-5 w-5" />
+  </button>
+</div>
+
         </div>
       </section>
     </main>

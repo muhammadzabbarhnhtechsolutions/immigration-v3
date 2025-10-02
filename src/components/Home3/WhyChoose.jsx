@@ -17,7 +17,16 @@ import img6 from "../../assets/pic3.png";
 import img7 from "../../assets/newUser.jpg";
 import img11 from "../../assets/ii3.png";
 import img12 from "../../assets/ii4.png";
-
+import icon1 from "../../assets/1.gif";
+import icon2 from "../../assets/2.gif";
+import icon3 from "../../assets/3.gif";
+import icon4 from "../../assets/4.gif";
+import icon5 from "../../assets/5.gif";
+import icon9 from "../../assets/6.gif";
+import i7 from "../../assets/010.png";
+import i8 from "../../assets/020.png";
+import i9 from "../../assets/030.png";
+import Link from "next/link";
 const PlatformBenefits = () => {
   const [isClient, setIsClient] = useState(false);
 
@@ -25,25 +34,7 @@ const PlatformBenefits = () => {
     setIsClient(true);
   }, []);
 
-  const cardVariant = {
-    hidden: { opacity: 0, y: 60, scale: 0.95 },
-    visible: (i) => ({
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        delay: i * 0.2,
-        duration: 0.6,
-        type: "spring",
-        stiffness: 120,
-      },
-    }),
-    hover: {
-      scale: 1.03,
-      y: -8,
-      transition: { type: "spring", stiffness: 300 },
-    },
-  };
+
 
   const testimonials = [
     {
@@ -95,70 +86,83 @@ const PlatformBenefits = () => {
     },
   ];
 
+  const keyFeatures = [
+    { icon: icon2, title: "Easy to Step-by-step courses" },
+    { icon: icon4, title: "Podcast & video learning" },
+    { icon: icon9, title: "Downloadable templates" },
+    { icon: icon5, title: "Instant feedback quizzes" },
+    { icon: icon3, title: "Verified by immigration lawyers" },
+    { icon: icon1, title: "Active support & community" },
+  ];
+
+  const audience = [
+    { icon: i9, title: "Podcast", text: "Stay updated with legal training", route: "/lawyers" },
+    { icon: i8, title: "Forums", text: "Learn how to apply the right way", route: "/students" },
+    { icon: i7, title: "Legal Advice", text: "Understand your immigration options", route: "/general-public" },
+  ];
+
+  // Animation variants
+  const cardVariant = {
+    hidden: { opacity: 0, y: 50, scale: 0.9 },
+    visible: (i) => ({
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { delay: i * 0.15, duration: 0.6, type: "spring", stiffness: 120 },
+    }),
+    hover: { scale: 1.0, y: -5, transition: { type: "spring", stiffness: 300 } },
+  };
+
+  const iconVariant = {
+    hover: { scale: 1.2, rotate: [0, 10, -10, 0], transition: { duration: 0.6 } },
+  };
   return (
     <>
       {/* ✅ Benefits Section */}
       <section className="py-12 px-4 md:py-20 sm:px-8 lg:px-16 text-center bg-white">
         <h2 className="font-marko text-2xl sm:text-5xl font-[400] mb-2">
-          Why Choose Immigration Navigator
+Community
         </h2>
-        <p className="font-marko text-black text-lg sm:text-3xl mt-4 mb-14">
+        {/* <p className="font-marko text-black text-lg sm:text-3xl mt-4 mb-14">
           Platform Benefits
-        </p>
-
-        {isClient && (
-          <Swiper
-            modules={[Pagination]}
-            spaceBetween={20}
-            slidesPerView={1}
-            breakpoints={{
-              640: { slidesPerView: 1 },
-              768: { slidesPerView: 2 },
-              1024: { slidesPerView: 3 },
-            }}
-            className="px-2 sm:px-6"
-          >
-            {benefits.map((benefit, i) => (
-              <SwiperSlide key={i}>
+        </p> */}
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:py-12">
+         {audience.map(({ icon, title, text, route }, idx) => (
+            <Link key={idx} href={route}>
+              <motion.div
+                className="bg-[#3F855D40] transform transition-all duration-300 cursor-pointer hover:-translate-y-3 hover:shadow-xl bg-opacity-20 border border-[#D9E3F2] p-6 sm:p-8 rounded-2xl shadow-sm"
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                custom={idx}
+              >
                 <motion.div
-                  variants={cardVariant}
-                  initial="hidden"
-                  whileInView="visible" // 👈 scroll par animate hoga
-                  viewport={{ once: true, amount: 0.3 }}
-                  whileHover="hover"
-                  custom={i}
-                  className="group h-[270px] rounded-2xl shadow-md overflow-hidden border border-gray-200"
+                  className="flex items-center gap-4 mb-4"
+                  variants={iconVariant}
                 >
-                  {/* Image */}
-                  <div className="relative w-full h-48 sm:h-72">
-                    <Image
-                      src={benefit.image}
-                      alt={benefit.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-
-                    {/* Gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
-
-                    {/* Text */}
-                    <div className="absolute bottom-4 left-4 right-4 text-left text-white">
-                      <h3 className="text-lg sm:text-xl font-semibold">
-                        {benefit.title}
-                      </h3>
-                      <p className="text-white/90 text-sm sm:text-base leading-relaxed">
-                        {benefit.description}
-                      </p>
-                    </div>
-                  </div>
+                  <Image
+                    src={icon}
+                    alt={title}
+                    width={72}
+                    height={72}
+                    className="rounded-lg"
+                  />
+                  <h3
+                    style={{ fontFamily: "Marcellus, serif" }}
+                    className="font-semibold text-2xl sm:text-[28px] ml-1   text-[#1A2B4B]"
+                  >
+                    {title}
+                  </h3>
                 </motion.div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        )}
-
-        <button className="mt-10 bg-[#76a088] text-white text-sm sm:text-base px-5 sm:px-6 py-3 rounded-full hover:bg-[#94c2a8] transition-all animate-pulse">
+                {/* <p classsName="text-sm text-[#637587] leading-relaxed">{text}</p> */}
+              </motion.div>
+            </Link>
+          ))}
+          </div>
+        {/* <button className="mt-10 bg-[#76a088] text-white text-sm sm:text-base px-5 sm:px-6 py-3 rounded-full hover:bg-[#94c2a8] transition-all animate-pulse">
           Request a Demo
-        </button>
+        </button> */}
       </section>
 
       {/* ✅ Testimonials Section */}
