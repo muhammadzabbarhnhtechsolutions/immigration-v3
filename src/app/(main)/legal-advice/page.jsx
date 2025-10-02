@@ -29,22 +29,6 @@ export default function LegalAdvicePage() {
   
     const handlePlay = () => setIsPlaying(true);
   
-    // Animation variants
-    const textVariant = {
-      hidden: { opacity: 0, y: 50 },
-      visible: { opacity: 1, y: 0, transition: { duration: 1 } },
-    };
-  
-    const buttonVariant = {
-      hidden: { opacity: 0, scale: 0.8 },
-      visible: { opacity: 1, scale: 1, transition: { delay: 0.5, duration: 0.5 } },
-    };
-  
-    const imageVariant = {
-      hidden: { opacity: 0, scale: 0.95 },
-      visible: { opacity: 1, scale: 1, transition: { duration: 1 } },
-    };
-  
   return (
     <main className="min-h-screen bg-white">
       {/* Hero Section */}
