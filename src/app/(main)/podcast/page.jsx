@@ -1,4 +1,4 @@
-import VideoTrailor from "../../video-trailer/VideoTrailor";
+import VideoTrailor from "../podcasts/page";
 
 export default function Page() {
     return (
