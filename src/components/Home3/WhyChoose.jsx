@@ -96,7 +96,7 @@ const PlatformBenefits = () => {
   ];
 
   const audience = [
-    { icon: i9, title: "Podcast", text: "Stay updated with legal training", route: "/video-trailer" },
+    { icon: i9, title: "Podcast", text: "Stay updated with legal training", route: "/podcasts" },
     { icon: i8, title: "Forums", text: "Learn how to apply the right way", route: "/forum" },
     { icon: i7, title: "Legal Advice", text: "Understand your immigration options", route: "/legal-advice" },
   ];
