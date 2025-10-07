@@ -4,7 +4,7 @@ import { clerkMiddleware, getAuth } from '@clerk/nextjs/server';
 
 export default clerkMiddleware((auth, request) => {
   // const { userId } = auth();
-  const token = request.cookies.get('access_token')?.value;
+  const token = request.cookies.get('user')?.value;
   // const token = request.cookies.get('access_token')?.value || null;
   const pathname = request.nextUrl.pathname;
 

@@ -1,5 +1,5 @@
 "use client"
-import { ArrowRightIcon } from "lucide-react";
+import { ArrowRight, ArrowRightIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from 'framer-motion';
@@ -43,17 +43,32 @@ export default function AboutUs() {
             wide range of services.
           </p>
           {/* Button Updated */}
-         <motion.button
-  initial={{ opacity: 0, y: 30 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.8, ease: "easeOut" }}
-  whileHover={{ scale: 1.08 }}
-  whileTap={{ scale: 0.95 }}
-  className="mt-6 flex items-center justify-center cursor-pointer bg-[#88B29A] text-white px-6 py-3 rounded-md font-medium shadow-md hover:bg-[#6f967f] transition-colors"
->
-  Free Demo
-  <ArrowRightIcon className="ml-2 animate-pulse h-5 w-5" />
-</motion.button>
+        <motion.button
+             className="relative overflow-hidden bg-transport  mt-6 flex items-center gap-2 text-[#88B29A]  border border-gray-200 font-semibold px-6 py-2.5 rounded-full shadow-lg text-lg"
+             whileHover={{ scale: 1.08, rotate: 1 }}
+             whileTap={{ scale: 0.92 }}
+             transition={{ type: "spring", stiffness: 300 }}
+           >
+             {/* Shiny glow effect */}
+             <motion.span
+               className="absolute inset-0 bg-white/20"
+               initial={{ x: "-100%" }}
+               whileHover={{ x: "100%" }}
+               transition={{ duration: 0.8, repeat: Infinity, repeatType: "reverse" }}
+             />
+       
+             {/* Text */}
+             <span className="relative z-10">Free Demo</span>
+       
+             {/* Animated Arrow */}
+             <motion.span
+               className="relative z-10"
+               animate={{ x: [0, 6, 0] }}
+               transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+             >
+               <ArrowRight className="w-5 h-5" />
+             </motion.span>
+           </motion.button>
         </div>
 
         {/* Better Graphic Placeholder */}
@@ -101,7 +116,7 @@ export default function AboutUs() {
 
       {/* Our Story & Mission Section */}
      <section className="bg-[#88B29A14] w-full py-6 px-6 md:px-3">
-  <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start">
+  <div className="max-w-8xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start">
     
     {/* Our Story */}
     <div className="p-4 md:p-6 lg:p-8">
@@ -117,15 +132,14 @@ export default function AboutUs() {
         the complexities of UK Immigration Law with confidence and achieve their
         desired outcomes.
       </p>
-      <p className="text-[#676767] text-base md:text-base leading-relaxed text-justify">
-        We provide a comprehensive range of resources, including video
-        resources, written materials, and application templates, to meet your
+      <p className="text-[#676767] text-base md:text-base  leading-relaxed text-justify">
+        We provide a comprehensive range of resources including video resources written materials and application templates to meet your
         specific needs.
       </p>
     </div>
 
     {/* Our Mission */}
-    <div className="p-4 md:p-6 lg:p-8">
+    <div className="p-4 md:p-4 lg:p-8">
       <h2 className="text-2xl md:text-[35px] font-bold text-[#88B29A] font-sans mb-5 md:mb-6 text-center md:text-left">
         Our Mission
       </h2>
@@ -149,10 +163,10 @@ export default function AboutUs() {
 
       {/* CTA Section */}
       <section className="container mx-auto px-2 py-12 mb-12">
-        <div className="bg-[#88B29A] p-6 md:p-12 flex flex-col md:flex-row md:justify-between items-center rounded-lg gap-6">
+        <div className="bg-[#88B29A] p-6 md:p-6 flex flex-col md:flex-row md:justify-between items-center rounded-lg gap-6">
           {/* Left Content */}
           <div className="flex flex-col text-center md:text-left items-center md:items-start">
-            <h2 className="text-2xl md:text-4xl font-bold text-[#ffffff] mb-4">
+            <h2 className="text-2xl md:text-3xl font-semibold text-[#ffffff] mb-4">
               Start Your Journey Today!
             </h2>
             <p className="text-white mb-6 max-w-2xl text-base md:text-lg leading-relaxed">
@@ -163,6 +177,7 @@ export default function AboutUs() {
 
           {/* Right Button Updated */}
          <div>
+           {/* <motion. */}
   <button
     className="bg-white flex items-center justify-center px-6 py-3 text-[#88B29A] rounded-md font-medium hover:bg-[#6f967f] hover:text-white transition-colors 
                animate-pulse"
