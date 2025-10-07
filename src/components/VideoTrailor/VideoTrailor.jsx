@@ -44,12 +44,24 @@ export default function VideoTrailor() {
       <div className="max-w-7xl mx-auto">
         {/* Hero Section */}
         <section className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-20">
-          <div style={{lineHeight:"37px"}} className="text-lg md:text-xl ml-4">
-            Stay ahead with our podcast, where we share the latest updates, insights, and developments
-            in UK immigration law. Hosted by a UK-qualified solicitor, each episode breaks down complex
-            changes, highlights key trends, and explores the issues that matter most to individuals
-            and businesses navigating the immigration system.
-          </div>
+<div
+  style={{ lineHeight: "43px" }}
+  className="mx-auto max-w-4xl px-6 md:px-0 text-center md:text-left"
+>
+  <h1 className="text-3xl sm:text-4xl md:text-[40px] font-bold mb-5 md:mb-6 leading-[58px] text-[#88B29A]">
+    Stay Ahead with Expert Insights
+  </h1>
+
+  <p className="text-gray-600 text-base md:text-lg leading-relaxed text-justify">
+    Stay ahead with our podcast, where we share the latest updates, insights,
+    and developments in UK immigration law. Hosted by a UK-qualified solicitor,
+    each episode breaks down complex changes, highlights key trends, and
+    explores the issues that matter most to individuals and businesses
+    navigating the immigration system.
+  </p>
+</div>
+
+
 
           <div className="relative w-full max-w-lg mx-auto">
             {isPlaying ? (
@@ -83,9 +95,7 @@ export default function VideoTrailor() {
           </div>
         </section>
 
-        <h2 className="text-2xl sm:text-3xl md:text-4xl text-[#88B29A] font-bold mb-6">
-          Video Trailers
-        </h2>
+
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {videos.map((video, index) => (

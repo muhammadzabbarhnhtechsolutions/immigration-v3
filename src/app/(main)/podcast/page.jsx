@@ -1,10 +1,9 @@
-import PodCast from "../../../components/PodCast/PodCast";
+import VideoTrailor from "../../video-trailer/VideoTrailor";
 
 export default function Page() {
     return (
-<>
-{/* ...this is new file changes" */}
-<PodCast/>
-</>
-);
+        <>
+            <VideoTrailor />
+        </>
+    );
 }

@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaPlayCircle } from 'react-icons/fa';
 import bgImage from '../../assets/bgv3.png';
 import { ArrowRight } from 'lucide-react';
@@ -26,6 +26,37 @@ export default function HeroSection() {
     visible: { opacity: 1, scale: 1, transition: { duration: 1 } },
   };
 
+    const text = "Master UK Immigration Law. Anytime. Anywhere."
+  const [displayedText, setDisplayedText] = useState("")
+  const [index, setIndex] = useState(0)
+  const [isDeleting, setIsDeleting] = useState(false)
+
+  useEffect(() => {
+    let timeout;
+
+    if (!isDeleting && index < text.length) {
+      // typing effect
+      timeout = setTimeout(() => {
+        setDisplayedText((prev) => prev + text.charAt(index))
+        setIndex(index + 1)
+      }, 80) // typing speed
+    } else if (!isDeleting && index === text.length) {
+      // pause before deleting
+      timeout = setTimeout(() => setIsDeleting(true), 2000)
+    } else if (isDeleting && index > 0) {
+      // deleting effect
+      timeout = setTimeout(() => {
+        setDisplayedText(text.substring(0, index - 1))
+        setIndex(index - 1)
+      }, 40) // deleting speed
+    } else if (isDeleting && index === 0) {
+      // restart typing
+      setIsDeleting(false)
+    }
+
+    return () => clearTimeout(timeout)
+  }, [index, isDeleting])
+
   return (
     <section
       className="text-white px-4 h-[555px] sm:px-8 lg:px-8 py-12 sm:py-28 relative overflow-hidden"
@@ -45,12 +76,20 @@ export default function HeroSection() {
           animate="visible"
           variants={textVariant}
         >
-          <h1
-            style={{ lineHeight: '62px' }}
-            className="text-3xl font-marko sm:text-5xl md:text-4.5xl font-bold mb-4 sm:mb-6 leading-[62px]"
-          >
-            Master UK Immigration Law. Anytime. Anywhere.
-          </h1>
+           <motion.h1
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      style={{ lineHeight: "62px" }}
+      className="text-3xl font-marko sm:text-5xl md:text-4.5xl font-bold mb-4 sm:mb-6 leading-[62px]"
+    >
+      {displayedText}
+      <motion.span
+        animate={{ opacity: [0, 1, 0] }}
+        transition={{ duration: 0.8, repeat: Infinity }}
+        className="inline-block w-[2px] h-8 bg-[#88B29A] ml-1 align-middle"
+      ></motion.span>
+    </motion.h1>
           <p className="text-base font-medium sm:text-xl mb-4 sm:mb-6 text-white/90">
             Courses, templates, forums, and expert insights for lawyers, <br /> students, and the public.
           </p>

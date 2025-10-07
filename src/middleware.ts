@@ -9,7 +9,7 @@ export default clerkMiddleware((auth, request) => {
   const pathname = request.nextUrl.pathname;
 
   const authPages = ['/login', '/signup'];
-  const protectedPages = ['/forum', '/videos'];
+  const protectedPages = ['/videos'];
 
   const isAuthPage = authPages.some((path) => pathname.startsWith(path));
   const isProtectedPage = protectedPages.some((path) => pathname.startsWith(path));

@@ -43,9 +43,17 @@ export default function AboutUs() {
             wide range of services.
           </p>
           {/* Button Updated */}
-          <button className="mt-6 flex cursor-pointer items-center bg-[#88B29A] text-white px-6 py-3 rounded-md font-medium hover:bg-[#6f967f] transition-colors">
-            Free Demo <ArrowRightIcon className="ml-2 h-5 w-5" />
-          </button>
+         <motion.button
+  initial={{ opacity: 0, y: 30 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8, ease: "easeOut" }}
+  whileHover={{ scale: 1.08 }}
+  whileTap={{ scale: 0.95 }}
+  className="mt-6 flex items-center justify-center cursor-pointer bg-[#88B29A] text-white px-6 py-3 rounded-md font-medium shadow-md hover:bg-[#6f967f] transition-colors"
+>
+  Free Demo
+  <ArrowRightIcon className="ml-2 animate-pulse h-5 w-5" />
+</motion.button>
         </div>
 
         {/* Better Graphic Placeholder */}
@@ -92,47 +100,52 @@ export default function AboutUs() {
       </section>
 
       {/* Our Story & Mission Section */}
-      <section className="bg-[#88B29A14] container px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="p-6 rounded-lg">
-            <h2 className="text-2xl md:text-[35px] font-bold text-[#88B29A] font-sans mb-4">
-              Our Story
-            </h2>
-            <p className="text-[#676767] mb-4 text-base md:text-lg leading-relaxed">
-              At Immigration Navigator, our story is one driven by a passion for
-              excellence in UK Immigration Law. Founded by experienced legal
-              professionals, we recognised the need for comprehensive and
-              accessible resources. With our video resources, written guides,
-              and application templates, we empower individuals and legal
-              professionals to navigate the complexities of UK Immigration Law
-              with confidence and achieve their desired outcomes.
-            </p>
-            <p className="text-[#676767] text-base md:text-lg leading-relaxed">
-              We provide a comprehensive range of resources, including video
-              resources, written materials, and application templates, to meet
-              your specific needs.
-            </p>
-          </div>
-          <div className="p-6 rounded-lg">
-            <h2 className="text-2xl md:text-[35px] font-sans font-bold text-[#88B29A] mb-4">
-              Our Mission
-            </h2>
-            <p className="text-[#676767] mb-4 text-base md:text-lg leading-relaxed">
-              We are dedicated to providing comprehensive resources and expert
-              guidance in the complex field of UK Immigration Law. We offer a
-              range of specialised services to empower you in navigating the
-              intricacies of immigration applications and processes.
-            </p>
-            <p className="text-[#676767] mb-4 text-base md:text-lg leading-relaxed">
-              We have earned a reputation for our reliable and accurate
-              Immigration Law resources. Our materials are meticulously
-              researched and regularly updated to reflect the latest legal
-              developments. Rely on our trusted expertise to guide you through
-              the ever-changing immigration landscape.
-            </p>
-          </div>
-        </div>
-      </section>
+     <section className="bg-[#88B29A14] w-full py-6 px-6 md:px-3">
+  <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start">
+    
+    {/* Our Story */}
+    <div className="p-4 md:p-6 lg:p-8">
+      <h2 className="text-2xl md:text-[35px] font-bold text-[#88B29A] font-sans mb-5 md:mb-6 text-center md:text-left">
+        Our Story
+      </h2>
+      <p className="text-[#676767] mb-5 text-base md:text-base leading-relaxed text-justify">
+        At Immigration Navigator, our story is one driven by a passion for
+        excellence in UK Immigration Law. Founded by experienced legal
+        professionals, we recognised the need for comprehensive and accessible
+        resources. With our video resources, written guides, and application
+        templates, we empower individuals and legal professionals to navigate
+        the complexities of UK Immigration Law with confidence and achieve their
+        desired outcomes.
+      </p>
+      <p className="text-[#676767] text-base md:text-base leading-relaxed text-justify">
+        We provide a comprehensive range of resources, including video
+        resources, written materials, and application templates, to meet your
+        specific needs.
+      </p>
+    </div>
+
+    {/* Our Mission */}
+    <div className="p-4 md:p-6 lg:p-8">
+      <h2 className="text-2xl md:text-[35px] font-bold text-[#88B29A] font-sans mb-5 md:mb-6 text-center md:text-left">
+        Our Mission
+      </h2>
+      <p className="text-[#676767] mb-5 text-base md:text-base leading-relaxed text-justify">
+        We are dedicated to providing comprehensive resources and expert
+        guidance in the complex field of UK Immigration Law. We offer a range of
+        specialised services to empower you in navigating the intricacies of
+        immigration applications and processes.
+      </p>
+      <p className="text-[#676767] text-base md:text-base leading-relaxed text-justify">
+        We have earned a reputation for our reliable and accurate Immigration
+        Law resources. Our materials are meticulously researched and regularly
+        updated to reflect the latest legal developments. Rely on our trusted
+        expertise to guide you through the ever-changing immigration landscape.
+      </p>
+    </div>
+
+  </div>
+</section>
+
 
       {/* CTA Section */}
       <section className="container mx-auto px-2 py-12 mb-12">
