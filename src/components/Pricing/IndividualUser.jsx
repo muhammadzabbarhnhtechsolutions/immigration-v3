@@ -64,12 +64,12 @@ export default function IndividualUsers() {
     }
 
     try {
-      if (billingType === "Consultation") {
+      if (billingType === "Legel Advice") {
         const formData = new FormData();
         formData.append("package_id", id);
         const res = await appointmentPakageBuy(router, formData);
         if (res?.checkout_url) window.open(res.checkout_url, "_blank");
-        else toast.error("Failed to initiate consultation payment.");
+        else toast.error("Failed to initiate Legel Advice payment.");
       } else {
         const res = await buyPakages(id, token);
         const checkoutUrl = res?.data?.checkout_url;
@@ -115,7 +115,7 @@ export default function IndividualUsers() {
   const filteredPackages = (selectedIds.length ? filteredPackagesByResources : packageData)
     .filter((pkg) => {
       if (billingType === "Service") return pkg.package_type === 1;
-      if (billingType === "Consultation") return pkg.package_type === 2;
+      if (billingType === "Legel Advice") return pkg.package_type === 2;
       if (billingType === "Business Plan") return pkg.package_type === 3;
       return false;
     })
