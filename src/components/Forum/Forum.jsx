@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import ForumLeftSide from "./ForumLeftSide";
 import ForumList from "./ForumList";
 import ForumTopBar from "./ForumTopBar";
+import { useRouter } from "next/navigation";
 
 const Forum = () => {
   const [active, setActive] = useState(false);
@@ -15,7 +16,15 @@ const Forum = () => {
   const handleActive = () => {
     setActive(!active);
   };
-
+ const router = useRouter();
+  // useEffect(() => {
+  // const user = localStorage.getItem("user"); 
+  // if(!user){
+  //   router.push("/login");
+  
+  // }
+  
+  // }, [])
   const AllPosts = async () => {
     try {
       const result = await GeAllPosts();
@@ -29,22 +38,65 @@ const Forum = () => {
         toast.error(result.message || "Error occurred");
       }
     }
-    catch (error) {
-      toast.error('something went wrong')
-      console.error("Signup error", error);
-    }
-  };
+   catch (error) {
+  console.error("Forum error:", error);
 
-  const getProfileData = async () => {
-    try {
-      const result = await GetProfile()
-      if (result.data) {
-        setProfile(result.data.data);
-      }
-    } catch (_) {
-      toast.error('something went wrong')
+  // Extract the backend error safely
+  const backendError = error?.response?.data?.error || error?.error;
+  const status = error?.response?.status;
+
+  // ✅ If backend says "Need Login" or token invalid
+  if (backendError === "Need Login" || status === 401 || status === 403) {
+    toast.info("Please login to continue");
+    
+    // Clear localStorage just in case
+    localStorage.removeItem("user");
+    localStorage.removeItem("access_token");
+    
+    // ✅ Use window.location for hard redirect (always works)
+    if (typeof window !== "undefined") {
+      window.location.href = "/login";
+      return;
     }
   }
+
+  toast.error("Something went wrong");
+}
+
+  };
+
+  // const getProfileData = async () => {
+  //   try {
+  //     const result = await GetProfile()
+  //     if (result.data) {
+  //       setProfile(result.data.data);
+  //     }
+  //   } catch (_) {
+  //     toast.error('something went wrong')
+  //   }
+  // }
+  const getProfileData = async () => {
+  try {
+    const result = await GetProfile();
+    if (result.data) {
+      setProfile(result.data.data);
+    }
+  } catch (error) {
+    console.error("Profile error:", error);
+    const backendError = error?.response?.data?.error;
+    const status = error?.response?.status;
+
+    if (backendError === "Need Login" || status === 401 || status === 403) {
+      toast.info("Please login to continue");
+      localStorage.clear();
+      window.location.href = "/login";
+      return;
+    }
+
+    toast.error("Something went wrong");
+  }
+};
+
 
   useEffect(() => {
     getProfileData()

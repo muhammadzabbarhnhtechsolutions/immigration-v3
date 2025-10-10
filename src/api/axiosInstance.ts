@@ -1,44 +1,63 @@
-import axios from 'axios';
-import { getAccessToken, setAccessToken } from '@/utils/localStorage'; // Adjust the path as needed
-import { refreshToken } from '@/api/auth'; // Your token refresh API logic
-// import { BASE_URL } from '@/utils/constants';
+import axios from "axios";
+import { getAccessToken, setAccessToken } from "@/utils/localStorage";
+import { refreshToken } from "@/api/auth";
 
 const axiosInstance = axios.create({
   baseURL: "https://e-learning.devssh.xyz",
 });
 
-// Request interceptor to add the access token to every request
+// 🔹 Request Interceptor — Add token
 axiosInstance.interceptors.request.use((config) => {
-  const token = getAccessToken()
+  const token = getAccessToken();
   if (token) {
-    config.headers['Authorization'] = `Bearer ${token}`;
+    config.headers["Authorization"] = `Bearer ${token}`;
   }
   return config;
 });
 
-// Response interceptor to handle token expiration
+// 🔹 Response Interceptor — Handle 401 / 403 Globally
 axiosInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
 
-    // If 401 Unauthorized and not retrying already
-    if (error.response.status === 401 && !originalRequest._retry) {
+    // Get the HTTP status code
+    const status = error?.response?.status;
+
+    // ✅ Handle 401 Unauthorized
+    if (status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
       try {
-        // Try to refresh the token
         const newAccessToken = await refreshToken();
-        setAccessToken(newAccessToken); // Update token in localStorage
+        if (newAccessToken) {
+          setAccessToken(newAccessToken);
 
-        // Retry the original request with the new token
-        originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
-        return axiosInstance(originalRequest);
-      } catch (err) {
-        // If token refresh fails, log the user out or redirect
-        console.error('Token refresh failed:', err);
-        // Optionally redirect to login or handle logout
-        return Promise.reject(err);
+          // Retry the failed request with the new token
+          originalRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
+          return axiosInstance(originalRequest);
+        }
+      } catch (refreshError) {
+        console.error("Token refresh failed:", refreshError);
+        // Remove invalid token and redirect
+        localStorage.removeItem("user");
+        localStorage.removeItem("access_token");
+
+        if (typeof window !== "undefined") {
+          window.location.href = "/login";
+        }
+        return Promise.reject(refreshError);
+      }
+    }
+
+    // ✅ Handle 403 Forbidden — directly redirect
+    if (status === 403) {
+      console.warn("Access denied — redirecting to login");
+      localStorage.removeItem("user");
+      localStorage.removeItem("access_token");
+
+      if (typeof window !== "undefined") {
+        window.location.href = "/login";
       }
     }
 
