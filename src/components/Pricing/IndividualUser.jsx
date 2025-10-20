@@ -48,9 +48,9 @@ const CrossIcon = () => (
   </svg>
 );
 
-export default function IndividualUsers() {
+export default function IndividualUsers({ fixedBilling }) {
   const [packageData, setPackageData] = useState([]);
-  const [billing, setBilling] = useState("Service");
+  const [billing, setBilling] = useState(fixedBilling || "Service");
   const [loading, setLoading] = useState(true);
   const [checklogin, setcheckLogin] = useState("");
   const [token, setToken] = useState(null);
@@ -204,6 +204,7 @@ const filteredPackages = (
   return (
     <div className="mx-auto px-4 sm:px-6 lg:px-8 mt-0 py-12 sm:py-16 md:px-22">
   {/* 🧭 Billing Type + Tab Buttons */}
+{!fixedBilling && (
 <div className="text-center mb-8">
   <div className="flex justify-center">
     <div className="inline-flex flex-wrap justify-start items-center gap-4 mb-6 mt-6 px-4 py-3 rounded-2xl border border-gray-200 w-full sm:w-auto">
@@ -257,8 +258,10 @@ const filteredPackages = (
     </div>
   </div>
 </div>
+)}
 
 {/* 🟢 Monthly / Annual Tabs */}
+{!fixedBilling || billing !== "Legal Advice" ? (
 <div className="flex justify-center mt-6 gap-4">
   <button
     onClick={() => setTab("monthly")}
@@ -281,6 +284,7 @@ const filteredPackages = (
     Annual
   </button>
 </div>
+) : null}
 
 {/* 💰 Packages List */}
 {filteredPackages.length === 0 ? (

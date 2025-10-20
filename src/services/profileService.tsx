@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 interface ErrorResponse {
   message?: string; // Optional message property
   error?: string; // Optional message property
-
 }
 
 export const getProfile = async () => {
