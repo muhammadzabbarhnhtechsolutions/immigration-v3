@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { FaPlayCircle } from "react-icons/fa";
-import IndividualUsers from "../../../components/Pricing/IndividualUser";
+import LegalAdvicePricing from "../../../components/Pricing/LegalAdvicePricing";
 
 export default function LegalAdvicePage() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -67,7 +67,7 @@ export default function LegalAdvicePage() {
 
       {/* Legal Advice Pricing Section */}
       <section className="container mx-auto flex justify-center items-center px-6 py-12">
-        <IndividualUsers fixedBilling="Legal Advice" />
+        <LegalAdvicePricing />
       </section>
     </main>
   );
