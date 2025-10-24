@@ -27,6 +27,8 @@ import i7 from "../../assets/010.png";
 import i8 from "../../assets/020.png";
 import i9 from "../../assets/030.png";
 import Link from "next/link";
+import { MapPin, Pin, Quote } from "lucide-react";
+import { FaQuoteLeft, FaQuoteRight } from "react-icons/fa6";
 const PlatformBenefits = () => {
   const [isClient, setIsClient] = useState(false);
 
@@ -38,6 +40,29 @@ const PlatformBenefits = () => {
 
   const testimonials = [
     {
+      id: 1,
+      text: "“This platform simplified the Global Talent Visa process for me. The guidance was spot-on!”",
+      name: "Amelia Clarke",
+      role: "Tech Professional",
+      avatar: img7,
+      badge: img11,
+    },
+    {
+      id: 2,
+      text: "“The templates and resources saved me countless hours. Highly recommend it to lawyers and clients alike.”",
+      name: "James Patel",
+      role: "Immigration Lawyer",
+      avatar: img6,
+      badge: img11,
+    },
+    {
+      id: 3,
+      text: "“As an entrepreneur, I found the visa route guidance extremely clear and practical.”",
+      name: "Sophia Martinez",
+      role: "Startup Founder",
+      avatar: img5,
+      badge: img11,
+    }, {
       id: 1,
       text: "“This platform simplified the Global Talent Visa process for me. The guidance was spot-on!”",
       name: "Amelia Clarke",
@@ -166,79 +191,71 @@ Community
       </section>
 
       {/* ✅ Testimonials Section */}
-      <section className="py-12 md:py-20 px-4 sm:px-8 lg:px-12 bg-[#f9fafb]">
-        <h2 className="text-center font-marko text-2xl sm:text-[36px] font-[500] mb-10">
-          Testimonials
-        </h2>
+ <section className="py-14 md:py-20 px-4 sm:px-8 lg:px-12 bg-gradient-to-b from-[#f9fafb] to-[#f1f5f9]">
+      <h2 className="text-center font-marko text-3xl sm:text-[36px] font-[500] mb-12 text-gray-800 relative">
+        Testimonials
+        <span className="absolute left-1/2 -bottom-3 w-16 h-[3px] bg-green-500 rounded-full -translate-x-1/2"></span>
+      </h2>
 
-        <Swiper
-          slidesPerView={1}
-          spaceBetween={20}
-          pagination={{ clickable: true }}
-          modules={[Pagination]}
-          breakpoints={{
-            640: { slidesPerView: 1 },
-            768: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 },
-          }}
-          className="h-[330px]"
-        >
-          {testimonials.map((item, i) => (
-            <SwiperSlide key={item.id}>
-              <motion.div
-                variants={cardVariant}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
-                whileHover="hover"
-                custom={i}
-                className="bg-white shadow-md h-[270px] rounded-xl p-6 flex flex-col justify-between"
-              >
+      <Swiper
+        slidesPerView={1}
+        spaceBetween={20}
+        pagination={{ clickable: true }}
+        modules={[Pagination]}
+        breakpoints={{
+          640: { slidesPerView: 1 },
+          768: { slidesPerView: 2 },
+          1024: { slidesPerView: 3 },
+        }}
+        className="h-[350px]"
+      >
+        {testimonials.map((item, i) => (
+          <SwiperSlide key={item.id}>
+            <motion.div
+              variants={cardVariant}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              whileHover="hover"
+              custom={i}
+              className="relative bg-white shadow-lg hover:shadow-2xl rounded-2xl p-7 h-[258px] flex flex-col justify-between border border-gray-100 transition-all duration-300"
+            >
+              {/* Quote icon */}
+              <div className="absolute top-4  left-4 bg-[#88b29a] p-2 rounded-full shadow-md">
+                <FaQuoteLeft className="w-5 h-5 text-white" />
+              </div>
+
+              {/* Testimonial text */}
+              <div className="pt-6">
+                <p className="text-gray-700 text-[15px] mt-4 italic leading-relaxed">
+                  {item.text}
+                </p>
+              </div>
+
+              {/* User info */}
+              <div className="flex items-center gap-3 mt-6 border-t pt-4 border-gray-100">
+                <Image
+                  src={item.avatar}
+                  alt={item.name}
+                  width={48}
+                  height={48}
+                  className="rounded-full shadow-md"
+                />
                 <div>
-                  <div className="flex justify-between items-start">
-                    <Image
-                      src={img12}
-                      alt="quote"
-                      width={30}
-                      height={30}
-                      className="object-contain"
-                    />
-                    <Image
-                      src={item.badge}
-                      alt="badge"
-                      width={30}
-                      height={30}
-                      className="object-contain"
-                    />
-                  </div>
-                  <p className="text-gray-700 text-[15px] mt-4 italic">
-                    {item.text}
+                  <h4 className="text-gray-800 font-semibold text-base">
+                    {item.name}
+                  </h4>
+                  <p className="text-sm text-[#629779] font-medium">
+                    {item.role}
                   </p>
                 </div>
-
-                {/* User */}
-                <div className="flex items-center gap-3 mt-6">
-                  <Image
-                    src={item.avatar}
-                    alt={item.name}
-                    width={46}
-                    height={46}
-                    className="rounded-full"
-                  />
-                  <div>
-                    <h4 className="text-gray-800 font-medium text-base">
-                      {item.name}
-                    </h4>
-                    <p className="text-sm text-green-600 font-semibold">
-                      {item.role}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </section>
+              </div>
+            </motion.div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </section>
+  
     </>
   );
 };

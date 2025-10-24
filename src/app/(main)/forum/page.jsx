@@ -5,12 +5,14 @@ import { useEffect } from "react";
 
 
 const Page = () => {
- 
+
   return (
     <div>
       <Forum />
     </div>
   );
 };
+
+export const dynamic = 'force-dynamic';
 
 export default Page;

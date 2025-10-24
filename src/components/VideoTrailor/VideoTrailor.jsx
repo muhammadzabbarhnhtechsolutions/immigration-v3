@@ -46,7 +46,7 @@ export default function VideoTrailor() {
         <section className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-20">
 <div
   style={{ lineHeight: "43px" }}
-  className="mx-auto max-w-4xl px-6 md:px-0 text-center md:text-left"
+  className="mx-auto max-w-4xl px-6 md:px-0 -mt-14 text-center md:text-left"
 >
   <h1 className="text-3xl sm:text-4xl md:text-[40px] font-bold mb-5 md:mb-6 leading-[58px] text-[#88B29A]">
     Stay Ahead with Expert Insights

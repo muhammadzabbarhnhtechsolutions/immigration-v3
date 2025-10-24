@@ -48,7 +48,7 @@ export default function InfoSection() {
   return (
     <section className="bg-white text-gray-900 px-4 sm:px-8 lg:px-12 py-16 sm:py-16">
       {/* --- WHO IS IT FOR --- */}
-      <div className="max-w-6xl mx-auto mt-20 mb-20 sm:mt-14 px-2 sm:px-0">
+      <div className="max-w-6xl mx-12 mt-20 mb-20 sm:mt-14 px-2 sm:px-0">
         <h2 className="text-2xl font-marko sm:text-5xl md:text-center mb-10 sm:mb-4">
           Who Is Immigration Navigator For?
         </h2>
@@ -56,7 +56,7 @@ export default function InfoSection() {
           {audience.map(({ icon, title, text, route }, idx) => (
             <Link key={idx} href={route}>
               <motion.div
-                className="bg-[#3F855D40] transform transition-all duration-300 cursor-pointer hover:-translate-y-3 hover:shadow-xl bg-opacity-20 border border-[#D9E3F2] p-6 sm:p-8 rounded-2xl shadow-sm"
+                className="bg-[#3F855D40] transform transition-all duration-300 cursor-pointer hover:-translate-y-3 hover:shadow-xl bg-opacity-20 border border-[#D9E3F2] h-[192px] p-6 sm:p-8 rounded-2xl shadow-sm"
                 variants={cardVariant}
                 initial="hidden"
                 whileInView="visible"
@@ -98,7 +98,7 @@ export default function InfoSection() {
           {keyFeatures.map(({ icon, title }, idx) => (
             <motion.div
               key={idx}
-              className="flex items-center justify-center flex-col cursor-pointer border bg-[#3F855D40] border-gray-200 p-6 rounded-2xl shadow-sm"
+              className="flex items-center justify-center flex-col cursor-pointer border bg-[#3F855D40] border-gray-200 px-1 py-4 rounded-2xl shadow-sm"
               variants={cardVariant}
               initial="hidden"
               whileInView="visible"
@@ -118,7 +118,7 @@ export default function InfoSection() {
                   className="rounded-md"
                 />
               </motion.div>
-              <h3 className="font-semibold text-center text-[21px] text-gray-800 mb-2">
+              <h3 className="font-semibold text-center text-[19px] text-gray-800 mb-2">
                 {title}
               </h3>
             </motion.div>

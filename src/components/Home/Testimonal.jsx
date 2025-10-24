@@ -7,7 +7,7 @@ import { Navigation, Pagination } from "swiper/modules"
 import "swiper/css"
 import "swiper/css/navigation"
 import "swiper/css/pagination"
-import { QuoteIcon } from "lucide-react"
+import { MapPin, QuoteIcon } from "lucide-react"
 import { FaQuoteLeft, FaQuoteRight } from "react-icons/fa"
 
 export default function TestimonialsSection() {
@@ -62,7 +62,8 @@ export default function TestimonialsSection() {
   {/* Left quote icon */}
   <div className="absolute left-4 sm:left-6 md:left-10 top-10 sm:top-16 md:top-20">
     <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 bg-white/70 rounded-full flex items-center justify-center text-emerald-600">
-      <FaQuoteLeft className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
+      {/* <FaQuoteLeft className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" /> */}
+       <MapPin className="w-5 h-5 text-rose-600" />
     </div>
   </div>
 

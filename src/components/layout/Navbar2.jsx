@@ -17,6 +17,8 @@ export default function Navbar1() {
     { href: "/podcasts", label: "Podcast" },
     { href: "/forum", label: "Community" },
     { href: "/contact-us", label: "Contact Us" },
+   { href: "/refrences", label: "Our Products" },
+
   ];
 
   const router = useRouter();
@@ -62,7 +64,7 @@ export default function Navbar1() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="hover:text-[#62af84] transition-colors duration-200"
+                  className="hover:text-[#6d9e82] text-[16.8px] font-[600] transition-colors duration-200"
                 >
                   {link.label}
                 </Link>
