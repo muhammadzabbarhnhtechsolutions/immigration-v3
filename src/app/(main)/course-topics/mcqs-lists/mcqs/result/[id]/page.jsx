@@ -46,35 +46,35 @@ function ResultContent() {
   };
 
   const handleDownloadPDF = async () => {
-    if (!detailedResult) return;
-    setDownloading(true);
-    const element = document.getElementById("detailed-result");
-    if (element) {
-      const canvas = await html2canvas(element);
-      const imgData = canvas.toDataURL("image/png");
-      const pdf = new jsPDF();
-      const pageWidth = 210;
-      const pageHeight = 295;
-      const margin = 20;
-      const imgWidth = pageWidth - 2 * margin;
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
-      let heightLeft = imgHeight;
-      let position = margin;
+  if (!detailedResult) return;
+  setDownloading(true);
+  const element = document.getElementById("detailed-result");
+  if (element) {
+    const canvas = await html2canvas(element, { scale: 2 });
+    const imgData = canvas.toDataURL("image/png");
+    const pdf = new jsPDF("p", "mm", "a4");
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+    const imgWidth = pageWidth - 20;
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    let heightLeft = imgHeight;
+    let position = 10;
 
-      pdf.addImage(imgData, "PNG", margin, position, imgWidth, imgHeight);
+    pdf.addImage(imgData, "PNG", 10, position, imgWidth, imgHeight);
+    heightLeft -= pageHeight;
+
+    while (heightLeft > 0) {
+      position = heightLeft - imgHeight + 10;
+      pdf.addPage();
+      pdf.addImage(imgData, "PNG", 10, position, imgWidth, imgHeight);
       heightLeft -= pageHeight;
-
-      while (heightLeft >= 0) {
-        position = heightLeft - imgHeight + margin;
-        pdf.addPage();
-        pdf.addImage(imgData, "PNG", margin, position, imgWidth, imgHeight);
-        heightLeft -= pageHeight;
-      }
-
-      pdf.save(`${detailedResult.test_title}_result.pdf`);
     }
-    setDownloading(false);
-  };
+
+    pdf.save(`${detailedResult.test_title}_result.pdf`);
+  }
+  setDownloading(false);
+};
+
 
   const percent = Math.round((score / total) * 100);
   const passed = percent >= 50;
@@ -96,12 +96,12 @@ function ResultContent() {
   return (
     <div className="min-h-screen pt-1 z-50 flex flex-col items-center justify-center px-4">
       {showDetailed && detailedResult ? (
-        <div className="w-full max-w-4xl bg-white rounded-3xl shadow-xl p-10 text-center relative overflow-hidden animate-fade-in">
-          <div id="detailed-result">
-            <h1 className="text-4xl font-extrabold text-[#88B29A] mb-8">
+        <div className="w-full max-w-4xl bg-white rounded-3xl shadow-xl md:p-10 text-center relative overflow-hidden animate-fade-in">
+<div id="detailed-result" className="p-4">
+            <h1 className="text-2xl md:text-4xl mt-6 md:mt-0 lg:mt-0 font-extrabold text-[#88B29A] mb-8">
               Detailed Test Result
             </h1>
-            <div className="text-left mb-8">
+            <div className="text-left mb-8 p-4">
               <h2 className="text-2xl font-bold text-gray-800 mb-2">{detailedResult.test_title}</h2>
               <p className="text-lg text-gray-600">Course: {detailedResult.course_name}</p>
               <p className="text-lg text-gray-600">Module: {detailedResult.module_name}</p>
@@ -124,14 +124,14 @@ function ResultContent() {
                 </div>
               ))}
             </div>
-            <div className="text-left mb-8">
+            <div className="text-left mb-8 mx-4">
               <h3 className="text-xl font-semibold text-gray-800 mb-4">Summary</h3>
               <p className="text-lg">Total Questions: {detailedResult.summary.total_questions}</p>
               <p className="text-lg">Correct Answers: {detailedResult.summary.correct_answers}</p>
               <p className="text-lg">Score: {detailedResult.summary.score}%</p>
             </div>
           </div>
-          <div className="flex gap-4 justify-center mt-8">
+          <div className="flex flex-col sm:flex-row gap-4 mb-6 justify-center mt-8 w-full px-4">
             <button
               onClick={() => setShowDetailed(false)}
               className="bg-gray-500 text-white px-6 py-3 rounded-xl text-lg hover:bg-gray-600 transition-all duration-300 shadow-md"
@@ -141,10 +141,10 @@ function ResultContent() {
             <button
               onClick={handleDownloadPDF}
               disabled={downloading}
-              className="bg-[#88B29A] text-white px-6 py-3 rounded-xl text-lg hover:bg-[#99c5ac] transition-all duration-300 shadow-md flex items-center gap-2"
+              className="bg-[#81aa93] text-white px-6 py-3 rounded-xl text-lg hover:bg-[#99c5ac] transition-all duration-300 shadow-md flex items-center gap-2"
             >
               <Download className="w-5 h-5" />
-              {downloading ? "Downloading..." : "Download PDF"}
+              {downloading ? "Downloading ..." : "Download PDF"}
             </button>
           </div>
         </div>
@@ -195,10 +195,10 @@ function ResultContent() {
             </div>
           )}
 
-          <div className="flex gap-4 justify-center mt-8">
+          <div className="flex flex-col sm:flex-row gap-4 mb-6 justify-center mt-8 w-full px-1">
             <button
               onClick={handleViewDetailed}
-              className="bg-[#88B29A] text-white px-6 py-3 rounded-xl text-lg hover:bg-[#78ad8f] transition-all duration-300 shadow-md flex items-center gap-2"
+              className="bg-[#88B29A] text-white px-6 py-3 rounded-xl md:text-lg hover:bg-[#78ad8f] transition-all duration-300 shadow-md flex items-center gap-2"
             >
               <Eye className="w-5 h-5" />
               View Detailed Result
