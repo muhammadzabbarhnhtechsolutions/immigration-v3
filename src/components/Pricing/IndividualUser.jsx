@@ -13,6 +13,7 @@ import { useSearchParams } from "next/navigation";
 import { appointmentPakageBuy } from "@/services/appointmentSubscribe";
 import { filterByResources, getAllResources } from "@/services/getAllResources";
 import { ChevronDown, Euro } from "lucide-react";
+import { FaPoundSign } from "react-icons/fa";
 
 // Icon Components
 const CheckIcon = () => (
@@ -311,7 +312,7 @@ const filteredPackages = (
             <div className="text-center mb-6">
               <div className="flex justify-center items-end gap-2 text-[#88B29A]">
                 <span className="text-3xl sm:text-4xl font-semibold flex items-center gap-1">
-                  <Euro className="w-5 h-5 mt-1" />
+                  <FaPoundSign className="w-5 h-5 mt-1" />
                   {parseFloat(pkg.price).toFixed(2)}
                 </span>
                 {/* <span className="text-gray-500 text-xs mb-1">

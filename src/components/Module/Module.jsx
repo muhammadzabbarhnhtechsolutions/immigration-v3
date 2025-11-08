@@ -184,7 +184,7 @@ const Module = () => {
                 {/* Content */}
                 <div>
                   <h2 className="text-lg sm:text-xl font-semibold text-gray-800 mb-3">
-                    {m.title}
+                    {m.title.length > 24 ? m.title.slice(0,24):m.title}
                   </h2>
                   <p className="text-gray-600 text-sm">
                     {m.description.length > 160
