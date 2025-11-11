@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { Briefcase, LogOut, Menu, UserCircle2, X } from "lucide-react";
+import { Briefcase, LogOut, Menu, PackageCheck, UserCircle2, X } from "lucide-react";
 import logo from "../../assets/logo1.png";
 import { useRouter } from "next/navigation";
 import imgContact from "../../assets/contactIcon.png";
@@ -93,44 +93,67 @@ export default function Navbar1() {
           </div>
         )  : (
           // Agar login hai => Sirf profile icon + dropdown
-          <div className="relative flex gap-4">
-            <button
-              onClick={hanldeShowLogoutButton}
-              className="flex items-center justify-center w-12 h-12 bg-gray-100 rounded-full hover:ring-2 hover:ring-[#88B29A] transition"
-            >
-              <UserCircle2 className="w-7 h-7 text-gray-700" />
-            </button>
-            <a
-              href="#contact"
-              className="flex items-center justify-center w-7 h-7 mt-2 transition"
-            >
-              <Image src={imgContact} width={100} height={100} alt="contact" />
-            </a>
+         <div className="relative z-[100] flex gap-4 items-center">
+  {/* User Avatar */}
+  <button
+    onClick={hanldeShowLogoutButton}
+    className="flex items-center justify-center w-12 h-12 bg-gray-100 rounded-full hover:ring-2 hover:ring-[#88B29A] hover:scale-105 transition-transform duration-300 shadow-sm"
+  >
+    <UserCircle2 className="w-7 h-7 text-gray-700" />
+  </button>
 
-            {openLogout && (
-              <div className="absolute -right-4 z-20 mt-3 py-1 w-44 rounded-lg bg-white shadow-lg ring-1 ring-gray-200">
-                {/* Business Account */}
-                <Link href="/business-account">
-                  <button
-                    onClick={() => setLogoutOpen(false)}
-                    className="flex w-full items-center gap-2 px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-all duration-200"
-                  >
-                    <Briefcase className="w-5 h-5 text-gray-600" />
-                    Business Account
-                  </button>
-                </Link>
+  {/* Contact Icon */}
+  <a
+    href="#contact"
+    className="flex items-center justify-center w-10 h-10  rounded-full hover:bg-[#f0fdf4] hover:scale-110 transition-transform duration-300 shadow-sm"
+  >
+    <Image
+      src={imgContact}
+      width={100}
+      height={100}
+      alt="contact"
+      className="rounded-full p-0"
+    />
+  </a>
 
-                {/* Logout */}
-                <button
-                  onClick={Logout}
-                  className="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                >
-                  <LogOut className="w-4 h-4 mr-2" />
-                  Logout
-                </button>
-              </div>
-            )}
-          </div>
+  {/* Dropdown Menu */}
+  {openLogout && (
+    <div className="absolute -right-4 mt-44 w-48 rounded-lg bg-white shadow-xl ring-1 ring-gray-200 animate-dropdown origin-top-right">
+      {/* Dropdown Items */}
+      <Link href="/business-account">
+        <button
+          onClick={() => setLogoutOpen(false)}
+          className="flex w-full items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-[#2E7D32] transition-all duration-200 rounded-lg"
+        >
+          <Briefcase className="w-5 h-5 text-gray-600" />
+          Business Account
+        </button>
+      </Link>
+
+      <Link href="/subscriptions">
+        <button
+          onClick={() => setLogoutOpen(false)}
+          className="flex w-full items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-[#2E7D32] transition-all duration-200 rounded-lg"
+        >
+          <PackageCheck className="w-5 h-5 text-gray-600" />
+          My Subscription
+        </button>
+      </Link>
+
+      <div className="border-t border-gray-200 my-1"></div>
+
+      <button
+        onClick={Logout}
+        className="flex w-full items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-all duration-200 rounded-lg"
+      >
+        <LogOut className="w-4 h-4" />
+        Logout
+      </button>
+    </div>
+  )}
+</div>
+
+
         )}
 
         {/* Mobile Menu Icon */}

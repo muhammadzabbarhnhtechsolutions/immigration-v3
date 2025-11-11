@@ -59,7 +59,7 @@ export default function HeroSection() {
 
   return (
     <section
-      className="text-white px-4 h-[555px] sm:px-8 lg:px-8 py-12 sm:py-28 relative overflow-hidden"
+      className="text-white px-4 h-[555px] -z-[50] sm:px-8 lg:px-8 py-12 sm:py-28 relative overflow-hidden"
       style={{
         backgroundImage: `url(${bgImage.src})`,
         backgroundSize: 'cover',
