@@ -43,8 +43,8 @@ export default function Navbar1() {
     setLogoutOpen(!openLogout);
   };
   return (
-    <nav className="w-full  top-0 left-0 z-50 bg-white/90 backdrop-blur-md text-[#88B29A] shadow-md">
-      <div className="container px-4 sm:px-6 flex justify-between items-center py-1">
+    <nav className="w-full  top-0 left-0  bg-white/90 backdrop-blur-md text-[#88B29A] shadow-md">
+      <div className="container px-4 sm:px-6 flex justify-between items-center py-4">
         {/* Logo */}
         <Link href="/" className="">
           <Image
@@ -93,7 +93,7 @@ export default function Navbar1() {
           </div>
         )  : (
           // Agar login hai => Sirf profile icon + dropdown
-         <div className="relative z-[100] flex gap-4 items-center">
+         <div className="  flex gap-4 items-center">
   {/* User Avatar */}
   <button
     onClick={hanldeShowLogoutButton}
@@ -117,40 +117,43 @@ export default function Navbar1() {
   </a>
 
   {/* Dropdown Menu */}
-  {openLogout && (
-    <div className="absolute -right-4 mt-44 w-48 rounded-lg bg-white shadow-xl ring-1 ring-gray-200 animate-dropdown origin-top-right">
-      {/* Dropdown Items */}
-      <Link href="/business-account">
-        <button
-          onClick={() => setLogoutOpen(false)}
-          className="flex w-full items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-[#2E7D32] transition-all duration-200 rounded-lg"
-        >
-          <Briefcase className="w-5 h-5 text-gray-600" />
-          Business Account
-        </button>
-      </Link>
+{openLogout && (
+  <div className="absolute right-0 top-[112px] w-56 rounded-lg bg-white shadow-2xl ring-1 ring-gray-200 z-[9999] mb-[133px]">
 
-      <Link href="/subscriptions">
-        <button
-          onClick={() => setLogoutOpen(false)}
-          className="flex w-full items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-[#2E7D32] transition-all duration-200 rounded-lg"
-        >
-          <PackageCheck className="w-5 h-5 text-gray-600" />
-          My Subscription
-        </button>
-      </Link>
-
-      <div className="border-t border-gray-200 my-1"></div>
-
+    {/* Dropdown Items */}
+    <Link href="/business-account">
       <button
-        onClick={Logout}
-        className="flex w-full items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-all duration-200 rounded-lg"
+        onClick={() => setLogoutOpen(false)}
+        className="flex w-full items-center gap-2 px-4 pt-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-[#2E7D32] transition-all duration-200 rounded-lg"
       >
-        <LogOut className="w-4 h-4" />
-        Logout
+        <Briefcase className="w-5 h-5 text-gray-600" />
+        Business Account
       </button>
-    </div>
-  )}
+    </Link>
+
+    <Link href="/subscriptions">
+      <button
+        onClick={() => setLogoutOpen(false)}
+        className="flex w-full items-center gap-2 px-4 pt-3 text-sm text-gray-700 hover:bg-gray-100 hover:text-[#2E7D32] transition-all duration-200 rounded-lg"
+      >
+        <PackageCheck className="w-5 h-5 text-gray-600" />
+        My Subscription
+      </button>
+    </Link>
+
+    <div className="border-t border-gray-200 my-1"></div>
+
+    <button
+      onClick={Logout}
+      className="flex w-full items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-all duration-200 rounded-lg"
+    >
+      <LogOut className="w-4 h-4" />
+      Logout
+    </button>
+  </div>
+)}
+
+
 </div>
 
 

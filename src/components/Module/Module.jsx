@@ -59,7 +59,7 @@ const Module = () => {
   }
 
   return (
-    <div className="flex min-h-screen bg-gray-100 relative">
+    <div className="flex min-h-screen  bg-gray-100 relative">
       {/* ── Backdrop (mobile) ── */}
       {sidebarOpen && (
         <div

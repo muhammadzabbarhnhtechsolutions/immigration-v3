@@ -6,7 +6,7 @@ const Footer2 = () => {
   return (
     <>
     
-    <div className="bg-[#99b9a7] mb-42 text-white py-8 px-4 sm:px-8 lg:px-12 text-center">
+    <div className="bg-[#99b9a7]  mb-12 text-white py-8 px-4 sm:px-8 lg:px-12 text-center">
     <h3 className="text-lg sm:text-xl font-semibold mb-4">
       Enhance Your UK Immigration Knowledge Today
     </h3>
@@ -18,7 +18,7 @@ const Footer2 = () => {
     </button>
   </div>
 
-  <footer className="bg-[#88B29A] mt-24 py-10 px-6 sm:px-12 md:px-24 text-white">
+  <footer className="bg-[#88B29A] mt-2 py-10 px-6 sm:px-12 md:px-24 text-white">
   <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:justify-between md:gap-8 gap-10 text-base">
     {/* Logo Section */}
     <div className="md:w-[324px]">
