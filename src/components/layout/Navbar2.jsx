@@ -43,7 +43,7 @@ export default function Navbar1() {
     setLogoutOpen(!openLogout);
   };
   return (
-    <nav className="w-full  top-0 left-0  bg-white/90 backdrop-blur-md text-[#88B29A] shadow-md">
+    <nav className="w-full z-50 top-0 left-0  bg-white/90 backdrop-blur-md text-[#88B29A] shadow-md">
       <div className="container px-4 sm:px-6 flex justify-between items-center py-4">
         {/* Logo */}
         <Link href="/" className="">
@@ -118,7 +118,7 @@ export default function Navbar1() {
 
   {/* Dropdown Menu */}
 {openLogout && (
-  <div className="absolute right-0 top-[112px] w-56 rounded-lg bg-white shadow-2xl ring-1 ring-gray-200 z-[9999] mb-[133px]">
+  <div className="absolute right-0 top-[112px] w-56 rounded-lg bg-white shadow-2xl ring-1 ring-gray-200 z-50 mb-[133px]">
 
     {/* Dropdown Items */}
     <Link href="/business-account">

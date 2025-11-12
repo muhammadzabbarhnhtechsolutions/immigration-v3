@@ -59,7 +59,7 @@ const Module = () => {
   }
 
   return (
-    <div className="flex min-h-screen  bg-gray-100 relative">
+    <div className="flex min-h-screen    bg-gray-100 ">
       {/* ── Backdrop (mobile) ── */}
       {sidebarOpen && (
         <div
@@ -70,7 +70,7 @@ const Module = () => {
 
       {/* ── Sidebar ── */}
       <aside
-        className={`fixed md:relative inset-y-0 left-0 z-40 transform ${
+        className={`fixed md:relative inset-y-0 left-0 transform ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
         } w-60 md:w-[80px] bg-[#88B29A] p-4 flex flex-col gap-6 pt-24 items-center transition-transform duration-300 ease-in-out`}
       >
@@ -104,7 +104,7 @@ const Module = () => {
       </button>
 
       {/* ── Main ── */}
-      <main className="flex-1 p-4 sm:p-6 md:p-8 mt-12 md:mt-10">
+      <main className="flex-1  p-4 sm:p-6 md:p-8 mt-12 md:mt-10">
         {/* Heading + search */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
           <h1 className="text-2xl sm:text-3xl font-bold text-[#88B29A]">
@@ -144,7 +144,7 @@ const Module = () => {
             filteredModules.map((m) => (
               <div
                 key={m.id}
-                className="relative bg-white rounded-2xl p-6 sm:p-8 shadow-lg border border-gray-200 hover:shadow-xl transition hover:scale-[1.01] flex flex-col justify-between"
+                className="relative bg-white rounded-2xl p-6 sm:p-8 shadow-lg border border-gray-200 hover:shadow-xl z-50 transition hover:scale-[1.01] flex flex-col justify-between"
               >
                 {/* Circle */}
                 <div className="absolute top-4 right-4">
