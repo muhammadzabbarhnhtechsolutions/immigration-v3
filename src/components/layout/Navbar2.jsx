@@ -93,7 +93,7 @@ export default function Navbar1() {
           </div>
         )  : (
           // Agar login hai => Sirf profile icon + dropdown
-         <div className=" relative flex gap-4 items-center">
+         <div className=" flex gap-4 items-center">
   {/* User Avatar */}
   <button
     onClick={hanldeShowLogoutButton}
