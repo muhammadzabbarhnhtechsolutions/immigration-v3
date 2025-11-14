@@ -90,17 +90,17 @@ export default function GeneralResourcesPage() {
 
       {/* Grid */}
       {currentDocs.length ? (
-        <div className="flex flex-wrap justify-center gap-6 max-w-6xl mx-auto mb-12">
+        <div className="flex flex-wrap justify-center gap-4 max-w-7xl mx-auto mb-12">
           {currentDocs.map((doc, idx) => (
             <a
               key={doc.id ?? idx}
               href={doc.documents}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white w-full sm:w-[240px] md:w-[260px] rounded-xl shadow-lg border border-gray-100 px-6 py-6 flex flex-col items-center hover:shadow-xl transition"
+              className="bg-white w-full sm:w-[240px] md:w-[280px] rounded-xl shadow-lg border border-gray-100 px-6 py-6 flex flex-col items-center hover:shadow-xl transition"
             >
               <FileArchive className="h-16 w-16 mb-3 text-[#88B29A]" />
-              <p className="text-gray-800 font-semibold mb-1">
+              <p title={doc?.title} className="text-gray-800 truncate font-semibold mb-1">
                 {doc?.title}
               </p>
               <p className="text-gray-500 text-sm">
