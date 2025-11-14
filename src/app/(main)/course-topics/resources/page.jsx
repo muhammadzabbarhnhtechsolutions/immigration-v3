@@ -101,7 +101,7 @@ export default function GeneralResourcesPage() {
             >
               <FileArchive className="h-16 w-16 mb-3 text-[#88B29A]" />
               <p className="text-gray-800 font-semibold mb-1">
-                Resource {idx + 1}
+                {doc?.title}
               </p>
               <p className="text-gray-500 text-sm">
                 {doc.type?.toUpperCase() || "FILE"}
