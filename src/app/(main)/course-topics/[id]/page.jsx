@@ -10,6 +10,7 @@ import {
   Eye,
   Compass,
   Folder,
+  Info,
 } from "lucide-react";
 import { FaAngleDown } from "react-icons/fa";
 import Plyr from "plyr-react";
@@ -85,11 +86,11 @@ export default function Page() {
       md:pt-16 md:py-10 fixed md:static top-[99px] md:-mt-12 z-40">
 
         {/* Eye / Description */}
-        <div
+        {/* <div
           className="flex flex-col mt-4 items-center cursor-pointer relative"
           onClick={() => setShowTooltip(!showTooltip)}
         >
-          <Eye className={iconClasses} />
+          <Info className={iconClasses} />
           {showTooltip && moduleDescription && (
             <div className="absolute left-full ml-3 top-1/2 -translate-y-1/2 
             bg-white text-gray-800 text-sm shadow-xl border border-gray-200 
@@ -102,7 +103,7 @@ export default function Page() {
               w-3 h-3 bg-white border-l border-t border-gray-200 rotate-45"></div>
             </div>
           )}
-        </div>
+        </div> */}
 
         {/* Home */}
         <div className="flex flex-col items-center cursor-pointer">
@@ -192,52 +193,84 @@ export default function Page() {
       <div className="flex-1 ml-0 md:ml-[10px] md:p-6 mt-[99px] md:mt-[54px]">
 
         {/* Header */}
-        <div className="flex justify-between bg-[#88B29A] items-center py-2.5 px-2">
-          <div className="flex items-center gap-4 text-white">
-            <button
-              onClick={() => setSelectedIndex(Math.max(selectedIndex - 1, 0))}
-              className="px-1.5 ml-2 py-1.5 bg-gray-50 text-gray-700 rounded-xl"
-            >
-              <MoveLeftIcon className="w-6 h-6 text-[#88B29A]" />
-            </button>
-            <p className="text-white">{video.title}</p>
-          </div>
+      <div className="flex justify-between bg-[#88B29A] items-center py-2.5 px-3">
 
-          {/* Dropdown */}
-          <div className="relative">
-            <button
-              type="button"
-              onClick={() => setShowDropDown(!showDropDown)}
-              className="inline-flex rounded-md border px-2 py-1.5 bg-white text-sm"
-            >
-              <FaAngleDown className="w-4 h-4 text-[#88B29A]" />
-            </button>
+  {/* LEFT SIDE — Back Button + Title */}
+  <div className="flex items-center gap-4 text-white">
 
-            {showDropDown && (
-              <div className="absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white z-50">
-                <div className="py-1">
-                  <Link href={`/course-topics/mcqs-lists/${video.id}`}>
-                    <button className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100">
-                      MCQs
-                    </button>
-                  </Link>
+    {/* Back Button */}
+    <button
+      onClick={() => setSelectedIndex(Math.max(selectedIndex - 1, 0))}
+      className="px-1.5 ml-1 py-1.5 bg-gray-50 text-gray-700 rounded-xl"
+    >
+      <MoveLeftIcon className="w-6 h-6 text-[#88B29A]" />
+    </button>
 
-                  <Link href={`/course-topics/resources`}>
-                    <button className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100">
-                      General Resource
-                    </button>
-                  </Link>
+    {/* Video Title */}
+    <p className="text-white font-medium">{video.title}</p>
+  </div>
 
-                  <Link href={`/course-topics/resources?video_id=${video.id}`}>
-                    <button className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100">
-                      Resources
-                    </button>
-                  </Link>
-                </div>
-              </div>
-            )}
+  {/* RIGHT SIDE — Info Icon + Dropdown */}
+  <div className="flex items-center gap-4">
+
+    {/* INFO ICON WITH TOOLTIP */}
+    <div className="relative group">
+      <Info className="w-5 h-5 text-white cursor-pointer" />
+
+      {/* Tooltip */}
+      <div className="absolute right-0 mt-2 w-64 bg-white text-gray-800 text-sm 
+      shadow-xl border border-gray-200 rounded-xl p-4 opacity-0 group-hover:opacity-100 
+      transition-all duration-200 z-50 pointer-events-none">
+
+        <h4 className="font-semibold text-[#88B29A] mb-1">Module Description</h4>
+        <p className="text-gray-700 text-xs leading-relaxed">
+          {moduleDescription}
+        </p>
+
+        {/* Tooltip Arrow */}
+        <div className="absolute right-4 -top-1 w-3 h-3 bg-white 
+        border-l border-t border-gray-200 rotate-45"></div>
+      </div>
+    </div>
+
+    {/* DROPDOWN BUTTON */}
+    <div className="relative">
+      <button
+        type="button"
+        onClick={() => setShowDropDown(!showDropDown)}
+        className="inline-flex rounded-md border px-2 py-1.5 bg-white text-sm"
+      >
+        <FaAngleDown className="w-4 h-4 text-[#88B29A]" />
+      </button>
+
+      {showDropDown && (
+        <div className="absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white z-50">
+          <div className="py-1">
+            <Link href={`/course-topics/mcqs-lists/${video.id}`}>
+              <button className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100">
+                MCQs
+              </button>
+            </Link>
+
+            <Link href={`/course-topics/resources`}>
+              <button className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100">
+                General Resource
+              </button>
+            </Link>
+
+            <Link href={`/course-topics/resources?video_id=${video.id}`}>
+              <button className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100">
+                Resources
+              </button>
+            </Link>
           </div>
         </div>
+      )}
+    </div>
+
+  </div>
+</div>
+
 
         {/* Player */}
         <div className="w-full aspect-video rounded-lg overflow-hidden mt-4 shadow-lg">
