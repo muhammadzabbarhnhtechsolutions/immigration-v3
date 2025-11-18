@@ -34,3 +34,29 @@ export const getCourseModuleVideo = async (
     return null;
   }
 };
+
+export const getModuleDescription = async (
+  router: AppRouterInstance,
+  moduleId: string
+) => {
+  try {
+    const response = await axiosInstance.get(
+      `/user/course/view_module_detail/?module_id=${moduleId}`
+    );
+    return response.data; // expecting { status, message, data: {description} }
+  } catch (error) {
+    const axiosError = error as AxiosError<ErrorResponse>;
+    const statusCode = axiosError?.response?.status;
+    const errorMessage =
+      axiosError?.response?.data?.error ||
+      axiosError?.response?.data?.message;
+
+    if (statusCode === 403) {
+      router.push("/login");
+    } else {
+      toast.error(errorMessage || "Something went wrong");
+    }
+
+    return null;
+  }
+};

@@ -1,4 +1,8 @@
-# TODO: Fix Suspense Boundary for useSearchParams in Resources Page
+# TODO: Add View Icon for Module Descriptions
 
-- [x] Modify src/app/(main)/course-topics/resources/page.jsx to wrap GeneralResourcesPage in Suspense boundary
-- [ ] Test the fix to ensure no errors on Vercel
+- [x] Import Eye icon from lucide-react
+- [x] Add state for selectedModule and showModal
+- [x] Add view button (Eye icon) in each module card
+- [x] Add modal component to display full description
+- [x] Implement openModal and closeModal functions
+- [ ] Test the modal functionality

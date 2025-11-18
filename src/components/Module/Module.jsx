@@ -9,6 +9,7 @@ import {
   BarChart3,
   Menu,
   X,
+  Eye,
 } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams, useRouter, useParams } from "next/navigation";
@@ -23,6 +24,8 @@ const Module = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [selectedModule, setSelectedModule] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const fetchModules = async () => {
@@ -44,6 +47,17 @@ const Module = () => {
     setFilteredModules(
       modules.filter((m) => m.title.toLowerCase().includes(q))
     );
+  };
+
+  // Modal handlers
+  const openModal = (module) => {
+    setSelectedModule(module);
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setSelectedModule(null);
+    setShowModal(false);
   };
 
   const iconClasses = "w-5 h-5 text-white mb-1";
@@ -183,9 +197,17 @@ const Module = () => {
 
                 {/* Content */}
                 <div>
-                  <h2 className="text-lg sm:text-xl font-semibold text-gray-800 mb-3">
-                    {m.title.length > 24 ? m.title.slice(0,24):m.title}
-                  </h2>
+                  <div className="flex items-center justify-between mb-3">
+                    <h2 className="text-lg sm:text-xl font-semibold text-gray-800">
+                      {m.title.length > 24 ? m.title.slice(0,24):m.title}
+                    </h2>
+                    {/* <button
+                      onClick={() => openModal(m)}
+                      className="text-[#88B29A] hover:text-[#6a8f7a] transition"
+                    >
+                      <Eye className="w-5 h-5" />
+                    </button> */}
+                  </div>
                   <p className="text-gray-600 text-sm">
                     {m.description.length > 160
                       ? m.description.slice(0, 360) + "..."
@@ -226,6 +248,28 @@ const Module = () => {
           )}
         </div>
       </main>
+
+      {/* Modal */}
+      {showModal && selectedModule && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl p-6 max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-semibold text-gray-800">
+                {selectedModule.title}
+              </h2>
+              <button
+                onClick={closeModal}
+                className="text-gray-500 hover:text-gray-700"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+            <p className="text-gray-600 leading-relaxed">
+              {selectedModule.description}
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
