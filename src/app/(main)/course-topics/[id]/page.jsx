@@ -20,9 +20,14 @@ import { getCourseModuleVideo } from "@/services/courseVideoService";
 import LessonLayout from "@/components/CourseTopics";
 
 // ✅ Sidebar icons (Left mini navbar)
-const SidebarIcons = ({ toggleSidebar }) => {
+const SidebarIcons = ({ toggleSidebar, moduleId }) => {
   const iconClasses = "w-5 h-5 text-white mb-1";
   const textClasses = "text-xs text-white";
+  const router = useRouter();
+
+  const handleResourcesClick = () => {
+    router.push(`/course-topics/resources?module_id=${moduleId}`);
+  };
 
   return (
     <div className="w-full md:w-[80px] bg-[#88B29A] px-4 py-2.5 flex flex-row md:flex-col gap-4 md:gap-6 items-center md:items-center justify-around md:justify-start md:pt-16 md:py-10 fixed md:static top-[99px] md:-mt-12 z-40">
@@ -30,9 +35,13 @@ const SidebarIcons = ({ toggleSidebar }) => {
         <Home className={iconClasses} />
         <span className={textClasses}>Home</span>
       </div>
-      <div className="flex flex-col items-center cursor-pointer">
+      <div className="flex flex-col items-center cursor-pointer" onClick={handleResourcesClick}>
         <User className={iconClasses} />
-        <span className={textClasses}>Profile</span>
+        <span className={textClasses}>Resources</span>
+      </div>
+      <div className="flex flex-col items-center cursor-pointer">
+        <Code2 className={iconClasses} />
+        <span className={textClasses}>General Resources</span>
       </div>
       <div
         onClick={toggleSidebar}
@@ -41,14 +50,10 @@ const SidebarIcons = ({ toggleSidebar }) => {
         <BookOpen className={iconClasses} />
         <span className={textClasses}>Lessons</span>
       </div>
-      <div className="flex flex-col items-center cursor-pointer">
-        <Code2 className={iconClasses} />
-        <span className={textClasses}>Practice</span>
-      </div>
-      <div className="flex flex-col items-center cursor-pointer">
+      {/* <div className="flex flex-col items-center cursor-pointer">
         <BarChart3 className={iconClasses} />
         <span className={textClasses}>Progress</span>
-      </div>
+      </div> */}
     </div>
   );
 };
@@ -179,7 +184,12 @@ const MainContent = ({ selectedIndex, setSelectedIndex, videos }) => {
                       MCQs
                     </button>
                   </Link>
-                  <Link href="/course-topics/resources">
+                  <Link href={`/course-topics/resources`}>
+                    <button className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                      General Resource
+                    </button>
+                  </Link>
+                  <Link href={`/course-topics/resources?video_id=${video.id}`}>
                     <button className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                       Resources
                     </button>
@@ -257,7 +267,7 @@ export default function Page() {
 
   return (
     <div className="flex flex-row md:flex-row relative z-10 font-sans mt-12">
-      <SidebarIcons toggleSidebar={toggleSidebar} />
+      <SidebarIcons toggleSidebar={toggleSidebar} moduleId={id} />
       <Sidebar
         selectedIndex={selectedIndex}
         setSelectedIndex={setSelectedIndex}

@@ -34,6 +34,31 @@ export const getAllResources = async (
   }
 };
 
+export const getUserProfileResources = async (
+  router: AppRouterInstance
+) => {
+  try {
+    const response = await axiosInstance.get(
+      `/user/user_profile/resource_view/`
+    );
+    return response.data; // expecting { status, message, data: [...] }
+  } catch (error) {
+    const axiosError = error as AxiosError<ErrorResponse>;
+    const statusCode = axiosError?.response?.status;
+    const errorMessage =
+      axiosError?.response?.data?.error ||
+      axiosError?.response?.data?.message;
+
+    if (statusCode === 403) {
+      router.push("/login");
+    } else {
+      toast.error(errorMessage || "Something went wrong");
+    }
+
+    return null;
+  }
+};
+
 export const filterByResources = async (ids: string[], router: AppRouterInstance) => {
   if (!ids.length) return null;
 

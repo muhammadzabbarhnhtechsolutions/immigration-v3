@@ -69,13 +69,13 @@ const Module = () => {
       )}
 
       {/* ── Sidebar ── */}
-      <aside
+      {/* <aside
         className={`fixed md:relative inset-y-0 left-0 transform ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
         } w-60 md:w-[80px] bg-[#88B29A] p-4 flex flex-col gap-6 pt-24 items-center transition-transform duration-300 ease-in-out`}
       >
         {/* Close btn (mobile) */}
-        <button
+        {/* <button
           className="md:hidden absolute top-4 right-4 text-white"
           onClick={() => setSidebarOpen(false)}
         >
@@ -93,7 +93,7 @@ const Module = () => {
             </span>
           </div>
         ))}
-      </aside>
+      </aside> */} 
 
       {/* ── Hamburger (mobile) ── */}
       <button

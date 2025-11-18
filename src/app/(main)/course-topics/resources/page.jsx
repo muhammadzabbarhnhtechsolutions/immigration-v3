@@ -1,14 +1,18 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
-import { getGeneralResource } from "@/services/generalResourcesServices";
+import { useRouter, useSearchParams } from "next/navigation";
+import { getGeneralResource, getCourseResources } from "@/services/generalResourcesServices";
+import { getUserProfileResources } from "@/services/getAllResources";
 import { ChevronLeft, ChevronRight, FileArchive } from "lucide-react";
 
 const ITEMS_PER_PAGE = 8; // فی صفحہ کتنے ریسورس
 
 export default function GeneralResourcesPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const videoId = searchParams.get("video_id");
+  const moduleId = searchParams.get("module_id");
 
   const [documents, setDocuments] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -18,11 +22,18 @@ export default function GeneralResourcesPage() {
   /* ── Fetch once ────────────────────────────────────────────── */
   useEffect(() => {
     (async () => {
-      const res = await getGeneralResource(router, "course-id");
+      let res;
+      if (videoId) {
+        res = await getGeneralResource(router, "course-id", videoId);
+      } else if (moduleId) {
+        res = await getCourseResources(router, moduleId);
+      } else {
+        res = await getUserProfileResources(router);
+      }
       if (res?.data) setDocuments(res.data);
       setLoading(false);
     })();
-  }, []);
+  }, [videoId, moduleId]);
 
   /* ── Filtered list ─────────────────────────────────────────── */
   const filteredDocs = useMemo(() => {
@@ -59,7 +70,7 @@ export default function GeneralResourcesPage() {
       {/* Heading + search */}
       <div className="flex flex-col sm:flex-row items-start md:mt-6 sm:items-center justify-between gap-4 mb-10">
         <h2 className="text-[26px] sm:text-3xl font-bold text-[#88B29A]">
-          General Resources
+          {videoId ? "General Resources" : moduleId ? "Course Resources" : "Resources"}
         </h2>
 
         {/* 🔍 Search bar */}
