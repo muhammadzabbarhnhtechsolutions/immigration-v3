@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { getGeneralResource, getCourseResources } from "@/services/generalResourcesServices";
 import { getUserProfileResources } from "@/services/getAllResources";
@@ -8,7 +8,7 @@ import { ChevronLeft, ChevronRight, FileArchive } from "lucide-react";
 
 const ITEMS_PER_PAGE = 8; // فی صفحہ کتنے ریسورس
 
-export default function GeneralResourcesPage() {
+function GeneralResourcesPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const videoId = searchParams.get("video_id");
@@ -121,7 +121,7 @@ export default function GeneralResourcesPage() {
           ))}
         </div>
       ) : (
-<div className="col-span-full flex flex-col items-center text-center mt-22 text-gray-500">
+      <div className="col-span-full flex flex-col items-center text-center mt-22 text-gray-500">
               <svg
                 className="w-12 h-12 text-[#88B29A] mb-4"
                 fill="none"
@@ -165,5 +165,13 @@ export default function GeneralResourcesPage() {
         </div>
       )}
     </section>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <GeneralResourcesPage />
+    </Suspense>
   );
 }
