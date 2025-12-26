@@ -17,11 +17,6 @@ import { FaAngleDown } from "react-icons/fa";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { getCourseModuleVideo } from "@/services/courseVideoService";
-
-// ✅ Sidebar icons
-
-
-// ✅ Main Layout Wrapper
 const LessonLayout = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [sidebarOpen, setSidebarOpen] = useState(false);
