@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono, Poppins } from "next/font/google";
-import { Marko_One } from "next/font/google";
+"use client";
+
 import "./globals.css";
+import { GeistSans, GeistMono } from "geist/font"; // objects
+import localFont from "next/font/local";
 import StoreProvider from "./StoreProvider";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -10,44 +11,34 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-const marko = Marko_One({
-  weight: "400", // only available weight
-  subsets: ["latin"],
-  variable: "--font-marko", // css variable
+// Geist fonts are objects, no need to call
+const geistSans = GeistSans; 
+const geistMono = GeistMono;
+
+// Local Poppins
+const poppins = localFont({
+  src: [
+    { path: "/fonts/Poppins-Regular.woff2", weight: "400" },
+    { path: "/fonts/Poppins-Medium.woff2", weight: "500" },
+    { path: "/fonts/Poppins-Bold.woff2", weight: "700" },
+  ],
+  variable: "--font-poppins",
 });
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+// Local Marko One
+const marko = localFont({
+  src: "/fonts/MarkoOne-Regular.woff2",
+  weight: "400",
+  variable: "--font-marko",
 });
 
-const poppins = Poppins({
-  variable: "--font-poppins", // This defines your CSS variable
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-export const metadata: Metadata = {
-  title: "Immigration Navigator",
-  description: "Immigration Navigator",
-};
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${marko.variable}  antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${marko.variable} antialiased`}
       >
-        <ClerkProvider>
+        <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}>
           <StoreProvider>{children}</StoreProvider>
           <ToastContainer />
         </ClerkProvider>

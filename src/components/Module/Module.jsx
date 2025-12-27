@@ -140,7 +140,6 @@ const handleModelLoading = ()=>{
     <div className="relative right-[9px] group"> {/* <-- parent group */}
       <Info className="text-[#99b9a7]  cursor-pointer h-6 w-6" />
 
-      {/* Tooltip */}
       <div className="absolute right-8 -top-4 w-64 p-2 bg-gray-700 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
         {module.description}
       </div>
