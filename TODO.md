@@ -1,25 +1,33 @@
-# TODO: Fix Clerk Publishable Key Issue
+# Clerk Authentication Build Error Fix Plan
 
-## Problem
-- Next.js build failing due to missing Clerk publishable key
-- Error: "@clerk/clerk-react: Missing publishableKey"
-- The key exists in `.clerk/.tmp/keyless.json` but not set as environment variable
+## Problem Analysis
+- Error: "@clerk/nextjs: Missing publishableKey"
+- Build fails at the "/latest-news" page during prerendering
+- ClerkProvider is configured but publishableKey is not available during build
 
-## Solution Plan
+## Information Gathered
+- Project uses Next.js 15.3.1 with Clerk authentication
+- ClerkProvider configured in `src/app/layout.tsx` with `process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`
+- Middleware uses Clerk authentication functions
+- Various components use Clerk hooks (useSignIn, useSignUp, etc.)
+- .env.local file exists in src/ directory but can't be accessed directly
 
-### Step 1: Create Environment File
-- Create `.env.local` file with the publishable key from keyless.json
-- Set `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_YnVzeS1lbXUtOTEuY2xlcmsuYWNjb3VudHMuZGV2JA`
+## Plan
+1. **Environment Setup**: Ensure NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY is properly set
+2. **Fallback Configuration**: Add graceful handling for missing keys during build
+3. **Build Configuration**: Update build process to handle authentication properly
+4. **Testing**: Verify the fix works for the build process
 
-### Step 2: Verify Configuration
-- Check that the environment variable is properly loaded
-- Confirm ClerkProvider can access the publishable key
+## Dependent Files to be Edited
+- `src/app/layout.tsx` - ClerkProvider configuration
+- `.env.local` - Environment variables (create/update)
+- `next.config.ts` - Build configuration if needed
 
-### Step 3: Test Build
-- Run `npm run build` again to verify the issue is resolved
+## Followup Steps
+1. Get the correct Clerk publishable key from user
+2. Test the build process
+3. Verify authentication works in development and production
+4. Clear Next.js cache and rebuild
 
-## Files to Modify
-- `.env.local` (create new file)
-
-## Expected Outcome
-- Build should complete successfully without the Clerk publishable key error
+## Next Steps
+Ask user for the Clerk publishable key or guide them to get one from Clerk dashboard.

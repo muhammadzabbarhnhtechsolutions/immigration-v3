@@ -31,7 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={`${poppins.variable} ${marko.variable} antialiased`}>
-        <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}>
+        <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY || "pk_test_bGVhZGluZy1jaXZldC0zMy5jbGVyay5hY2NvdW50cy5kZXYk"}>
           <StoreProvider>{children}</StoreProvider>
           <ToastContainer />
         </ClerkProvider>
