@@ -15,7 +15,7 @@ export const getMcqsLists = async (
 ) => {
   try {
     const response = await axiosInstance.get(
-      `user/list_mcqs_tests/?video_id=${video_id}`
+      `/user/list_mcqs_tests/?course_id=${video_id}`
     );
     return response.data; // expecting { status, message, data: [...] }
   } catch (error) {

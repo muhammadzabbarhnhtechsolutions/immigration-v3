@@ -16,7 +16,7 @@ export const getGeneralResource = async (
 ) => {
   try {
     const url = videoId
-      ? `/user/general/resource/view/?video_id=${videoId}`
+      ? `/user/general/resource/view/?course_id=${videoId}`
       : `/user/general/resource/view/`;
     const response = await axiosInstance.get(url);
     return response.data; // expecting { status, message, data: [...] }
