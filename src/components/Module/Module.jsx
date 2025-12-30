@@ -84,8 +84,8 @@ export default function ModulePage() {
   return (
     <div className="p-4 relative mb-[99px]">
       <div className="flex justify-between">
-        <h1 className="text-2xl font-bold text-[#88B29A] mb-6 px-4 pt-8">
-          Course Modules
+        <h1 className="text-2xl font-bold text-[#88B29A] mb-2 px-4 pt-8">
+          Course Videos
         </h1>
         {/* <Link href={`/course-topics/resources`}>
           <button className="w-full rounded-full mt-8 text-left px-4 py-2 text-sm text-white bg-[#88B29A] hover:bg-[#88B29A]">
@@ -96,12 +96,12 @@ export default function ModulePage() {
 
       <div
         ref={listRef}
-        className="space-y-4  "
+        className="space-y-1 bg-white shadow-lg px-2 rounded-2xl py-8  "
       >
         {modules.map((module) => (
           <div
             key={module.id}
-            className="bg-white rounded-2xl border border-gray-200 shadow-lg p-4"
+            className="bg-white  "
           >
             {/* Module header */}
             <div className="flex justify-between items-center">
@@ -132,7 +132,7 @@ export default function ModulePage() {
 
             {/* Videos (always visible) */}
             {module.videos.length > 0 ? (
-              <ul className="mt-4 space-y-2 ">
+              <ul className="mt-0 space-y-0">
                 {module.videos.map((video) => (
                   <li
                     key={video.id}

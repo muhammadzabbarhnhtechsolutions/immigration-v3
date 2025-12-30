@@ -101,7 +101,7 @@ function GeneralResourcesPage() {
 
       {/* Grid */}
       {currentDocs.length ? (
-        <div className="flex flex-wrap justify-center gap-4 max-w-7xl mx-auto mb-12">
+        <div className="flex flex-wrap justify-left gap-4 max-w-7xl mx-auto mb-12">
           {currentDocs.map((doc, idx) => (
             <a
               key={doc.id ?? idx}
