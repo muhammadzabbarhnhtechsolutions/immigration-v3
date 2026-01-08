@@ -112,7 +112,7 @@ function GeneralResourcesPage() {
             >
               <FileArchive className="h-16 w-16 mb-3 text-[#88B29A]" />
               <p title={doc?.title} className="text-gray-800 truncate font-semibold mb-1">
-                {doc?.title}
+                {doc?.title ? doc?.title :" -"}
               </p>
               <p className="text-gray-500 text-sm">
                 {doc.type?.toUpperCase() || "FILE"}
