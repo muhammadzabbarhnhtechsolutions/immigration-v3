@@ -108,7 +108,7 @@ function GeneralResourcesPage() {
               href={doc.documents}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white w-full sm:w-[240px] md:w-[280px] rounded-xl shadow-lg border border-gray-100 px-6 py-6 flex flex-col items-center hover:shadow-xl transition"
+              className="bg-white w-full sm:w-[240px] md:w-[370px] rounded-xl shadow-lg border border-gray-100 px-6 py-10 flex flex-col items-center hover:shadow-xl transition"
             >
               <FileArchive className="h-16 w-16 mb-3 text-[#88B29A]" />
               <p title={doc?.title} className="text-gray-800 truncate font-semibold mb-1">
