@@ -46,17 +46,17 @@ export default function InfoSection() {
   };
 
   return (
-    <section className="bg-white text-gray-900 px-4 sm:px-8 lg:px-12 py-16 sm:py-16">
+    <section className="bg-white text-gray-900 px-4 sm:px-16 lg:px-16 py-16 sm:py-16">
       {/* --- WHO IS IT FOR --- */}
-      <div className="max-w-6xl mx-12 mt-20 mb-20 sm:mt-14 px-2 sm:px-0">
+      <div className="max-w-7xl mx-1 mt-20 mb-20 sm:mt-14 px-2 sm:px-0">
         <h2 className="text-2xl font-marko sm:text-5xl md:text-center mb-10 sm:mb-4">
           Who Is Immigration Navigator For?
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-6 md:py-12">
           {audience.map(({ icon, title, text, route }, idx) => (
             <Link key={idx} href={route}>
               <motion.div
-                className="bg-[#3F855D40] transform transition-all duration-300 cursor-pointer hover:-translate-y-3 hover:shadow-xl bg-opacity-20 border border-[#D9E3F2] h-[192px] p-6 sm:p-8 rounded-2xl shadow-sm"
+                className="bg-[#3F855D40]  transform transition-all duration-300 cursor-pointer hover:-translate-y-3 hover:shadow-xl bg-opacity-20 border border-[#D9E3F2] h-[192px]  sm:p-8 rounded-2xl shadow-sm"
                 variants={cardVariant}
                 initial="hidden"
                 whileInView="visible"

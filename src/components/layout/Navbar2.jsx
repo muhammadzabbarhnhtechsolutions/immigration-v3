@@ -12,12 +12,12 @@ export default function Navbar1() {
 
   const navLinks = [
     { href: "/about-us", label: "About Us" },
-    { href: "/pricing", label: "Pricing" },
+    { href: "/our-products", label: "Our Products" },
     { href: "/legal-advice", label: "Legal Advice" },
     { href: "/podcasts", label: "Podcast" },
     { href: "/forum", label: "Community" },
     { href: "/contact-us", label: "Contact Us" },
-   { href: "/our-products", label: "Our Products" },
+    { href: "/pricing", label: "Pricing" },
 
   ];
 

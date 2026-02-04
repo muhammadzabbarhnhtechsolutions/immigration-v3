@@ -14,15 +14,16 @@ const params = useParams().id
 
   return (
     <div className="p-6 mb-[144px]">
-      <h1 className="text-2xl font-semibold mb-4 text-[#99b9a7] px-4 pt-2">Course Topics</h1>
-
+ <h4 className="text-2xl font-marko mt-6 sm:text-5xl md:text-center  ">
+          Course Modules
+        </h4>
       {/* 3 Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6">
+      <div className="grid grid-cols-1 md:grid-cols-3  gap-4 mt-[83px]">
         <Link href={`/course-topics/course-videos/${params}`}>
 
          <div
           // onClick={() => handleCardClick("video")}
-          className="cursor-pointer bg-[#99B9A7] text-white text-4xl border rounded-xl shadow-md px-6 py-12 hover:shadow-lg transition"
+          className="cursor-pointer bg-[#99B9A7] text-white text-4xl border rounded-xl shadow-md px-6 py-16 hover:shadow-lg transition"
         >
           <h2 className="text-2xl font-semibold mb-2">Course Video</h2>
           <p className="text-base text-white">
@@ -33,7 +34,7 @@ const params = useParams().id
 
         {/* 2. MCQs Card */}
         <Link href={`/course-topics/mcqs-lists/${params}`}>
-          <div className="cursor-pointer bg-[#99B9A7] text-white text-4xl border rounded-xl shadow-md px-6 py-12 hover:shadow-lg transition">
+          <div className="cursor-pointer bg-[#99B9A7] text-white text-4xl border rounded-xl shadow-md px-6 py-16 hover:shadow-lg transition">
             <h2 className="text-2xl font-semibold mb-2">MCQs</h2>
             <p className="text-base text-white">Attempt practice MCQs here.</p>
           </div>
@@ -41,7 +42,7 @@ const params = useParams().id
 
         {/* 3. Resources Card */}
         <Link href={`/course-topics/resources?video_id=${params}`}>
-          <div className="cursor-pointer bg-[#99B9A7] text-white text-4xl border rounded-xl shadow-md px-6 py-12 hover:shadow-lg transition">
+          <div className="cursor-pointer bg-[#99B9A7] text-white text-4xl border rounded-xl shadow-md px-6 py-16 hover:shadow-lg transition">
             <h2 className="text-2xl font-poppin font-bold mb-2">Resources</h2>
             <p className="text-base text-white">
               Access learning materials and PDFs.

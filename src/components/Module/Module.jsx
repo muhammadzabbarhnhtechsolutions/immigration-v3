@@ -83,10 +83,10 @@ export default function ModulePage() {
 
   return (
     <div className="p-4 relative mb-[99px]">
-      <div className="flex justify-between">
-        <h1 className="text-2xl font-bold text-[#88B29A] mb-2 px-4 pt-8">
+      <div className="flex justify-center">
+        <h3 className="text-2xl font-marko sm:text-4xl px-4 pt-8 md:text-center  ">
           Course Videos
-        </h1>
+        </h3>
         {/* <Link href={`/course-topics/resources`}>
           <button className="w-full rounded-full mt-8 text-left px-4 py-2 text-sm text-white bg-[#88B29A] hover:bg-[#88B29A]">
             General Resource
@@ -96,7 +96,7 @@ export default function ModulePage() {
 
       <div
         ref={listRef}
-        className="space-y-1 bg-white shadow-lg px-2 rounded-2xl py-8  "
+        className="space-y-1 bg-white border border-gray-100 mt-6 shadow-lg px-2 rounded-2xl py-8  "
       >
         {modules.map((module) => (
           <div

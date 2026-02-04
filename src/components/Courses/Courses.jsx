@@ -48,11 +48,12 @@ export default function CoursePage() {
   return (
     <main className="bg-gray-50 min-h-screen px-4 py-8 md:py-24">
       {/* Heading + Search */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 max-w-7xl md:mx-12 mb-10">
-        <h2 className="text-3xl font-bold text-[#88B29A]">All Courses</h2>
-
+ <h3 className="text-2xl font-marko sm:text-5xl md:text-center  ">
+          Courses
+        </h3>
+      <div className="flex flex-col sm:flex-row justify-end -mt-12 items-start sm:items-center gap-4 max-w-7xl md:mx-12 mb-10">
         {/* 🔍 Search Bar */}
-        <div className="relative w-full sm:w-96">
+        <div className="relative w-full  sm:w-96">
           <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
             <svg
               className="h-5 w-5 text-gray-400"
@@ -79,7 +80,7 @@ export default function CoursePage() {
       </div>
 
       {/* Course Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 gap-10 max-w-7xl md:mx-12">
+      <div className="grid grid-cols-1 mt-14 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 gap-10 max-w-7xl md:mx-12">
         {filteredCourses.length > 0 ? (
           filteredCourses.map((course) => (
             <div

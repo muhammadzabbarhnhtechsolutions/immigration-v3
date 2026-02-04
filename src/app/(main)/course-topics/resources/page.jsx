@@ -1,177 +1,81 @@
 "use client";
 
-import { useEffect, useMemo, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { getGeneralResource, getCourseResources } from "@/services/generalResourcesServices";
-import { getUserProfileResources } from "@/services/getAllResources";
-import { ChevronLeft, ChevronRight, FileArchive } from "lucide-react";
+import { FileText, FolderOpen, BookOpen } from "lucide-react";
 
-const ITEMS_PER_PAGE = 8; // فی صفحہ کتنے ریسورس
-
-function GeneralResourcesPage() {
+function ResourcesPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const videoId = searchParams.get("video_id");
-  const moduleId = searchParams.get("module_id");
+  const courseId = searchParams.get("course_id");
 
-  const [documents, setDocuments] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(true);
+  // 2 cards configuration
+  const cards = [
+    {
+      id: "templates",
+      name: "Templates",
+      description: "View Templates",
+      icon:  BookOpen,
+      color: "bg-gradient-to-br from-[#88B29A]/20 to-[#88B29A]/10 border-[#88B29A]/30 hover:from-[#88B29A]/30 hover:to-[#88B29A]/20",
+      iconColor: "text-[#88B29A]"
+    }, {
+      id: "sample_docs",
+      name: "Sample Docs",
+      description: "View sample documents",
+      icon: FileText,
+      color: "bg-gradient-to-br from-[#88B29A]/20 to-[#88B29A]/10 border-[#88B29A]/30 hover:from-[#88B29A]/30 hover:to-[#88B29A]/20",
+      iconColor: "text-[#88B29A]"
+    },
+    {
+      id: "general_resources",
+      name: "General Resources",
+      description: "Access general resources",
+      icon: FolderOpen,
+      color: "bg-gradient-to-br from-[#88B29A]/20 to-[#88B29A]/10 border-[#88B29A]/30 hover:from-[#88B29A]/30 hover:to-[#88B29A]/20",
+      iconColor: "text-[#88B29A]"
+    }
+  ];
 
-  /* ── Fetch once ────────────────────────────────────────────── */
-  useEffect(() => {
-    (async () => {
-      let res;
-      if (videoId) {
-        res = await getGeneralResource(router, "course-id", videoId);
-      } else if (moduleId) {
-        res = await getCourseResources(router, moduleId);
-      } else {
-        res = await getUserProfileResources(router);
-      }
-      if (res?.data) setDocuments(res.data);
-      setLoading(false);
-    })();
-  }, [videoId, moduleId]);
-
-  /* ── Filtered list ─────────────────────────────────────────── */
-  const filteredDocs = useMemo(() => {
-    const q = searchQuery.toLowerCase();
-    if (!q) return documents;
-    return documents.filter(
-      (d) =>
-        d.type?.toLowerCase().includes(q) ||
-        d.documents?.toLowerCase().includes(q)
-    );
-  }, [documents, searchQuery]);
-
-  /* ── Pagination slice ─────────────────────────────────────── */
-  const totalPages = Math.max(1, Math.ceil(filteredDocs.length / ITEMS_PER_PAGE));
-  const currentDocs = filteredDocs.slice(
-    (page - 1) * ITEMS_PER_PAGE,
-    page * ITEMS_PER_PAGE
-  );
-
-  // سرچ بدلتے ہی پہلا صفحہ
-  useEffect(() => setPage(1), [searchQuery, documents]);
-
-  if (loading) {
-    return (
-       <div className="mx-auto  px-4 mt-0 py-20 text-center flex flex-col items-center justify-center gap-4 animate-fade-in">
-        <div className="h-10 w-10 border-4 border-[#88B29A] border-t-transparent rounded-full animate-spin"></div>
-        <p className="text-[#88B29A] text-lg font-medium">Loading Resources...</p>
-      </div>
-    );
-  }
+  // Handle card click
+  const handleCardClick = (cardId) => {
+    if (courseId) {
+      router.push(`/user/general/resource/resource_template_view/?course_id=${courseId}&category=${cardId}`);
+    } else {
+      // Use a default course_id or show error
+      router.push(`/user/general/resource/resource_template_view/?category=${cardId}`);
+    }
+  };
 
   return (
-    <section className="px-4 sm:px-12 py-16">
-      {/* Heading + search */}
-      <div className="flex flex-col sm:flex-row items-start md:mt-6 sm:items-center justify-between gap-4 mb-10">
-        <h2 className="text-[26px] sm:text-3xl font-bold text-[#88B29A]">
-          {videoId ? "General Resources" : moduleId ? "Course Resources" : "Resources"}
-        </h2>
+    <section className="px-4 sm:px-12 py-16 ">
+      <h4 className="text-2xl font-marko mt-1 sm:text-4xl md:text-center  ">
+Resources        </h4>
 
-        {/* 🔍 Search bar */}
-        <div className="relative w-full sm:w-80">
-          <span className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-            <svg
-              className="h-5 w-5 text-gray-400"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
+      {/* 3 Cards Grid */}
+      <div className="flex flex-wrap gap-4 mt-12 max-w-7xl mx-auto">
+        {cards.map((card) => {
+          const Icon = card.icon;
+          return (
+            <button
+              key={card.id}
+              onClick={() => handleCardClick(card.id)}
+              className={`w-full sm:w-[240px] md:w-[360px] ml-4 ${card.color} border rounded-xl px-6 py-10 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-lg`}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M21 21l-4.35-4.35M10 18a8 8 0 100-16 8 8 0 000 16z"
-              />
-            </svg>
-          </span>
-          <input
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search by type or file…"
-            className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-[#88B29A] focus:outline-none"
-          />
-        </div>
+              <Icon className={`h-16 w-16 mb-4 ${card.iconColor}`} />
+              <p className="text-gray-800 font-semibold text-lg mb-1">
+                {card.name}
+              </p>
+              <p className="text-gray-500 text-sm text-center">
+                {card.description}
+              </p>
+            </button>
+          );
+        })}
       </div>
-
-      {/* Grid */}
-      {currentDocs.length ? (
-        <div className="flex flex-wrap justify-left gap-4 max-w-7xl mx-auto mb-12">
-          {currentDocs.map((doc, idx) => (
-            <a
-              key={doc.id ?? idx}
-              href={doc.documents}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-white w-full sm:w-[240px] md:w-[370px] rounded-xl shadow-lg border border-gray-100 px-6 py-10 flex flex-col items-center hover:shadow-xl transition"
-            >
-              <FileArchive className="h-16 w-16 mb-3 text-[#88B29A]" />
-              <p title={doc?.title} className="text-gray-800 truncate font-semibold mb-1">
-                {doc?.title ? doc?.title :" -"}
-              </p>
-              <p className="text-gray-500 text-sm">
-                {doc.type?.toUpperCase() || "FILE"}
-              </p>
-            </a>
-          ))}
-        </div>
-      ) : (
-      <div className="col-span-full flex flex-col items-center text-center mt-22 text-gray-500">
-              <svg
-                className="w-12 h-12 text-[#88B29A] mb-4"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15 12H9m12 0A9 9 0 113 12a9 9 0 0118 0z"
-                />
-              </svg>
-              <p className="text-lg font-medium text-[#88B29A]">
-                No Resources found
-              </p>
-              <p className="text-[13px] text-gray-400">
-                Try searching with a different keyword.
-              </p>
-            </div>         )}
-
-      {/* Pagination */}
-      {totalPages > 1 && (
-        <div className="flex justify-center items-center gap-4">
-          <button
-            onClick={() => setPage((p) => Math.max(p - 1, 1))}
-            disabled={page === 1}
- className="p-3 rounded-full bg-white border border-[#88B29A] text-[#88B29A] hover:bg-[#88B29A] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300 shadow-sm hover:shadow-lg"          >
-        <ChevronLeft className="w-5 font-bold h-5" />
-    </button>
-
-    <span className="px-4 py-2 text-sm bg-[#f0f7f4] rounded-full text-[#88B29A] font-semibold shadow-sm">
-      Page {totalPages}
-    </span>
-          <button
-            onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
-            disabled={page === totalPages}
- className="p-3 rounded-full bg-white border border-[#88B29A] text-[#88B29A] hover:bg-[#88B29A] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300 shadow-sm hover:shadow-lg"          >
-            <ChevronRight className="w-5 font-bold h-5"/>
-          </button>
-        </div>
-      )}
     </section>
   );
 }
 
 export default function Page() {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <GeneralResourcesPage />
-    </Suspense>
-  );
+  return <ResourcesPage />;
 }
+
