@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 import { FileText, FolderOpen, BookOpen } from "lucide-react";
 
 function ResourcesPage() {
@@ -75,7 +76,34 @@ Resources        </h4>
   );
 }
 
+function ResourcesPageSuspense() {
+  return (
+    <Suspense fallback={
+      <section className="px-4 sm:px-12 py-16">
+        <h4 className="text-2xl font-marko mt-1 sm:text-4xl md:text-center">
+          Resources
+        </h4>
+        <div className="flex flex-wrap gap-4 mt-12 max-w-7xl mx-auto">
+          {/* Loading skeleton for cards */}
+          {[1, 2, 3].map((i) => (
+            <div
+              key={i}
+              className="w-full sm:w-[240px] md:w-[360px] ml-4 bg-gray-200 border rounded-xl px-6 py-10 animate-pulse"
+            >
+              <div className="h-16 w-16 mb-4 bg-gray-300 rounded-full mx-auto"></div>
+              <div className="h-6 w-24 bg-gray-300 rounded mx-auto mb-2"></div>
+              <div className="h-4 w-32 bg-gray-300 rounded mx-auto"></div>
+            </div>
+          ))}
+        </div>
+      </section>
+    }>
+      <ResourcesPage />
+    </Suspense>
+  );
+}
+
 export default function Page() {
-  return <ResourcesPage />;
+  return <ResourcesPageSuspense />;
 }
 
