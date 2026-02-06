@@ -18,7 +18,7 @@ const params = useParams().id
           Course Modules
         </h4> */}
       {/* 3 Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3  gap-4 mt-[3px]">
+      <div className="grid grid-cols-1 md:grid-cols-3  gap-4 mt-[33px]">
         <Link href={`/course-topics/course-videos/${params}`}>
 
          <div
