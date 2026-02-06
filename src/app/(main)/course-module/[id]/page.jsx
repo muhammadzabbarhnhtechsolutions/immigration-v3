@@ -14,11 +14,11 @@ const params = useParams().id
 
   return (
     <div className="p-6 mb-[144px]">
- <h4 className="text-2xl font-marko mt-6 sm:text-5xl md:text-center  ">
+ {/* <h4 className="text-2xl font-marko mt-6 sm:text-5xl md:text-center  ">
           Course Modules
-        </h4>
+        </h4> */}
       {/* 3 Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3  gap-4 mt-[83px]">
+      <div className="grid grid-cols-1 md:grid-cols-3  gap-4 mt-[3px]">
         <Link href={`/course-topics/course-videos/${params}`}>
 
          <div
