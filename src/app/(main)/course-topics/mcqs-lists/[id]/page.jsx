@@ -40,7 +40,7 @@ export default function McqsTestListPage() {
             <div className="flex items-center justify-center gap-2 mb-6">
         {/* <Sparkles className="text-black w-6 mt-3 h-6" /> */}
  <h4 className="text-2xl font-marko mt-6 sm:text-4xl md:text-center  ">
- MCQS Test        </h4>            </div>
+ MCQS        </h4>            </div>
 
             {loading ? (
  <div className="mx-autopx-4 mt-0 py-20 text-center flex flex-col items-center justify-center gap-4 animate-fade-in">
