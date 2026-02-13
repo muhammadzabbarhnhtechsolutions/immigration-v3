@@ -83,86 +83,52 @@ export default function ModulePage() {
 
   return (
     <div className="p-4 relative mb-[99px]">
-      <div className="flex justify-center">
-        <h3 className="text-2xl font-marko sm:text-4xl px-4 pt-8 md:text-center  ">
-          Course Videos
-        </h3>
-        {/* <Link href={`/course-topics/resources`}>
-          <button className="w-full rounded-full mt-8 text-left px-4 py-2 text-sm text-white bg-[#88B29A] hover:bg-[#88B29A]">
-            General Resource
-          </button>
-        </Link> */}
-      </div>
+    <div className="flex justify-center">
+  <h3 className="text-2xl font-marko sm:text-4xl px-4 pt-8 md:text-center">
+    Course Videos
+  </h3>
+</div>
 
-      <div
-        ref={listRef}
-        className="space-y-1  mt-6  px-2 rounded-2xl py-8  "
-      >
-        {modules.map((module) => (
-          <div
-            key={module.id}
-            className=" "
-          >
-            {/* Module header */}
-            <div className="flex justify-between items-center">
-              {/* <h2 className="text-lg font-semibold text-gray-800">
-                {module.title}
-              </h2> */}
-{/* 
-              <div className="flex items-center gap-4">
-                {module.description && (
-                  <div className="relative right-[9px] group">
-                    <Info className="text-[#99b9a7] cursor-pointer h-6 w-6" />
-                    <div className="absolute right-8 -top-4 w-64 p-2 bg-gray-700 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
-                      {module.description}
-                    </div>
-                  </div>
-                )}
-                <div
-                  className={`rounded-full border-[3px] border-[#99b9a7] ${
-                    module.percentage > 0 ? "px-1.5 py-1.5" : "px-2.5 py-1.5"
-                  }`}
-                >
-                  <span className="text-gray-700 text-xs font-medium">
-                    {module.percentage.toFixed(0)}%
-                  </span>
-                </div>
-              </div> */}
+<div ref={listRef} className="space-y-1 mt-4 px-2 rounded-2xl py-8">
+  {modules.map((module) => (
+    <div key={module.id}>
+      {/* Videos Section */}
+      {module.videos.length > 0 ? (
+        <div
+          className={`mt-1 px-4 gap-6 grid ${
+            module.videos.length === 1
+              ? "grid-cols-1 place-items-center" // ✅ center single video
+              : "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 justify-items-start" // ✅ normal grid for multiple
+          }`}
+        >
+          {module.videos.map((video) => (
+            <div
+              key={video.id}
+              onClick={() => openVideoModal(video)}
+              className="cursor-pointer border border-gray-300 h-[273px] bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-transform transform hover:-translate-y-1 w-full sm:w-[340px]"
+            >
+              <div className="w-full h-48 overflow-hidden">
+                <img
+                  src={video.thumbnail}
+                  alt={video.title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="p-3 text-center">
+                <h3 className="text-lg font-[600] text-gray-800 mt-1 line-clamp-2">
+                  {video.title}
+                </h3>
+              </div>
             </div>
-
-            {/* Videos (always visible) */}
-            {module.videos.length > 0 ? (
-             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-4 mt-6">
-  {module.videos.map((video) => (
-    <div
-      key={video.id}
-      onClick={() => openVideoModal(video)}
-      className="cursor-pointer border borderr-gray-300 h-[273px] bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-transform transform hover:-translate-y-1"
-    >
-      <div className="w-full h-48 overflow-hidden">
-        <img
-          src={video.thumbnail}
-          alt={video.title}
-          className="w-full h-full object-cover"
-        />
-      </div>
-      <div className="p-3 text-center">
-        <h3 className="text-lg font-[600] text-gray-800 mt-1 line-clamp-2">
-          {video.title}
-        </h3>
-      </div>
+          ))}
+        </div>
+      ) : (
+        <p className="mt-2 text-sm text-gray-500">No videos available.</p>
+      )}
     </div>
   ))}
 </div>
 
-            ) : (
-              <p className="mt-2 text-sm text-gray-500">
-                No videos available.
-              </p>
-            )}
-          </div>
-        ))}
-      </div>
 
       {/* Loading Spinner for Modal */}
       {VideoModelLoading && (
