@@ -87,7 +87,7 @@ export default function CoursePage() {
               key={course.id}
               className="bg-white flex justify-between flex-col rounded-xl hover:shadow-xl hover:-translate-y-4 hover:scale-100 transition-all cursor-pointer shadow-sm border border-gray-200 p-4"
             ><div>
-              <Link href={`/course-module/${course.id}`}>
+              <Link href={`/course-module/${course.id}?title=${course.title.split(" ").join("")}`}>
                 <div className="relative w-full h-48 rounded-md overflow-hidden mb-4">
                   <Image
                     src={course.thumbnail}

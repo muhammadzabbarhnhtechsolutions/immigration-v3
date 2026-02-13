@@ -16,8 +16,8 @@ export default function Navbar1() {
     { href: "/legal-advice", label: "Legal Advice" },
     { href: "/podcasts", label: "Podcast" },
     { href: "/forum", label: "Community" },
-    { href: "/contact-us", label: "Contact Us" },
     { href: "/pricing", label: "Pricing" },
+    { href: "/contact-us", label: "Contact Us" },
 
   ];
 

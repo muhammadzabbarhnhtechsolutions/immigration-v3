@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Module from "../../../../components/Module/Module";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 
 export default function Page() {
@@ -12,15 +12,18 @@ const params = useParams().id
     setActiveCard(card);
   };
 
-  return (
-    <div className="p-6 mb-[144px]">
- {/* <h4 className="text-2xl font-marko mt-6 sm:text-5xl md:text-center  ">
-          Course Modules
-        </h4> */}
-      {/* 3 Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3  gap-4 mt-[53px]">
-        <Link href={`/course-topics/course-videos/${params}`}>
+   const title = new URLSearchParams(window.location.search).get("title") || "";
 
+
+  return (
+    <div className="p-6 mb-[144px] flex flex-col items-center justify-center">
+ <h4 className="text-2xl font-marko mt-6 sm:text-5xl md:text-center  ">
+           {title}
+        </h4>
+        
+      {/* 3 Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 max-w-6xl  gap-4 mt-[53px]">
+        <Link href={`/course-topics/course-videos/${params}`}>
          <div
           // onClick={() => handleCardClick("video")}
           className="cursor-pointer bg-[#99B9A7] text-white text-4xl border rounded-xl shadow-md px-6 py-16 hover:shadow-lg transition"

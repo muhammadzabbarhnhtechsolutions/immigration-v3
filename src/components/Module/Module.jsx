@@ -96,12 +96,12 @@ export default function ModulePage() {
 
       <div
         ref={listRef}
-        className="space-y-1 bg-white border border-gray-100 mt-6 shadow-lg px-2 rounded-2xl py-8  "
+        className="space-y-1  mt-6  px-2 rounded-2xl py-8  "
       >
         {modules.map((module) => (
           <div
             key={module.id}
-            className="bg-white  "
+            className=" "
           >
             {/* Module header */}
             <div className="flex justify-between items-center">
@@ -132,56 +132,29 @@ export default function ModulePage() {
 
             {/* Videos (always visible) */}
             {module.videos.length > 0 ? (
-              <ul className="mt-0 space-y-0">
-                {module.videos.map((video) => (
-                  <li
-                    key={video.id}
-                    className="flex items-center justify-between gap-2 p-2 cursor-pointer hover:bg-gray-100 rounded relative"
-                  >
-                    <div
-                      className="flex items-center gap-2"
-                      onClick={() => openVideoModal(video)}
-                    >
-                      <VideoIcon className="w-4 h-4 text-[#88B29A]" />
-                      <span className="text-gray-700">{video.title}</span>
-                    </div>
+             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-4 mt-6">
+  {module.videos.map((video) => (
+    <div
+      key={video.id}
+      onClick={() => openVideoModal(video)}
+      className="cursor-pointer border borderr-gray-300 h-[273px] bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-transform transform hover:-translate-y-1"
+    >
+      <div className="w-full h-48 overflow-hidden">
+        <img
+          src={video.thumbnail}
+          alt={video.title}
+          className="w-full h-full object-cover"
+        />
+      </div>
+      <div className="p-3 text-center">
+        <h3 className="text-lg font-[600] text-gray-800 mt-1 line-clamp-2">
+          {video.title}
+        </h3>
+      </div>
+    </div>
+  ))}
+</div>
 
-                    <div className="relative">
-                      {/* <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setShowVideoDropDown(
-                            video.id === showVideoDropDown ? null : video.id
-                          );
-                        }}
-                        className="inline-flex items-center rounded-md border px-2 py-1.5 bg-white text-sm"
-                      >
-                        <FaAngleDown className="w-4 h-4 text-[#88B29A]" />
-                      </button> */}
-
-                      {/* {showVideoDropDown === video.id && (
-                        <div className="absolute right-0 mt-2 w-44 rounded-md shadow-lg bg-white z-50">
-                          <div className="py-1">
-                            <Link href={`/course-topics/mcqs-lists/${video.id}`}>
-                              <button className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100">
-                                MCQs
-                              </button>
-                            </Link>
-                            <Link
-                              href={`/course-topics/resources?video_id=${video.id}`}
-                            >
-                              <button className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100">
-                                Resources
-                              </button>
-                            </Link>
-                          </div>
-                        </div>
-                      )} */}
-                    </div>
-                  </li>
-                ))}
-              </ul>
             ) : (
               <p className="mt-2 text-sm text-gray-500">
                 No videos available.

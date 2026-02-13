@@ -53,10 +53,11 @@ const ResourcesSection = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white flex flex-wrap justify-center items-center pb-14 pt-24">
-       <h2 className="text-2xl font-marko sm:text-5xl md:text-center mb-10 sm:mb-4">
+    <>
+       <h2 className="text-2xl font-marko sm:text-5xl md:text-center  mt-16 ">
 Our Products        </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 max-w-7xl mt-28 md:mt-14">
+    <div className="min-h-screen bg-white flex flex-wrap justify-center items-center ">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 max-w-7xl mt-28 md:-mt-32">
         {resources.map((resource, index) => {
           const title = resource.name?.trim() || `Resource ${index + 1}`;
           const icon = resource.icon;
@@ -94,6 +95,7 @@ Our Products        </h2>
         })}
       </div>
     </div>
+    </>
   );
 };
 
