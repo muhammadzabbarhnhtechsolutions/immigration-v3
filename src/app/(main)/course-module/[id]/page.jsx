@@ -3,27 +3,30 @@
 import Link from "next/link";
 import Module from "../../../../components/Module/Module";
 import { useEffect, useState } from "react";
-import { useParams, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 export default function Page() {
   const [activeCard, setActiveCard] = useState(null);
   const [title, setTitle] = useState("");
+  const [id, setId] = useState("");
 
-  // ✅ get the id from route params
-  const params = useParams();
-  const id = params?.id; // Extract id properly
-
-  // ✅ get query params (like ?title=SpouseVisa)
   const searchParams = useSearchParams();
 
   useEffect(() => {
+    // 🟢 Extract ID from the pathname (/course-module/id=f3a2b800-...)
+    const path = window.location.pathname;
+    const match = path.match(/id=([^/]+)/);
+    if (match) setId(match[1]);
+
+    // 🟢 Extract and format title from query (?title=immigration-for-testing)
     const t = searchParams.get("title");
-    if (t) setTitle(t);
+    if (t) setTitle(t.replace(/-/g, " "));
   }, [searchParams]);
 
   const handleCardClick = (card) => {
     setActiveCard(card);
   };
+
 
   return (
     <div className="p-6 mb-[144px] flex flex-col items-center justify-center">
@@ -51,9 +54,8 @@ export default function Page() {
             <p className="text-base text-white">Attempt practice MCQs here.</p>
           </div>
         </Link>
-
         {/* 3. Resources Card */}
-        <Link href={`/course-topics/resources?video_id=${id}`}>
+        <Link href={`/course-topics/resources/?course_id=${id}`}>
           <div className="cursor-pointer bg-[#99B9A7] text-white text-4xl border rounded-xl shadow-md px-6 py-16 hover:shadow-lg transition">
             <h2 className="text-2xl font-poppin font-bold mb-2">Resources</h2>
             <p className="text-base text-white">
