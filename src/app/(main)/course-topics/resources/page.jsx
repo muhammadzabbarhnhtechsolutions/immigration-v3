@@ -2,7 +2,7 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
-import { FileText, FolderOpen, BookOpen } from "lucide-react";
+import { FileText, FolderOpen, BookOpen, Upload } from "lucide-react";
 
 function ResourcesPage() {
   const router = useRouter();
@@ -33,7 +33,15 @@ function ResourcesPage() {
       icon: FolderOpen,
       color: "bg-gradient-to-br from-[#88B29A]/20 to-[#88B29A]/10 border-[#88B29A]/30 hover:from-[#88B29A]/30 hover:to-[#88B29A]/20",
       iconColor: "text-[#88B29A]"
-    }
+    },{
+  id: "document_upload_instruction",
+  name: "Document Upload Instructions",
+  description: "Instructions for uploading your documents safely", // updated description
+  icon: Upload, // icon changed to Upload symbol
+ color: "bg-gradient-to-br from-[#88B29A]/20 to-[#88B29A]/10 border-[#88B29A]/30 hover:from-[#88B29A]/30 hover:to-[#88B29A]/20",
+      iconColor: "text-[#88B29A]"
+}
+
   ];
 
   // Handle card click

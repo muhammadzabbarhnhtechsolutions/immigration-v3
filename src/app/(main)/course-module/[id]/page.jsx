@@ -3,13 +3,13 @@
 import Link from "next/link";
 import Module from "../../../../components/Module/Module";
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 
 export default function Page() {
   const [activeCard, setActiveCard] = useState(null);
   const [title, setTitle] = useState("");
   const [id, setId] = useState("");
-
+// const id = useParams().id;
   const searchParams = useSearchParams();
 
   useEffect(() => {

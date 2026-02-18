@@ -92,7 +92,7 @@ export default function Page() {
         </div>
 
         {/* Resource (video_id pass) */}
-        <Link href={`/course-topics/resources?video_id=${video.id}`}>
+        <Link href={`/course-topics/resources?video_id=${video?.id}`}>
           <div className="flex flex-col items-center cursor-pointer">
             <Folder className={iconClasses} />
             <span className={textClasses}>Resources</span>
@@ -146,8 +146,8 @@ export default function Page() {
 
         {/* List */}
         <ul className="space-y-2 overflow-y-auto mt-4">
-          {filteredVideos.map((item, idx) => {
-            const originalIndex = videos.indexOf(item);
+          {filteredVideos?.map((item, idx) => {
+            const originalIndex = videos?.indexOf(item);
             return (
               <li
                 key={item.id}
@@ -162,7 +162,7 @@ export default function Page() {
                 }`}
               >
                 <VideoIcon className="mr-3 text-white w-4 h-4" />
-                <span>{originalIndex + 1}. {item.title}</span>
+                <span>{originalIndex + 1}. {item?.title}</span>
               </li>
             );
           })}
@@ -187,7 +187,7 @@ export default function Page() {
     </button>
 
     {/* Video Title */}
-    <p className="text-white font-medium">{video.title}</p>
+    <p className="text-white font-medium">{video?.title}</p>
   </div>
 
   {/* RIGHT SIDE — Info Icon + Dropdown */}
@@ -226,7 +226,7 @@ export default function Page() {
       {showDropDown && (
         <div className="absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white z-50">
           <div className="py-1">
-            <Link href={`/course-topics/mcqs-lists/${video.id}`}>
+            <Link href={`/course-topics/mcqs-lists/${video?.id}`}>
               <button className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100">
                 MCQs
               </button>
@@ -238,7 +238,7 @@ export default function Page() {
               </button>
             </Link>
 
-            <Link href={`/course-topics/resources?video_id=${video.id}`}>
+            <Link href={`/course-topics/resources?video_id=${video?.id}`}>
               <button className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100">
                 Resources
               </button>

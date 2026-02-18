@@ -24,7 +24,7 @@ function ResourceTemplateViewPage() {
       try {
         setLoading(true);
         let url = "";
-        
+
         if (courseId && category) {
           url = `/user/general/resource/resource_template_view/?course_id=${courseId}&category=${category}`;
         } else if (courseId) {
@@ -65,10 +65,13 @@ function ResourceTemplateViewPage() {
   });
 
   // Pagination
-  const totalPages = Math.max(1, Math.ceil(filteredResources.length / ITEMS_PER_PAGE));
+  const totalPages = Math.max(
+    1,
+    Math.ceil(filteredResources.length / ITEMS_PER_PAGE),
+  );
   const currentResources = filteredResources.slice(
     (page - 1) * ITEMS_PER_PAGE,
-    page * ITEMS_PER_PAGE
+    page * ITEMS_PER_PAGE,
   );
 
   // Reset page on search
@@ -79,7 +82,9 @@ function ResourceTemplateViewPage() {
     return (
       <div className="mx-auto px-4 mt-0 py-20 text-center flex flex-col items-center justify-center gap-4 animate-fade-in">
         <div className="h-10 w-10 border-4 border-[#88B29A] border-t-transparent rounded-full animate-spin"></div>
-        <p className="text-[#88B29A] text-lg font-medium">Loading Resources...</p>
+        <p className="text-[#88B29A] text-lg font-medium">
+          Loading Resources...
+        </p>
       </div>
     );
   }
@@ -96,15 +101,29 @@ function ResourceTemplateViewPage() {
             <ChevronLeft className="w-5 h-5" />
           </button>
           <h2 className="text-[26px] sm:text-3xl font-bold text-[#88B29A]">
-            {category ? category.replace(/_/g, " ").replace(/\b\w/g, (l) => l.toUpperCase()) : "Resources"}
+            {category
+              ? category
+                  .replace(/_/g, " ")
+                  .replace(/\b\w/g, (l) => l.toUpperCase())
+              : "Resources"}
           </h2>
         </div>
 
         {/* Search bar */}
         <div className="relative w-full sm:w-80">
           <span className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-            <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-4.35-4.35M10 18a8 8 0 100-16 8 8 0 000 16z" />
+            <svg
+              className="h-5 w-5 text-gray-400"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M21 21l-4.35-4.35M10 18a8 8 0 100-16 8 8 0 000 16z"
+              />
             </svg>
           </span>
           <input
@@ -128,9 +147,19 @@ function ResourceTemplateViewPage() {
               className="bg-white w-full sm:w-[240px] md:w-[370px] rounded-xl shadow-lg border border-gray-100 px-6 py-10 flex flex-col items-center hover:shadow-xl transition"
             >
               <FileArchive className="h-16 w-16 mb-3 text-[#88B29A]" />
-              <p title={doc?.title} className="text-gray-800 truncate font-semibold mb-1">
-                {doc?.title || "-"}
-              </p>
+              {doc?.title ? (
+                <p
+                  title={doc?.title}
+                  className="text-gray-800 font-semibold mb-1"
+                >
+                  {doc?.title?.length > 28
+                    ? doc.title.slice(0, 24) + "..."
+                    : doc.title}
+                </p>
+              ) : (
+                "-"
+              )}
+
               <p className="text-gray-500 text-sm">
                 {doc.type?.toUpperCase() || "FILE"}
               </p>
@@ -139,11 +168,25 @@ function ResourceTemplateViewPage() {
         </div>
       ) : (
         <div className="col-span-full flex flex-col items-center text-center mt-22 text-gray-500">
-          <svg className="w-12 h-12 text-[#88B29A] mb-4" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M15 12H9m12 0A9 9 0 113 12a9 9 0 0118 0z" />
+          <svg
+            className="w-12 h-12 text-[#88B29A] mb-4"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15 12H9m12 0A9 9 0 113 12a9 9 0 0118 0z"
+            />
           </svg>
-          <p className="text-lg font-medium text-[#88B29A]">No Resources found</p>
-          <p className="text-[13px] text-gray-400">Try searching with a different keyword.</p>
+          <p className="text-lg font-medium text-[#88B29A]">
+            No Resources found
+          </p>
+          <p className="text-[13px] text-gray-400">
+            Try searching with a different keyword.
+          </p>
         </div>
       )}
 
@@ -180,4 +223,3 @@ export default function Page() {
     </Suspense>
   );
 }
-

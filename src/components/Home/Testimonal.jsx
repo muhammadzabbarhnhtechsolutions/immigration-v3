@@ -94,8 +94,8 @@ export default function TestimonialsSection() {
             1024: { slidesPerView: 3, spaceBetween: 24 },
           }}
           navigation={{
-            prevEl: prevRef.current,
-            nextEl: nextRef.current,
+            prevEl: prevRef?.current,
+            nextEl: nextRef?.current,
           }}
           pagination={{
             clickable: true,
@@ -105,30 +105,30 @@ export default function TestimonialsSection() {
             bulletActiveClass: "bg-white",
           }}
           onBeforeInit={(swiper) => {
-            swiper.params.navigation.prevEl = prevRef.current;
-            swiper.params.navigation.nextEl = nextRef.current;
+            swiper?.params?.navigation?.prevEl = prevRef?.current;
+            swiper?.params?.navigation?.nextEl = nextRef?.current;
           }}
           className="testimonials-swiper"
         >
-          {testimonials.map((t) => (
-            <SwiperSlide key={t.id}>
+          {testimonials?.map((t) => (
+            <SwiperSlide key={t?.id}>
               <div className="bg-white rounded-lg p-6 sm:p-7 md:p-8 shadow-sm h-full">
                 <p className="text-gray-700 mb-6 italic text-center">
-                  &quot;{t.text}&quot;
+                  &quot;{t?.text}&quot;
                 </p>
                 <div className="flex items-center justify-center">
                   <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden mr-3 sm:mr-4">
                     <Image
-                      src={t.avatar}
-                      alt={t.name}
+                      src={t?.avatar}
+                      alt={t?.name}
                       width={60}
                       height={60}
                       className="object-cover"
                     />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-900">{t.name}</h4>
-                    <p className="text-gray-600 text-sm">{t.role}</p>
+                    <h4 className="font-semibold text-gray-900">{t?.name}</h4>
+                    <p className="text-gray-600 text-sm">{t?.role}</p>
                   </div>
                 </div>
               </div>
