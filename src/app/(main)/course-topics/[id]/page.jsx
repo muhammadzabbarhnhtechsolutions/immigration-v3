@@ -85,27 +85,7 @@ export default function Page() {
       md:flex-col gap-4 md:gap-6 items-center justify-around md:justify-start 
       md:pt-16 md:py-10 fixed md:static top-[99px] md:-mt-12 z-40">
 
-        {/* Eye / Description */}
-        {/* <div
-          className="flex flex-col mt-4 items-center cursor-pointer relative"
-          onClick={() => setShowTooltip(!showTooltip)}
-        >
-          <Info className={iconClasses} />
-          {showTooltip && moduleDescription && (
-            <div className="absolute left-full ml-3 top-1/2 -translate-y-1/2 
-            bg-white text-gray-800 text-sm shadow-xl border border-gray-200 
-            rounded-xl p-4 w-64 leading-relaxed z-50 animate-fadeIn">
-
-              <h4 className="font-semibold text-[#88B29A] mb-1">Module Description</h4>
-              <p className="text-gray-700 text-xs">{moduleDescription}</p>
-
-              <div className="absolute left-[-6px] top-1/2 -translate-y-1/2 
-              w-3 h-3 bg-white border-l border-t border-gray-200 rotate-45"></div>
-            </div>
-          )}
-        </div> */}
-
-        {/* Home */}
+  
         <div className="flex flex-col items-center cursor-pointer">
           <Home className={iconClasses} />
           <span className={textClasses}>Home</span>

@@ -13,12 +13,12 @@ export default function Page() {
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    // 🟢 Extract ID from the pathname (/course-module/id=f3a2b800-...)
+    //  Extract ID from the pathname (/course-module/id=f3a2b800-...)
     const path = window.location.pathname;
     const match = path.match(/id=([^/]+)/);
     if (match) setId(match[1]);
 
-    // 🟢 Extract and format title from query (?title=immigration-for-testing)
+    //  Extract and format title from query (?title=immigration-for-testing)
     const t = searchParams.get("title");
     if (t) setTitle(t.replace(/-/g, " "));
   }, [searchParams]);
